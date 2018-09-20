@@ -1,239 +1,409 @@
 ---
-title: API Reference
+title: Daybit API Reference
 
-language_tabs: # must be one of https://git.io/vQNgJ
-  - shell
-  - ruby
+language_tabs:
   - python
-  - javascript
-
-toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/lord/slate'>Documentation Powered by Slate</a>
 
 includes:
-  - errors
+  - api
+  - subscription
+  - advanced
 
 search: true
 ---
 
-# Introduction
+# **Introduction**
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Daybit's API works in socket server and based on your task and subject of required action, you can either subscribe to `api` or `subscription`s channels.
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+This API document explains the basic types of APIs, usage of each API, expected request body to call API, and response object from API.
 
-This example API documentation page was created with [Slate](https://github.com/lord/slate). Feel free to edit it and use it as a base for your own API's documentation.
+## Libraries
 
-# Authentication
+Exchange is using Elixir language and built on [Phoenix framework](https://phoenixframework.org/). Exchange API can be accessed from Phoenix client, which is based on websocket. For now, Daybit officially supports python langauge wrapper only.
 
-> To authorize, use this code:
+* PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
-```ruby
-require 'kittn'
+For other languages, please refer below libraries to implement the features of this Exchange API. You can also find useful information of using this API in [below](#advanced).
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
+* Phoenix.js(Javascript): [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix/)
+* SwiftPhoenixClient(Swift): [https://github.com/davidstump/SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient/)
+* PhoenixSharp(C#): [https://github.com/Mazyod/PhoenixSharp](https://github.com/Mazyod/PhoenixSharp/)
+* Kotlin: TBD
 
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
+## Host address
 
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
+    $ git clone https://github.com/daybit-exchange/pydaybit
+    $ pip install -e pydaybit
 ```
 
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
+* Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
+
+* API Python wrapper : [https://github.com/daybit-exchange/pydaybit/](https://github.com/daybit-exchange/pydaybit/)
+
+For wrapper installation, please look right column.
+
+# Terms
+
+* `quote`: Asking token. ex) `BTC` from `ETH/BTC`.
+* `base`: Base token. ex) `ETH` from `ETH/BTC`.
+* [Channels](https://hexdocs.pm/phoenix/channels.html) are a part of Phoenix that allow us to easily add soft-realtime features to our applications. Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
+* [Topic](https://hexdocs.pm/phoenix/channels.html#topics) are string identifiers - names that the various layers use in order to make sure messages end up in the right place. As we saw above, topics can use wildcards. This allows for a useful “topic:subtopic” convention. Often, you’ll compose topics using record IDs from your application layer, such as `users:123`.
+
+For detailed explanation, please look explanation of [Advanced](#advanced) usage.
+
+# Common
+
+## Types
+
+- `integer`: `integer` data type. ex) `123`
+- `decimal`: Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. ex) `"880.524"`
+- `string`: `string`. ex) `"string"`
+- `boolean`: `boolean`. ex) `true`, `false`
+- `unix_timestamp`: `millisecond` unit unix timestamp. ex) `1528269989516`
+- `csv`: string based comma separated values. ex) `"1, 2, 3"`
+
+## Authorization
+
+The usage of API is restricted by given right to each API key. You would get `unauthenticated` response error_code if you called API that is not accessible from your API key.
+
+| Type | Description |
+|------|-------------|
+| public_data | Authorized to access public data. ex) Market Summary, Order Book and so on
+| private_data | Authorized to access private data. ex) Asset and so on
+| trade | Authorized to call trade related APIs. ex) Order, Trade and so on
+| transaction | Authorized to call transaction related APIs. ex) Deposit, Wdrl and so on
+
+## Response format
+
+Basically there are two types of response formats. Based on the result of API calls, you would get one of success of fail models. If there was an error while running the API call, proper message will be returned along with error_code.
+
+> Success
+
+```python
+{
+  "data": object || array
+}
 ```
 
-```javascript
-const kittn = require('kittn');
+> Fail
 
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
+```python
+{
+  "error": {
+    "error_code": 'string',
+    "message": 'string'
   }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
-
-<aside class="success">
-Remember — a happy kitten is an authenticated kitten!
-</aside>
-
-## Get a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
 }
 ```
 
-This endpoint retrieves a specific kitten.
+## Pagination
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
-
-### HTTP Request
-
-`GET http://example.com/kittens/<ID>`
-
-### URL Parameters
-
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
-
-## Delete a Specific Kitten
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
-
+first request:
 ```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
-
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
-
-> The above command returns JSON structured like this:
-
-```json
 {
-  "id": 2,
-  "deleted" : ":("
+  "size": wanted number of objects
 }
 ```
 
-This endpoint deletes a specific kitten.
+next page:
+```python
+{
+  "to_id": request until this id
+  "size": wanted number of objects
+}
+```
 
-### HTTP Request
+## Size
 
-`DELETE http://example.com/kittens/<ID>`
+Maximum value for `size` is `30`. API will replace `size` to `30` if you placed the number larger than `30`.
 
-### URL Parameters
+## Market
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
+`quote` and `base` are both required if request asked certain market's data by `quote` and `base`.
 
+## Error list
+
+### General
+
+- unauthenticated: unauthenticated user action
+- invalid_arguments: invalid arguments in request
+- resource_not_found: Resource not found
+
+### Api
+
+- api_invalid_timestamp_or_timeout: `timestamp` and/or `timeout` of request is not valid
+- api_timeout: timeout happens by requested `timestamp` and/or `timeout`
+- api_exceeded_rate_limit: Rate limit exceeded
+- api_invalid_param_types: Invalid request parameter type
+- api_required_params_not_provided: Missing required parameter
+
+### Order
+
+- order_invalid_market: Invalid market(`quote`, `base`)
+- order_not_tradable_coin: Not tradable coin
+- order_not_sellable_market: Not sellable market
+- order_not_buyable_market: Not buyable market
+- order_invalid_price: Invalid price
+- order_invalid_amount: Invalid amount
+- order_only_both_role_can_be_cond: Conditional order is available only when `role` is `both`
+- order_out_of_price_range: Out of price range (Sell: 20% ~ 200%, Buy: 50% ~ 500%)
+- order_exceeded_max_tstops: Exceeded maximum Trailing-Stop
+- order_suspended_due_to_frequent_canceling: Order suspended due to frequent canceling
+- order_exceeds_my_asset_values: Order exceeded my asset values
+- order_violates_min_quote: Order amount less than minimum quote
+- order_already_closed: Order already closed
+
+### Wdrl
+
+- wdrl_suspended_coin: Suspended coin
+- wdrl_precision_error: Decimal place accuracy error
+- wdrl_under_min_amount: Withdrawal amount less than minimum per transaction
+- wdrl_over_daily_wdrl_limit: Withdrawal amount exceeded daily limit
+- wdrl_exceeds_my_asset_values: Withdrawal exceeded my asset
+- wdrl_needs_to_tag: Missing `to_tag` parameter
+- wdrl_invalid_addr: Invalid address
+
+# Models
+
+Below are generic data models.
+
+## Coin
+
+identifier: `sym`
+
+| Name | Type | Description |
+|---|---|---|
+| sym | string | Token symbol |
+| native_decimal_point | integer | Withdrawal amount decimal restriction |
+| amount_decimal_point | integer | Order amount decimal point restriction |
+| tick_amount | decimal | Order amount unit |
+| deposit_confirm | integer | Number of confirms required for deposit completion |
+| wdrl_confirm | integer | Number of confirms required for withdrawal completion |
+| public | boolean | Public coin or not |
+| name | string | Name of token (locale applied) |
+| tradable | boolean | Tradable |
+| deposit_enabled | boolean | Deposit enabled |
+| wdrl_enabled | boolean | Withdrawal enabled |
+| wdrl_fee | decimal | Withdrawal fee |
+| min_deposit | decimal | Minimum deposit |
+| min_wdrl | decimal | Minimum withdrawal |
+| has_tag | boolean | to_tag required at deposit or withdrawal |
+| has_org | boolean | to_org required at deposit or withdrawal |
+
+## Coin price
+
+identifier: `sym`
+
+| Name | Type | Description |
+|---|---|---|
+| sym | string | Token symbol |
+| usdt_price | decimal | USDT exchanged price |
+
+## Quote coin
+
+identifier: `sym`
+
+| Name | Type | Description |
+|---|---|---|
+| sym | string | Token symbol |
+
+## Market
+
+identifier: `quote`, `base`
+
+| Name | Type | Description |
+|---|---|---|
+| quote | string | Quote token |
+| base | string | Base token |
+| tick_price | decimal | Order price unit |
+| sellable | boolean | Sellable |
+| buyable | boolean | Buyable |
+| tick_levels | integer | Number of levels for order book existence per `tick_price`. Order book is incrased ten times for each level. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100 |
+
+## Market summary interval
+
+identifier: `seconds`
+
+| Name | Type | Description |
+|---|---|---|
+| seconds | integer | Market Summary unit time |
+
+## Market summary
+
+identifier: `quote`, `base`, `seconds`
+
+| Name | Type | Description |
+|---|---|---|
+| quote | string | Quote token |
+| base | string | Base token |
+| seconds | integer | Time unit |
+| open | decimal | Opening price |
+| close | decimal | Closing price |
+| high | decimal | Highest price |
+| low | decimal | Lowest price |
+| volatility | decimal | Price volatility |
+| quote_vol | decimal | Trading volume per quote token |
+| base_vol | decimal | Trading volume per base token |
+
+## Order book
+
+identifier: `quote`, `base`, `price_intvl`, `min_price`
+
+| Name | Type | Description |
+|---|---|---|
+| quote | string | Quote token |
+| base | string | Base token |
+| price_intvl | decimal | Price interval unit |
+| min_price | decimal | Minimum price |
+| max_price | decimal | Maximum price |
+| sell_vol | decimal | Selling volume |
+| buy_vol | decimal | Buying volume |
+
+## Price history interval
+
+identifier: `seconds`
+
+| Name | Type | Description |
+|---|---|---|
+| seconds | integer | Price History time unit |
+
+## Price history
+
+identifier: `quote`, `base`, `intvl`, `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| quote | string | Quote token |
+| base | string | Base token |
+| intvl | integer | Time interval |
+| start_time | unix_timestamp | Start time |
+| end_time | unix_timestamp | End time |
+| open | decimal | Opening price |
+| close | decimal | Closing price |
+| high | decimal | Highest price |
+| low | decimal | Lowest price |
+| base_vol | decimal | Trading volume per base token |
+| quote_vol | decimal | Trading volume per quote token |
+
+## User
+
+identifier: -
+
+| Name | Type | Description |
+|---|---|---|
+| maker_fee_rate | decimal | Maker fee rate |
+| taker_fee_rate | decimal | Taker fee rate |
+| one_day_wdrl_usdt_limit | decimal | Withdrawal limit for 24 hours in USDT |
+
+## Asset
+
+identifier: `coin`
+
+| Name | Type | Description |
+|---|---|---|
+| coin | string | Token symbol |
+| total | decimal | Total amount |
+| reserved | decimal | Reserved amount for order and so on |
+| available | decimal | Availalbe amount for order |
+| investment_usdt | decimal | Total investment in USDT |
+
+## Order
+
+identifier: `id`
+
+| Name | Type | Description |
+|---|---|---|
+| id | integer | id |
+| sell | boolean | Sell (true) or buying (false) |
+| quote | string | Quote token |
+| base | string | Base token |
+| price | decimal | Price |
+| role | string | Order role. `"both"`, `"maker_only"`, `"taker_only"` |
+| cond_type | string | COnditional order type. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
+| cond_value | decimal or null | Conditional order price value |
+| coin_fee | decimal | Fee |
+| amount | decimal | Order amount |
+| filled | decimal | Order filled (per base at selling) |
+| filled_quote | decimal | Order filled (per quote at buying) |
+| unfilled | decimal | Order unfilled |
+| received_at | unix_timestamp | Order received time |
+| placed_at | unix_timestamp or null | Order placed time (to order book) |
+| closed_at | unix_timestamp or null | Order closed time |
+| status | string | Order status (received, placed, completed, canceled) |
+
+## Trade
+
+identifier: `id`
+
+| Name | Type | Description |
+|---|---|---|
+| id | integer | id |
+| quote | string | Quote token |
+| base | string | Base token |
+| quote_amount | decimal | Quote token trade amount |
+| base_amount | decimal | Base token trade amount |
+| price | decimal | Trade closing price |
+| taker_sold | boolean | Taker is seller (true) or buyer (false) |
+| price_dec_digit | integer | Valid price decimal digit |
+| base_amount_dec_digit | integer | Valid base amount decimal digit |
+| exec_at | unix_timestamp | Execution time |
+| Below are only available from my_trades  |
+| order_id | integer | Trade order id |
+| fee | decimal | Fee |
+| sell | boolean | Sell (true) or buying (false) |
+
+## Deposit
+
+identifier: `id`
+
+| Name | Type | Description |
+|---|---|---|
+| id | integer | id |
+| coin | string | Token symbol |
+| txid | string | Deposit transaction id |
+| amount | decimal | Deposit amount |
+| usdt_amount | decimal | Deposit USDT amount |
+| found_at | unix_timestamp | Deposit transaction found time |
+| confirm | integer | Confirm count |
+| confirm_checked_at | unix_timestamp | Confirm checked time |
+| applied_to_asset_at | unix_timestamp or null | Asset applied time |
+
+## Wdrl
+
+identifier: `id`
+
+| Name | Type | Description |
+|---|---|---|
+| id | integer | id |
+| coin | string | Withdrawal token |
+| to_addr | string | Withdrawal receiving address |
+| to_tag | string or null | Withdrawal tag |
+| to_org | string or null | Withdrawal organization |
+| amount | decimal | Withdrawal amount |
+| usdt_amount | decimal | Withdrawal amount in USDT |
+| fee | decimal | Withdrawal fee |
+| requested_at | unix_timestamp | Withdrawal requested time |
+| txid | string or null | Withdrawal transaction id |
+| tx_created_at | unix_timestamp or null | Withdrawal transaction created time |
+| completed_at | unix_timestamp or null | Withdrawal completed time |
+
+## Airdrop
+
+identifier: `id`
+
+| Name | Type | Description |
+|---|---|---|
+| id | integer | id |
+| coin | string | Token symbol |
+| amount | decimal | Airdrop amount |
+| description | string | Airdrop description |
+| airdropped_at | unix_timestamp | Airdrop time |
+
+# Versioning
+
+## 2018-10-08
+
+**TODO: CONFIRM VERSION NUMBER**
+Initial release of Daybit Exchange API v1.0 and its python wrapper.
