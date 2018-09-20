@@ -2,36 +2,21 @@
 
 This section explains how you could implement various features of the Exchange API. If you subscribed to certain `/subscription:<sub_topic>`, you will get notification from the server when relevant modification happens.
 
-* topic: `/subscription:<sub_topic>`
+* Topic: `/subscription:<sub_topic>`
 
-* event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to the event with `request` event, you will get `init` action response from the API. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the API with `notification` event. For more information of actions, please look [Action](#action).
+* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to the event with `request` event, you will get either `init` or `upsert` action response from the API. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the API with `notification` event. For more information of actions, please look [Action](#action).
 
-* rate limit: Limit of calls for every second. Only applicable for `request`.
+* Rate limit: Limit of calls for every second. Only applicable for `request`.
 
-> Response data types of `request` and `notification` events are identical.
+## Action
 
-```python
-{
-  "data": [
-    {
-      "action": string,
-      "data": [
-        {} # data
-      ]
-    }
-  ]
-}
-```
-
-### Action
-
-Response holds `action` which helps you to understand how to handle the `data`.
+Response holds `action` which helps you to understand how to handle the response.
 
 * `init` : Dump all previous data and initialize everything with most recent data.
-* `insert` : Add data to current data set, as most recent data.
-* `update` : Search the given data and replace if it exists.
-* `upsert` : Search the given data and replace if it exists, or insert if it doesn't exist.
-* `delete` : Search the given data and remove if it exists.
+* `insert` : Add data to data set, as most recent data.
+* `update` : Search in data set and replace if it was found.
+* `upsert` : Search in data set and replace if it was found, or insert if there's no matching data.
+* `delete` : Search in data set and remove if it was found.
 
 # Public data
 
@@ -54,30 +39,43 @@ async def daybit_coins():
 
 ```python
 {
-  "data": [
-    {
-      "action":"init",
-      "data": [
-        {
-          "sym":"USDT",
-          "native_decimal_places":2,
-          "tick_amount":"0.10000000",
-          "deposit_confirm":3,
-          "wdrl_confirm":10,
-          "public":true,
-          "tradable":true,
-          "deposit_enabled":true,
-          "wdrl_enabled":true,
-          "wdrl_fee":"5.00000000",
-          "min_deposit":"10.00000000",
-          "min_wdrl":"10.00000000",
-          "name":"테더",
-          "has_tag":false,
-          "has_org":false
-        }
-      ]
-    }
-  ]
+  'ADA': {
+    'deposit_confirm': 3,
+    'deposit_enabled': True,
+    'has_org': False,
+    'has_tag': False,
+    'min_deposit': '100.00000000',
+    'min_wdrl': '100.00000000',
+    'name': 'Ada',
+    'native_decimal_places': 8,
+    'public': True,
+    'sym': 'ADA',
+    'tick_amount': '2.00000000',
+    'tradable': False,
+    'wdrl_confirm': 10,
+    'wdrl_enabled': True,
+    'wdrl_fee': '50.00000000'
+  },
+
+  # ...       
+      
+  'ZRX': {
+    'deposit_confirm': 3,
+    'deposit_enabled': True,
+    'has_org': False,
+    'has_tag': False,
+    'min_deposit': '13.00000000',
+    'min_wdrl': '13.00000000',
+    'name': '0x Protocol',
+    'native_decimal_places': 4,
+    'public': True,
+    'sym': 'ZRX',
+    'tick_amount': '0.20000000',
+    'tradable': True,
+    'wdrl_confirm': 10,
+    'wdrl_enabled': True,
+    'wdrl_fee': '6.30000000'
+  }
 }
 ```
 
@@ -89,7 +87,7 @@ async def daybit_coins():
 
 * Rate limit: 2
 
-* Response: Array of [Coin](#coin)
+* Response: [Coin](#coin)
 
 * sort: -
 
@@ -121,30 +119,25 @@ async def daybit_coin_prices_with_sym(sym='ETH'):
 ```python
 # If you didn't specify the token
 {
-  "data": [
-    {
-      "action":"init",
-      "data": [
-        {"usdt_price":"1.00000000","sym":"USDT"},
-        {"usdt_price":"0.00269932","sym":"AMO"},
-        {"usdt_price":"0.09000000","sym":"ADA"},
-        ...,
-        {"usdt_price":"0.62462722","sym":"ZRX"}
-      ]
-    }
-  ]
+  'ADA': {
+    'sym': 'ADA',
+    'usdt_price': '0.09000000'
+  },
+
+  # ...
+
+  'ZRX': {
+    'sym': 'ZRX',
+    'usdt_price': '0.67047870'
+  }
 }
 
 # If you specified the token
 {
-  "data": [
-    {
-      "action":"init",
-      "data": [
-        {"usdt_price":"267.54000000","sym":"ETH"}
-      ]
-    }
-  ]
+  'ETH': {
+    'sym': 'ETH',
+    'usdt_price': '291.88000000'
+  }
 }
 ```
 
@@ -158,7 +151,7 @@ async def daybit_coin_prices_with_sym(sym='ETH'):
 
 * Rate limit: 5
 
-* Response: Array of [Coin price](#coin-price)
+* Response: [Coin price](#coin-price)
 
 * sort: -
 
@@ -172,7 +165,7 @@ async def daybit_coin_prices_with_sym(sym='ETH'):
 
 * Rate limit: 5
 
-* Response: Array of [Coin price](#coin-price)
+* Response: [Coin price](#coin-price)
 
 * sort: -
 
@@ -193,14 +186,15 @@ async def daybit_quote_coins():
 
 ```python
 {
-    "data": [
-        {
-            "action":"init",
-            "data": [
-                {"sym":"USDT"},{"sym":"BTC"},{"sym":"ETH"}
-            ]
-        }
-    ]
+  'BTC': {
+    'sym': 'BTC'
+  },
+  'ETH': {
+    'sym': 'ETH'
+  },
+  'USDT': {
+    'sym': 'USDT'
+  }
 }
 ```
 
@@ -213,7 +207,7 @@ async def daybit_quote_coins():
 
 * Rate limit: 2
 
-* Response: Array of [Quote coin](#quote-coin)
+* Response: [Quote coin](#quote-coin)
 
 * sort: -
 
@@ -234,39 +228,25 @@ async def daybit_markets():
 
 ```python
 {
-  "data": [
-    {
-      "action":"init",
-      "data": [
-        {
-          "tick_price":"0.00000001",
-          "tick_levels":5,
-          "sellable":true,
-          "quote":"BTC",
-          "buyable":true,
-          "base":"ADA"
-        },{
-          "tick_price":"0.00000200",
-          "tick_levels":5,
-          "sellable":false,
-          "quote":"BTC",
-          "buyable":true,
-          "base":"DASH"
-        },
+  'BTC-ADA': {
+    'base': 'ADA',
+    'buyable': True,
+    'quote': 'BTC',
+    'sellable': True,
+    'tick_levels': 5,
+    'tick_price': '0.00000001'
+  },
 
-        # ...
-
-        {
-          "tick_price":"0.00000200",
-          "tick_levels":5,
-          "sellable":true,
-          "quote":"ETH",
-          "buyable":true,
-          "base":"ETC"
-        }
-      ]
-    }
-  ]
+  # ...
+             
+  'USDT-ETH': {
+    'base': 'ETH',
+    'buyable': True,
+    'quote': 'USDT',
+    'sellable': True,
+    'tick_levels': 5,
+    'tick_price': '0.02000000'
+  }
 }
 ```
 
@@ -279,7 +259,7 @@ async def daybit_markets():
 
 * Rate limit: 2
 
-* Response: Array of [Market](#market-2)
+* Response: [Market](#market-2)
 
 * sort: -
 
@@ -300,24 +280,15 @@ async def daybit_market_summary_intvls():
 
 ```python
 {
-  "data": [
-    {
-      "action":"init",
-      "data": [
-        {
-          "seconds":30
-        },{
-          "seconds":60
-        },{
-          "seconds":360
-        },{
-          "seconds":720
-        },{
-          "seconds":1440
-        }
-      ]
-    }
-  ]
+  30: {
+    'seconds': 30
+  },
+
+  # ...
+
+  1440: {
+    'seconds': 1440
+  }
 }
 ```
 
@@ -330,7 +301,7 @@ async def daybit_market_summary_intvls():
 
 * Rate limit: 2
 
-* Response: Array of [Market summary interval](#market-summary-interval)
+* Response: [Market summary interval](#market-summary-interval)
 
 * sort: by `seconds` in `desc`
 
@@ -342,60 +313,43 @@ async def daybit_market_summary_intvls():
 from pprint import pprint
 from pydaybit import Daybit
 
-async with Daybit() as daybit:
-    intvls = sorted((await daybit.market_summary_intvls()).keys())
-    pprint(await (daybit.market_summaries / intvls[0])())
+async def daybit_market_summaries():
+    async with Daybit() as daybit:
+        intvls = sorted((await daybit.market_summary_intvls()).keys())
+        pprint(await (daybit.market_summaries / intvls[0])())
 ```
 
 > Example Response
 
 ```python
 {
-  "data": [
-    {
-      "action": "init",
-      "data": [
-        {
-          "volatility":"0.0000",
-          "seconds":30,
-          "quote_vol":"0.000",
-          "quote":"BTC",
-          "open":"0.00000049",
-          "low":"0.00000049",
-          "high":"0.00000049",
-          "close":"0.00000049",
-          "base_vol":"0.000",
-          "base":"AMO"
-        },{
-          "volatility":"0.0000",
-          "seconds":30,
-          "quote_vol":"0.000",
-          "quote":"BTC",
-          "open":"0.083755",
-          "low":"0.083755",
-          "high":"0.083755",
-          "close":"0.083755",
-          "base_vol":"0.000",
-          "base":"BCH"
-        },
+  'BTC-AMO': {
+    'base': 'AMO',
+    'base_vol': '141900.000',
+    'close': '0.00000046',
+    'high': '0.00000046',
+    'low': '0.00000046',
+    'open': '0.00000046',
+    'quote': 'BTC',
+    'quote_vol': '0.065',
+    'seconds': 30,
+    'volatility': '0.0000'
+  },
 
-        # ...
+  # ...
 
-        {
-          "volatility":"0.0000",
-          "seconds":30,
-          "quote_vol":"0.000",
-          "quote":"USDT",
-          "open":"285.34",
-          "low":"285.34",
-          "high":"285.34",
-          "close":"285.34",
-          "base_vol":"0.000",
-          "base":"ETH"
-        }
-      ]
-    }
-  ]
+  'USDT-ETH': {
+    'base': 'ETH',
+    'base_vol': '0.275',
+    'close': '291.82',
+    'high': '291.82',
+    'low': '291.82',
+    'open': '291.82',
+    'quote': 'USDT',
+    'quote_vol': '80.251',
+    'seconds': 30,
+    'volatility': '0.0000'
+  }
 }
 ```
 
@@ -408,7 +362,7 @@ async with Daybit() as daybit:
 
 * Rate limit: 5
 
-* Response: Array of [Market summary](#market-summary)
+* Response: [Market summary](#market-summary)
 
 * sort: -
 
@@ -442,15 +396,6 @@ async def daybit_order_books():
     'quote': 'USDT',
     'sell_vol': '0.00000000'
   },
- '6480.00000000-6485.00000000': {
-   'base': 'BTC',
-    'buy_vol': '0.22132000',
-    'intvl': '5.00000000',
-    'max_price': '6485.00000000',
-    'min_price': '6480.00000000',
-    'quote': 'USDT',
-    'sell_vol': '0.00000000'
-  },
 
   # ...
 
@@ -475,7 +420,7 @@ async def daybit_order_books():
 
 * Rate limit: 5
 
-* Response: Array of [Order book](#order-book)
+* Response: [Order book](#order-book)
 
 * sort: by `min_price` in `desc`
 
@@ -499,33 +444,9 @@ async def daybit_price_history_intvls():
   60: {
     'seconds': 60
   },
-  180: {
-    'seconds': 180
-  },
-  300: {
-    'seconds': 300
-  },
-  600: {
-    'seconds': 600
-  },
-  900: {
-    'seconds': 900
-  },
-  1800: {
-    'seconds': 1800
-  },
-  3600: {
-    'seconds': 3600
-  },
-  7200: {
-    'seconds': 7200
-  },
-  14400: {
-    'seconds': 14400
-  },
-  21600: {
-    'seconds': 21600
-  },
+  
+  # ...
+
   86400: {
     'seconds': 86400
   }
@@ -541,7 +462,7 @@ async def daybit_price_history_intvls():
 
 * Rate limit: 2
 
-* Response: Array of [Price history interval](#price-history-interval)
+* Response: [Price history interval](#price-history-interval)
 
 * sort: `seconds` in `asc`
 
@@ -579,19 +500,6 @@ async def daybit_price_histories():
     'quote_vol': '0',
     'start_time': 1537351080000
   },
-  'USDT-BTC-60-1537351140000': {
-    'base': 'BTC',
-    'base_vol': '0',
-    'close': '6833.00000000',
-    'end_time': 1537351200000,
-    'high': '6833.00000000',
-    'intvl': 60,
-    'low': '6833.00000000',
-    'open': '6833.00000000',
-    'quote': 'USDT',
-    'quote_vol': '0',
-    'start_time': 1537351140000
-  },
 
   # ...
 
@@ -620,7 +528,7 @@ async def daybit_price_histories():
 
 * Rate limit: 20
 
-* Response: Array of [Price history](#price-history)
+* Response: [Price history](#price-history)
 
 * sort: -
 
@@ -657,16 +565,6 @@ async def daybit_trades():
     'quote_amount': '18.17578000',
     'taker_sold': True
   },
-  40810690: {
-    'base': 'BTC',
-    'base_amount': '0.00044000',
-    'exec_at': 1537350775677,
-    'id': 40810690,
-    'price': '6833.00000000',
-    'quote': 'USDT',
-    'quote_amount': '3.00652000',
-    'taker_sold': True
-  },
 
   # ...
 
@@ -692,7 +590,7 @@ async def daybit_trades():
 
 * Rate limit: 5
 
-* Response: Array of [Trade](#trade)
+* Response: [Trade](#trade)
 
 * sort: by `exec_at` in `desc`
 
@@ -739,7 +637,7 @@ async def daybit_my_users():
 
 * Rate limit: 2
 
-* Response: Array of [User](#user)
+* Response: [User](#user)
 
 * sort: -
 
@@ -767,13 +665,6 @@ async def daybit_my_assets():
     'reserved': '0.000000000000000000',
     'total': '700000.000000000000000000'
   },
-  'AMO': {
-    'available': '20000000.000000000000000000',
-    'coin': 'AMO',
-    'investment_usdt': '0.000000000000000000',
-    'reserved': '0.000000000000000000',
-    'total': '20000000.000000000000000000'
-  },
 
   # ...
 
@@ -796,7 +687,7 @@ async def daybit_my_assets():
 
 * Rate limit: 5
 
-* Response: Array of [Asset](#asset)
+* Response: [Asset](#asset)
 
 * sort: -
 
@@ -841,28 +732,6 @@ async def daybit_my_orders():
     'status': 'closed',
     'unfilled': '0.00020000'
   },
-  82622825: {
-    'amount': '0.00020000',
-    'base': 'BTC',
-    'cancel_reason': 'user',
-    'close_type': 'canceled',
-    'closed_at': 1537347005236,
-    'cond_arg1': None,
-    'cond_arg2': None,
-    'cond_type': 'none',
-    'filled': '0.00000000',
-    'filled_quote': '0.00000000',
-    'id': 82622825,
-    'placed_amount': '0.00020000',
-    'placed_at': 1537346949166,
-    'price': '7091.00000000',
-    'quote': 'USDT',
-    'received_at': 1537346949161,
-    'role': 'both',
-    'sell': False,
-    'status': 'closed',
-    'unfilled': '0.00020000'
-  },
 
   # ...
 
@@ -900,7 +769,7 @@ async def daybit_my_orders():
 
 * Rate limit: 5
 
-* Response: Array of [Order](#order-2)
+* Response: [Order](#order-2)
 
 * sort: by `id` in `desc`
 
@@ -946,20 +815,6 @@ async def daybit_my_trades():
     'sell': True,
     'taker_sold': True
   },
-  40807562: {
-    'base': 'BTC',
-    'base_amount': '0.00020000',
-    'coin_fee': '0.00000001',
-    'day_fee': '0.03977098',
-    'exec_at': 1537347414699,
-    'id': 40807562,
-    'order_id': 82707467,
-    'price': '7091.00000000',
-    'quote': 'USDT',
-    'quote_amount': '1.41820000',
-    'sell': True,
-    'taker_sold': True
-  },
 
   # ...
 
@@ -989,7 +844,7 @@ async def daybit_my_trades():
 
 * Rate limit: 5
 
-* Response: Array of [Trade](#trade)
+* Response: [Trade](#trade)
 
 * sort: by `id` in `desc`
 
@@ -1034,7 +889,7 @@ async def daybit_my_tx_summaries():
 
 * Rate limit: 5
 
-* Response: Array of [Deposit](#deposit)
+* Response: [Deposit](#deposit)
 
 * sort: by `id` in `desc`
 
@@ -1072,7 +927,7 @@ async def daybit_my_my_airdrops():
 
 * sort: by `id` in `desc`
 
-* Response: Array of [Airdrop](#airdrop)
+* Response: [Airdrop](#airdrop)
 
 ### arguments
 

@@ -7,7 +7,6 @@ language_tabs:
 includes:
   - api
   - subscription
-  - advanced
 
 search: true
 ---
@@ -20,11 +19,11 @@ This API document explains the basic types of APIs, usage of each API, expected 
 
 ## Libraries
 
-Exchange is using Elixir language and built on [Phoenix framework](https://phoenixframework.org/). Exchange API can be accessed from Phoenix client, which is based on websocket. For now, Daybit officially supports python langauge wrapper only.
+Exchange is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Exchange API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides wrapper for python langauge only.
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
-For other languages, please refer below libraries to implement the features of this Exchange API. You can also find useful information of using this API in [below](#advanced).
+For other languages, please refer below libraries to implement the features of this Exchange API.
 
 * Phoenix.js(Javascript): [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix/)
 * SwiftPhoenixClient(Swift): [https://github.com/davidstump/SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient/)
@@ -51,22 +50,20 @@ For wrapper installation, please look right column.
 * [Channels](https://hexdocs.pm/phoenix/channels.html) are a part of Phoenix that allow us to easily add soft-realtime features to our applications. Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
 * [Topic](https://hexdocs.pm/phoenix/channels.html#topics) are string identifiers - names that the various layers use in order to make sure messages end up in the right place. As we saw above, topics can use wildcards. This allows for a useful “topic:subtopic” convention. Often, you’ll compose topics using record IDs from your application layer, such as `users:123`.
 
-For detailed explanation, please look explanation of [Advanced](#advanced) usage.
-
 # Common
 
 ## Types
 
-- `integer`: `integer` data type. ex) `123`
-- `decimal`: Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. ex) `"880.524"`
-- `string`: `string`. ex) `"string"`
-- `boolean`: `boolean`. ex) `true`, `false`
-- `unix_timestamp`: `millisecond` unit unix timestamp. ex) `1528269989516`
-- `csv`: string based comma separated values. ex) `"1, 2, 3"`
+* `integer`: `integer` data type. ex) `123`
+* `decimal`: Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. ex) `"880.524"`
+* `string`: `string`. ex) `"string"`
+* `boolean`: `boolean`. ex) `true`, `false`
+* `unix_timestamp`: `millisecond` unit unix timestamp. ex) `1528269989516`
+* `csv`: string based comma separated values. ex) `"1, 2, 3"`
 
 ## Authorization
 
-The usage of API is restricted by given right to each API key. You would get `unauthenticated` response error_code if you called API that is not accessible from your API key.
+The usage of API is restricted by given right to each API key. You would get `unauthenticated` response error_code if you called API that is not accessible from your API key. Please look below for the types of API key and details of it.
 
 | Type | Description |
 |------|-------------|
@@ -83,11 +80,11 @@ Basically there are two types of response formats. Based on the result of API ca
 
 ```python
 {
-  "data": object || array
+  # plain json object with proper data
 }
 ```
 
-> Fail
+> Fail **TODO: CHECK ERROR RESPONSE**
 
 ```python
 {
@@ -98,72 +95,55 @@ Basically there are two types of response formats. Based on the result of API ca
 }
 ```
 
-## Pagination
-
-first request:
-```python
-{
-  "size": wanted number of objects
-}
-```
-
-next page:
-```python
-{
-  "to_id": request until this id
-  "size": wanted number of objects
-}
-```
-
 ## Size
 
 Maximum value for `size` is `30`. API will replace `size` to `30` if you placed the number larger than `30`.
 
 ## Market
 
-`quote` and `base` are both required if request asked certain market's data by `quote` and `base`.
+`quote` and `base` are both required if request asked certain market's information by `quote` and `base`.
 
 ## Error list
 
 ### General
 
-- unauthenticated: unauthenticated user action
-- invalid_arguments: invalid arguments in request
-- resource_not_found: Resource not found
+* unauthenticated: Unauthenticated user action
+* invalid_arguments: Invalid arguments in request
+* resource_not_found: Resource not found
 
 ### Api
 
-- api_invalid_timestamp_or_timeout: `timestamp` and/or `timeout` of request is not valid
-- api_timeout: timeout happens by requested `timestamp` and/or `timeout`
-- api_exceeded_rate_limit: Rate limit exceeded
-- api_invalid_param_types: Invalid request parameter type
-- api_required_params_not_provided: Missing required parameter
+* api_invalid_timestamp_or_timeout: `timestamp` and/or `timeout` of request is not valid
+* api_timeout: Timeout happens by requested `timestamp` and/or `timeout`
+* api_exceeded_rate_limit: Rate limit exceeded
+* api_invalid_param_types: Invalid request parameter type
+* api_required_params_not_provided: Missing required parameter
 
 ### Order
 
-- order_invalid_market: Invalid market(`quote`, `base`)
-- order_not_tradable_coin: Not tradable coin
-- order_not_sellable_market: Not sellable market
-- order_not_buyable_market: Not buyable market
-- order_invalid_price: Invalid price
-- order_invalid_amount: Invalid amount
-- order_only_both_role_can_be_cond: Conditional order is available only when `role` is `both`
-- order_out_of_price_range: Out of price range (Sell: 20% ~ 200%, Buy: 50% ~ 500%)
-- order_exceeded_max_tstops: Exceeded maximum Trailing-Stop
-- order_suspended_due_to_frequent_canceling: Order suspended due to frequent canceling
-- order_exceeds_my_asset_values: Order exceeded my asset values
-- order_violates_min_quote: Order amount less than minimum quote
-- order_already_closed: Order already closed
+* order_invalid_market: Invalid market(`quote`, `base`)
+* order_not_tradable_coin: Coin trade suspended
+* order_not_sellable_market: Selling is suspended in the market
+* order_not_buyable_market: Buying is suspended in the market
+* order_invalid_price: Invalid price
+* order_invalid_amount: Invalid amount
+* order_only_both_role_can_be_cond: Conditional order is available only when `role` is `both`
+* order_out_of_price_range: Out of price range (Selling: 20% ~ 200%, Buying: 50% ~ 500%)
+* order_exceeded_max_tstops: Exceeded maximum Trailing*Stop order count
+* order_suspended_due_to_frequent_canceling: Order suspended due to frequent canceling
+* order_exceeds_my_asset_values: Order exceeded my asset values
+* order_violates_min_quote: Order amount is less than minimum quote
+* order_already_closed: Order already closed
 
 ### Wdrl
 
-- wdrl_suspended_coin: Suspended coin
-- wdrl_precision_error: Decimal place accuracy error
-- wdrl_under_min_amount: Withdrawal amount less than minimum per transaction
-- wdrl_over_daily_wdrl_limit: Withdrawal amount exceeded daily limit
-- wdrl_exceeds_my_asset_values: Withdrawal exceeded my asset
-- wdrl_needs_to_tag: Missing `to_tag` parameter
-- wdrl_invalid_addr: Invalid address
+* wdrl_suspended_coin: Coin was Suspended to withdraw
+* wdrl_precision_error: Decimal place accuracy error
+* wdrl_under_min_amount: One time withdrawal amount is less than minimum
+* wdrl_over_daily_wdrl_limit: Withdrawal amount exceeded daily limit
+* wdrl_exceeds_my_asset_values: Withdrawal amount exceeded my asset
+* wdrl_needs_to_tag: Missing `to_tag` parameter
+* wdrl_invalid_addr: Invalid address
 
 # Models
 
@@ -181,16 +161,16 @@ identifier: `sym`
 | tick_amount | decimal | Order amount unit |
 | deposit_confirm | integer | Number of confirms required for deposit completion |
 | wdrl_confirm | integer | Number of confirms required for withdrawal completion |
-| public | boolean | Public coin or not |
+| public | boolean | ㅣ Listed on the exchange (`true`) or not (`false`) |
 | name | string | Name of token (locale applied) |
-| tradable | boolean | Tradable |
-| deposit_enabled | boolean | Deposit enabled |
-| wdrl_enabled | boolean | Withdrawal enabled |
+| tradable | boolean | Tradable or not |
+| deposit_enabled | boolean | Deposit enabled or not |
+| wdrl_enabled | boolean | Withdrawal enabled or not |
 | wdrl_fee | decimal | Withdrawal fee |
-| min_deposit | decimal | Minimum deposit |
-| min_wdrl | decimal | Minimum withdrawal |
-| has_tag | boolean | to_tag required at deposit or withdrawal |
-| has_org | boolean | to_org required at deposit or withdrawal |
+| min_deposit | decimal | Minimum deposit amount |
+| min_wdrl | decimal | Minimum withdrawal amount |
+| has_tag | boolean | to_tag required or not for deposit/withdrawal |
+| has_org | boolean | to_org required or not for deposit/withdrawal |
 
 ## Coin price
 
@@ -218,9 +198,9 @@ identifier: `quote`, `base`
 | quote | string | Quote token |
 | base | string | Base token |
 | tick_price | decimal | Order price unit |
-| sellable | boolean | Sellable |
-| buyable | boolean | Buyable |
-| tick_levels | integer | Number of levels for order book existence per `tick_price`. Order book is incrased ten times for each level. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100 |
+| sellable | boolean | Sellable or not |
+| buyable | boolean | Buyable or not |
+| tick_levels | integer | Number of levels for order book existence per `tick_price`. Order book is increased ten times for each level. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100 |
 
 ## Market summary interval
 
@@ -228,7 +208,7 @@ identifier: `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| seconds | integer | Market Summary unit time |
+| seconds | integer | Market summary interval unit |
 
 ## Market summary
 
@@ -267,7 +247,7 @@ identifier: `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| seconds | integer | Price History time unit |
+| seconds | integer | Price history interval unit |
 
 ## Price history
 
@@ -278,8 +258,8 @@ identifier: `quote`, `base`, `intvl`, `start_time`
 | quote | string | Quote token |
 | base | string | Base token |
 | intvl | integer | Time interval |
-| start_time | unix_timestamp | Start time |
-| end_time | unix_timestamp | End time |
+| start_time | unix_timestamp | Start time of price history |
+| end_time | unix_timestamp | End time of price history |
 | open | decimal | Opening price |
 | close | decimal | Closing price |
 | high | decimal | Highest price |
@@ -316,7 +296,7 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| sell | boolean | Sell (true) or buying (false) |
+| sell | boolean | Selling (`true`) or buying (`false`) |
 | quote | string | Quote token |
 | base | string | Base token |
 | price | decimal | Price |
@@ -345,14 +325,14 @@ identifier: `id`
 | quote_amount | decimal | Quote token trade amount |
 | base_amount | decimal | Base token trade amount |
 | price | decimal | Trade closing price |
-| taker_sold | boolean | Taker is seller (true) or buyer (false) |
+| taker_sold | boolean | Taker is seller (`true`) or buyer (`false`) |
 | price_dec_digit | integer | Valid price decimal digit |
 | base_amount_dec_digit | integer | Valid base amount decimal digit |
 | exec_at | unix_timestamp | Execution time |
-| Below are only available from my_trades  |
+| Below are only available from [my_trades](#my-trades)  |
 | order_id | integer | Trade order id |
 | fee | decimal | Fee |
-| sell | boolean | Sell (true) or buying (false) |
+| sell | boolean | Selling (`true`) or buying (`false`) |
 
 ## Deposit
 
@@ -405,5 +385,4 @@ identifier: `id`
 
 ## 2018-10-08
 
-**TODO: CONFIRM VERSION NUMBER**
 Initial release of Daybit Exchange API v1.0 and its python wrapper.

@@ -1,14 +1,12 @@
 # **Topic: API**
 
-[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. For valid `topic` and `event`, please look below. You can include them in [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html).
+[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. For valid `topic` and `event` of the [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html), please look below.
 
-* topic: `/api`
+* Topic: `/api`
 
-* event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
+* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
 
-* rate limit: Limit of calls for every second.
-
-(Please look [Advanced](#advanced) for detailed explanation of above terms.)
+* Rate limit: Limit of calls for every second.
 
 <aside class="notice">
 It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
@@ -32,12 +30,7 @@ async def daybit_get_server_time():
 > Example Response
 
 ```python
-{
-  "data": {
-    "server_time": 1537245470341 # unix_timestamp
-    }
-  }
-}
+1537418605426 # unix_timestamp
 ```
 
 ### event: `get_server_time`
@@ -86,28 +79,26 @@ async def daybit_create_order_sell():
 
 ```python
 {
-  "data": {
-    'amount': '0.00020000',
-    'base': 'BTC',
-    'cancel_reason': None,
-    'close_type': None,
-    'closed_at': None,
-    'cond_arg1': None,
-    'cond_arg2': None,
-    'cond_type': 'none',
-    'filled': '0.00000000',
-    'filled_quote': '0.00000000',
-    'id': 81133319,
-    'placed_amount': '0.00020000',
-    'placed_at': 1537339108540,
-    'price': '6040.50000000',
-    'quote': 'USDT',
-    'received_at': 1537339108516,
-    'role': 'both',
-    'sell': True,
-    'status': 'placed',
-    'unfilled': '0.00020000'
-  }
+  'amount': '0.00200000',
+  'base': 'BTC',
+  'cancel_reason': None,
+  'close_type': None,
+  'closed_at': None,
+  'cond_arg1': None,
+  'cond_arg2': None,
+  'cond_type': 'none',
+  'filled': '0.00000000',
+  'filled_quote': '0.00000000',
+  'id': 53026865,
+  'placed_amount': '0.00200000',
+  'placed_at': 1537419310682,
+  'price': '6961.00000000',
+  'quote': 'USDT',
+  'received_at': 1537419310639,
+  'role': 'both',
+  'sell': True,
+  'status': 'placed',
+  'unfilled': '0.00200000'
 }
 ```
 
@@ -148,28 +139,26 @@ async def daybit_cancel_order():
 
 ```python
 {
-  "data": {
-    "id":12345678,
-    "sell":false,
-    "quote":"BTC",
-    "base":"OMG",
-    "price":"0.00055140",
-    "role":"both",
-    "cond_type":"none",
-    "amount":"12943.30000000",
-    "filled":"1466.75000000",
-    "filled_quote":"0.80485826",
-    "unfilled":"11476.55000000",
-    "received_at":1537245926083,
-    "placed_at":1537245926086,
-    "closed_at":1537246289313,
-    "status":"closed",
-    "placed_amount":"12943.30000000",
-    "cond_arg2":null,
-    "cond_arg1":null,
-    "close_type":"canceled",
-    "cancel_reason":"user"
-  }
+  'amount': '0.00200000',
+  'base': 'BTC',
+  'cancel_reason': 'user',
+  'close_type': 'canceled',
+  'closed_at': 1537421465336,
+  'cond_arg1': None,
+  'cond_arg2': None,
+  'cond_type': 'none',
+  'filled': '0.00000000',
+  'filled_quote': '0.00000000',
+  'id': 53216861,
+  'placed_amount': '0.00200000',
+  'placed_at': 1537421443079,
+  'price': '6595.00000000',
+  'quote': 'USDT',
+  'received_at': 1537421443074,
+  'role': 'both',
+  'sell': False,
+  'status': 'closed',
+  'unfilled': '0.00200000'
 }
 ```
 
@@ -207,9 +196,7 @@ async def daybit_cancel_orders():
 
 ```python
 {
-  "data": {
-    "num_canceled_orders": 2
-  }
+  'num_canceled_orders': 5
 }
 ```
 
@@ -253,9 +240,7 @@ async def daybit_cancel_all_my_orders():
 
 ```python
 {
-  "data": {
-    "num_canceled_orders": 2
-  }
+  'num_canceled_orders': 2
 }
 ```
 
@@ -290,20 +275,18 @@ async def daybit_create_wdrl():
 
 ```python
 {
-  "data": {
-    "id":47291,
-    "coin":"ADA",
-    "to_addr":"fake_address",
-    "to_tag":null,
-    "to_org":null,
-    "amount":"100.00000000",
-    "usdt_amount":"9.00000000",
-    "fee":"50.00000000",
-    "requested_at":1537250187162,
-    "txid":null,
-    "tx_created_at":null,
-    "completed_at":null
-  }
+  'amount': '100.00000000',
+  'coin': 'ADA',
+  'completed_at': None,
+  'fee': '50.00000000',
+  'id': 47291,
+  'requested_at': 1537419011126,
+  'to_addr': 'fake_address',
+  'to_org': None,
+  'to_tag': None,
+  'tx_created_at': None,
+  'txid': None,
+  'usdt_amount': '9.00000000'
 }
 ```
 
