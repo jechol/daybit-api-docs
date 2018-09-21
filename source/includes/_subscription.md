@@ -877,7 +877,67 @@ async def daybit_my_tx_summaries():
 > Example Response
 
 ```python
-**TODO: NEED RESPONSE EXAMPLE**
+# response of daybit.my_tx_summaries(type='deposit')
+{
+  47283: {
+    'amount': '1.2977',
+    'coin': 'LTC',
+    'completed_at': 1537417829032,
+    'confirm': 3847,
+    'created_at': 1537417829029,
+    'deposit_status': 'completed',
+    'id': 47283,
+    'req_confirm': 3,
+    'tx_link_url': 'https://live.blockcypher.com/ltc/tx/a809a19d194d48967f1c8b6aa1dae33d412ece2570fe8d9b751d63a703e15183',
+    'txid': 'a809a19d194d48967f1c8b6aa1dae33d412ece2570fe8d9b751d63a703e15183',
+    'type': 'deposit',
+    'wdrl_status': None,
+    'wdrl_to_addr': None,
+    'wdrl_to_org': None,
+    'wdrl_to_tag': None
+  },
+
+  # ...
+  
+  47287: {
+    'amount': '0.01448502',
+    'coin': 'BTC',
+    'completed_at': 1537417829091,
+    'confirm': 955,
+    'created_at': 1537417829087,
+    'deposit_status': 'completed',
+    'id': 47287,
+    'req_confirm': 3,
+    'tx_link_url': 'https://live.blockcypher.com/btc/tx/af9648f4c1622b3872649019d4391248d9c93bdd9630e16128431d475d2263a4',
+    'txid': 'af9648f4c1622b3872649019d4391248d9c93bdd9630e16128431d475d2263a4',
+    'type': 'deposit',
+    'wdrl_status': None,
+    'wdrl_to_addr': None,
+    'wdrl_to_org': None,
+    'wdrl_to_tag': None
+  }
+}
+
+# example of daybit.my_tx_summaries(type='wdrl')
+{
+  47291: {
+    'amount': '100.00000000',
+    'coin': 'ADA',
+    'completed_at': None,
+    'confirm': 0,
+    'created_at': 1537419011126,
+    'deposit_status': None,
+    'id': 47291,
+    'req_confirm': 10,
+    'tx_link_url': None,
+    'txid': None,
+    'type': 'wdrl',
+    'wdrl_status': 'queued',
+    'wdrl_to_addr': '0x2b7cd7f27d21da93395a4c19aea80f8467f93596',
+    'wdrl_to_org': None,
+    'wdrl_to_tag': None
+  }
+}
 ```
 
 ### subtopic: `my_tx_summaries`
