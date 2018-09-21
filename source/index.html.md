@@ -13,9 +13,9 @@ search: true
 
 # **Introduction**
 
-Daybit's API works in socket server and based on your task and subject of required action, you can either subscribe to `api` or `subscription`s channels.
+Daybit's API works in socket server. Based on your task and subject of required action, you can either subscribe to `api` or `subscription`s channels.
 
-This API document explains the basic types of APIs, usage of each API, expected request body to call API, and response object from API.
+This document provides basic information of the API, usage of wrapper, and working examples of the wrapper.
 
 ## Libraries
 
@@ -74,7 +74,7 @@ The usage of API is restricted by given right to each API key. You would get `un
 
 ## Response format
 
-Basically there are two types of response formats. Based on the result of API calls, you would get one of success of fail models. If there was an error while running the API call, proper message will be returned along with error_code.
+Basically there are two types of response formats. Based on the result of API calls, you would get one of success or fail models. If there was an error while running the API call, proper message will be returned along with error_code.
 
 > Success
 

@@ -1,6 +1,6 @@
 # **Topic: API**
 
-[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. For valid `topic` and `event` of the [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html), please look below.
+[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. It also shows how to use wrapper and expected response from it. For valid `topic` and `event` of the [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html), please look below.
 
 * Topic: `/api`
 
