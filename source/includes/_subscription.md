@@ -355,7 +355,7 @@ async def daybit_market_summaries():
 
 ### subtopic: `market_summaries;<seconds>`
 
-* Description: Subscribe to get market price summaries. For the valid `seconds`, please refer [Market summary intervals](#market-summary-intervals).
+* Description: Subscribe to get market summaries. For the valid `seconds`, please refer [Market summary intervals](#market-summary-intervals).
 
 * request: `init`
 * notification: `init`

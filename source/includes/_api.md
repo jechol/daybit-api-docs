@@ -202,7 +202,7 @@ async def daybit_cancel_orders():
 
 ### event: `cancel_orders`
 
-* Description: Cancel multiple orders. If invalid one or more of `order_ids` are invalid, the API simply ignores it and cancels only valid ones. You can check number of canceled ids from `num_canceled_orders` in response.
+* Description: Cancel multiple orders. If one or more of `order_ids` are invalid, the API simply ignores it and cancels only valid ones. You can check number of canceled ids from `num_canceled_orders` in response.
 
 * Rate limit: 5
 
