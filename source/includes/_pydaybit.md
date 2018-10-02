@@ -2,12 +2,17 @@
 Pydaybit is an API wrapper for Daybit exchange written in Python.
 
 
+## **Disclaimer**
+USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
+
+
 ## **Installation**
   
   ```shell
       $ git clone https://github.com/daybit-exchange/pydaybit
       $ pip install -e pydaybit
   ```
+  
 
 ## get_server_time()
 
