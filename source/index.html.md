@@ -378,9 +378,3 @@ identifier: `id`
 | amount | decimal | Airdrop amount |
 | description | string | Airdrop description |
 | airdropped_at | unix_timestamp | Airdrop time |
-
-# Versioning
-
-## 2018-10-08
-
-Initial release of Daybit Exchange API v1.0 and its python wrapper.
