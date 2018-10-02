@@ -143,11 +143,11 @@ Maximum value for `size` is `30`. API will replace `size` to `30` if you placed 
 * wdrl_needs_to_tag: Missing `to_tag` parameter
 * wdrl_invalid_addr: Invalid address
 
-# Models
+## Models
 
 Below are generic data models.
 
-## Coin
+### Coin
 
 identifier: `sym`
 
@@ -170,7 +170,7 @@ identifier: `sym`
 | has_tag | boolean | to_tag required or not for deposit/withdrawal |
 | has_org | boolean | to_org required or not for deposit/withdrawal |
 
-## Coin price
+### Coin price
 
 identifier: `sym`
 
@@ -179,7 +179,7 @@ identifier: `sym`
 | sym | string | Token symbol |
 | usdt_price | decimal | USDT exchanged price |
 
-## Quote coin
+### Quote coin
 
 identifier: `sym`
 
@@ -187,7 +187,7 @@ identifier: `sym`
 |---|---|---|
 | sym | string | Token symbol |
 
-## Market
+### Market
 
 identifier: `quote`, `base`
 
@@ -200,7 +200,7 @@ identifier: `quote`, `base`
 | buyable | boolean | Buyable or not |
 | tick_levels | integer | Number of levels for order book existence per `tick_price`. Order book is increased ten times for each level. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100 |
 
-## Market summary interval
+### Market summary interval
 
 identifier: `seconds`
 
@@ -208,7 +208,7 @@ identifier: `seconds`
 |---|---|---|
 | seconds | integer | Market summary interval unit |
 
-## Market summary
+### Market summary
 
 identifier: `quote`, `base`, `seconds`
 
@@ -225,7 +225,7 @@ identifier: `quote`, `base`, `seconds`
 | quote_vol | decimal | Trading volume per quote token |
 | base_vol | decimal | Trading volume per base token |
 
-## Order book
+### Order book
 
 identifier: `quote`, `base`, `price_intvl`, `min_price`
 
@@ -239,7 +239,7 @@ identifier: `quote`, `base`, `price_intvl`, `min_price`
 | sell_vol | decimal | Selling volume |
 | buy_vol | decimal | Buying volume |
 
-## Price history interval
+### Price history interval
 
 identifier: `seconds`
 
@@ -247,7 +247,7 @@ identifier: `seconds`
 |---|---|---|
 | seconds | integer | Price history interval unit |
 
-## Price history
+### Price history
 
 identifier: `quote`, `base`, `intvl`, `start_time`
 
@@ -265,7 +265,7 @@ identifier: `quote`, `base`, `intvl`, `start_time`
 | base_vol | decimal | Trading volume per base token |
 | quote_vol | decimal | Trading volume per quote token |
 
-## User
+### User
 
 identifier: -
 
@@ -275,7 +275,7 @@ identifier: -
 | taker_fee_rate | decimal | Taker fee rate |
 | one_day_wdrl_usdt_limit | decimal | Withdrawal limit for 24 hours in USDT |
 
-## Asset
+### Asset
 
 identifier: `coin`
 
@@ -287,7 +287,7 @@ identifier: `coin`
 | available | decimal | Availalbe amount for order |
 | investment_usdt | decimal | Total investment in USDT |
 
-## Order
+### Order
 
 identifier: `id`
 
@@ -311,7 +311,7 @@ identifier: `id`
 | closed_at | unix_timestamp or null | Order closed time |
 | status | string | Order status (received, placed, completed, canceled) |
 
-## Trade
+### Trade
 
 identifier: `id`
 
@@ -332,7 +332,7 @@ identifier: `id`
 | fee | decimal | Fee |
 | sell | boolean | Selling (`true`) or buying (`false`) |
 
-## Deposit
+### Deposit
 
 identifier: `id`
 
@@ -348,7 +348,7 @@ identifier: `id`
 | confirm_checked_at | unix_timestamp | Confirm checked time |
 | applied_to_asset_at | unix_timestamp or null | Asset applied time |
 
-## Wdrl
+### Wdrl
 
 identifier: `id`
 
@@ -367,7 +367,7 @@ identifier: `id`
 | tx_created_at | unix_timestamp or null | Withdrawal transaction created time |
 | completed_at | unix_timestamp or null | Withdrawal completed time |
 
-## Airdrop
+### Airdrop
 
 identifier: `id`
 
