@@ -24,3 +24,6 @@ vendor/
 _yardoc
 doc/
 .idea/
+
+# asdf
+*.tool-versions
