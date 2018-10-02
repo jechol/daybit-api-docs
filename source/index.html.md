@@ -1,9 +1,6 @@
 ---
 title: Daybit API Reference
 
-language_tabs:
-  - python
-
 includes:
   - api
   - subscription
