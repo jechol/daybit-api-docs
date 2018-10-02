@@ -30,17 +30,7 @@ For other languages, please refer below libraries to implement the features of t
 
 ## Host address
 
-```shell
-    $ git clone https://github.com/daybit-exchange/pydaybit
-    $ pip install -e pydaybit
-```
-
 * Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
-
-* Python API wrapper : [https://github.com/daybit-exchange/pydaybit/](https://github.com/daybit-exchange/pydaybit/)
-
-For wrapper installation, please look right column.
-
 
 # Common
 

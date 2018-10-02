@@ -1,4 +1,13 @@
 # Pydaybit
+Pydaybit is an API wrapper for Daybit exchange written in Python.
+
+
+## **Installation**
+  
+  ```shell
+      $ git clone https://github.com/daybit-exchange/pydaybit
+      $ pip install -e pydaybit
+  ```
 
 ## get_server_time()
 
