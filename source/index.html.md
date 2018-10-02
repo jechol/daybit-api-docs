@@ -9,6 +9,9 @@ includes:
   - subscription
 
 search: true
+
+toc_footers:
+ - <a href='https://www.daybit.com'>Daybit</a>
 ---
 
 # **Introduction**
