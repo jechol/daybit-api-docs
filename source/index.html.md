@@ -32,7 +32,7 @@ For other languages, please refer below libraries to implement the features of t
 
 ## Host address
 
-```python
+```shell
     $ git clone https://github.com/daybit-exchange/pydaybit
     $ pip install -e pydaybit
 ```
