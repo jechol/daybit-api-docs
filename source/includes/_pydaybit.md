@@ -297,9 +297,6 @@ Parameter | Type | Required | Description
 `amount` | decimal | Required | Amount to withdraw.
 
 
-## **Subscriptions**
-
-
 ## coins()
 
 > Example Request
