@@ -13,6 +13,8 @@ USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESP
       $ pip install -e pydaybit
   ```
   
+  For the installation, please look right column.
+  
 
 ## get_server_time()
 
