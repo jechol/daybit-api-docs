@@ -42,14 +42,15 @@ For other languages, please refer below libraries to implement the features of t
 
 For wrapper installation, please look right column.
 
-# Terms
+
+# Common
+
+## Terms
 
 * `quote`: Asking token. ex) `BTC` from `ETH/BTC`.
 * `base`: Base token. ex) `ETH` from `ETH/BTC`.
 * [Channels](https://hexdocs.pm/phoenix/channels.html) are a part of Phoenix that allow us to easily add soft-realtime features to our applications. Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
 * [Topic](https://hexdocs.pm/phoenix/channels.html#topics) are string identifiers - names that the various layers use in order to make sure messages end up in the right place. As we saw above, topics can use wildcards. This allows for a useful “topic:subtopic” convention. Often, you’ll compose topics using record IDs from your application layer, such as `users:123`.
-
-# Common
 
 ## Types
 
