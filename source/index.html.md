@@ -84,14 +84,12 @@ Basically there are two types of response formats. Based on the result of API ca
 }
 ```
 
-> Fail **TODO: CHECK ERROR RESPONSE**
+> Fail
 
 ```python
 {
-  "error": {
-    "error_code": 'string',
-    "message": 'string'
-  }
+  "error_code": 'string',
+  "message": 'string'
 }
 ```
 
