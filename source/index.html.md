@@ -5,9 +5,8 @@ language_tabs:
   - python
 
 includes:
-  - api
-  - subscription
-
+  - pydaybit
+  
 search: true
 ---
 
