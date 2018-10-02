@@ -37,7 +37,7 @@ For other languages, please refer below libraries to implement the features of t
 
 * Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
 
-* API Python wrapper : [https://github.com/daybit-exchange/pydaybit/](https://github.com/daybit-exchange/pydaybit/)
+* Python API wrapper : [https://github.com/daybit-exchange/pydaybit/](https://github.com/daybit-exchange/pydaybit/)
 
 For wrapper installation, please look right column.
 
