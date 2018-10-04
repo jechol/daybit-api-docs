@@ -1,13 +1,13 @@
 ---
 title: Daybit API Reference
 
-language_tabs:
-  - python
-
 includes:
   - pydaybit
   
 search: true
+
+toc_footers:
+ - <a href='https://www.daybit.com'>Daybit</a>
 ---
 
 # **Introduction**
