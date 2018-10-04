@@ -1,14 +1,13 @@
 ---
 title: Daybit API Reference
 
-language_tabs:
-  - python
-
 includes:
-  - api
-  - subscription
-
+  - pydaybit
+  
 search: true
+
+toc_footers:
+ - <a href='https://www.daybit.com'>Daybit</a>
 ---
 
 # **Introduction**
@@ -19,7 +18,7 @@ This document provides basic information of the API, usage of wrapper, and worki
 
 ## Libraries
 
-Exchange is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Exchange API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides wrapper for python langauge only.
+Exchange is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Exchange API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides wrapper for Python language only.
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
@@ -28,29 +27,19 @@ For other languages, please refer below libraries to implement the features of t
 * Phoenix.js(Javascript): [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix/)
 * SwiftPhoenixClient(Swift): [https://github.com/davidstump/SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient/)
 * PhoenixSharp(C#): [https://github.com/Mazyod/PhoenixSharp](https://github.com/Mazyod/PhoenixSharp/)
-* Kotlin: TBD
 
 ## Host address
 
-```python
-    $ git clone https://github.com/daybit-exchange/pydaybit
-    $ pip install -e pydaybit
-```
-
 * Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
 
-* API Python wrapper : [https://github.com/daybit-exchange/pydaybit/](https://github.com/daybit-exchange/pydaybit/)
+# Common
 
-For wrapper installation, please look right column.
-
-# Terms
+## Terms
 
 * `quote`: Asking token. ex) `BTC` from `ETH/BTC`.
 * `base`: Base token. ex) `ETH` from `ETH/BTC`.
 * [Channels](https://hexdocs.pm/phoenix/channels.html) are a part of Phoenix that allow us to easily add soft-realtime features to our applications. Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
 * [Topic](https://hexdocs.pm/phoenix/channels.html#topics) are string identifiers - names that the various layers use in order to make sure messages end up in the right place. As we saw above, topics can use wildcards. This allows for a useful “topic:subtopic” convention. Often, you’ll compose topics using record IDs from your application layer, such as `users:123`.
-
-# Common
 
 ## Types
 
@@ -143,11 +132,11 @@ Maximum value for `size` is `30`. API will replace `size` to `30` if you placed 
 * wdrl_needs_to_tag: Missing `to_tag` parameter
 * wdrl_invalid_addr: Invalid address
 
-# Models
+## Models
 
 Below are generic data models.
 
-## Coin
+### Coin
 
 identifier: `sym`
 
@@ -170,7 +159,7 @@ identifier: `sym`
 | has_tag | boolean | to_tag required or not for deposit/withdrawal |
 | has_org | boolean | to_org required or not for deposit/withdrawal |
 
-## Coin price
+### Coin price
 
 identifier: `sym`
 
@@ -179,7 +168,7 @@ identifier: `sym`
 | sym | string | Token symbol |
 | usdt_price | decimal | USDT exchanged price |
 
-## Quote coin
+### Quote coin
 
 identifier: `sym`
 
@@ -187,7 +176,7 @@ identifier: `sym`
 |---|---|---|
 | sym | string | Token symbol |
 
-## Market
+### Market
 
 identifier: `quote`, `base`
 
@@ -200,7 +189,7 @@ identifier: `quote`, `base`
 | buyable | boolean | Buyable or not |
 | tick_levels | integer | Number of levels for order book existence per `tick_price`. Order book is increased ten times for each level. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100 |
 
-## Market summary interval
+### Market summary interval
 
 identifier: `seconds`
 
@@ -208,7 +197,7 @@ identifier: `seconds`
 |---|---|---|
 | seconds | integer | Market summary interval unit |
 
-## Market summary
+### Market summary
 
 identifier: `quote`, `base`, `seconds`
 
@@ -225,7 +214,7 @@ identifier: `quote`, `base`, `seconds`
 | quote_vol | decimal | Trading volume per quote token |
 | base_vol | decimal | Trading volume per base token |
 
-## Order book
+### Order book
 
 identifier: `quote`, `base`, `price_intvl`, `min_price`
 
@@ -239,7 +228,7 @@ identifier: `quote`, `base`, `price_intvl`, `min_price`
 | sell_vol | decimal | Selling volume |
 | buy_vol | decimal | Buying volume |
 
-## Price history interval
+### Price history interval
 
 identifier: `seconds`
 
@@ -247,7 +236,7 @@ identifier: `seconds`
 |---|---|---|
 | seconds | integer | Price history interval unit |
 
-## Price history
+### Price history
 
 identifier: `quote`, `base`, `intvl`, `start_time`
 
@@ -265,7 +254,7 @@ identifier: `quote`, `base`, `intvl`, `start_time`
 | base_vol | decimal | Trading volume per base token |
 | quote_vol | decimal | Trading volume per quote token |
 
-## User
+### User
 
 identifier: -
 
@@ -275,7 +264,7 @@ identifier: -
 | taker_fee_rate | decimal | Taker fee rate |
 | one_day_wdrl_usdt_limit | decimal | Withdrawal limit for 24 hours in USDT |
 
-## Asset
+### Asset
 
 identifier: `coin`
 
@@ -287,7 +276,7 @@ identifier: `coin`
 | available | decimal | Availalbe amount for order |
 | investment_usdt | decimal | Total investment in USDT |
 
-## Order
+### Order
 
 identifier: `id`
 
@@ -311,7 +300,7 @@ identifier: `id`
 | closed_at | unix_timestamp or null | Order closed time |
 | status | string | Order status (received, placed, completed, canceled) |
 
-## Trade
+### Trade
 
 identifier: `id`
 
@@ -332,7 +321,7 @@ identifier: `id`
 | fee | decimal | Fee |
 | sell | boolean | Selling (`true`) or buying (`false`) |
 
-## Deposit
+### Deposit
 
 identifier: `id`
 
@@ -348,7 +337,7 @@ identifier: `id`
 | confirm_checked_at | unix_timestamp | Confirm checked time |
 | applied_to_asset_at | unix_timestamp or null | Asset applied time |
 
-## Wdrl
+### Wdrl
 
 identifier: `id`
 
@@ -367,7 +356,7 @@ identifier: `id`
 | tx_created_at | unix_timestamp or null | Withdrawal transaction created time |
 | completed_at | unix_timestamp or null | Withdrawal completed time |
 
-## Airdrop
+### Airdrop
 
 identifier: `id`
 
@@ -379,8 +368,73 @@ identifier: `id`
 | description | string | Airdrop description |
 | airdropped_at | unix_timestamp | Airdrop time |
 
-# Versioning
 
-## 2018-10-08
+## APIs
 
-Initial release of Daybit Exchange API v1.0 and its python wrapper.
+[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. It also shows how to use wrapper and expected response from it. For valid `topic` and `event` of the [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html), please look below.
+
+* Topic: `/api`
+
+* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
+
+* Rate limit: Limit of calls for every second.
+
+<aside class="notice">
+It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
+</aside>
+
+## Subscriptions
+
+This section explains how you could implement various features of the Exchange API. If you subscribed to certain `/subscription:<sub_topic>`, you will get notification from the server when relevant modification happens.
+
+* Topic: `/subscription:<sub_topic>`
+
+* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to the event with `request` event, you will get either `init` or `upsert` action response from the API. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the API with `notification` event. For more information of actions, please look following [Action](#action).
+
+* Rate limit: Limit of calls for every second. Only applicable for `request`.
+
+### Action
+
+Response holds `action` which helps you to understand how to handle the response.
+
+* `init` : Dump all previous data and initialize everything with most recent data.
+* `insert` : Add data to data set, as most recent data.
+* `update` : Search in data set and replace if it was found.
+* `upsert` : Search in data set and replace if it was found, or insert if there's no matching data.
+* `delete` : Search in data set and remove if it was found.
+
+
+## Advanced
+
+This section provides helpful information for the developers who are interested in implementing Exchange API features in low level and want to have total control of using the API.
+
+### Topic
+
+Exchange API has basically two layers of [Topic](https://hexdocs.pm/phoenix/channels.html#topics)s - [`/api`](#topic-api) and [`/subscription:<sub_topic>`](#topic-subscription) - and expects certain events to properly handle the request.
+
+### Event
+
+You need to send `phx_join` event message to join the channel before sending necessary events if you decided to access the API without using the wrapper. If there was no problem of joining the topic, you will receive `phx_reply` event with `"status":"ok"` payload from the socket connection. If you reached this step and confirmed successful join, you can send events specified in this document and complete your task.
+
+* `/api` : In `/api` topic, API expects following events - `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`.
+
+* `/subscription:<sub_topic>` : In `/subscription` topic, you should state `<sub_topic>` to specify your purpose of calling the API. After you successfully join the `/subscription:<sub_topic>` topic by sending `phx_join` event, you need to send `request` event and let the API know you want to get notification regarding the `<sub_topic>`. The notifications from API contains `notification` event with proper `action` (one of `insert`, `update`, `upsert`, or `delete`) for you to update the data set, if necessary.
+
+### Timestamp
+
+All request takes `timestamp` and `timeout` to prevent unexpected calls because of network delay and so on.
+
+- `timestamp`: `unix_timestamp`
+- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000`.
+
+Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
+
+If there was a problem, below error_code will be returned in response.
+- `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` are not existed or they are not `integer` (unix timestamp in millisecond).
+- `api_timeout`: Rejected because of request time out.
+
+### Rate limit
+
+Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceed the limit.
+
+
