@@ -27,6 +27,8 @@ from pydaybit import Daybit
 async def daybit_get_server_time():
     async with Daybit() as daybit:
         pprint(await daybit.get_server_time())
+
+asyncio.get_event_loop().run_until_complete(daybit_get_server_time())
 ```
 
 > Example Response
@@ -45,33 +47,49 @@ async def daybit_get_server_time():
 > Example Request
 
 ```python
+import asyncio
+from contextlib import suppress
 from decimal import Decimal
 from pprint import pprint
+
 from pydaybit import Daybit
+from pydaybit.exceptions import OrderAlreadyClosed
+
 
 async def current_price(daybit, quote, base):
     summary_intvl = sorted((await daybit.market_summary_intvls()).keys())[0]
     price = (await (daybit.market_summaries / summary_intvl)())['{}-{}'.format(quote, base)]['close']
     return Decimal(price)
 
+
 async def daybit_create_order_sell():
     async with Daybit() as daybit:
         quote = 'USDT'
         base = 'BTC'
 
-        price = await current_price(daybit, quote, base)
+        tick_price = Decimal((await daybit.markets())['{}-{}'.format(quote, base)]['tick_price'])
         tick_amount = Decimal((await daybit.coins())[base]['tick_amount'])
 
+        # amount * price should be greater than 10 USDT.
+        price = ((await current_price(daybit, quote, base)) * Decimal(1.2)).quantize(tick_price)
+        amount = (Decimal(10.5) / price).quantize(tick_amount)
+
         response = await daybit.create_order(
-            sell=True, # False for buying
+            sell=True,
             role='both',
             quote=quote,
             base=base,
             price=price,
-            amount=tick_amount * 10,
+            amount=amount,
             cond_type='none',
         )
         pprint(response)
+
+        with suppress(OrderAlreadyClosed):
+            await daybit.cancel_order(response['id'])
+
+
+asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 ```
 
 > Example Response
@@ -102,6 +120,11 @@ async def daybit_create_order_sell():
 ```
 
 * Description: Create order to sell or buy token.
+role 은 "both", "maker_only", "taker_only" 가 있다. cond_type 은
+
+role = "both" 일 때: "none", "le"(less or equal than), "ge"(greate or equal than), "down_from_high", "up_from_low"
+role = "maker_only" or "taker_only" 일 때: "none" 이 가능하다.
+
 
 * Rate limit: 100
 
@@ -126,11 +149,18 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
+from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_cancel_order():
     async with Daybit() as daybit:
-        await daybit.cancel_order(12345678)
+        pprint(await daybit.cancel_order(53216861))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_cancel_order())
 ```
 
 > Example Response
@@ -178,8 +208,11 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_cancel_orders():
     async with Daybit() as daybit:
@@ -187,6 +220,9 @@ async def daybit_cancel_orders():
         open_orders = ([my_orders[key]['id'] for key in my_orders if my_orders[key]['status'] == 'placed'])
         pprint(open_orders)
         pprint(await daybit.cancel_orders(open_orders))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_cancel_orders())
 ```
 
 > Example Response
@@ -223,13 +259,19 @@ Field | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_cancel_all_my_orders():
     async with Daybit() as daybit:
         response = await daybit.cancel_all_my_orders()
         pprint(response)
+
+
+asyncio.get_event_loop().run_until_complete(daybit_cancel_all_my_orders())
 ```
 
 > Example Response
@@ -256,30 +298,39 @@ Field | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_create_wdrl():
     async with Daybit() as daybit:
-        pprint(await daybit.create_wdrl(coin='ADA', to_addr='fake_address', amount='100'))
+        pprint(await daybit.create_wdrl(coin='BTC', to_addr='fake_address', amount='0.01'))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 ```
 
 > Example Response
 
 ```python
 {
-  'amount': '100.00000000',
-  'coin': 'ADA',
+  'amount': '0.01000000',
+  'coin': 'BTC',
   'completed_at': None,
-  'fee': '50.00000000',
-  'id': 47291,
-  'requested_at': 1537419011126,
-  'to_addr': 'fake_address',
-  'to_org': None,
-  'to_tag': None,
-  'tx_created_at': None,
+  'confirm': 0,
+  'created_at': 1538639363972,
+  'deposit_status': None,
+  'id': 5294,
+  'req_confirm': 10,
+  'tx_link_url': 'https://live.blockcypher.com/btc/tx/',
   'txid': None,
-  'usdt_amount': '9.00000000'
+  'type': 'wdrl',
+  'wdrl_status': 'queued',
+  'wdrl_to_addr': 'fake_address',
+  'wdrl_to_org': None,
+  'wdrl_to_tag': None
 }
 ```
 
@@ -304,12 +355,18 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_coins():
     async with Daybit() as daybit:
         pprint(await daybit.coins())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_coins())
 ```
 
 > Example Response
@@ -375,18 +432,26 @@ async def daybit_coins():
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 # For every token
 async def daybit_coin_prices():
     async with Daybit() as daybit:
         pprint(await daybit.coin_prices())
 
+
 # For specific token
 async def daybit_coin_prices_with_sym(sym='ETH'):
     async with Daybit() as daybit:
         pprint(await (daybit.coin_prices / sym)())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
+# asyncio.get_event_loop().run_until_complete(daybit_coin_prices_with_sym())
 ```
 
 > Example Response
@@ -450,12 +515,18 @@ async def daybit_coin_prices_with_sym(sym='ETH'):
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_quote_coins():
     async with Daybit() as daybit:
         pprint(await daybit.quote_coins())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_quote_coins())
 ```
 
 > Example Response
@@ -490,12 +561,18 @@ async def daybit_quote_coins():
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_markets():
     async with Daybit() as daybit:
         pprint(await daybit.markets())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_markets())
 ```
 
 > Example Response
@@ -542,12 +619,18 @@ async def daybit_markets():
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_market_summary_intvls():
     async with Daybit() as daybit:
         pprint(await daybit.market_summary_intvls())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_market_summary_intvls())
 ```
 
 > Example Response
@@ -582,13 +665,19 @@ async def daybit_market_summary_intvls():
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_market_summaries():
     async with Daybit() as daybit:
         intvls = sorted((await daybit.market_summary_intvls()).keys())
         pprint(await (daybit.market_summaries / intvls[0])())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_market_summaries())
 ```
 
 > Example Response
@@ -643,9 +732,12 @@ async def daybit_market_summaries():
 > Example Request
 
 ```python
+import asyncio
 from decimal import Decimal
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_order_books():
     async with Daybit() as daybit:
@@ -653,6 +745,9 @@ async def daybit_order_books():
         base = 'BTC'
         price_intvl = Decimal((await daybit.markets())['{}-{}'.format(quote, base)]['tick_price']) * 10
         pprint(await (daybit.order_books / quote / base / price_intvl)())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_order_books())
 ```
 
 > Example Response
@@ -702,12 +797,18 @@ async def daybit_order_books():
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_price_history_intvls():
     async with Daybit() as daybit:
         pprint(await daybit.price_history_intvls())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_price_history_intvls())
 ```
 
 > Example Response
@@ -743,8 +844,12 @@ async def daybit_price_history_intvls():
 > Example Request
 
 ```python
+import asyncio
+import time
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_price_histories():
     async with Daybit() as daybit:
@@ -752,7 +857,11 @@ async def daybit_price_histories():
         base = 'BTC'
         intvl = sorted((await daybit.price_history_intvls()).keys())[0]
         pprint(
-            await (daybit.price_histories / quote / base / intvl)(from_time=int(time.time() * 1000 - intvl * 10 * 1000), to_time=int(time.time() * 1000)))
+            await (daybit.price_histories / quote / base / intvl)(from_time=int(time.time() * 1000 - intvl * 10 * 1000),
+                                                                  to_time=int(time.time() * 1000)))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_price_histories())
 ```
 
 > Example Response
@@ -818,7 +927,9 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
 
 
@@ -826,7 +937,10 @@ async def daybit_trades():
     async with Daybit() as daybit:
         quote = 'USDT'
         base = 'BTC'
-        pprint(await (daybit.trades / quote / base)(num_trades=10))
+        pprint(await (daybit.trades / quote / base)(size=10))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_trades())
 ```
 
 > Example Response
@@ -884,12 +998,18 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_my_users():
     async with Daybit() as daybit:
         pprint(await daybit.my_users())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_users())
 ```
 
 > Example Response
@@ -922,12 +1042,18 @@ async def daybit_my_users():
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_my_assets():
     async with Daybit() as daybit:
         pprint(await daybit.my_assets())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_assets())
 ```
 
 > Example Response
@@ -972,12 +1098,18 @@ async def daybit_my_assets():
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_my_orders():
     async with Daybit() as daybit:
         pprint(await daybit.my_orders(statuses='placed'))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_orders())
 ```
 
 > Example Response
@@ -1063,12 +1195,18 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_my_trades():
     async with Daybit() as daybit:
         pprint(await daybit.my_trades(sell=True, quote='USDT'))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_trades())
 ```
 
 > Example Response
@@ -1079,6 +1217,7 @@ async def daybit_my_trades():
     'base': 'BTC',
     'base_amount': '0.00020000',
     'coin_fee': '0.00141820',
+    'counterpart': 'user',
     'day_fee': '0.00000000',
     'exec_at': 1537347408941,
     'id': 40807547,
@@ -1096,6 +1235,7 @@ async def daybit_my_trades():
     'base': 'BTC',
     'base_amount': '0.00020000',
     'coin_fee': '0.00000000',
+    'counterpart': 'user',
     'day_fee': '0.04415411',
     'exec_at': 1537347509915,
     'id': 40807691,
@@ -1136,13 +1276,19 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_my_tx_summaries():
     async with Daybit() as daybit:
         pprint(await daybit.my_tx_summaries(type='deposit'))
         pprint(await daybit.my_tx_summaries(type='wdrl'))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_tx_summaries())
 ```
 
 > Example Response
@@ -1234,18 +1380,24 @@ Parameter | Type | Required | Description
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
 
-async def daybit_my_my_airdrops():
+
+async def daybit_my_airdrop_histories():
     async with Daybit() as daybit:
-        pprint(await daybit.my_airdrops())
+        pprint(await daybit.my_airdrop_histories())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_airdrop_histories())
 ```
 
 > Example Response
 
 ```python
-**TODO: NEED RESPONSE EXAMPLE**
+{}
 ```
 
 * Description: Subscribe to get list of my airdrops.
