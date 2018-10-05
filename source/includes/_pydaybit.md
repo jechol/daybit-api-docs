@@ -563,7 +563,7 @@ Token to USDT exchange rate for every token. You will get `Noficiation` event wh
 
 * Response: [Coin price](#coin-price)
 
-* sort: -
+* Sort: -
 
 ### (coin_prices / `<sym>`)()
 
@@ -629,7 +629,7 @@ Subscribe to get quote token list.
 
 * Response: [Quote coin](#quote-coin)
 
-* sort: -
+* Sort: -
 
 ## markets()
 
@@ -738,7 +738,7 @@ Time intervals of market price (unit: second). Return value can be used for inpu
 
 * Response: [Market summary interval](#market-summary-interval)
 
-* sort: by `seconds` in `desc`
+* Sort: by `seconds` in `desc`
 
 ## market_summaries()
 
@@ -1001,7 +1001,7 @@ Past market price data. For the valid `intvl`, please refer [Price history inter
 
 * Response: [Price history](#price-history)
 
-* sort: -
+* Sort: -
 
 ### arguments
 
@@ -1128,7 +1128,7 @@ Subscribe to get information of my account.
 
 * Response: [User](#user)
 
-* sort: -
+* Sort: -
 
 
 ## my_assets()
@@ -1187,7 +1187,7 @@ Subscribe to get information of my assets.
 
 * Response: [Asset](#asset)
 
-* sort: -
+* Sort: -
 
 
 ## my_orders()
@@ -1361,7 +1361,7 @@ Subscribe to get information of my trade data.
 
 * Response: [Trade](#trade)
 
-* sort: by `id` in `desc`
+* Sort: by `id` in `desc`
 
 ### arguments
 
@@ -1472,7 +1472,7 @@ Subscribe to get my transaction summaries.
 
 * Response: [Deposit](#deposit)
 
-* sort: by `id` in `desc`
+* Sort: by `id` in `desc`
 
 ### arguments
 
