@@ -58,9 +58,6 @@ asyncio.get_event_loop().run_until_complete(daybit_example())
 
 환경 변수를 세팅하지 않아도 예제처럼 사용할 수 있습니다.
 
-  
-  
-
 ## get_server_time()
 
 > Example Request
@@ -82,8 +79,12 @@ asyncio.get_event_loop().run_until_complete(daybit_get_server_time())
 1537418605426 # unix_timestamp
 ```
 
-* Descrition: Get current server time of Daybit backend server in unix timestamp format.
+Get current server time of Daybit backend server in unix timestamp format.
 
+* Topic: `/api`
+
+* Event: `get_server_time`
+ 
 * Rate limit: 10
 
 
@@ -164,7 +165,12 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-* Description: Create order to sell or buy token.
+Create order to sell or buy token.
+
+* Topic: `/api`
+
+* Event: `create_order`
+
 role 은 "both", "maker_only", "taker_only" 가 있다. cond_type 은
 
 role = "both" 일 때: "none", "le"(less or equal than), "ge"(greate or equal than), "down_from_high", "up_from_low"
@@ -235,7 +241,11 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_order())
 }
 ```
 
-* Description: Cancel placed order. You must pass valid `id` to cancel the order.
+Cancel placed order. You must pass valid `id` to cancel the order.
+
+* Topic: `/api`
+
+* Event: `cancel_order`
 
 * Rate limit: 100
 
@@ -278,7 +288,11 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_orders())
 }
 ```
 
-* Description: Cancel multiple orders. If one or more of `order_ids` are invalid, the API simply ignores it and cancels only valid ones. You can check number of canceled ids from `num_canceled_orders` in response.
+Cancel multiple orders. If one or more of `order_ids` are invalid, the API simply ignores it and cancels only valid ones. You can check number of canceled ids from `num_canceled_orders` in response.
+
+* Topic: `/api`
+
+* Event: `cancel_orders`
 
 * Rate limit: 5
 
@@ -327,7 +341,11 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_all_my_orders())
 }
 ```
 
-* Description: Cancel all my orders (both sell and buy orders).
+Cancel all my orders (both sell and buy orders).
+
+* Topic: `/api`
+
+* Event: `cancel_all_my_orders`
 
 * Rate limit: 5
 
@@ -379,7 +397,11 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 }
 ```
 
-* Description: Request withdraw to `to_addr` for `amount` of `coin`.
+Request withdraw to `to_addr` for `amount` of `coin`.
+
+* Topic: `/api`
+
+* Event: `create_wdrl`
 
 * Rate limit: 10
 
@@ -458,18 +480,19 @@ asyncio.get_event_loop().run_until_complete(daybit_coins())
 }
 ```
 
-* Description: Subscribe to get token data.
+Subscribe to get token data.
 
-* request: `init`
+* Topic: `/subscription:coins` 
 
-* notification: `insert`, `update`
+* Request: `init`
+
+* Notification: `insert`, `update`
 
 * Rate limit: 2
 
 * Response: [Coin](#coin)
 
-* sort: -
-
+* Sort: -
 
 
 ## coin_prices()
@@ -528,11 +551,13 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 
 ### coin_prices()
 
-* Description: Token to USDT exchange rate for every token. You will get `noficiation` event whenever price of any token gets changed. Please note that only updated token price will be returned.
+Token to USDT exchange rate for every token. You will get `Noficiation` event whenever price of any token gets changed. Please note that only updated token price will be returned.
 
-* request: `init`
+* Topic: `/subscription:coin_prices`
 
-* notification: `update`
+* Request: `init`
+
+* Notification: `update`
 
 * Rate limit: 5
 
@@ -542,17 +567,19 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 
 ### (coin_prices / `<sym>`)()
 
-* Description: Token to USDT exchange rate for specific token. You will get `noficiation` event whenever price of the specified token gets changed.
+Token to USDT exchange rate for specific token. You will get `Noficiation` event whenever price of the specified token gets changed.
 
-* request: `init`
+* Topic: `/subscription:coin_prices;<sym>`
 
-* notification: `update`
+* Request: `init`
+
+* Notification: `update`
 
 * Rate limit: 5
 
 * Response: [Coin price](#coin-price)
 
-* sort: -
+* Sort: -
 
 
 ## quote_coins()
@@ -590,10 +617,13 @@ asyncio.get_event_loop().run_until_complete(daybit_quote_coins())
 }
 ```
 
-* Description: Subscribe to get quote token list.
+Subscribe to get quote token list.
 
-* request: `init`
-* notification: `insert`, `update`, `delete`
+* Topic: `/subscription:quote_coins`
+
+* Request: `init`
+
+* Notification: `insert`, `update`, `delete`
 
 * Rate limit: 2
 
@@ -646,17 +676,19 @@ asyncio.get_event_loop().run_until_complete(daybit_markets())
 }
 ```
 
-* Description: Subscribe to get basic market data.
+Subscribe to get basic market data.
 
-* request: `init`
+* Topic: `/subscription:markets`
 
-* notification: `insert`, `update`, `delete`
+* Request: `init`
+
+* Notification: `insert`, `update`, `delete`
 
 * Rate limit: 2
 
 * Response: [Market](#market-2)
 
-* sort: -
+* Sort: -
 
 
 ## market_summary_intvls()
@@ -694,10 +726,13 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summary_intvls())
 }
 ```
 
-* Description: Time intervals of market price (unit: second). Return value can be used for input of [Market summaries](#market-summaries).
+Time intervals of market price (unit: second). Return value can be used for input of [Market summaries](#market-summaries).
 
-* request: `init`
-* notification: `insert`, `update`, `delete`
+* Topic: `/subscription:market_summary_intvls`
+
+* Request: `init`
+
+* Notification: `insert`, `update`, `delete`
 
 * Rate limit: 2
 
@@ -760,16 +795,19 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summaries())
 ```
 `market_summaries/<seconds>`
 
-* Description: Subscribe to get market summaries. For the valid `seconds`, please refer [Market summary intervals](#market-summary-intervals).
+Subscribe to get market summaries. For the valid `seconds`, please refer [Market summary intervals](#market-summary-intervals).
 
-* request: `init`
-* notification: `init`
+* Topic: `/subscription:market_summaries;<market_summary_intvl>`
+
+* Request: `init`
+
+* Notification: `init`
 
 * Rate limit: 5
 
 * Response: [Market summary](#market-summary)
 
-* sort: -
+* Sort: -
 
 
 ## order_books()
@@ -823,18 +861,21 @@ asyncio.get_event_loop().run_until_complete(daybit_order_books())
 }
 ```
 
-`order_books/<quote>/<base>/<price_intvl>`
 
-* Description: Order book by unit price. In the response, there's no `id` so you need to compare it with `min_price` or `max_price` to identify the order book. (min_price, max_price] is the range for selling and [min_price, max_price) is the range for buying. In case of `sell_vol` and `buy_vol` exist at the same time, please make sure that they are located in difference range by above range conditions.
 
-* request: `init`
-* notification: `init`, `upsert`
+Order book by unit price. In the response, there's no `id` so you need to compare it with `min_price` or `max_price` to identify the order book. (min_price, max_price] is the range for selling and [min_price, max_price) is the range for buying. In case of `sell_vol` and `buy_vol` exist at the same time, please make sure that they are located in difference range by above range conditions.
+
+* Topic: `/subscription:order_books/<quote>/<base>/<price_intvl>`
+
+* Request: `init`
+
+* Notification: `init`, `upsert`
 
 * Rate limit: 5
 
 * Response: [Order book](#order-book)
 
-* sort: by `min_price` in `desc`
+* Sort: by `min_price` in `desc`
 
 
 ## price_history_intvls()
@@ -872,16 +913,19 @@ asyncio.get_event_loop().run_until_complete(daybit_price_history_intvls())
 }
 ```
 
-* Description: Time intervals of past market price data (unit: second). Return value can be used for input of [Price histories](#price-histories).
+Time intervals of past market price data (unit: second). Return value can be used for input of [Price histories](#price-histories).
 
-* `request`: `init`
-* `notification`: - (nothing to be reported)
+* Topic: `/subscription:price_history_intvls`
+
+* Request: `init`
+
+* Notification: - (nothing to be reported)
 
 * Rate limit: 2
 
 * Response: [Price history interval](#price-history-interval)
 
-* sort: `seconds` in `asc`
+* Sort: `seconds` in `asc`
 
 
 ## price_histories()
@@ -945,12 +989,13 @@ asyncio.get_event_loop().run_until_complete(daybit_price_histories())
 }
 ```
 
-`price_histories;<quote>/<base>/<intvl>`
+Past market price data. For the valid `intvl`, please refer [Price history intervals](#price-history-intervals).
 
-* Description: Past market price data. For the valid `intvl`, please refer [Price history intervals](#price-history-intervals).
+* Topic: `/subscription:price_histories;<quote>/<base>/<intvl>`
 
-* request: `upsert`
-* notification: `insert`, `update`
+* Request: `upsert`
+
+* Notification: `insert`, `update`
 
 * Rate limit: 20
 
@@ -1018,18 +1063,19 @@ asyncio.get_event_loop().run_until_complete(daybit_trades())
 }
 ```
 
-`trades/<quote>/<base>`
+Subscribe to get trade data per market. API doesn't support for getting past trade data.
 
-* Description: Subscribe to get trade data per market. API doesn't support for getting past trade data.
+* Topic: `/subscription:trades/<quote>/<base>` 
 
-* request: `init`
-* notification: `insert`
+* Request: `init`
+
+* Notification: `insert`
 
 * Rate limit: 5
 
 * Response: [Trade](#trade)
 
-* sort: by `exec_at` in `desc`
+* Sort: by `exec_at` in `desc`
 
 ### arguments
 
@@ -1070,10 +1116,13 @@ asyncio.get_event_loop().run_until_complete(daybit_my_users())
 ]
 ```
 
-* Description: Subscribe to get information of my account.
+Subscribe to get information of my account.
 
-* request: `init`
-* notification: `init`
+* Topic: `/subscription:my_users`
+
+* Request: `init`
+
+* Notification: `init`
 
 * Rate limit: 2
 
@@ -1126,10 +1175,13 @@ asyncio.get_event_loop().run_until_complete(daybit_my_assets())
 ```
 
 
-* Description: Subscribe to get information of my assets.
+Subscribe to get information of my assets.
 
-* request: `init`
-* notification: `insert`, `update`
+* Topic: `/subscription:my_assets`
+
+* Request: `init`
+
+* Notification: `insert`, `update`
 
 * Rate limit: 5
 
@@ -1211,16 +1263,19 @@ asyncio.get_event_loop().run_until_complete(daybit_my_orders())
 }
 ```
 
-* Description: Subscribe to get information of my orders.
+Subscribe to get information of my orders.
 
-* request: `upsert`
-* notification: `insert`, `update`
+* Topic: `/subscription:my_orders`
+
+* Request: `upsert`
+
+* Notification: `insert`, `update`
 
 * Rate limit: 5
 
 * Response: [Order](#order-2)
 
-* sort: by `id` in `desc`
+* Sort: by `id` in `desc`
 
 ### arguments
 
@@ -1294,10 +1349,13 @@ asyncio.get_event_loop().run_until_complete(daybit_my_trades())
 }
 ```
 
-* Description: Subscribe to get information of my trade data.
+Subscribe to get information of my trade data.
 
-* request: `upsert`
-* notification: `insert`
+* Topic: `/subscription:my_trades`
+
+* Request: `upsert`
+
+* Notification: `insert`
 
 * Rate limit: 5
 
@@ -1402,10 +1460,13 @@ asyncio.get_event_loop().run_until_complete(daybit_my_tx_summaries())
 }
 ```
 
-* Description: Subscribe to get my transaction summaries.
+Subscribe to get my transaction summaries.
 
-* request: `upsert`
-* notification: `insert`, `update`
+* Topic: `/subscription:my_tx_summaries`
+
+* Request: `upsert`
+
+* Notification: `insert`, `update`
 
 * Rate limit: 5
 
@@ -1420,7 +1481,7 @@ Parameter | Type | Required | Description
 `type` | string | Required | One of `deposit` or `wdrl` per your purpose.
 
 
-## my_airdrops()
+## my_airdrop_histories()
 
 > Example Request
 
@@ -1445,12 +1506,15 @@ asyncio.get_event_loop().run_until_complete(daybit_my_airdrop_histories())
 {}
 ```
 
-* Description: Subscribe to get list of my airdrops.
+Subscribe to get list of my airdrops.
 
-* request: `upsert`
-* notification: `insert`
+* Topic: `/subscription:my_airdrop_histories`
 
-* sort: by `id` in `desc`
+* Request: `upsert`
+
+* Notification: `insert`
+
+* Sort: by `id` in `desc`
 
 * Response: [Airdrop](#airdrop)
 
