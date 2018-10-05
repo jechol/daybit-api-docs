@@ -41,15 +41,6 @@ For other languages, please refer below libraries to implement the features of t
 * [Channels](https://hexdocs.pm/phoenix/channels.html) are a part of Phoenix that allow us to easily add soft-realtime features to our applications. Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
 * [Topic](https://hexdocs.pm/phoenix/channels.html#topics) are string identifiers - names that the various layers use in order to make sure messages end up in the right place. As we saw above, topics can use wildcards. This allows for a useful “topic:subtopic” convention. Often, you’ll compose topics using record IDs from your application layer, such as `users:123`.
 
-## Types
-
-* `integer`: `integer` data type. ex) `123`
-* `decimal`: Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. ex) `"880.524"`
-* `string`: `string`. ex) `"string"`
-* `boolean`: `boolean`. ex) `true`, `false`
-* `unix_timestamp`: `millisecond` unit unix timestamp. ex) `1528269989516`
-* `csv`: string based comma separated values. ex) `"1, 2, 3"`
-
 ## Authorization
 
 The usage of API is restricted by given right to each API key. You would get `unauthenticated` response error_code if you called API that is not accessible from your API key. Please look below for the types of API key and details of it.
@@ -131,6 +122,82 @@ Maximum value for `size` is `30`. API will replace `size` to `30` if you placed 
 * wdrl_exceeds_my_asset_values: Withdrawal amount exceeded my asset
 * wdrl_needs_to_tag: Missing `to_tag` parameter
 * wdrl_invalid_addr: Invalid address
+
+## APIs
+
+[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. It also shows how to use wrapper and expected response from it. For valid `topic` and `event` of the [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html), please look below.
+
+* Topic: `/api`
+
+* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
+
+* Rate limit: Limit of calls for every second.
+
+<aside class="notice">
+It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
+</aside>
+
+## Subscriptions
+
+This section explains how you could implement various features of the Exchange API. If you subscribed to certain `/subscription:<sub_topic>`, you will get notification from the server when relevant modification happens.
+
+* Topic: `/subscription:<sub_topic>`
+
+* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to the event with `request` event, you will get either `init` or `upsert` action response from the API. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the API with `notification` event. For more information of actions, please look following [Action](#action).
+
+* Rate limit: Limit of calls for every second. Only applicable for `request`.
+
+### Action
+
+Response holds `action` which helps you to understand how to handle the response.
+
+* `init` : Dump all previous data and initialize everything with most recent data.
+* `insert` : Add data to data set, as most recent data.
+* `update` : Search in data set and replace if it was found.
+* `upsert` : Search in data set and replace if it was found, or insert if there's no matching data.
+* `delete` : Search in data set and remove if it was found.
+
+## Advanced
+
+This section provides helpful information for the developers who are interested in implementing Exchange API features in low level and want to have total control of using the API.
+
+### Topic
+
+Exchange API has basically two layers of [Topic](https://hexdocs.pm/phoenix/channels.html#topics)s - [`/api`](#topic-api) and [`/subscription:<sub_topic>`](#topic-subscription) - and expects certain events to properly handle the request.
+
+### Event
+
+You need to send `phx_join` event message to join the channel before sending necessary events if you decided to access the API without using the wrapper. If there was no problem of joining the topic, you will receive `phx_reply` event with `"status":"ok"` payload from the socket connection. If you reached this step and confirmed successful join, you can send events specified in this document and complete your task.
+
+* `/api` : In `/api` topic, API expects following events - `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`.
+
+* `/subscription:<sub_topic>` : In `/subscription` topic, you should state `<sub_topic>` to specify your purpose of calling the API. After you successfully join the `/subscription:<sub_topic>` topic by sending `phx_join` event, you need to send `request` event and let the API know you want to get notification regarding the `<sub_topic>`. The notifications from API contains `notification` event with proper `action` (one of `insert`, `update`, `upsert`, or `delete`) for you to update the data set, if necessary.
+
+### Timestamp
+
+All request takes `timestamp` and `timeout` to prevent unexpected calls because of network delay and so on.
+
+- `timestamp`: `unix_timestamp`
+- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000`.
+
+Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
+
+If there was a problem, below error_code will be returned in response.
+- `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` are not existed or they are not `integer` (unix timestamp in millisecond).
+- `api_timeout`: Rejected because of request time out.
+
+## Rate limit
+
+Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceed the limit.
+
+## Types
+
+* `integer`: `integer` data type. ex) `123`
+* `decimal`: Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. ex) `"880.524"`
+* `string`: `string`. ex) `"string"`
+* `boolean`: `boolean`. ex) `true`, `false`
+* `unix_timestamp`: `millisecond` unit unix timestamp. ex) `1528269989516`
+* `csv`: string based comma separated values. ex) `"1, 2, 3"`
 
 ## Models
 
@@ -367,74 +434,3 @@ identifier: `id`
 | amount | decimal | Airdrop amount |
 | description | string | Airdrop description |
 | airdropped_at | unix_timestamp | Airdrop time |
-
-
-## APIs
-
-[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. It also shows how to use wrapper and expected response from it. For valid `topic` and `event` of the [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html), please look below.
-
-* Topic: `/api`
-
-* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
-
-* Rate limit: Limit of calls for every second.
-
-<aside class="notice">
-It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
-</aside>
-
-## Subscriptions
-
-This section explains how you could implement various features of the Exchange API. If you subscribed to certain `/subscription:<sub_topic>`, you will get notification from the server when relevant modification happens.
-
-* Topic: `/subscription:<sub_topic>`
-
-* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to the event with `request` event, you will get either `init` or `upsert` action response from the API. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the API with `notification` event. For more information of actions, please look following [Action](#action).
-
-* Rate limit: Limit of calls for every second. Only applicable for `request`.
-
-### Action
-
-Response holds `action` which helps you to understand how to handle the response.
-
-* `init` : Dump all previous data and initialize everything with most recent data.
-* `insert` : Add data to data set, as most recent data.
-* `update` : Search in data set and replace if it was found.
-* `upsert` : Search in data set and replace if it was found, or insert if there's no matching data.
-* `delete` : Search in data set and remove if it was found.
-
-
-## Advanced
-
-This section provides helpful information for the developers who are interested in implementing Exchange API features in low level and want to have total control of using the API.
-
-### Topic
-
-Exchange API has basically two layers of [Topic](https://hexdocs.pm/phoenix/channels.html#topics)s - [`/api`](#topic-api) and [`/subscription:<sub_topic>`](#topic-subscription) - and expects certain events to properly handle the request.
-
-### Event
-
-You need to send `phx_join` event message to join the channel before sending necessary events if you decided to access the API without using the wrapper. If there was no problem of joining the topic, you will receive `phx_reply` event with `"status":"ok"` payload from the socket connection. If you reached this step and confirmed successful join, you can send events specified in this document and complete your task.
-
-* `/api` : In `/api` topic, API expects following events - `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`.
-
-* `/subscription:<sub_topic>` : In `/subscription` topic, you should state `<sub_topic>` to specify your purpose of calling the API. After you successfully join the `/subscription:<sub_topic>` topic by sending `phx_join` event, you need to send `request` event and let the API know you want to get notification regarding the `<sub_topic>`. The notifications from API contains `notification` event with proper `action` (one of `insert`, `update`, `upsert`, or `delete`) for you to update the data set, if necessary.
-
-### Timestamp
-
-All request takes `timestamp` and `timeout` to prevent unexpected calls because of network delay and so on.
-
-- `timestamp`: `unix_timestamp`
-- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000`.
-
-Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
-
-If there was a problem, below error_code will be returned in response.
-- `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` are not existed or they are not `integer` (unix timestamp in millisecond).
-- `api_timeout`: Rejected because of request time out.
-
-### Rate limit
-
-Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceed the limit.
-
-
