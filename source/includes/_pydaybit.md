@@ -19,6 +19,8 @@ For the installation, please look right column.
 
 ## **API Key Pair**
 
+Pydaybit을 이용하려면 키페어 발급이 필요합니다. [Authorization](#authorization) 항목을 참조하십시오.
+
 ### Environment Variables
 
 > bash example
@@ -29,7 +31,6 @@ export DAYBIT_API_KEY="YOUR_OWN_API_KEY"
 export DAYBIT_API_SECRET="YOUR_WON_API_SECRET"
 ```
 
-Pydaybit을 이용하려면 키페어 발급이 필요합니다. [Authorization](#authorization) 항목을 참조하십시오.
 발급 받은 키페어는 환경 변수로 설정 가능합니다. 
 
 * `DAYBIT_API_KEY`: 발급 받은 API KEY
