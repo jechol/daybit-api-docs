@@ -10,40 +10,23 @@ toc_footers:
  - <a href='https://www.daybit.com'>Daybit</a>
 ---
 
-# **Introduction**
+# Introduction
 
-Daybit's API works in socket server. Based on your task and subject of required action, you can either subscribe to `api` or `subscription`s channels.
+이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었고, 당신의 자산을 손해를 가져다 줄 수 있는 예제가 포함되어 있다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 한다. 모든 책임은 본인에게 있다.
 
-This document provides basic information of the API, usage of wrapper, and working examples of the wrapper.
+Daybit API를 사용하기 전에 데이빗의 웹페이지에서 적절한 권한으로 API 키페어를 생성해야 한다. 데이빗의 [캔들 데이터](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 정보 등을 수신하는 권한과 개인의 자산 내역을 확인할 수 있는 권한, 개인의 자산을 사고 파는 권한, 출금을 하는 권한으로 나뉘어 있다. 자세한 내용은 [Authorization](#authorization)을 참고하라.
 
-## Libraries
+데이빗 API는 크게 두가지 종류가 있다. 첫번째는 [API Call](#api-calls)을 통해 클라이언트가 요청을 보내고 서버가 응답하는 형식이다. 보통 클라이언트의 자산의 거래나 입출금을 요청하기 위해 사용한다.
 
-Exchange is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Exchange API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides wrapper for Python language only.
+두번째는 API를 Subscribe하면 서버에서 지속적으로 업데이트 해준다. 종목의 가격 변화, 가격 변화에서부터 내 지갑의 정보, 내 주문의 채결 여부에 대한 정보 등을 업데이트 해준다. 이러한 API를 [`Subscription`](#subscriptions)이라 부른다.
 
-* PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
+이러한 Daybit API는 웹소켓으로 통신하며 피닉스 프레임워크에서 정의된 형식으로 한다. 데이빗 서버는 Elixir 언어로 작성된 Phoenix Framework를 기반으로 구현되어 있다. Daybit은 Daybit API를 손쉽게 사용할 수 있는 [Pydaybit](#pydaybit) written in Python 을 제공한다. 
 
-For other languages, please refer below libraries to implement the features of this Exchange API.
+ 프로그래밍에 익숙하지 않은 사용자는 먼저 [Pydaybit](#pydaybit)의 예제를 보는 것이 도움이 될 것이다. 
+ 
+# Authorization
 
-* Phoenix.js(Javascript): [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix/)
-* SwiftPhoenixClient(Swift): [https://github.com/davidstump/SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient/)
-* PhoenixSharp(C#): [https://github.com/Mazyod/PhoenixSharp](https://github.com/Mazyod/PhoenixSharp/)
-
-## Host address
-
-* Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
-
-# Common
-
-## Terms
-
-* `quote`: Asking token. ex) `BTC` from `ETH/BTC`.
-* `base`: Base token. ex) `ETH` from `ETH/BTC`.
-* [Channels](https://hexdocs.pm/phoenix/channels.html) are a part of Phoenix that allow us to easily add soft-realtime features to our applications. Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
-* [Topic](https://hexdocs.pm/phoenix/channels.html#topics) are string identifiers - names that the various layers use in order to make sure messages end up in the right place. As we saw above, topics can use wildcards. This allows for a useful “topic:subtopic” convention. Often, you’ll compose topics using record IDs from your application layer, such as `users:123`.
-
-## Authorization
-
-The usage of API is restricted by given right to each API key. You would get `unauthenticated` response error_code if you called API that is not accessible from your API key. Please look below for the types of API key and details of it.
+Daybit API를 사용하기 전에 데이빗의 웹페이지에서 적절한 권한으로 API 키페어를 생성해야 한다. 데이빗의 [캔들 데이터](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 정보 등을 수신하는 권한과 개인의 자산 내역을 확인할 수 있는 권한, 개인의 자산을 사고 파는 권한, 출금을 하는 권한으로 나뉘어 있다.
 
 | Type | Description |
 |------|-------------|
@@ -52,9 +35,173 @@ The usage of API is restricted by given right to each API key. You would get `un
 | trade | Authorized to call trade related APIs. ex) Order, Trade and so on
 | transaction | Authorized to call transaction related APIs. ex) Deposit, Wdrl and so on
 
+ 
+MyPage에서 [API Keys](https://www.daybit.com/mypage/api-managements)에서 계정당 최대 5개의 API Key를 생성할 수 있다. 각 API Key는 다음과 같은 권한을 가질 수 있다.  
+
+* `public_data`
+* `public_data`, `private_data`, `trade`
+* `public_data`, `private_data`, `transaction`
+* `public_data`, `private_data`, `trade`, `transaction`
+
+The usage of API is restricted by given right to each API key. You would get `unauthenticated` response error_code if you called API that is not accessible from your API key. Please look above for the types of API key and details of it.
+
+# Host address
+
+* Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
+
+# APIs
+
+데이빗 API는 크게 두가지 종류가 있다. 첫번째는 API Call을 통해 클라이언트가 요청을 보내고 서버가 응답하는 형식이다. 보통 클라이언트의 자산의 거래나 입출금을 요청하기 위해 사용한다. 두번째는 어떠한 주제에 대한 정보에 대해 서버에서 지속적으로 업데이트 해주는 API가 있다. 종목의 가격 변화, 가격 변화에서부터 내 지갑의 정보, 내 주문의 채결 여부에 대한 정보 등을 업데이트 해준다. 이러한 API를 `Subscription` 이라 부른다.
+
+## Channels
+Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
+API Call은 `/api` 채널에 `get_server_time`, `create_order`
+
+### Topics
+Topic are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit은 `/api`, `/subscription:coins`, `/subscription:market_summaries;<market_summary_intvl>`과 같은 토픽을 사용하고 있다. 
+
+### Event
+채널에 대한 특별한 행동을 나타내기 위해 사용되는 `string`이다. 채널에 조인할때의 `phx_join`이나 채널을 나갈 때 `phx_leave`가 사용된다. 또한 [API Calls](#api-calls)는 Event에 실어 보낸다.  
+
+### Message
+
+> Example of `create_wdrl` 
+
+```python
+import asyncio
+import logging
+
+from pydaybit import Daybit
+
+logger = logging.getLogger('pydaybit')
+logger.setLevel(logging.DEBUG)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(logging.Formatter('%(message)s'))
+logger.addHandler(stream_handler)
+
+
+async def daybit_create_wdrl():
+    async with Daybit() as daybit:
+        await daybit.create_wdrl(coin='BTC', to_addr='18vabZgKs4UCoxGnE3Vx54yDgDdcpGhaJL', amount='0.05')
+
+
+asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
+```
+
+> Output of the example
+
+```console
+> {"join_ref": "1", "ref": "1", "topic": "/api", "event": "phx_join", "payload": {"timestamp": 1538739991045}, "timeout": 3000}
+< {"topic":"/api","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+> {"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "18vabZgKs4UCoxGnE3Vx54yDgDdcpGhaJL", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
+< {"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"18vabZgKs4UCoxGnE3Vx54yDgDdcpGhaJL","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
+> {"join_ref": "1", "ref": "3", "topic": "/api", "event": "phx_leave", "payload": {"timestamp": 1538739991124}, "timeout": 3000}
+< {"topic":"/api","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+< {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
+```
+
+
+다음과 같은 정보를 [json](https://en.wikipedia.org/wiki/JSON)형식으로 전달한다.
+
+`topic` - The string topic or topic:subtopic pair namespace, for example “messages”, “messages:123”
+`event` - The string event name, for example “phx_join”
+`payload` - The message payload
+`ref` - The unique string ref
+`join_ref` - 채널에 조인할 때의 ref
+
+## API Calls
+[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), [`get_server_time`](#get_server_time) API가 있다. 이 API는 `/api`채널에서 event에 사용할 API를, `payload`에 알맞은 값을 입력해서 보낸다.
+
+* Topic: `/api`
+
+* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
+
+* Rate limit: Limit of calls for every second.
+
+<aside class="notice">
+It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
+</aside>
+
+> Request `create_wdrl`
+
+```console
+{"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "18vabZgKs4UCoxGnE3Vx54yDgDdcpGhaJL", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
+```
+
+> Response
+
+```console
+{"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"18vabZgKs4UCoxGnE3Vx54yDgDdcpGhaJL","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
+```
+
+## Subscriptions
+API Subscription은 `/subscription:<subtopic>` 채널에 조인하고 `request` 이벤트를 보내면, 이후부터 새로운 정보가 있으면 서버에서 `notfication` event를 보내준다.
+ 여기에는 [`coins`](#coins), [`coin_prices`](#coin_prices), [`quote_coins`](#quote_coins), [`markets`](#markets), [`market_summary_intvls`](#market_summary_intvls), [`market_summaries`](#market_summaries), [`order_books`](#order_books), [`price_history_intvls`](#price_history_intvls), [`price_histories`](#price_histories), [`trades`](#trades), [`my_users`](#my_users), [`my_assets`](#my_assets), [`my_orders`](#my_orders), [`my_trades`](#my_trades), [`my_tx_summaries`](#my_tx_summaries), [`my_airdrop_histories`](#my_airdrop_histories)가 있다.
+
+
+* Topic: `/subscription:<sub_topic>`
+
+* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to the event with `request` event, you will get either `init` or `upsert` action response from the API. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the API with `notification` event. For more information of actions, please look following [Action](#action).
+
+* Rate limit: Limit of calls for every second. Only applicable for `request`.
+
+> Example of `coins`
+
+```python
+import asyncio
+import logging
+
+from pydaybit import Daybit
+
+logger = logging.getLogger('pydaybit')
+logger.setLevel(logging.DEBUG)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(logging.Formatter('%(message)s'))
+logger.addHandler(stream_handler)
+
+
+async def daybit_coins():
+    async with Daybit() as daybit:
+        await daybit.coins()
+
+
+asyncio.get_event_loop().run_until_complete(daybit_coins())
+```
+
+> Output
+
+```console
+> {"join_ref": "1", "ref": "1", "topic": "/subscription:coins", "event": "phx_join", "payload": {"timestamp": 1538740890363}, "timeout": 3000}
+< {"topic":"/subscription:coins","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+> {"join_ref": "1", "ref": "2", "topic": "/subscription:coins", "event": "request", "payload": {"timestamp": 1538740890374}, "timeout": 3000}
+< {"topic":"/subscription:coins","ref":"2","payload":{"status":"ok","response":{"data":[{"data":[{"wdrl_fee":"5.00000000","wdrl_enabled":true,"wdrl_confirm":2,"tradable":true,"tick_amount":"0.10000000","sym":"USDT","native_decimal_places":2,"name":"Tether","min_wdrl":"10.00000000","min_deposit":"10.00000000","has_tag":false,"has_org":false,"deposit_enabled":true,"deposit_confirm":2} ... ],"action":"init"}]}},"event":"phx_reply"}
+> {"join_ref": "1", "ref": "3", "topic": "/subscription:coins", "event": "phx_leave", "payload": {"timestamp": 1538740890386}, "timeout": 3000}
+< {"topic":"/subscription:coins","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+< {"topic":"/subscription:coins","ref":"1","payload":{},"event":"phx_close"}
+```
+
+## Rate limit
+
+Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceed the limit.
+
+## Timestamp
+
+All request takes `timestamp` and `timeout` to prevent unexpected calls because of network delay and so on.
+
+- `timestamp`: `unix_timestamp`
+- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000`.
+
+Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
+
+If there was a problem, below error_code will be returned in response.
+- `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` are not existed or they are not `integer` (unix timestamp in millisecond).
+- `api_timeout`: Rejected because of request time out.
+
 ## Response format
 
-Basically there are two types of response formats. Based on the result of API calls, you would get one of success or fail models. If there was an error while running the API call, proper message will be returned along with error_code.
+Basically there are two types of response formats. Based on the result of API calls, you would get one of success or fail models. 결과 값은 오른쪽과 같. [Error List](#error-list)는 아래에 있다.  
 
 > Success
 
@@ -73,15 +220,19 @@ Basically there are two types of response formats. Based on the result of API ca
 }
 ```
 
-## Size
+# Libraries
 
-Maximum value for `size` is `30`. API will replace `size` to `30` if you placed the number larger than `30`.
+Exchange is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Exchange API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides wrapper for Python language only.
 
-## Market
+* PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
-`quote` and `base` are both required if request asked certain market's information by `quote` and `base`.
+For other languages, please refer below libraries to implement the features of this Exchange API.
 
-## Error list
+* Phoenix.js(Javascript): [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix/)
+* SwiftPhoenixClient(Swift): [https://github.com/davidstump/SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient/)
+* PhoenixSharp(C#): [https://github.com/Mazyod/PhoenixSharp](https://github.com/Mazyod/PhoenixSharp/)
+
+# Error list
 
 ### General
 
@@ -123,30 +274,6 @@ Maximum value for `size` is `30`. API will replace `size` to `30` if you placed 
 * wdrl_needs_to_tag: Missing `to_tag` parameter
 * wdrl_invalid_addr: Invalid address
 
-## APIs
-
-[Topic](#terms) are string identifiers of the channels. You can find trade and order related APIs in this section. It also shows how to use wrapper and expected response from it. For valid `topic` and `event` of the [message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html), please look below.
-
-* Topic: `/api`
-
-* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
-
-* Rate limit: Limit of calls for every second.
-
-<aside class="notice">
-It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
-</aside>
-
-## Subscriptions
-
-This section explains how you could implement various features of the Exchange API. If you subscribed to certain `/subscription:<sub_topic>`, you will get notification from the server when relevant modification happens.
-
-* Topic: `/subscription:<sub_topic>`
-
-* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to the event with `request` event, you will get either `init` or `upsert` action response from the API. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the API with `notification` event. For more information of actions, please look following [Action](#action).
-
-* Rate limit: Limit of calls for every second. Only applicable for `request`.
-
 ### Action
 
 Response holds `action` which helps you to understand how to handle the response.
@@ -157,49 +284,50 @@ Response holds `action` which helps you to understand how to handle the response
 * `upsert` : Search in data set and replace if it was found, or insert if there's no matching data.
 * `delete` : Search in data set and remove if it was found.
 
-## Advanced
+# Types
 
-This section provides helpful information for the developers who are interested in implementing Exchange API features in low level and want to have total control of using the API.
+### integer 
 
-### Topic
+`integer` data type.
+ 
+* `123`
+* `20181010`
 
-Exchange API has basically two layers of [Topic](https://hexdocs.pm/phoenix/channels.html#topics)s - [`/api`](#topic-api) and [`/subscription:<sub_topic>`](#topic-subscription) - and expects certain events to properly handle the request.
+### decimal
+Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. 
 
-### Event
+* `"880.524"`
+* `"59.55000000000000000:`
 
-You need to send `phx_join` event message to join the channel before sending necessary events if you decided to access the API without using the wrapper. If there was no problem of joining the topic, you will receive `phx_reply` event with `"status":"ok"` payload from the socket connection. If you reached this step and confirmed successful join, you can send events specified in this document and complete your task.
+### string
 
-* `/api` : In `/api` topic, API expects following events - `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`.
+`string`.
+ 
+* `"string"`
+* `"bitcoin"`
+* `"Pydaybit"`
 
-* `/subscription:<sub_topic>` : In `/subscription` topic, you should state `<sub_topic>` to specify your purpose of calling the API. After you successfully join the `/subscription:<sub_topic>` topic by sending `phx_join` event, you need to send `request` event and let the API know you want to get notification regarding the `<sub_topic>`. The notifications from API contains `notification` event with proper `action` (one of `insert`, `update`, `upsert`, or `delete`) for you to update the data set, if necessary.
+ 
+### boolean
 
-### Timestamp
+`boolean`.
+ 
+* `true`
+* `false`
 
-All request takes `timestamp` and `timeout` to prevent unexpected calls because of network delay and so on.
+### unix_timestamp
 
-- `timestamp`: `unix_timestamp`
-- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000`.
+`millisecond` unit unix timestamp.
+ 
+* `1528269989516`
 
-Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
+### csv
 
-If there was a problem, below error_code will be returned in response.
-- `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` are not existed or they are not `integer` (unix timestamp in millisecond).
-- `api_timeout`: Rejected because of request time out.
+string based comma separated values.
+ 
+* `"1, 2, 3"`
 
-## Rate limit
-
-Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceed the limit.
-
-## Types
-
-* `integer`: `integer` data type. ex) `123`
-* `decimal`: Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. ex) `"880.524"`
-* `string`: `string`. ex) `"string"`
-* `boolean`: `boolean`. ex) `true`, `false`
-* `unix_timestamp`: `millisecond` unit unix timestamp. ex) `1528269989516`
-* `csv`: string based comma separated values. ex) `"1, 2, 3"`
-
-## Models
+# Models
 
 Below are generic data models.
 

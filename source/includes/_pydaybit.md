@@ -1,4 +1,4 @@
-# Pydaybit
+# **Pydaybit**
 Pydaybit is an API wrapper for Daybit exchange written in Python.
 
 
@@ -676,7 +676,7 @@ asyncio.get_event_loop().run_until_complete(daybit_markets())
 }
 ```
 
-Subscribe to get basic market data.
+Subscribe to get basic market data. 
 
 * Topic: `/subscription:markets`
 
@@ -1075,7 +1075,7 @@ Subscribe to get trade data per market. API doesn't support for getting past tra
 
 * Response: [Trade](#trade)
 
-* Sort: by `exec_at` in `desc`
+* Sort: by `id` in `desc`
 
 ### arguments
 
@@ -1284,7 +1284,7 @@ Parameter | Type | Required | Description
 `quote` | string | Optional | Quote token symbol. ex) "BTC"
 `base` | string | Optional | Base token symbol. ex) "ETH"
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving.
+`size` | integer | Optional | Order count for retrieving. `size` <=  30. 
 `sell` | boolean | Optional | `true` for selling order and `false` for buying order.
 `statuses` | csv | Optional | Conditions of `status` to retrieve. csv form of `received`, `placed`, `completed`, and `canceled`. (ex, `"received, placed"`)
 
@@ -1370,7 +1370,7 @@ Parameter | Type | Required | Description
 `quote` | string | Optional | Quote token symbol. ex) "BTC"
 `base` | string | Optional | Base token symbol. ex) "ETH"
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving.
+`size` | integer | Optional | Order count for retrieving. `size` <=  30.
 `sell` | boolean | Optional | `true` for selling order and `false` for buying order.
 
 
@@ -1523,4 +1523,4 @@ Subscribe to get list of my airdrops.
 Parameter | Type | Required | Description
 ----------|------|----------|------------
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving.
+`size` | integer | Optional | Order count for retrieving. `size` <=  30.
