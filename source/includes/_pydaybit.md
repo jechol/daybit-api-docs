@@ -8,12 +8,56 @@ USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESP
 
 ## **Installation**
   
-  ```shell
-      $ git clone https://github.com/daybit-exchange/pydaybit
-      $ pip install -e pydaybit
-  ```
+> Pydaybit installation
+
+```shell
+$ git clone https://github.com/daybit-exchange/pydaybit
+$ pip install -e pydaybit
+```
   
-  For the installation, please look right column.
+For the installation, please look right column.
+
+## **API Key Pair**
+
+### Environment Variables
+
+> bash example
+
+```shell
+# ~/.bash_profile
+export DAYBIT_API_KEY="YOUR_OWN_API_KEY"
+export DAYBIT_API_SECRET="YOUR_WON_API_SECRET"
+```
+
+Pydaybit을 이용하려면 키페어 발급이 필요합니다. [Authorization](#authorization) 항목을 참조하십시오.
+발급 받은 키페어는 환경 변수로 설정 가능합니다. 
+
+* `DAYBIT_API_KEY`: 발급 받은 API KEY
+* `DAYBIT_API_SECRET`: 발급 받은 API SECRET
+
+
+### Without Environment Variables
+
+> without environment settings
+
+```python
+import asyncio
+
+from pydaybit import Daybit, PARAM_API_KEY, PARAM_API_SECRET
+
+
+async def daybit_example():
+    async with Daybit(params={PARAM_API_KEY: "YOUR_OWN_API_KEY",
+                              PARAM_API_SECRET: "YOUR_OWR_API_SECRET"}) as daybit:
+        pass
+
+
+asyncio.get_event_loop().run_until_complete(daybit_example())
+```
+
+환경 변수를 세팅하지 않아도 예제처럼 사용할 수 있습니다.
+
+  
   
 
 ## get_server_time()
