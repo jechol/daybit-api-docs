@@ -19,7 +19,7 @@ For the installation, please look right column.
 
 ## **API Key Pair**
 
-Pydaybit을 이용하려면 키페어 발급이 필요합니다. [Authorization](#authorization) 항목을 참조하십시오.
+You need to generate Key pair to use Pydaybit. Please refer [Authorization](#authorization).
 
 ### Environment Variables
 
@@ -31,10 +31,10 @@ export DAYBIT_API_KEY="YOUR_OWN_API_KEY"
 export DAYBIT_API_SECRET="YOUR_WON_API_SECRET"
 ```
 
-발급 받은 키페어는 환경 변수로 설정 가능합니다. 
+You can set generated key pair as environment variable.
 
-* `DAYBIT_API_KEY`: 발급 받은 API KEY
-* `DAYBIT_API_SECRET`: 발급 받은 API SECRET
+* `DAYBIT_API_KEY`: Generated API KEY
+* `DAYBIT_API_SECRET`: Generated API SECRET
 
 
 ### Without Environment Variables
@@ -56,7 +56,7 @@ async def daybit_example():
 asyncio.get_event_loop().run_until_complete(daybit_example())
 ```
 
-환경 변수를 세팅하지 않아도 예제처럼 사용할 수 있습니다.
+For using the key pair without settings them in environment variable, please refer the example.
 
 ## get_server_time()
 

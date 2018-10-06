@@ -12,31 +12,30 @@ toc_footers:
 
 # Introduction
 
-이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었고, 당신의 자산을 손해를 가져다 줄 수 있는 예제가 포함되어 있다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 한다. 모든 책임은 본인에게 있다.
+Target audience of this document is those who are capable of writing proper program source code and this document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionality of the source code before run them. Use this API at your own risk and all kind of outcome of using this API is your responsibility.
 
-Daybit API를 사용하기 전에 데이빗의 웹페이지에서 적절한 권한으로 API 키페어를 생성해야 한다. 데이빗의 [캔들 데이터](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 정보 등을 수신하는 권한과 개인의 자산 내역을 확인할 수 있는 권한, 개인의 자산을 사고 파는 권한, 출금을 하는 권한으로 나뉘어 있다. 자세한 내용은 [Authorization](#authorization)을 참고하라.
+You need to generate API key pair before using Daybit API [from Daybit's website](https://daybit.com). API has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
 
-데이빗 API는 크게 두가지 종류가 있다. 첫번째는 [API Call](#api-calls)을 통해 클라이언트가 요청을 보내고 서버가 응답하는 형식이다. 보통 클라이언트의 자산의 거래나 입출금을 요청하기 위해 사용한다.
+Basically there are two types of Daybit's API. First one is [API Call](#api-calls) - client sends request and server responds accordingly. Usually this type of call is used for asset trading or deposit/withdraw.
 
-두번째는 API를 Subscribe하면 서버에서 지속적으로 업데이트 해준다. 종목의 가격 변화, 가격 변화에서부터 내 지갑의 정보, 내 주문의 채결 여부에 대한 정보 등을 업데이트 해준다. 이러한 API를 [`Subscription`](#subscriptions)이라 부른다.
+Second type is [`Subscription`](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
 
-이러한 Daybit API는 웹소켓으로 통신하며 피닉스 프레임워크에서 정의된 형식으로 한다. 데이빗 서버는 Elixir 언어로 작성된 Phoenix Framework를 기반으로 구현되어 있다. Daybit은 Daybit API를 손쉽게 사용할 수 있는 [Pydaybit](#pydaybit) written in Python 을 제공한다. 
+Daybit API supports websocket connection and follows the format defined in Phoenix Framework. Daybit server is implemented in Phoenix Framework written in Elixir language. Daybit also provides [Pydaybit](#pydaybit) written in Python which allows developers to easily use Daybit API.
 
- 프로그래밍에 익숙하지 않은 사용자는 먼저 [Pydaybit](#pydaybit)의 예제를 보는 것이 도움이 될 것이다. 
+If you are not familiar with programming, it would be better to take a look at examples of [Pydaybit](#pydaybit) first.
  
 # Authorization
 
-Daybit API를 사용하기 전에 데이빗의 웹페이지에서 적절한 권한으로 API 키페어를 생성해야 한다. 데이빗의 [캔들 데이터](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 정보 등을 수신하는 권한과 개인의 자산 내역을 확인할 수 있는 권한, 개인의 자산을 사고 파는 권한, 출금을 하는 권한으로 나뉘어 있다.
+Before you are using Daybit API, you first need to generate API key pair with proper authorization. API has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations.
 
 | Type | Description |
 |------|-------------|
-| public_data | Authorized to access public data. ex) Market Summary, Order Book and so on
-| private_data | Authorized to access private data. ex) Asset and so on
-| trade | Authorized to call trade related APIs. ex) Order, Trade and so on
-| transaction | Authorized to call transaction related APIs. ex) Deposit, Wdrl and so on
+| public_data | Authorized to access public data (ex, Market Summary, Order Book and so on). To get this authorization level from API key, please include 'Market Inquiry' at API key creation.
+| private_data | Authorized to access private data (ex, Asset and so on). To get this authorization level from API key, please include 'Private Asset Inquiry' at API key creation.
+| trade | Authorized to call trade related APIs (ex, Order, Trade and so on). To get this authorization level from API key, please include 'Trading API' at API key creation.
+| transaction | Authorized to call transaction related APIs (ex, Deposit, Wdrl and so on). To get this authorization level from API key, please include 'Withdrawal API' at API key creation.
 
- 
-MyPage에서 [API Keys](https://www.daybit.com/mypage/api-managements)에서 계정당 최대 5개의 API Key를 생성할 수 있다. 각 API Key는 다음과 같은 권한을 가질 수 있다.  
+You can generate maximum 5 API keys per account in [API Keys](https://www.daybit.com/mypage/api-managements) from My Page. Each API Key can have following authorizations:
 
 * `public_data`
 * `public_data`, `private_data`, `trade`
@@ -51,17 +50,18 @@ The usage of API is restricted by given right to each API key. You would get `un
 
 # APIs
 
-데이빗 API는 크게 두가지 종류가 있다. 첫번째는 API Call을 통해 클라이언트가 요청을 보내고 서버가 응답하는 형식이다. 보통 클라이언트의 자산의 거래나 입출금을 요청하기 위해 사용한다. 두번째는 어떠한 주제에 대한 정보에 대해 서버에서 지속적으로 업데이트 해주는 API가 있다. 종목의 가격 변화, 가격 변화에서부터 내 지갑의 정보, 내 주문의 채결 여부에 대한 정보 등을 업데이트 해준다. 이러한 API를 `Subscription` 이라 부른다.
+Basically there are two types of Daybit's API. First one is [API Call](#api-calls) - client sends request and server responds accordingly. Usually this type of call is used for asset trading or deposit/withdraw. Second type is [`Subscription`](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
 
 ## Channels
 Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
 API Call은 `/api` 채널에 `get_server_time`, `create_order`
 
 ### Topics
-Topic are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit은 `/api`, `/subscription:coins`, `/subscription:market_summaries;<market_summary_intvl>`과 같은 토픽을 사용하고 있다. 
+Topic are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit is using following types of topics: `/api`, `/subscription:coins`, `/subscription:market_summaries;<market_summary_intvl>`.
 
 ### Event
-채널에 대한 특별한 행동을 나타내기 위해 사용되는 `string`이다. 채널에 조인할때의 `phx_join`이나 채널을 나갈 때 `phx_leave`가 사용된다. 또한 [API Calls](#api-calls)는 Event에 실어 보낸다.  
+Event is `string` representing specific actions of the channel. `phx_join` is for joinning the channel and `phx_leave` is for leaving the channel. [API Calls](#api-calls) includes types of request in event.
+ 
 
 ### Message
 
@@ -101,17 +101,16 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 < {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
 ```
 
-
-다음과 같은 정보를 [json](https://en.wikipedia.org/wiki/JSON)형식으로 전달한다.
+Following information is delievered in the format of [json](https://en.wikipedia.org/wiki/JSON) object.
 
 `topic` - The string topic or topic:subtopic pair namespace, for example “messages”, “messages:123”
 `event` - The string event name, for example “phx_join”
 `payload` - The message payload
 `ref` - The unique string ref
-`join_ref` - 채널에 조인할 때의 ref
+`join_ref` - ref of joinning the channel
 
 ## API Calls
-[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), [`get_server_time`](#get_server_time) API가 있다. 이 API는 `/api`채널에서 event에 사용할 API를, `payload`에 알맞은 값을 입력해서 보낸다.
+[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), [`get_server_time`](#get_server_time) are types of API calls. You can use this API by sending required event and proper `payload` value in `/api` channel.
 
 * Topic: `/api`
 
@@ -136,8 +135,7 @@ It is recommended to retrieve data from `notification` of `/subscription:<sub_to
 ```
 
 ## Subscriptions
-API Subscription은 `/subscription:<subtopic>` 채널에 조인하고 `request` 이벤트를 보내면, 이후부터 새로운 정보가 있으면 서버에서 `notfication` event를 보내준다.
- 여기에는 [`coins`](#coins), [`coin_prices`](#coin_prices), [`quote_coins`](#quote_coins), [`markets`](#markets), [`market_summary_intvls`](#market_summary_intvls), [`market_summaries`](#market_summaries), [`order_books`](#order_books), [`price_history_intvls`](#price_history_intvls), [`price_histories`](#price_histories), [`trades`](#trades), [`my_users`](#my_users), [`my_assets`](#my_assets), [`my_orders`](#my_orders), [`my_trades`](#my_trades), [`my_tx_summaries`](#my_tx_summaries), [`my_airdrop_histories`](#my_airdrop_histories)가 있다.
+For using API Subscription, first you need to join `/subscription:<subtopic>` channel and send `request` event. Once you are successfully subscribed by joinning the channel, the server sends `notfication` for any kind of updated data. [`coins`](#coins), [`coin_prices`](#coin_prices), [`quote_coins`](#quote_coins), [`markets`](#markets), [`market_summary_intvls`](#market_summary_intvls), [`market_summaries`](#market_summaries), [`order_books`](#order_books), [`price_history_intvls`](#price_history_intvls), [`price_histories`](#price_histories), [`trades`](#trades), [`my_users`](#my_users), [`my_assets`](#my_assets), [`my_orders`](#my_orders), [`my_trades`](#my_trades), [`my_tx_summaries`](#my_tx_summaries), [`my_airdrop_histories`](#my_airdrop_histories) are the topics you can use in API subscription.
 
 
 * Topic: `/subscription:<sub_topic>`
