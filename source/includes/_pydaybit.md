@@ -166,7 +166,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 ```
 
 Create order to sell or buy token. 거래 타입은 [General order](#general-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), [Trailling Stop Order](#trailing-stop-order) 가 있다.
-`sell`, `quote`, `base`, `amount`, `role` are always required.
+`sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
 
 * Topic: `/api`
 
