@@ -192,8 +192,7 @@ await daybit.create_order(
 )
 ```
 
-`sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type` 을 입력해야 한다.
-
+* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type` 을 입력해야 한다.
 * `role` = `"both"`, `cond_type` = `"none"` 으로 한다.
 * 매수 주문을 할 때는 `sell` = `True`, 매도 주문을 할 때는 `sell` = `False`로 한다.
 * `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
@@ -218,6 +217,7 @@ await daybit.create_order(
 만약에 너의 주문의 일부나 전부가 오더북에 표시 되기 전에 거래가 일어 나면, 이것을 "taker" 거래라고 한다. 이러한 거래는 오더북에 있는 volume 을 "taking" 하기 때문에 "taker"라고 불린다.
 이 주문은 오더북에 있는 volume만을 taking한다. 
 
+* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type`을 입력해야 한다.
 * `role` = `"taker_only"`, `cond_type` = `"none"` 으로 한다.
 * `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
 * `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
@@ -241,6 +241,7 @@ await daybit.create_order(
 너의 주문의 일부나 전부가 오더북을 채우고, 이후에 이 주문이 거래가 된다면 이 주문을 "maker"라고 부른다.
 이 주문은 오더북에 volume을 채울때만 유효하다.
 
+* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type`을 입력해야 한다.
 * maker order 를 할때는 `role` = `"maker_only"`, `cond_type` = `"none"` 으로 한다.
 * `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
 * `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
@@ -264,6 +265,7 @@ await daybit.create_order(
 
 현재 가격이 cond_arg1보다 크거나 같을 때, 혹은 작거나 같을 때 일반 주문을 넣는다.
 
+* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type`, `cond_arg1`을 입력해야 한다.
 * `role` = `"both"`, `cond_type` = `"le"` or `"ge"` 이어야 한다.
 * `cond_type` = `"le"`일 때, `current_price` <= `cond_arg1` 이 되면 `price` 가격으로 일반 주문을 넣는다.
 * `cond_type` = `"ge"`일 때, `current_price` >= `cond_arg1` 이 되면 `price` 가격으로 일반 주문을 넣는다.
@@ -291,7 +293,8 @@ await daybit.create_order(
 최고점 대비 특정 비율만큼 하락했을 때, 현재 가격에서 일정 비율만큼 할인해서 팔거나
 최저점 대비 특정 비율만큼 상승했을 때, 현재 가격에서 일정 비율만큼 할증한 가격에서 산다.
 
-* `price` = `None`, `role` = `"both"`, `cond_type` = `"fall_from_top"`, 이나 `"rise_from_bottom"` 으로 한다.
+* `sell`, `role`, `quote`, `base`, `amount`, `cond_type`, `cond_arg1`, `cond_arg2`를 입력해야 한다.
+* `role` = `"both"`, `cond_type` = `"fall_from_top"`, 이나 `"rise_from_bottom"` 으로 한다.
 * `cond_type` = `"fall_from_top"`인 경우에, `current_price` <= `top_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. -0.1 <= `cond_arg2` <= -0.02. 
 * `cond_type` = `"rise_from_bottom"`인 경우에, `current_price` >= `bottom_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. 0.02 <= `cond_arg2` <= 0.1
 
