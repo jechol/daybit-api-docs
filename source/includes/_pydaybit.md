@@ -273,7 +273,7 @@ await daybit.create_order(
 
 ### Trailing Stop Order
 
-> Example Stop Limit Order
+> Example Trailing Stop Order
 
 ```python
 await daybit.create_order(
