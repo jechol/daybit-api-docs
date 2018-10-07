@@ -82,7 +82,7 @@ logger.addHandler(stream_handler)
 
 async def daybit_create_wdrl():
     async with Daybit() as daybit:
-        await daybit.create_wdrl(coin='BTC', to_addr='A_BTC_ADDRESS', amount='0.05')
+        await daybit.create_wdrl(coin='BTC', to_addr='ABTCADDRESS', amount='0.05')
 
 
 asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
@@ -93,7 +93,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 ```console
 > {"join_ref": "1", "ref": "1", "topic": "/api", "event": "phx_join", "payload": {"timestamp": 1538739991045}, "timeout": 3000}
 < {"topic":"/api","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
-> {"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "A_BTC_ADDRESS", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
+> {"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "ABTCADDRESS", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
 < {"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"A_BTC_ADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
 > {"join_ref": "1", "ref": "3", "topic": "/api", "event": "phx_leave", "payload": {"timestamp": 1538739991124}, "timeout": 3000}
 < {"topic":"/api","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
@@ -124,13 +124,13 @@ It is recommended to retrieve data from `notification` of `/subscription:<sub_to
 > Request `create_wdrl`
 
 ```console
-{"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "18vabZgKs4UCoxGnE3Vx54yDgDdcpGhaJL", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
+{"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "ABTCADDRESS", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
 ```
 
 > Response
 
 ```console
-{"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"18vabZgKs4UCoxGnE3Vx54yDgDdcpGhaJL","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
+{"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"ABTCADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
 ```
 
 ## Subscriptions
