@@ -277,7 +277,7 @@ await daybit.create_order(
 
 ```python
 await daybit.create_order(
-    sell=True, # True for selling, False for buying.
+    sell=True, # True for 'fall_from_top', False for 'rise_from_bottom'.
     role='both',
     quote=quote,
     base=base,
