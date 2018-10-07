@@ -166,6 +166,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 ```
 
 Create order to sell or buy token. 거래 타입은 [General order](#general-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), [Trailling Stop Order](#trailing-stop-order) 가 있다.
+`sell`, `quote`, `base`, `amount`, `role` are always required.
 
 * Topic: `/api`
 
@@ -176,9 +177,9 @@ Create order to sell or buy token. 거래 타입은 [General order](#general-ord
 * Response: [Order](#order-2)
 
 
-### General Order
+### Limit Order
 
-> Example General Order
+> Example Limit Order
 
 ```python
 await daybit.create_order(
@@ -192,7 +193,6 @@ await daybit.create_order(
 )
 ```
 
-* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type` 을 입력해야 한다.
 * `role` = `"both"`, `cond_type` = `"none"` 으로 한다.
 * 매수 주문을 할 때는 `sell` = `True`, 매도 주문을 할 때는 `sell` = `False`로 한다.
 * `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
@@ -217,7 +217,6 @@ await daybit.create_order(
 만약에 너의 주문의 일부나 전부가 오더북에 표시 되기 전에 거래가 일어 나면, 이것을 "taker" 거래라고 한다. 이러한 거래는 오더북에 있는 volume 을 "taking" 하기 때문에 "taker"라고 불린다.
 이 주문은 오더북에 있는 volume만을 taking한다. 
 
-* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type`을 입력해야 한다.
 * `role` = `"taker_only"`, `cond_type` = `"none"` 으로 한다.
 * `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
 * `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
@@ -241,7 +240,6 @@ await daybit.create_order(
 너의 주문의 일부나 전부가 오더북을 채우고, 이후에 이 주문이 거래가 된다면 이 주문을 "maker"라고 부른다.
 이 주문은 오더북에 volume을 채울때만 유효하다.
 
-* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type`을 입력해야 한다.
 * maker order 를 할때는 `role` = `"maker_only"`, `cond_type` = `"none"` 으로 한다.
 * `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
 * `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
@@ -263,12 +261,12 @@ await daybit.create_order(
 )
 ```
 
-현재 가격이 `cond_arg1`보다 크거나 같을 때, 혹은 작거나 같을 때 일반 주문을 넣는다.
+현재 가격이 `cond_arg1`보다 크거나 같을 때, 혹은 작거나 같을 때 Limit Order을 넣는다.
 
-* `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type`, `cond_arg1`을 입력해야 한다.
+* `price`, `amount`, `cond_type`, `cond_arg1` are also required.
 * `role` = `"both"`, `cond_type` = `"le"` or `"ge"` 이어야 한다.
-* `cond_type` = `"le"`일 때, `current_price` <= `cond_arg1` 이 되면 `price` 가격으로 일반 주문을 넣는다.
-* `cond_type` = `"ge"`일 때, `current_price` >= `cond_arg1` 이 되면 `price` 가격으로 일반 주문을 넣는다.
+* `cond_type` = `"le"`일 때, `current_price` <= `cond_arg1` 이 되면 `price` 가격으로 Limit Order를 넣는다.
+* `cond_type` = `"ge"`일 때, `current_price` >= `cond_arg1` 이 되면 `price` 가격으로 Limit Order를 넣는다.
 * 조건이 만족 했을 때, `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
 * `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
 
@@ -284,19 +282,22 @@ await daybit.create_order(
     quote=quote,
     base=base,
     amount=amount,
-    cond_type='ge', # cond_type could be 'ge' or 'le'.
+    cond_type='fall_from_top', # cond_type could be 'fall_from_top' or 'rise_from_bottom'.
     cond_arg1=최고가_대비_하락_비율,
     cond_arg2=현재가에서_할인할_가격,
 )
 ```
 
-최고점 대비 특정 비율만큼 하락했을 때, 현재 가격에서 일정 비율만큼 할인해서 팔거나
-최저점 대비 특정 비율만큼 상승했을 때, 현재 가격에서 일정 비율만큼 할증한 가격에서 산다.
+최고점 대비 특정 비율만큼 하락했을 때, 현재 가격에서 일정 비율만큼 할인해서 팔거나 최저점 대비 특정 비율만큼 상승했을 때, 현재 가격에서 일정 비율만큼 할증한 가격에서 산다.
 
-* `sell`, `role`, `quote`, `base`, `amount`, `cond_type`, `cond_arg1`, `cond_arg2`를 입력해야 한다.
+예를 들어, 한 trailing stop order를 (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='fall_from_top', cond_arg1='-0.01', cond_arg2='-0.005') 이라는 주문을 넣었다고 하자.
+이후에 최고점 10,000 USDT 찍고 계속 하락을 한다면, 이 주문은 9,000 USDT (= 1000 USDT * (1 - 0.1)) 에 trigger되어 8955 USDT (= 9,000 USDT * (1 - 0.005)) 가격에 파는 limit order를 생성한다.
+
+* `cond_type`, `cond_arg1`, `cond_arg2` are also required. 
 * `role` = `"both"`, `cond_type` = `"fall_from_top"`, 이나 `"rise_from_bottom"` 으로 한다.
-* `cond_type` = `"fall_from_top"`인 경우에, `current_price` <= `top_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. -0.1 <= `cond_arg2` <= -0.02. 
-* `cond_type` = `"rise_from_bottom"`인 경우에, `current_price` >= `bottom_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. 0.02 <= `cond_arg2` <= 0.1
+* `cond_type` = `"fall_from_top"`인 경우에, `sell`=`True`이고 `current_price` <= `top_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. -0.1 <= `cond_arg1` <= -0.02. -0.1 <= `cond_arg2` <= -0.01. 
+* `cond_type` = `"rise_from_bottom"`인 경우에, `sell`=`False`이고 `current_price` >= `bottom_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. 0.02 <= `cond_arg1` <= 0.1. 0.01 <= `cond_arg2` <= 0.1
+* `amount` * `trigger되는 시점의 가격` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
 
 
 ### arguments
