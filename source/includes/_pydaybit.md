@@ -263,7 +263,7 @@ await daybit.create_order(
 )
 ```
 
-현재 가격이 cond_arg1보다 크거나 같을 때, 혹은 작거나 같을 때 일반 주문을 넣는다.
+현재 가격이 `cond_arg1`보다 크거나 같을 때, 혹은 작거나 같을 때 일반 주문을 넣는다.
 
 * `sell`, `role`, `quote`, `base`, `price`, `amount`, `cond_type`, `cond_arg1`을 입력해야 한다.
 * `role` = `"both"`, `cond_type` = `"le"` or `"ge"` 이어야 한다.
