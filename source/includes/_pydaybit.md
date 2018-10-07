@@ -281,10 +281,10 @@ await daybit.create_order(
     role='both',
     quote=quote,
     base=base,
-    amount=amount,
+    amount=Decimal('0.1'),
     cond_type='fall_from_top', # cond_type could be 'fall_from_top' or 'rise_from_bottom'.
-    cond_arg1=최고가_대비_하락_비율,
-    cond_arg2=현재가에서_할인할_가격,
+    cond_arg1=Decimal('-0.01'),
+    cond_arg2=Decimal('-0.005'),
 )
 ```
 
