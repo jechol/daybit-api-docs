@@ -296,7 +296,7 @@ await daybit.create_order(
 * `cond_type`, `cond_arg1`, `cond_arg2` are also required. 
 * `role` = `"both"`, `cond_type` = `"fall_from_top"`, 이나 `"rise_from_bottom"` 으로 한다.
 * `cond_type` = `"fall_from_top"`인 경우에, `sell`=`True`이고 `current_price` <= `top_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. -0.1 <= `cond_arg1` <= -0.02. -0.1 <= `cond_arg2` <= -0.01. 
-* `cond_type` = `"rise_from_bottom"`인 경우에, `sell`=`False`이고 `current_price` >= `bottom_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. 0.02 <= `cond_arg1` <= 0.1. 0.01 <= `cond_arg2` <= 0.1
+* `cond_type` = `"rise_from_bottom"`인 경우에, `sell`=`False`이고 `current_price` >= `bottom_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. 0.02 <= `cond_arg1` <= 0.1. 0.01 <= `cond_arg2` <= 0.1.
 * `amount` * `trigger되는 시점의 가격` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
 
 
