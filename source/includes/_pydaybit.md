@@ -865,7 +865,7 @@ asyncio.get_event_loop().run_until_complete(daybit_order_books())
 
 Order book by unit price. In the response, there's no `id` so you need to compare it with `min_price` or `max_price` to identify the order book. (min_price, max_price] is the range for selling and [min_price, max_price) is the range for buying. In case of `sell_vol` and `buy_vol` exist at the same time, please make sure that they are located in difference range by above range conditions.
 
-* Topic: `/subscription:order_books/<quote>/<base>/<price_intvl>`
+* Topic: `/subscription:order_books;<quote>;<base>;<price_intvl>`
 
 * Request: `init`
 
@@ -991,7 +991,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_histories())
 
 Past market price data. For the valid `intvl`, please refer [Price history intervals](#price-history-intervals).
 
-* Topic: `/subscription:price_histories;<quote>/<base>/<intvl>`
+* Topic: `/subscription:price_histories;<quote>;<base>;<intvl>`
 
 * Request: `upsert`
 
