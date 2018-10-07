@@ -271,7 +271,7 @@ For other languages, please refer below libraries to implement the features of t
 * wdrl_needs_to_tag: Missing `to_tag` parameter
 * wdrl_invalid_addr: Invalid address
 
-## Action
+# Action
 
 Response holds `action` which helps you to understand how to handle the response.
 
