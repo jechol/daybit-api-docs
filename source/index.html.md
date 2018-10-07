@@ -54,7 +54,6 @@ Basically there are two types of Daybit's API. First one is [API Call](#api-call
 
 ## Channels
 Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
-API Call은 `/api` 채널에 `get_server_time`, `create_order`
 
 ### Topics
 Topic are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit is using following types of topics: `/api`, `/subscription:coins`, `/subscription:market_summaries;<market_summary_intvl>`.
