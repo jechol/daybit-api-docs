@@ -177,10 +177,6 @@ Create order to sell or buy coin. There are types of orders you can request to t
 * Response: [Order](#order-2)
 
 
-### arguments in general
-
-Please keep in mind that conditions of parameters in below are general descriptions. Any of them can be changed and, for the correct and detail parameter requirements, please look following - [Limit Order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
-
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
 `sell` | boolean | Required | `true` for selling and `false` for buying.
@@ -212,14 +208,17 @@ await daybit.create_order(
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
 `sell` | boolean | Required | `True` for selling and `False` for buying.
-`amount` | decimal | Required | Required amount of `quote`.
 `role` | string | Required | `"both"`
-`cond_type` | string | Required | `"none"`
+`quote` | string | Required | Quote coin symbol. ex) "BTC"
+`base` | string | Required | Base coin symbol. ex) "ETH"
 `price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
+`amount` | decimal | Required | Required amount of `quote`.
+`cond_type` | string | Required | `"none"`
+
 
 <aside class="notice">
- `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
- </aside>
+  Constraint: <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+</aside>
 
 ### Taker Order
 
@@ -239,17 +238,9 @@ await daybit.create_order(
 
 If the order was placed, before part or all of your orders are going on the order book, these are called as "taker". These trades are called as "taker" because it is "taking" the volume in the order book. This order is taking only volumes in the order book.
 
-Parameter | Type | Required | Description
-----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
-`amount` | decimal | Required | Required amount of `quote`.
-`role` | string | Required | `"taker_only"`
-`cond_type` | string | Required | `"none"`
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-
 <aside class="notice">
- `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
- </aside>
+  Constraint:  <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+</aside>
 
 ### Maker Order
 
@@ -267,19 +258,21 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, after part or all of your orders filled the order book, these are called as "maker". This order is only valid when it fills the volumne in the order book.
+If the order was placed, after part or all of your orders filled the order book, these are called as "maker". This order is only valid when it fills the volume in the order book.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
 `sell` | boolean | Required | `True` for selling and `False` for buying.
-`amount` | decimal | Required | Required amount of `quote`.
 `role` | string | Required | `"maker_only"`
-`cond_type` | string | Required | `"none"`
+`quote` | string | Required | Quote coin symbol.
+`base` | string | Required | Base coin symbol.
 `price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
+`amount` | decimal | Required | Required amount of `quote`.
+`cond_type` | string | Required | `"none"`
 
 <aside class="notice">
- `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
- </aside>
+  Constraint: <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+</aside>
 
 ### Stop Limit Order
 
@@ -300,24 +293,24 @@ await daybit.create_order(
 
 When current price is equal or greater/less than `cond_arg1`, it places Limit Order.
 
+* If you sent request with `cond_type` = `"le"`, it places Limit Order for the price of `price` when it becomes `current_price` ≤ `conditional_price`(= `cond_arg1`).
+
+* If you sent request with `cond_type` = `"ge"`, it places Limit Order for the price of `price` when it becomes `current_price` ≥ `conditional_price`(= `cond_arg1`).
+
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
 `sell` | boolean | Required | `True` for selling and `False` for buying.
-`amount` | decimal | Required | Required amount of `quote`.
 `role` | string | Required | `"both"`
-`cond_type` | string | Required | `"le"` or `"ge"`
+`quote` | string | Required | Quote coin symbol.
+`base` | string | Required | Base coin symbol.
 `price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`cond_arg1` | decimal | Required | Conditional price of the order. This value is compared with `current_price`.
-
-* `price`, `amount`, `cond_type`, `cond_arg1` are also required.
-
-* If you sent request with `cond_type` = `"le"`, it places Limit Order for the price of `price` when it becomes `current_price` <= `cond_arg1`.
-
-* If you sent request with `cond_type` = `"ge"`, it places Limit Order for the price of `price` when it becomes `current_price` >= `cond_arg1`.
+`amount` | decimal | Required | Required amount of `quote`.
+`cond_type` | string | Required | `"le"` or `"ge"`
+`cond_arg1` | decimal | Required | `conditional_price` of the order. This value is compared with `current_price`.
 
 <aside class="notice">
- `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
- </aside>
+  Constraint: <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+</aside>
 
 
 ### Trailing Stop Order
@@ -341,25 +334,36 @@ You can place trailing stop order to sell the coin, with certain rate of discoun
 
 For example, let say you placed a trailing stop order with (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='fall_from_top', cond_arg1='-0.01', cond_arg2='-0.005') parameters. After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be trigerred at 9,000 USDT (= 1000 USDT * (1 - 0.1)) and create selling limit order at the price of 8955 USDT (= 9,000 USDT * (1 - 0.005)).
 
+* In *Fall From Top* case, when `current_price` ≤ `top_price` * (1 + `cond_arg1`), it places a limit order for the price of `current_price` * (1 + `cond_arg2`). 
+
+* In *Rise From Bottom* case, when `current_price` ≥ `bottom_price` * (1 + `cond_arg1`), it places a limit order for the price of `current_price` * (1 + `cond_arg2`). 
+
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `true` for selling and `false` for buying.
-`amount` | decimal | Required | Order amount.
+`sell` | boolean | Required | `true` for `"fall_from_top"` and `false` for `"rise_from_bottom"`.
 `role` | string | Required | `"both"`
+`quote` | string | Required | Quote coin symbol.
+`base` | string | Required | Base coin symbol.
+`amount` | decimal | Required | Order amount.
 `cond_type` | string | Required | `"fall_from_top"` or `"rise_from_bottom"`
-`price` | decimal | Optional | Asking price.
-`cond_arg1` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
-`cond_arg2` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
+`cond_arg1` | decimal | Required | 최고점 대비 하락 비율 for `"fall_from_top"`, 최저점 대비 상승 비율 for `"rise_from_bottom"`. 
+`cond_arg2` | decimal | Required | `current_price`가 `conditional_price`에  도달 하면, `conditional_price` * (1 + `cond_arg2`) 가격에 [Limit Order](#limit-order)를 주문한다.
 
-* `cond_type`, `cond_arg1`, `cond_arg2` are also required. 
-
-* In case of `cond_type` = `"fall_from_top"`, `sell`=`True` and `current_price` <= `top_price` * (1 + `cond_arg1`), it will create plain order as `price` = `current_price` * (1 + `cond_arg2`). -0.1 <= `cond_arg1` <= -0.02. -0.1 <= `cond_arg2` <= -0.01.
-
-* In case of `cond_type` = `"rise_from_bottom"`, `sell`=`False` and `current_price` >= `bottom_price` * (1 + `cond_arg1`), it will create plain order as `price` = `current_price` * (1 + `cond_arg2`). 0.02 <= `cond_arg1` <= 0.1. 0.01 <= `cond_arg2` <= 0.1.
 
 <aside class="notice">
- `amount` and `price` must meet: `amount` * `price_at_trigger` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
- </aside>
+ Constraint: <br />
+ <ul>
+ <li>
+ <code>amount</code> * <code>price in USDT at the trailing stop order is placed</code> ≥ 10.0 <code>USDT</code>.
+ </li>
+ <li>
+ In <em>Fall From Top</em> case:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
+ </li>
+ <li>
+ In <em>Rise From Bottom</em> case:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1
+ </li>
+ </ul>
+</aside>
 
 ## cancel_order()
 
@@ -417,7 +421,7 @@ Cancel placed order. You must pass valid `id` to cancel the order.
 
 * Response: [Order](#order-2)
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
@@ -462,13 +466,13 @@ Cancel multiple orders. If one or more of `order_ids` are invalid, the API simpl
 
 * Rate limit: 5
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|-----------|
 `order_ids` | array | Required | ids of order supposed to be canceled.
 
-### response
+### Response
 
 Field | Description
 ---------|------------
@@ -515,7 +519,7 @@ Cancel all my orders (both sell and buy orders).
 
 * Rate limit: 5
 
-### response
+### Response
 
 Field | Description
 ---------|------------
@@ -573,7 +577,7 @@ Request withdraw to `to_addr` for `amount` of `coin`.
 
 * Response: [Wdrl](#wdrl-2)
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
@@ -1169,7 +1173,7 @@ Past market price data. For the valid `intvl`, please refer [Price history inter
 
 * Sort: -
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
@@ -1243,7 +1247,7 @@ Subscribe to get trade data per market. API doesn't support for getting past tra
 
 * Sort: by `id` in `desc`
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
@@ -1443,14 +1447,14 @@ Subscribe to get information of my orders.
 
 * Sort: by `id` in `desc`
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
 `quote` | string | Optional | Quote coin symbol. ex) "BTC"
 `base` | string | Optional | Base coin symbol. ex) "ETH"
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` <=  30. 
+`size` | integer | Optional | Order count for retrieving. `size` ≤  30. 
 `sell` | boolean | Optional | `true` for selling order and `false` for buying order.
 `statuses` | csv | Optional | Conditions of `status` to retrieve. csv form of `received`, `placed`, `completed`, and `canceled`. (ex, `"received, placed"`)
 
@@ -1529,14 +1533,14 @@ Subscribe to get information of my trade data.
 
 * Sort: by `id` in `desc`
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
 `quote` | string | Optional | Quote coin symbol. ex) "BTC"
 `base` | string | Optional | Base coin symbol. ex) "ETH"
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` <=  30.
+`size` | integer | Optional | Order count for retrieving. `size` ≤  30.
 `sell` | boolean | Optional | `true` for selling order and `false` for buying order.
 
 
@@ -1640,7 +1644,7 @@ Subscribe to get my transaction summaries.
 
 * Sort: by `id` in `desc`
 
-### arguments
+### Arguments
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
@@ -1689,4 +1693,4 @@ Subscribe to get list of my airdrops.
 Parameter | Type | Required | Description
 ----------|------|----------|------------
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` <=  30.
+`size` | integer | Optional | Order count for retrieving. `size` ≤  30.
