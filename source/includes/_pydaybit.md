@@ -531,7 +531,7 @@ Request withdraw to `to_addr` for `amount` of `coin`.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`coin` | string | Required | Withdraw token.
+`coin` | string | Required | Withdraw coin.
 `to_addr` | string | Required | Withdraw receiving address.
 `to_tag` | string | Optional | Withdraw tag. Used by `XRP` and so on.
 `amount` | decimal | Required | Amount to withdraw.
@@ -600,7 +600,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coins())
 }
 ```
 
-Subscribe to get token data.
+Subscribe to get coin data.
 
 * Topic: `/subscription:coins` 
 
@@ -626,13 +626,13 @@ from pprint import pprint
 from pydaybit import Daybit
 
 
-# For every token
+# For every coin
 async def daybit_coin_prices():
     async with Daybit() as daybit:
         pprint(await daybit.coin_prices())
 
 
-# For specific token
+# For specific coin
 async def daybit_coin_prices_with_sym(sym='ETH'):
     async with Daybit() as daybit:
         pprint(await (daybit.coin_prices / sym)())
@@ -645,7 +645,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 > Example Response
 
 ```python
-# If you didn't specify the token
+# If you didn't specify the coin
 {
   'ADA': {
     'sym': 'ADA',
@@ -660,7 +660,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
   }
 }
 
-# If you specified the token
+# If you specified the coin
 {
   'ETH': {
     'sym': 'ETH',
@@ -671,7 +671,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 
 ### coin_prices()
 
-Token to USDT exchange rate for every token. You will get `Noficiation` event whenever price of any token gets changed. Please note that only updated token price will be returned.
+Coin to USDT exchange rate for every coin. You will get `Noficiation` event whenever price of any coin gets changed. Please note that only updated coin price will be returned.
 
 * Topic: `/subscription:coin_prices`
 
@@ -687,7 +687,7 @@ Token to USDT exchange rate for every token. You will get `Noficiation` event wh
 
 ### (coin_prices / `<sym>`)()
 
-Token to USDT exchange rate for specific token. You will get `Noficiation` event whenever price of the specified token gets changed.
+Coin to USDT exchange rate for specific coin. You will get `Noficiation` event whenever price of the specified coin gets changed.
 
 * Topic: `/subscription:coin_prices;<sym>`
 
@@ -737,7 +737,7 @@ asyncio.get_event_loop().run_until_complete(daybit_quote_coins())
 }
 ```
 
-Subscribe to get quote token list.
+Subscribe to get quote coin list.
 
 * Topic: `/subscription:quote_coins`
 
@@ -1401,8 +1401,8 @@ Subscribe to get information of my orders.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`quote` | string | Optional | Quote token symbol. ex) "BTC"
-`base` | string | Optional | Base token symbol. ex) "ETH"
+`quote` | string | Optional | Quote coin symbol. ex) "BTC"
+`base` | string | Optional | Base coin symbol. ex) "ETH"
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
 `size` | integer | Optional | Order count for retrieving. `size` <=  30. 
 `sell` | boolean | Optional | `true` for selling order and `false` for buying order.
@@ -1487,8 +1487,8 @@ Subscribe to get information of my trade data.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`quote` | string | Optional | Quote token symbol. ex) "BTC"
-`base` | string | Optional | Base token symbol. ex) "ETH"
+`quote` | string | Optional | Quote coin symbol. ex) "BTC"
+`base` | string | Optional | Base coin symbol. ex) "ETH"
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
 `size` | integer | Optional | Order count for retrieving. `size` <=  30.
 `sell` | boolean | Optional | `true` for selling order and `false` for buying order.

@@ -334,14 +334,14 @@ identifier: `sym`
 
 | Name | Type | Description |
 |---|---|---|
-| sym | string | Token symbol |
+| sym | string | Coin symbol |
 | native_decimal_point | integer | Withdrawal amount decimal restriction |
 | amount_decimal_point | integer | Order amount decimal point restriction |
 | tick_amount | decimal | Order amount unit |
 | deposit_confirm | integer | Number of confirms required for deposit completion |
 | wdrl_confirm | integer | Number of confirms required for withdrawal completion |
 | public | boolean | ㅣ Listed on the exchange (`true`) or not (`false`) |
-| name | string | Name of token (locale applied) |
+| name | string | Name of coin (locale applied) |
 | tradable | boolean | Tradable or not |
 | deposit_enabled | boolean | Deposit enabled or not |
 | wdrl_enabled | boolean | Withdrawal enabled or not |
@@ -357,7 +357,7 @@ identifier: `sym`
 
 | Name | Type | Description |
 |---|---|---|
-| sym | string | Token symbol |
+| sym | string | Coin symbol |
 | usdt_price | decimal | USDT exchanged price |
 
 ### Quote coin
@@ -366,7 +366,7 @@ identifier: `sym`
 
 | Name | Type | Description |
 |---|---|---|
-| sym | string | Token symbol |
+| sym | string | Coin symbol |
 
 ### Market
 
@@ -374,8 +374,8 @@ identifier: `quote`, `base`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote token |
-| base | string | Base token |
+| quote | string | Quote coin |
+| base | string | Base coin |
 | tick_price | decimal | Order price unit |
 | sellable | boolean | Sellable or not |
 | buyable | boolean | Buyable or not |
@@ -395,16 +395,16 @@ identifier: `quote`, `base`, `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote token |
-| base | string | Base token |
+| quote | string | Quote coin |
+| base | string | Base coin |
 | seconds | integer | Time unit |
 | open | decimal | Opening price |
 | close | decimal | Closing price |
 | high | decimal | Highest price |
 | low | decimal | Lowest price |
 | volatility | decimal | Price volatility |
-| quote_vol | decimal | Trading volume per quote token |
-| base_vol | decimal | Trading volume per base token |
+| quote_vol | decimal | Trading volume per quote coin |
+| base_vol | decimal | Trading volume per base coin |
 
 ### Order book
 
@@ -412,8 +412,8 @@ identifier: `quote`, `base`, `price_intvl`, `min_price`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote token |
-| base | string | Base token |
+| quote | string | Quote coin |
+| base | string | Base coin |
 | price_intvl | decimal | Price interval unit |
 | min_price | decimal | Minimum price |
 | max_price | decimal | Maximum price |
@@ -434,8 +434,8 @@ identifier: `quote`, `base`, `intvl`, `start_time`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote token |
-| base | string | Base token |
+| quote | string | Quote coin |
+| base | string | Base coin |
 | intvl | integer | Time interval |
 | start_time | unix_timestamp | Start time of price history |
 | end_time | unix_timestamp | End time of price history |
@@ -443,8 +443,8 @@ identifier: `quote`, `base`, `intvl`, `start_time`
 | close | decimal | Closing price |
 | high | decimal | Highest price |
 | low | decimal | Lowest price |
-| base_vol | decimal | Trading volume per base token |
-| quote_vol | decimal | Trading volume per quote token |
+| base_vol | decimal | Trading volume per base coin |
+| quote_vol | decimal | Trading volume per quote coin |
 
 ### User
 
@@ -462,7 +462,7 @@ identifier: `coin`
 
 | Name | Type | Description |
 |---|---|---|
-| coin | string | Token symbol |
+| coin | string | Coin symbol |
 | total | decimal | Total amount |
 | reserved | decimal | Reserved amount for order and so on |
 | available | decimal | Availalbe amount for order |
@@ -476,8 +476,8 @@ identifier: `id`
 |---|---|---|
 | id | integer | id |
 | sell | boolean | Selling (`true`) or buying (`false`) |
-| quote | string | Quote token |
-| base | string | Base token |
+| quote | string | Quote coin |
+| base | string | Base coin |
 | price | decimal | Price |
 | role | string | Order role. `"both"`, `"maker_only"`, `"taker_only"` |
 | cond_type | string | COnditional order type. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
@@ -499,10 +499,10 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| quote | string | Quote token |
-| base | string | Base token |
-| quote_amount | decimal | Quote token trade amount |
-| base_amount | decimal | Base token trade amount |
+| quote | string | Quote coin |
+| base | string | Base coin |
+| quote_amount | decimal | Quote coin trade amount |
+| base_amount | decimal | Base coin trade amount |
 | price | decimal | Trade closing price |
 | taker_sold | boolean | Taker is seller (`true`) or buyer (`false`) |
 | price_dec_digit | integer | Valid price decimal digit |
@@ -520,7 +520,7 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| coin | string | Token symbol |
+| coin | string | Coin symbol |
 | txid | string | Deposit transaction id |
 | amount | decimal | Deposit amount |
 | usdt_amount | decimal | Deposit USDT amount |
@@ -536,7 +536,7 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| coin | string | Withdrawal token |
+| coin | string | Withdrawal coin |
 | to_addr | string | Withdrawal receiving address |
 | to_tag | string or null | Withdrawal tag |
 | to_org | string or null | Withdrawal organization |
@@ -555,7 +555,7 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| coin | string | Token symbol |
+| coin | string | coin symbol |
 | amount | decimal | Airdrop amount |
 | description | string | Airdrop description |
 | airdropped_at | unix_timestamp | Airdrop time |
