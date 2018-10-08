@@ -346,8 +346,8 @@ Parameter | Type | Required | Description
 `base` | string | Required | Base coin symbol.
 `amount` | decimal | Required | Order amount.
 `cond_type` | string | Required | `"fall_from_top"` or `"rise_from_bottom"`
-`cond_arg1` | decimal | Required | 최고점 대비 하락 비율 for `"fall_from_top"`, 최저점 대비 상승 비율 for `"rise_from_bottom"`. 
-`cond_arg2` | decimal | Required | `current_price`가 `conditional_price`에  도달 하면, `conditional_price` * (1 + `cond_arg2`) 가격에 [Limit Order](#limit-order)를 주문한다.
+`cond_arg1` | decimal | Required | In *Fall From Top* case, price discount rate compared with top price<br/>In *Rise From Bottom* case, price rise rate compared with bottom price.   
+`cond_arg2` | decimal | Required | When the condition as above is meet, it places a limit order for the price of `current_price` * (1 + `cond_arg2`).
 
 
 <aside class="notice">
