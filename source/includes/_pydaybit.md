@@ -165,7 +165,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-Create order to sell or buy coin. There are types of orders you can request to the server. There are descriptions of each parameter [in general](#arguments-in-general) and you need to send specific values to fulfill your purpose of order. For specific types of order, please refer following types and required parameters - [General order](#general-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
+Create order to sell or buy coin. There are types of orders you can request to the server. There are descriptions of each parameter [in general](#arguments-in-general) and you need to send specific values to fulfill your purpose of order. For specific types of order, please refer following types and required parameters - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
 `sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
 
 * Topic: `/api`
