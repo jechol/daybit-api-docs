@@ -165,7 +165,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-Create order to sell or buy token. 거래 타입은 [General order](#general-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), [Trailling Stop Order](#trailing-stop-order) 가 있다.
+Create order to sell or buy coin. There are types of orders you can request to the server. There are descriptions of each parameter [in general](#arguments-in-general) and you need to send specific values to fulfill your purpose of order. For specific types of order, please refer following types and required parameters - [General order](#general-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
 `sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
 
 * Topic: `/api`
@@ -176,6 +176,22 @@ Create order to sell or buy token. 거래 타입은 [General order](#general-ord
 
 * Response: [Order](#order-2)
 
+
+### arguments in general
+
+Please keep in mind that conditions of parameters in below are general descriptions. Any of them can be changed and, for the correct and detail parameter requirements, please look following - [Limit Order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
+
+Parameter | Type | Required | Description
+----------|------|----------|------|----------|------------
+`sell` | boolean | Required | `true` for selling and `false` for buying.
+`quote` | string | Required | Quote coin symbol. ex) "BTC"
+`base` | string | Required | Base coin symbol. ex) "ETH"
+`amount` | decimal | Required | Order amount.
+`role` | string | Required | Role of order.
+`cond_type` | string | Required | Conditional types of the order.
+`price` | decimal | Optional | Asking price.
+`cond_arg1` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
+`cond_arg2` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
 
 ### Limit Order
 
@@ -193,10 +209,17 @@ await daybit.create_order(
 )
 ```
 
-* `role` = `"both"`, `cond_type` = `"none"` 으로 한다.
-* 매수 주문을 할 때는 `sell` = `True`, 매도 주문을 할 때는 `sell` = `False`로 한다.
-* `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
-* `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다.  
+Parameter | Type | Required | Description
+----------|------|----------|------|----------|------------
+`sell` | boolean | Required | `True` for selling and `False` for buying.
+`amount` | decimal | Required | Required amount of `quote`.
+`role` | string | Required | `"both"`
+`cond_type` | string | Required | `"none"`
+`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
+
+<aside class="notice">
+ `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
+ </aside>
 
 ### Taker Order
 
@@ -214,12 +237,19 @@ await daybit.create_order(
 )
 ```
 
-만약에 너의 주문의 일부나 전부가 오더북에 표시 되기 전에 거래가 일어 나면, 이것을 "taker" 거래라고 한다. 이러한 거래는 오더북에 있는 volume 을 "taking" 하기 때문에 "taker"라고 불린다.
-이 주문은 오더북에 있는 volume만을 taking한다. 
+If the order was placed, before part or all of your orders are going on the order book, these are called as "taker". These trades are called as "taker" because it is "taking" the volume in the order book. This order is taking only volumes in the order book.
 
-* `role` = `"taker_only"`, `cond_type` = `"none"` 으로 한다.
-* `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
-* `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
+Parameter | Type | Required | Description
+----------|------|----------|------|----------|------------
+`sell` | boolean | Required | `True` for selling and `False` for buying.
+`amount` | decimal | Required | Required amount of `quote`.
+`role` | string | Required | `"taker_only"`
+`cond_type` | string | Required | `"none"`
+`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
+
+<aside class="notice">
+ `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
+ </aside>
 
 ### Maker Order
 
@@ -237,12 +267,19 @@ await daybit.create_order(
 )
 ```
 
-너의 주문의 일부나 전부가 오더북을 채우고, 이후에 이 주문이 거래가 된다면 이 주문을 "maker"라고 부른다.
-이 주문은 오더북에 volume을 채울때만 유효하다.
+If the order was placed, after part or all of your orders filled the order book, these are called as "maker". This order is only valid when it fills the volumne in the order book.
 
-* maker order 를 할때는 `role` = `"maker_only"`, `cond_type` = `"none"` 으로 한다.
-* `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
-* `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
+Parameter | Type | Required | Description
+----------|------|----------|------|----------|------------
+`sell` | boolean | Required | `True` for selling and `False` for buying.
+`amount` | decimal | Required | Required amount of `quote`.
+`role` | string | Required | `"maker_only"`
+`cond_type` | string | Required | `"none"`
+`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
+
+<aside class="notice">
+ `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
+ </aside>
 
 ### Stop Limit Order
 
@@ -261,14 +298,26 @@ await daybit.create_order(
 )
 ```
 
-현재 가격이 `cond_arg1`보다 크거나 같을 때, 혹은 작거나 같을 때 Limit Order을 넣는다.
+When current price is equal or greater/less than `cond_arg1`, it places Limit Order.
+
+Parameter | Type | Required | Description
+----------|------|----------|------|----------|------------
+`sell` | boolean | Required | `True` for selling and `False` for buying.
+`amount` | decimal | Required | Required amount of `quote`.
+`role` | string | Required | `"both"`
+`cond_type` | string | Required | `"le"` or `"ge"`
+`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
+`cond_arg1` | decimal | Required | Conditional price of the order. This value is compared with `current_price`.
 
 * `price`, `amount`, `cond_type`, `cond_arg1` are also required.
-* `role` = `"both"`, `cond_type` = `"le"` or `"ge"` 이어야 한다.
-* `cond_type` = `"le"`일 때, `current_price` <= `cond_arg1` 이 되면 `price` 가격으로 Limit Order를 넣는다.
-* `cond_type` = `"ge"`일 때, `current_price` >= `cond_arg1` 이 되면 `price` 가격으로 Limit Order를 넣는다.
-* 조건이 만족 했을 때, `amount` = `quote`의 원하는 수량, `price` = `base` / `quote` 으로 원하는 가격을 입력한다. 
-* `amount` * `price` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
+
+* If you sent request with `cond_type` = `"le"`, it places Limit Order for the price of `price` when it becomes `current_price` <= `cond_arg1`.
+
+* If you sent request with `cond_type` = `"ge"`, it places Limit Order for the price of `price` when it becomes `current_price` >= `cond_arg1`.
+
+<aside class="notice">
+ `amount` and `price` must meet: `amount` * `price` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
+ </aside>
 
 
 ### Trailing Stop Order
@@ -288,32 +337,29 @@ await daybit.create_order(
 )
 ```
 
-최고점 대비 특정 비율만큼 하락했을 때, 현재 가격에서 일정 비율만큼 할인해서 팔거나 최저점 대비 특정 비율만큼 상승했을 때, 현재 가격에서 일정 비율만큼 할증한 가격에서 산다.
+You can place trailing stop order to sell the coin, with certain rate of discount compared with current price, when the price has dropped at specific rate compared with highest price. Likewise, you can also buy the coin, with certain rate of extra charge compared with current price, when the price has risen at specific rate compared with lowest price, by placing trailing stop order.
 
-예를 들어, 한 trailing stop order를 (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='fall_from_top', cond_arg1='-0.01', cond_arg2='-0.005') 이라는 주문을 넣었다고 하자.
-이후에 최고점 10,000 USDT 찍고 계속 하락을 한다면, 이 주문은 9,000 USDT (= 1000 USDT * (1 - 0.1)) 에 trigger되어 8955 USDT (= 9,000 USDT * (1 - 0.005)) 가격에 파는 limit order를 생성한다.
-
-* `cond_type`, `cond_arg1`, `cond_arg2` are also required. 
-* `role` = `"both"`, `cond_type` = `"fall_from_top"`, 이나 `"rise_from_bottom"` 으로 한다.
-* `cond_type` = `"fall_from_top"`인 경우에, `sell`=`True`이고 `current_price` <= `top_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. -0.1 <= `cond_arg1` <= -0.02. -0.1 <= `cond_arg2` <= -0.01. 
-* `cond_type` = `"rise_from_bottom"`인 경우에, `sell`=`False`이고 `current_price` >= `bottom_price` * (1 + `cond_arg1`)이면 `price` = `current_price` * (1 + `cond_arg2`)인 일반 주문을 생성한다. 0.02 <= `cond_arg1` <= 0.1. 0.01 <= `cond_arg2` <= 0.1.
-* `amount` * `trigger되는 시점의 가격` * (1 `base`의 `usdt` 환산 가격) >= 10.0 `usdt` 이어야 한다. 
-
-
-### arguments
+For example, let say you placed a trailing stop order with (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='fall_from_top', cond_arg1='-0.01', cond_arg2='-0.005') parameters. After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be trigerred at 9,000 USDT (= 1000 USDT * (1 - 0.1)) and create selling limit order at the price of 8955 USDT (= 9,000 USDT * (1 - 0.005)).
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
 `sell` | boolean | Required | `true` for selling and `false` for buying.
-`quote` | string | Required | Quote token symbol. ex) "BTC"
-`base` | string | Required | Base token symbol. ex) "ETH"
 `amount` | decimal | Required | Order amount.
-`role` | string | Required | `"both"`, `"maker_only"`, and `"taker_only"` are valid.
-`cond_type` | string | Required | Conditional types of the order. <ul><li>When `role = "both"`: `"none"`, `"le"`(less or equal than), `"ge"`(greate or equal than), `"fall_from_top"`, and `"rise_from_bottom"` are valid.</li><li>When `role = "maker_only" or "taker_only"`: only `"none"` is valid.
+`role` | string | Required | `"both"`
+`cond_type` | string | Required | `"fall_from_top"` or `"rise_from_bottom"`
 `price` | decimal | Optional | Asking price.
-`cond_arg1` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.</li></ul>
-`cond_arg2` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.</li></ul>
+`cond_arg1` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
+`cond_arg2` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
 
+* `cond_type`, `cond_arg1`, `cond_arg2` are also required. 
+
+* In case of `cond_type` = `"fall_from_top"`, `sell`=`True` and `current_price` <= `top_price` * (1 + `cond_arg1`), it will create plain order as `price` = `current_price` * (1 + `cond_arg2`). -0.1 <= `cond_arg1` <= -0.02. -0.1 <= `cond_arg2` <= -0.01.
+
+* In case of `cond_type` = `"rise_from_bottom"`, `sell`=`False` and `current_price` >= `bottom_price` * (1 + `cond_arg1`), it will create plain order as `price` = `current_price` * (1 + `cond_arg2`). 0.02 <= `cond_arg1` <= 0.1. 0.01 <= `cond_arg2` <= 0.1.
+
+<aside class="notice">
+ `amount` and `price` must meet: `amount` * `price_at_trigger` * (1 `base` exchange rate to `usdt`) >= 10.0 `usdt`.
+ </aside>
 
 ## cancel_order()
 
