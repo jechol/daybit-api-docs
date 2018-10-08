@@ -165,7 +165,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-Create order to sell or buy coin. There are types of orders you can request to the server. There are descriptions of each parameter [in general](#arguments-in-general) and you need to send specific values to fulfill your purpose of order. For specific types of order, please refer following types and required parameters - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
+Create order to sell or buy coin. There are types of orders you can request to the server. For specific types of order, please refer following types and required parameters - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
 `sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
 
 * Topic: `/api`
@@ -176,7 +176,6 @@ Create order to sell or buy coin. There are types of orders you can request to t
 
 * Response: [Order](#order-2)
 
-
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
 `sell` | boolean | Required | `true` for selling and `false` for buying.
@@ -186,8 +185,8 @@ Parameter | Type | Required | Description
 `role` | string | Required | Role of order.
 `cond_type` | string | Required | Conditional types of the order.
 `price` | decimal | Optional | Asking price.
-`cond_arg1` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
-`cond_arg2` | decimal | Optional | Conditional price of the order. This is required only when `cond_type` is not `"none"`.
+`cond_arg1` | decimal | Optional | Conditional price of the order.
+`cond_arg2` | decimal | Optional | Conditional price of the order.
 
 ### Limit Order
 
@@ -237,6 +236,16 @@ await daybit.create_order(
 ```
 
 If the order was placed, before part or all of your orders are going on the order book, these are called as "taker". These trades are called as "taker" because it is "taking" the volume in the order book. This order is taking only volumes in the order book.
+
+Parameter | Type | Required | Description
+----------|------|----------|------|----------|------------
+`sell` | boolean | Required | `True` for selling and `False` for buying.
+`role` | string | Required | `"taker_only"`
+`quote` | string | Required | Quote coin symbol.
+`base` | string | Required | Base coin symbol.
+`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
+`amount` | decimal | Required | Required amount of `quote`.
+`cond_type` | string | Required | `"none"`
 
 <aside class="notice">
   Constraint:  <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
