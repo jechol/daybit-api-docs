@@ -1,5 +1,5 @@
 # **Pydaybit**
-Pydaybit is an API wrapper for Daybit exchange written in Python. The code is available in a [github repository](https://github.com/daybit-exchange/pydaybit). 
+Pydaybit is an API wrapper for Daybit exchange written in Python. The code is available in [Pydaybit Repository](https://github.com/daybit-exchange/pydaybit). 
 
 
 ## **Disclaimer**
