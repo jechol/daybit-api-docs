@@ -109,7 +109,7 @@ Following information is delivered in the format of [JSON](https://en.wikipedia.
 * `join_ref` - ref of joinning the channel
 
 ## API Calls
-[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), [`get_server_time`](#get_server_time) are types of API calls. You can use this API by sending required event and proper `payload` value in `/api` channel.
+[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), [`get_server_time`](#get_server_time) are API calls. You can use this APIs by sending required event and proper `payload` value in `/api` channel.
 
 * Topic: `/api`
 
