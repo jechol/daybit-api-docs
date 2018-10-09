@@ -19,7 +19,7 @@ For the installation, please look right column.
 
 ## **API Key Pair**
 
-You need to generate Key pair to use Pydaybit. Please refer [Authorization](#authorization).
+You need to generate a API key pair to use Pydaybit. Please refer [Authorization](#authorization).
 
 ### Environment Variables
 
