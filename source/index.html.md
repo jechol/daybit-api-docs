@@ -12,13 +12,13 @@ toc_footers:
 
 # Introduction
 
-Target audience of this document is those who are capable of writing proper program source code and this document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionality of the source code before run them. Use this API at your own risk and all kind of outcome of using this API is your responsibility.
+Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcome of using this API is your responsibility.
 
 You need to generate API key pair before using Daybit API [from Daybit's website](https://daybit.com). API has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
 
 Basically there are two types of Daybit's API. First one is [API Call](#api-calls) - client sends request and server responds accordingly. Usually this type of call is used for asset trading or deposit/withdraw.
 
-Second type is [`Subscription`](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
+Second type is [Subscription](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
 
 Daybit API supports websocket connection and follows the format defined in Phoenix Framework. Daybit server is implemented in Phoenix Framework written in Elixir language. Daybit also provides [Pydaybit](#pydaybit) written in Python which allows developers to easily use Daybit API.
 
@@ -50,7 +50,7 @@ The usage of API is restricted by given right to each API key. You would get `un
 
 # APIs
 
-Basically there are two types of Daybit's API. First one is [API Call](#api-calls) - client sends request and server responds accordingly. Usually this type of call is used for asset trading or deposit/withdraw. Second type is [`Subscription`](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
+Basically there are two types of Daybit's API. First one is [API Call](#api-calls) - client sends request and server responds accordingly. Usually this type of call is used for asset trading or deposit/withdraw. Second type is [Subscription](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
 
 ## Channels
 Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
@@ -291,7 +291,7 @@ Response holds `action` which helps you to understand how to handle the response
 * `20181010`
 
 ### decimal
-Decimal number. This is `string` data type to precisely express the exact amount of number that is not expressed in ordinary decimal numbers. 
+Decimal number. This is `string` data type to precisely express the exact amount of number, which can't be expressed in ordinary decimal number types.
 
 * `"880.524"`
 * `"59.55000000000000000:`
