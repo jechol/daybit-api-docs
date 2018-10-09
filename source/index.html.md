@@ -283,42 +283,42 @@ Response holds `action` which helps you to understand how to handle the response
 
 # Types
 
-### integer 
+### Integer 
 
 `integer` data type.
  
 * `123`
 * `20181010`
 
-### decimal
+### Decimal
 Decimal number. This is `string` data type to precisely express the exact amount of number which can't be expressed in ordinary decimal number types.
 
 * `"880.524"`
 * `"59.55000000000000000:`
 
-### string
+### String
 
 `string`.
  
 * `"string"`
 * `"bitcoin"`
-* `"Pydaybit"`
+* `"Daybit"`
 
  
-### boolean
+### Boolean
 
 `boolean`.
  
 * `true`
 * `false`
 
-### unix_timestamp
+### Unix Timestamp
 
-`millisecond` unit unix timestamp.
+`millisecond` unit Unix timestamp.
  
 * `1528269989516`
 
-### csv
+### CSV
 
 string based comma separated values.
  
