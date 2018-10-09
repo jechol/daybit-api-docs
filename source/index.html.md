@@ -291,7 +291,7 @@ Response holds `action` which helps you to understand how to handle the response
 * `20181010`
 
 ### decimal
-Decimal number. This is `string` data type to precisely express the exact amount of number, which can't be expressed in ordinary decimal number types.
+Decimal number. This is `string` data type to precisely express the exact amount of number which can't be expressed in ordinary decimal number types.
 
 * `"880.524"`
 * `"59.55000000000000000:`
