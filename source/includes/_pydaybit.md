@@ -204,6 +204,8 @@ await daybit.create_order(
 )
 ```
 
+If the order was placed, it is regarded as a [taker order](#taker-order). and if remain amount of the order exists, it is regarded as a [maker order](#maker-order).
+
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
 `sell` | boolean | Required | `True` for selling and `False` for buying.
@@ -213,7 +215,6 @@ Parameter | Type | Required | Description
 `price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
 `amount` | decimal | Required | Required amount of `quote`.
 `cond_type` | string | Required | `"none"`
-
 
 <aside class="notice">
   Constraint: <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
