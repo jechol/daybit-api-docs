@@ -14,13 +14,13 @@ toc_footers:
 
 Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcome of using this API is your responsibility.
 
-You need to generate API key pair before using Daybit API [from Daybit's website](https://daybit.com). API has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
+You need to generate an API key pair before using Daybit API from [Daybit's website](https://www.daybit.com). An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
 
-Basically there are two types of Daybit's API. First one is [API Call](#api-calls) - client sends request and server responds accordingly. Usually this type of call is used for asset trading or deposit/withdraw.
+Basically there are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw.
 
-Second type is [Subscription](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
+Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and get a continuous notification from the server. Based on type of a notification, the notification include price change of coins, information of one's wallet, result of one's order and so on.
 
-Daybit API supports websocket connection and follows the format defined in Phoenix Framework. Daybit server is implemented in Phoenix Framework written in Elixir language. Daybit also provides [Pydaybit](#pydaybit) written in Python which allows developers to easily use Daybit API.
+Daybit APIs are implemented based on websocket connection and follow the format defined in Phoenix Framework. Daybit also provides [Pydaybit](#pydaybit) written in Python which allows developers to easily use Daybit API.
 
 If you are not familiar with programming, it would be better to take a look at examples of [Pydaybit](#pydaybit) first.
  
