@@ -198,7 +198,7 @@ If there was a problem, below error_code will be returned in response.
 
 ## Response format
 
-Basically there are two types of response formats. Based on the result of API calls, you would get one of success or fail models. 결과 값은 오른쪽과 같. [Error List](#error-list)는 아래에 있다.  
+Basically there are two types of response formats. Based on the result of API calls, you would get one of success or fail models. Please see success and fail response examples on right column. You can also find [Error List](#error-list) in below.
 
 > Success
 
@@ -340,7 +340,7 @@ identifier: `sym`
 | tick_amount | decimal | Order amount unit |
 | deposit_confirm | integer | Number of confirms required for deposit completion |
 | wdrl_confirm | integer | Number of confirms required for withdrawal completion |
-| public | boolean | ㅣ Listed on the exchange (`true`) or not (`false`) |
+| public | boolean | Listed on the exchange (`true`) or not (`false`) |
 | name | string | Name of coin (locale applied) |
 | tradable | boolean | Tradable or not |
 | deposit_enabled | boolean | Deposit enabled or not |
@@ -480,7 +480,7 @@ identifier: `id`
 | base | string | Base coin |
 | price | decimal | Price |
 | role | string | Order role. `"both"`, `"maker_only"`, `"taker_only"` |
-| cond_type | string | COnditional order type. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
+| cond_type | string | Conditional order type. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
 | cond_value | decimal or null | Conditional order price value |
 | coin_fee | decimal | Fee |
 | amount | decimal | Order amount |

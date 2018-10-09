@@ -865,7 +865,7 @@ Subscribe to get basic market data.
 
 * Rate limit: 2
 
-* Response: [Market](#market-2)
+* Response: [Market](#market)
 
 * Sort: -
 
@@ -905,7 +905,7 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summary_intvls())
 }
 ```
 
-Time intervals of market price (unit: second). Return value can be used for input of [Market summaries](#market-summaries).
+Time intervals of market price (unit: second). Return value can be used for input of [Market summaries](#market_summaries).
 
 * Topic: `/subscription:market_summary_intvls`
 
@@ -974,7 +974,7 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summaries())
 ```
 `market_summaries/<seconds>`
 
-Subscribe to get market summaries. For the valid `seconds`, please refer [Market summary intervals](#market-summary-intervals).
+Subscribe to get market summaries. For the valid `seconds`, please refer [Market summary intervals](#market_summary_intvls).
 
 * Topic: `/subscription:market_summaries;<market_summary_intvl>`
 
@@ -1092,7 +1092,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_history_intvls())
 }
 ```
 
-Time intervals of past market price data (unit: second). Return value can be used for input of [Price histories](#price-histories).
+Time intervals of past market price data (unit: second). Return value can be used for input of [Price histories](#price_histories).
 
 * Topic: `/subscription:price_history_intvls`
 
@@ -1168,7 +1168,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_histories())
 }
 ```
 
-Past market price data. For the valid `intvl`, please refer [Price history intervals](#price-history-intervals).
+Past market price data. For the valid `intvl`, please refer [Price history intervals](#price_history_intvls).
 
 * Topic: `/subscription:price_histories;<quote>;<base>;<intvl>`
 
