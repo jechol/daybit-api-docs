@@ -56,10 +56,10 @@ Basically there are two types of Daybit's APIs. First one is an [API Call](#api-
 Channels are based on a simple idea of [Phoenix framework](https://phoenixframework.org/) that sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
 
 ### Topics
-Topics are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit APIs are using following types of topics: [`/api`](#api-calls), [`/subscription:coins`](#coins), [`/subscription:market_summaries;<market_summary_intvl>`](#market_summaries) and so on.
+Topics are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit APIs are using following types of topics: [`"/api"`](#api-calls), [`"/subscription:coins"`](#coins), [`"/subscription:market_summaries;<market_summary_intvl>"`](#market_summaries) and so on.
 
 ### Event
-Event is `string` representing specific actions of the channel. `phx_join` is for joinning the channel and `phx_leave` is for leaving the channel. [API Calls](#api-calls) includes types of request in event.
+Event is `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. [API Calls](#api-calls) include types of request in event.
  
 
 ### Message
@@ -100,13 +100,13 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 < {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
 ```
 
-Following information is delievered in the format of [json](https://en.wikipedia.org/wiki/JSON) object.
+Following information is delivered in the format of [JSON](https://en.wikipedia.org/wiki/JSON) object.
 
-`topic` - The string topic or topic:subtopic pair namespace, for example “messages”, “messages:123”
-`event` - The string event name, for example “phx_join”
-`payload` - The message payload
-`ref` - The unique string ref
-`join_ref` - ref of joinning the channel
+* `topic` - The string topic or topic:subtopic pair namespace, for example [`"/api"`](#api-calls), [`"/subscription:coins"`](#coins)
+* `event` - The string event name, for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`
+* `payload` - The message payload
+* `ref` - The unique string ref
+* `join_ref` - ref of joinning the channel
 
 ## API Calls
 [`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), [`get_server_time`](#get_server_time) are types of API calls. You can use this API by sending required event and proper `payload` value in `/api` channel.
