@@ -50,7 +50,7 @@ The usage of APIs is restricted by given right to each API key pair. You would g
 
 # APIs
 
-Basically there are two types of Daybit's API. First one is [API Call](#api-calls) - client sends request and server responds accordingly. Usually this type of call is used for asset trading or deposit/withdraw. Second type is [Subscription](#subscriptions) which allows you to subscribe to API and get continuous notification from the server. Based on type of notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
+Basically there are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw. Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and get continuous notification from the server. Based on type of a notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
 
 ## Channels
 Channels are based on a simple idea - sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
