@@ -79,7 +79,7 @@ asyncio.get_event_loop().run_until_complete(daybit_get_server_time())
 1537418605426 # unix_timestamp
 ```
 
-Get current server time of Daybit backend server in unix timestamp format.
+Get current time of Daybit in unix timestamp format.
 
 * Topic: `/api`
 
