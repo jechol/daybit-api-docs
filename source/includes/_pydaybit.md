@@ -142,9 +142,6 @@ async def daybit_create_order_sell():
 asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 ```
 
-<aside class="notice">
-  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
-</aside>
 
 > Example Response
 
