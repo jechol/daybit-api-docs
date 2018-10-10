@@ -13,13 +13,13 @@ toc_footers:
 
 # Introduction
 
-Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcome of using this API is your responsibility.
+Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcomes of using this API is your responsibility.
 
-You need to generate an API key pair before using Daybit API from [Daybit's website](https://www.daybit.com). An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
+You need to generate an API key pair from [Daybit's website](https://www.daybit.com) before using Daybit API. An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
 
 Basically there are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw.
 
-Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and get a continuous notification from the server. Based on type of a notification, the notification include price change of coins, information of one's wallet, result of one's order and so on.
+Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. Based on type of the notification, it includes price change of coins, information of one's wallet, result of one's order and so on.
 
 Daybit APIs are implemented based on websocket connection and follow the format defined in Phoenix Framework. Daybit also provides [Pydaybit](#pydaybit) written in Python which allows developers to easily use Daybit API.
 
@@ -34,7 +34,7 @@ Before you are using Daybit APIs, you first need to generate API key pair with p
 | public_data | Authorized to access public data (ex, Market Summary, Order Book and so on). To get this authorization level from an API key, please include 'Market Inquiry' at the API key pair creation.
 | private_data | Authorized to access private data (ex, Asset and so on). To get this authorization level from an API key, please include 'Private Asset Inquiry' at the API key pair creation.
 | trade | Authorized to call trade related APIs (ex, Order, Trade and so on). To get this authorization level from an API key, please include 'Trading API' at the API key pair creation.
-| transaction | Authorized to call transaction related APIs (ex, Deposit, Wdrl and so on). To get this authorization level from API key, please include 'Withdrawal API' at the API key pair creation.
+| transaction | Authorized to call transaction related APIs (ex, Deposit, Withdrawal and so on). To get this authorization level from API key, please include 'Withdrawal API' at the API key pair creation.
 
 You can generate maximum 5 API key pairs per account in [API Keys](https://www.daybit.com/mypage/api-managements) tab in My Page. Each API Key pair can have following authorizations:
 
@@ -43,7 +43,7 @@ You can generate maximum 5 API key pairs per account in [API Keys](https://www.d
 * `public_data`, `private_data`, `transaction`
 * `public_data`, `private_data`, `trade`, `transaction`
 
-The usage of APIs is restricted by given right to each API key pair. You would get `unauthenticated` response error_code if you called a API that is not accessible from your API key pair. Please look above for types of a API key pair and details of it.
+The usage of APIs is restricted by given right to each API key pair. You would get `unauthenticated` response error_code if you called an API that is not accessible from your API key pair. Please look above for types of API key pair and details of it.
 
 # Host address
 
@@ -51,7 +51,7 @@ The usage of APIs is restricted by given right to each API key pair. You would g
 
 # APIs
 
-Basically there are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw. Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and get continuous notification from the server. Based on type of a notification, each notification include price change of coins, information of one's wallet, result of one's order and so on.
+Basically there are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw. Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. Based on type of the notification, it includes price change of coins, information of one's wallet, result of one's order and so on.
 
 ## Channels
 Channels are based on a simple idea of [Phoenix framework](https://phoenixframework.org/) that sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
@@ -103,14 +103,14 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 
 Following information is delivered in the format of [JSON](https://en.wikipedia.org/wiki/JSON) object.
 
-* `topic` - The string topic or topic:subtopic pair namespace, for example [`"/api"`](#api-calls), [`"/subscription:coins"`](#coins)
-* `event` - The string event name, for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`
+* `topic` - The string topic or topic:subtopic pair namespace, for example [`"/api"`](#api-calls) or [`"/subscription:coins"`](#coins)
+* `event` - The string event name, for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`, and so on
 * `payload` - The message payload
 * `ref` - The unique string ref
 * `join_ref` - ref of joinning the channel
 
 ## API Calls
-[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), [`get_server_time`](#get_server_time) are API calls. You can use this APIs by sending required event and proper `payload` value in `/api` channel.
+[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), and [`get_server_time`](#get_server_time) are API calls. You can use this APIs by sending required event and proper `payload` value in `/api` channel.
 
 * Topic: `/api`
 
@@ -119,7 +119,7 @@ Following information is delivered in the format of [JSON](https://en.wikipedia.
 * Rate limit: Limit of calls for every second.
 
 <aside class="notice">
-It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
+It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic, not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
 </aside>
 
 > Request `create_wdrl`
@@ -140,7 +140,7 @@ For using API Subscriptions, first you need to join `/subscription:<subtopic>` c
 
 * Topic: `/subscription:<sub_topic>`
 
-* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to a API, namely the channel related to the API with `request` event, you will get either `init` or `upsert` action response from the channel. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the channel with `notification` event. For more information of actions, please look following [Action](#action).
+* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to API, i.e., joining the channel related to the API with `request` event, you will get either `init` or `upsert` action response from the channel. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the channel with `notification` event. For more information of actions, please look following [Action](#action).
 
 * Rate limit: Limit of calls for every second. Only applicable for `request`.
 
@@ -182,7 +182,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coins())
 
 ## Rate limit
 
-Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceed the limit.
+Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceeded the limit.
 
 ## Timestamp
 
@@ -533,8 +533,8 @@ identifier: `id`
 | txid | string or null | Withdrawal transaction id |
 | confirm | integer | Confirm count |
 | req_confirm | integer | |
-| deposit_status | string | |
-| wdrl_status | string or null | |
+| deposit_status | string | Deposit status |
+| wdrl_status | string or null | Withdrawal status |
 | wdrl_to_addr | string or null | Withdrawal receiving address |
 | wdrl_to_tag | string or null | Withdrawal tag |
 | wdrl_to_org | string or null | Withdrawal organization |
