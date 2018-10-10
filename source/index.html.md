@@ -408,21 +408,21 @@ identifier: `quote`, `base`, `seconds`
 | seconds | integer | Time unit |
 | open | decimal | Opening price |
 | close | decimal | Closing price |
-| high | decimal | Highest price |
-| low | decimal | Lowest price |
+| high | decimal or null | Highest price |
+| low | decimal or null | Lowest price |
 | volatility | decimal | Price volatility |
-| quote_vol | decimal | Trading volume per quote coin |
-| base_vol | decimal | Trading volume per base coin |
+| quote_vol | decimal or null | Trading volume per quote coin |
+| base_vol | decimal or null | Trading volume per base coin |
 
 ### Order book
 
-identifier: `quote`, `base`, `price_intvl`, `min_price`
+identifier: `quote`, `base`, `intvl`, `min_price`
 
 | Name | Type | Description |
 |---|---|---|
 | quote | string | Quote coin |
 | base | string | Base coin |
-| price_intvl | decimal | Price interval unit |
+| intvl | decimal | Price interval unit |
 | min_price | decimal | Minimum price |
 | max_price | decimal | Maximum price |
 | sell_vol | decimal | Selling volume |
@@ -489,7 +489,8 @@ identifier: `id`
 | price | decimal | Price |
 | role | string | Order role. `"both"`, `"maker_only"`, `"taker_only"` |
 | cond_type | string | Conditional order type. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
-| cond_value | decimal or null | Conditional order price value |
+| cond_arg1 | decimal or null | First conditional order price value |
+| cond_arg2 | decimal or null | Second conditional order price value |
 | coin_fee | decimal | Fee |
 | amount | decimal | Order amount |
 | filled | decimal | Order filled (per base at selling) |
@@ -498,7 +499,9 @@ identifier: `id`
 | received_at | unix_timestamp | Order received time |
 | placed_at | unix_timestamp or null | Order placed time (to order book) |
 | closed_at | unix_timestamp or null | Order closed time |
-| status | string | Order status (received, placed, completed, canceled) |
+| status | string | Order status (`"received"`, `"placed"`, `"closed"`) |
+| close_type | string | Closing type (`"rejected"`, `"filled"`, `"canceled"`) |
+| cancel_reason | string | Cancel reason (`"user"`, `"conflicting_self_order"`, `"expired"`, `"no_placed_amount"`, `"partially_filled_taker_only"`, `"maintenance"`, `"admin"`,) |
 
 ### Trade
 
@@ -513,48 +516,35 @@ identifier: `id`
 | base_amount | decimal | Base coin trade amount |
 | price | decimal | Trade closing price |
 | taker_sold | boolean | Taker is seller (`true`) or buyer (`false`) |
-| price_dec_digit | integer | Valid price decimal digit |
-| base_amount_dec_digit | integer | Valid base amount decimal digit |
 | exec_at | unix_timestamp | Execution time |
 | Below are only available from [my_trades](#my-trades)  |
 | order_id | integer | Trade order id |
 | fee | decimal | Fee |
 | sell | boolean | Selling (`true`) or buying (`false`) |
+| counterpart | string | (`"user"`, `"daybit"`, `"project"`), The counterparty of the trade. `"daybit"` and `"project"` means Daybit exchange and another coin project team, respectively. |
 
-### Deposit
-
-identifier: `id`
-
-| Name | Type | Description |
-|---|---|---|
-| id | integer | id |
-| coin | string | Coin symbol |
-| txid | string | Deposit transaction id |
-| amount | decimal | Deposit amount |
-| usd_amount | decimal | Deposit USD amount |
-| found_at | unix_timestamp | Deposit transaction found time |
-| confirm | integer | Confirm count |
-| confirm_checked_at | unix_timestamp | Confirm checked time |
-| applied_to_asset_at | unix_timestamp or null | Asset applied time |
-
-### Wdrl
+### Transaction Summary
 
 identifier: `id`
 
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| coin | string | Withdrawal coin |
-| to_addr | string | Withdrawal receiving address |
-| to_tag | string or null | Withdrawal tag |
-| to_org | string or null | Withdrawal organization |
-| amount | decimal | Withdrawal amount |
-| usd_amount | decimal | Withdrawal amount in USD |
-| fee | decimal | Withdrawal fee |
-| requested_at | unix_timestamp | Withdrawal requested time |
+| coin | string | Transaction coin |
+| type | string | Type of the transaction (`"wdrl"`, `"deposit"`) |
+| amount | decimal | Transaction amount |
 | txid | string or null | Withdrawal transaction id |
-| tx_created_at | unix_timestamp or null | Withdrawal transaction created time |
-| completed_at | unix_timestamp or null | Withdrawal completed time |
+| confirm | integer | Confirm count |
+| req_confirm | integer | |
+| deposit_status | string | |
+| wdrl_status | string or null | |
+| wdrl_to_addr | string or null | Withdrawal receiving address |
+| wdrl_to_tag | string or null | Withdrawal tag |
+| wdrl_to_org | string or null | Withdrawal organization |
+| created_at | unix_timestamp | Transaction created time |
+| completed_at | unix_timestamp or null | Transaction completed time |
+| tx_link_url | string ||
+
 
 ### Airdrop
 

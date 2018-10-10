@@ -1657,7 +1657,7 @@ Subscribe to get my transaction summaries.
 
 * Rate limit: 5
 
-* Response: [Deposit](#deposit)
+* Response: [Transaction Summary](#transaction-summary)
 
 * Sort: by `id` in `desc`
 
