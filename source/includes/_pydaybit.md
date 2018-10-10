@@ -460,7 +460,7 @@ from pydaybit import Daybit
 async def daybit_cancel_orders():
     async with Daybit() as daybit:
         my_orders = await daybit.my_orders()
-        open_orders = ([my_orders[key]['id'] for key in my_orders if my_orders[key]['status'] == 'placed'])
+        open_orders = ([my_orders[key]['id'] for key in my_orders if my_orders[key]['closed'] == false])
         pprint(open_orders)
         pprint(await daybit.cancel_orders(open_orders))
 
@@ -1391,7 +1391,7 @@ from pydaybit import Daybit
 
 async def daybit_my_orders():
     async with Daybit() as daybit:
-        pprint(await daybit.my_orders(statuses='placed'))
+        pprint(await daybit.my_orders(closed=False))
 
 
 asyncio.get_event_loop().run_until_complete(daybit_my_orders())
@@ -1474,9 +1474,7 @@ Parameter | Type | Required | Description
 `to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
 `size` | integer | Optional | Order count for retrieving. `size` ≤  30. 
 `sell` | boolean | Optional | `true` for selling order and `false` for buying order.
-`statuses` | csv | Optional | Conditions of `status` to retrieve. csv form of `received`, `placed`, `completed`, and `canceled`. (ex, `"received, placed"`)
-
-
+`closed` | boolean | Optional | Conditions of `status` to retrieve. `false` will retrieve orders in `received` and `placed` status. `true` will retrieve orders in `closed` status.
 
 ## my_trades()
 
@@ -1667,6 +1665,8 @@ Subscribe to get my transaction summaries.
 Parameter | Type | Required | Description
 ----------|------|----------|------------
 `type` | string | Required | One of `deposit` or `wdrl` per your purpose.
+`to_id` | integer | Optional | Get your transactions that are `id` is smaller than `to_id`.
+`size` | integer | Optional | The count of your transactions for retrieving. `size` ≤  30.
 
 
 ## my_airdrop_histories()
@@ -1710,5 +1710,5 @@ Subscribe to get list of my airdrops.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` ≤  30.
+`to_id` | integer | Optional | Get your airdrop histories that are `id` is smaller than `to_id`.
+`size` | integer | Optional | The count of your airdrop histories for retrieving. `size` ≤  30.
