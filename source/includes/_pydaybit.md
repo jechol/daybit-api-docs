@@ -481,7 +481,7 @@ Cancel multiple orders. If one or more of `order_ids` are invalid, the API simpl
 
 * Event: `cancel_orders`
 
-* Rate limit: 5
+* Rate limit: 1
 
 ### Arguments
 
@@ -534,7 +534,7 @@ Cancel all my orders (both sell and buy orders).
 
 * Event: `cancel_all_my_orders`
 
-* Rate limit: 5
+* Rate limit: 1
 
 ### Response
 
@@ -590,7 +590,7 @@ Request withdraw to `to_addr` for `amount` of `coin`.
 
 * Event: `create_wdrl`
 
-* Rate limit: 10
+* Rate limit: 50
 
 * Response: [Wdrl](#wdrl-2)
 
@@ -675,7 +675,7 @@ Subscribe to get coin data.
 
 * Notification: `insert`, `update`
 
-* Rate limit: 2
+* Rate limit: 3
 
 * Response: [Coin](#coin)
 
@@ -746,7 +746,7 @@ Coin to USD exchange rate for every coin. You will get `Noficiation` event whene
 
 * Notification: `update`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Coin price](#coin-price)
 
@@ -762,7 +762,7 @@ Coin to USD exchange rate for specific coin. You will get `Noficiation` event wh
 
 * Notification: `update`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Coin price](#coin-price)
 
@@ -812,7 +812,7 @@ Subscribe to get quote coin list.
 
 * Notification: `insert`, `update`, `delete`
 
-* Rate limit: 2
+* Rate limit: 3
 
 * Response: [Quote coin](#quote-coin)
 
@@ -871,7 +871,7 @@ Subscribe to get basic market data.
 
 * Notification: `insert`, `update`, `delete`
 
-* Rate limit: 2
+* Rate limit: 3
 
 * Response: [Market](#market)
 
@@ -921,7 +921,7 @@ Time intervals of market price (unit: second). Return value can be used for inpu
 
 * Notification: `insert`, `update`, `delete`
 
-* Rate limit: 2
+* Rate limit: 3
 
 * Response: [Market summary interval](#market-summary-interval)
 
@@ -990,7 +990,7 @@ Subscribe to get market summaries. For the valid `seconds`, please refer [Market
 
 * Notification: `init`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Market summary](#market-summary)
 
@@ -1058,7 +1058,7 @@ Order book by unit price. In the response, there's no `id` so you need to compar
 
 * Notification: `init`, `upsert`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Order book](#order-book)
 
@@ -1108,7 +1108,7 @@ Time intervals of past market price data (unit: second). Return value can be use
 
 * Notification: - (nothing to be reported)
 
-* Rate limit: 2
+* Rate limit: 3
 
 * Response: [Price history interval](#price-history-interval)
 
@@ -1184,7 +1184,7 @@ Past market price data. For the valid `intvl`, please refer [Price history inter
 
 * Notification: `insert`, `update`
 
-* Rate limit: 20
+* Rate limit: 8
 
 * Response: [Price history](#price-history)
 
@@ -1258,7 +1258,7 @@ Subscribe to get trade data per market. API doesn't support for getting past tra
 
 * Notification: `insert`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Trade](#trade)
 
@@ -1311,7 +1311,7 @@ Subscribe to get information of my account.
 
 * Notification: `init`
 
-* Rate limit: 2
+* Rate limit: 3
 
 * Response: [User](#user)
 
@@ -1370,7 +1370,7 @@ Subscribe to get information of my assets.
 
 * Notification: `insert`, `update`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Asset](#asset)
 
@@ -1458,7 +1458,7 @@ Subscribe to get information of my orders.
 
 * Notification: `insert`, `update`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Order](#order-2)
 
@@ -1544,7 +1544,7 @@ Subscribe to get information of my trade data.
 
 * Notification: `insert`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Trade](#trade)
 
@@ -1655,7 +1655,7 @@ Subscribe to get my transaction summaries.
 
 * Notification: `insert`, `update`
 
-* Rate limit: 5
+* Rate limit: 3
 
 * Response: [Transaction Summary](#transaction-summary)
 
