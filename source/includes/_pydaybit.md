@@ -465,7 +465,7 @@ from pydaybit import Daybit
 async def daybit_cancel_orders():
     async with Daybit() as daybit:
         my_orders = await daybit.my_orders()
-        open_orders = ([my_orders[key]['id'] for key in my_orders if my_orders[key]['closed'] == false])
+        open_orders = ([my_orders[key]['id'] for key in my_orders if my_orders[key]['status'] == 'placed'])
         pprint(open_orders)
         pprint(await daybit.cancel_orders(open_orders))
 
