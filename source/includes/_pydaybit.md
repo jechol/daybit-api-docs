@@ -562,7 +562,7 @@ from pydaybit import Daybit
 
 async def daybit_create_wdrl():
     async with Daybit() as daybit:
-        pprint(await daybit.create_wdrl(coin='BTC', to_addr='fake_address', amount='0.01'))
+        pprint(await daybit.create_wdrl(coin='BTC', to_addr='<YOUR BTC ADDRESS>', amount='0.01'))
 
 
 asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
@@ -584,7 +584,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
   'txid': None,
   'type': 'wdrl',
   'wdrl_status': 'queued',
-  'wdrl_to_addr': 'fake_address',
+  'wdrl_to_addr': '<YOUR BTC ADDRESS>',
   'wdrl_to_org': None,
   'wdrl_to_tag': None
 }
