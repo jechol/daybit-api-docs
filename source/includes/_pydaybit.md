@@ -1300,7 +1300,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_users())
 [
   {
     'maker_fee_rate': '0.001000',
-    'one_day_wdrl_usdt_limit': '5000.00000000',
+    'one_day_wdrl_usd_limit': '5000.00000000',
     'pay_fee_with_day': True,
     'taker_fee_rate': '0.001000'
   }
