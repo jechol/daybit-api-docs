@@ -63,12 +63,16 @@ For using the key pair without settings them in environment variable, please ref
 > Example Request
 
 ```python
+import asyncio
 from pprint import pprint
+
 from pydaybit import Daybit
+
 
 async def daybit_get_server_time():
     async with Daybit() as daybit:
         pprint(await daybit.get_server_time())
+
 
 asyncio.get_event_loop().run_until_complete(daybit_get_server_time())
 ```
@@ -137,6 +141,10 @@ async def daybit_create_order_sell():
 
 asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 ```
+
+<aside class="notice">
+  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+</aside>
 
 > Example Response
 
