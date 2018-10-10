@@ -256,18 +256,15 @@ For other languages, please refer below libraries to implement the features of D
 * `order_invalid_amount`: Invalid amount
 * `order_only_both_role_can_be_cond`: Conditional order is available only when `role` is `both`
 * `order_out_of_price_range`: Out of price range (Selling: 20% ~ 200%, Buying: 50% ~ 500%)
-* `order_exceeded_max_tstops`: Exceeded maximum Trailing*Stop order count
+* `order_exceeded_max_tstops`: Exceeded maximum Trailing*Stop order count (currently 2 per market)
 * `order_suspended_due_to_frequent_canceling`: Order suspended due to frequent canceling
 * `order_exceeds_my_asset_values`: Order exceeded my asset values
-* `order_violates_min_quote`: Order amount is less than minimum quote
 * `order_already_closed`: Order already closed
-* `order_exceeded_void_rate`: 잘못된 주문의 비율이 일정 값을 초과하여 10분간 거래가 중지됨 (현재 80%)
-* `order_exceeded_max_orders`: 미체결 주문 최대개수를 초과하여 주문 불가능 (현재 100개)
-* `order_exceeded_max_tstops`: 마켓당 2개라는 내용 추가
-* `order_violates_min_quote`: 삭제
-* `order_violates_min_usd`: 최소 USD 환산 총량 미만의 주문 (현재 10$)
-* `order_unplaceable_maker_only`: maker only 조건이 충족되지 않아서 실패
-* `order_unplaceable_taker_only`: taker only 조건이 충족되지 않아서 실패
+* `order_exceeded_void_rate`: Order suspended for 10 minutes because invalid order rate exceeded specific value (currently 80%)
+* `order_exceeded_max_orders`: Order exceeded maximum number of outstanding orders (currently 100)
+* `order_violates_min_usd`: Order violates minimum of total USD exchanged amount (currently $10)
+* `order_unplaceable_maker_only`: Order didn't meet maker only conditions
+* `order_unplaceable_taker_only`: Order didn't meet taker only conditions
 
 ### Wdrl
 
