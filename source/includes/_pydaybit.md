@@ -1696,7 +1696,11 @@ asyncio.get_event_loop().run_until_complete(daybit_my_airdrop_histories())
 > Example Response
 
 ```python
-{}
+{10: {'amount': '200.00000000',
+      'category': 'project',
+      'coin': 'DAY',
+      'exec_at': 1539148862461,
+      'id': 10}}
 ```
 
 Subscribe to get list of my airdrops.
