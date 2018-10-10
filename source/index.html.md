@@ -194,6 +194,7 @@ All request takes `timestamp` and `timeout` to prevent unexpected calls because 
 Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
 
 If there was a problem, below error_code will be returned in response.
+
 - `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` are not existed or they are not `integer` (unix timestamp in millisecond).
 - `api_timeout`: Rejected because of request time out.
 
@@ -514,7 +515,7 @@ identifier: `id`
 | price | decimal | Trade closing price |
 | taker_sold | boolean | Taker is seller (`true`) or buyer (`false`) |
 | exec_at | unix_timestamp | Execution time |
-| Below are only available from [my_trades](#my-trades)  |
+| Below are only available from [my_trades](#my_trades)  |
 | order_id | integer | Trade order id |
 | fee | decimal | Fee |
 | sell | boolean | Selling (`true`) or buying (`false`) |

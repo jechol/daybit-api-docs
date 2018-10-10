@@ -168,6 +168,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 Create a order to sell or buy coin. There are five types of orders you can request to the server. For detail of orders, please refer followings - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
  
 The conditions of invalid order (void) are,
+
 - rejected order (in case of placing error resulted order)
 - order cancellation by user
 - order cancellation by cross trading
@@ -179,7 +180,7 @@ The conditions of invalid order (void) are,
 
 * Event: `create_order`
 
-* Rate limit: 100
+* Rate limit: -
 
 * Response: [Order](#order-2)
 
@@ -434,7 +435,7 @@ Cancel placed order. You must pass valid `id` to cancel the order.
 
 * Event: `cancel_order`
 
-* Rate limit: 100
+* Rate limit: -
 
 * Response: [Order](#order-2)
 
@@ -592,7 +593,7 @@ Request withdraw to `to_addr` for `amount` of `coin`.
 
 * Rate limit: 50
 
-* Response: [Wdrl](#wdrl-2)
+* Response: [Transaction summary](#transaction-summary)
 
 ### Arguments
 
