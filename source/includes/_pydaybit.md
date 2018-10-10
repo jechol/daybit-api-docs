@@ -1348,9 +1348,10 @@ asyncio.get_event_loop().run_until_complete(daybit_my_assets())
   'ADA': {
     'available': '700000.000000000000000000',
     'coin': 'ADA',
-    'investment_usdt': '0.000000000000000000',
+    'investment_usd': '0.000000000000000000',
     'reserved': '0.000000000000000000',
-    'total': '700000.000000000000000000'
+    'total': '700000.000000000000000000',
+    'visible': True
   },
 
   # ...
@@ -1358,9 +1359,10 @@ asyncio.get_event_loop().run_until_complete(daybit_my_assets())
   'ZRX': {
     'available': '90000.000000000000000000',
     'coin': 'ZRX',
-    'investment_usdt': '0.000000000000000000',
+    'investment_usd': '0.000000000000000000',
     'reserved': '0.000000000000000000',
-    'total': '90000.000000000000000000'
+    'total': '90000.000000000000000000',
+    'visible': True
   }
 }
 ```
