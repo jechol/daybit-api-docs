@@ -167,11 +167,11 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 
 Create a order to sell or buy coin. There are five types of orders you can request to the server. For detail of orders, please refer followings - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
  
-잘못된 주문(void) 의 조건은,
-- reject 된 주문 (에러를 발생시키는 주문을 넣은 경우)
-- 유저의 주문 취소
-- 자전 거래로 인한 취소
-- 오래된 주문 자동 취소
+The conditions of invalid order (void) are,
+- rejected order (in case of placing error resulted order)
+- order cancellation by user
+- order cancellation by cross trading
+- auto cancellation of old order
 
 `sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
 
