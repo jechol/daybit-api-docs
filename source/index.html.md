@@ -366,7 +366,7 @@ identifier: `sym`
 | Name | Type | Description |
 |---|---|---|
 | sym | string | Coin symbol |
-| usdt_price | decimal | USDT exchanged price |
+| usd_price | decimal | USD exchanged price |
 
 ### Quote coin
 
@@ -462,7 +462,7 @@ identifier: -
 |---|---|---|
 | maker_fee_rate | decimal | Maker fee rate |
 | taker_fee_rate | decimal | Taker fee rate |
-| one_day_wdrl_usdt_limit | decimal | Withdrawal limit for 24 hours in USDT |
+| one_day_wdrl_usd_limit | decimal | Withdrawal limit for 24 hours in USD |
 
 ### Asset
 
@@ -474,7 +474,7 @@ identifier: `coin`
 | total | decimal | Total amount |
 | reserved | decimal | Reserved amount for order and so on |
 | available | decimal | Availalbe amount for order |
-| investment_usdt | decimal | Total investment in USDT |
+| investment_usd | decimal | Total investment in USD |
 
 ### Order
 
@@ -531,7 +531,7 @@ identifier: `id`
 | coin | string | Coin symbol |
 | txid | string | Deposit transaction id |
 | amount | decimal | Deposit amount |
-| usdt_amount | decimal | Deposit USDT amount |
+| usd_amount | decimal | Deposit USD amount |
 | found_at | unix_timestamp | Deposit transaction found time |
 | confirm | integer | Confirm count |
 | confirm_checked_at | unix_timestamp | Confirm checked time |
@@ -549,7 +549,7 @@ identifier: `id`
 | to_tag | string or null | Withdrawal tag |
 | to_org | string or null | Withdrawal organization |
 | amount | decimal | Withdrawal amount |
-| usdt_amount | decimal | Withdrawal amount in USDT |
+| usd_amount | decimal | Withdrawal amount in USD |
 | fee | decimal | Withdrawal fee |
 | requested_at | unix_timestamp | Withdrawal requested time |
 | txid | string or null | Withdrawal transaction id |

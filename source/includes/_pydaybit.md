@@ -224,7 +224,7 @@ Parameter | Type | Required | Description
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Taker Order
@@ -256,7 +256,7 @@ Parameter | Type | Required | Description
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint:  <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+  Constraint:  <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Maker Order
@@ -288,7 +288,7 @@ Parameter | Type | Required | Description
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Stop Limit Order
@@ -326,7 +326,7 @@ Parameter | Type | Required | Description
 `cond_arg1` | decimal | Required | `conditional_price` of the order. This value is compared with `current_price`.
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price</code> * (1 <code>base</code> / <code>USDT</code>) ≥ 10.0 <code>USDT</code>.
+  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 
@@ -371,7 +371,7 @@ Parameter | Type | Required | Description
  Constraint: <br />
  <ul>
  <li>
- <code>amount</code> * <code>price in USDT at the trailing stop order is placed</code> ≥ 10.0 <code>USDT</code>.
+ <code>amount</code> * <code>price in USD at a trailing stop order created</code> ≥ 10.0 <code>USD</code>.
  </li>
  <li>
  In <em>Fall From Top</em> case:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
@@ -716,14 +716,14 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 {
   'ADA': {
     'sym': 'ADA',
-    'usdt_price': '0.09000000'
+    'usd_price': '0.09000000'
   },
 
   # ...
 
   'ZRX': {
     'sym': 'ZRX',
-    'usdt_price': '0.67047870'
+    'usd_price': '0.67047870'
   }
 }
 
@@ -731,14 +731,14 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 {
   'ETH': {
     'sym': 'ETH',
-    'usdt_price': '291.88000000'
+    'usd_price': '291.88000000'
   }
 }
 ```
 
 ### coin_prices()
 
-Coin to USDT exchange rate for every coin. You will get `Noficiation` event whenever price of any coin gets changed. Please note that only updated coin price will be returned.
+Coin to USD exchange rate for every coin. You will get `Noficiation` event whenever price of any coin gets changed. Please note that only updated coin price will be returned.
 
 * Topic: `/subscription:coin_prices`
 
@@ -754,7 +754,7 @@ Coin to USDT exchange rate for every coin. You will get `Noficiation` event when
 
 ### (coin_prices / `<sym>`)()
 
-Coin to USDT exchange rate for specific coin. You will get `Noficiation` event whenever price of the specified coin gets changed.
+Coin to USD exchange rate for specific coin. You will get `Noficiation` event whenever price of the specified coin gets changed.
 
 * Topic: `/subscription:coin_prices;<sym>`
 
