@@ -310,7 +310,7 @@ await daybit.create_order(
     price=price,
     amount=amount,
     cond_type='ge', # cond_type could be 'ge' or 'le'.
-    cond_arg1=condition_price
+    cond_arg1=price * Decimal(1.5)
 )
 ```
 
@@ -342,20 +342,20 @@ Parameter | Type | Required | Description
 
 ```python
 await daybit.create_order(
-    sell=True, # True for 'fall_from_top', False for 'rise_from_bottom'.
+    sell=True,  # True for 'down_from_high', False for 'up_from_low'.
     role='both',
-    quote=quote,
-    base=base,
-    amount=Decimal('0.1'),
-    cond_type='fall_from_top', # cond_type could be 'fall_from_top' or 'rise_from_bottom'.
-    cond_arg1=Decimal('-0.01'),
-    cond_arg2=Decimal('-0.005'),
+    quote='BTC',
+    base='ETH',
+    amount=Decimal('1'),
+    cond_type='down_from_high',  # cond_type could be 'down_from_high' or 'up_from_low'.
+    cond_arg1=Decimal('-0.02'),
+    cond_arg2=Decimal('-0.01'),
 )
 ```
 
 You can place trailing stop order to sell the coin, with certain rate of discount compared with current price, when the price has dropped at specific rate compared with highest price. Likewise, you can also buy the coin, with certain rate of extra charge compared with current price, when the price has risen at specific rate compared with lowest price, by placing trailing stop order.
 
-For example, let say you placed a trailing stop order with (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='fall_from_top', cond_arg1='-0.01', cond_arg2='-0.005') parameters. After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be triggered at 9,000 USDT (= 1000 USDT * (1 - 0.1)) and create selling limit order at the price of 8955 USDT (= 9,000 USDT * (1 - 0.005)).
+For example, let say you placed a trailing stop order with (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='down_from_high', cond_arg1='-0.01', cond_arg2='-0.005') parameters. After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be triggered at 9,000 USDT (= 1000 USDT * (1 - 0.1)) and create selling limit order at the price of 8955 USDT (= 9,000 USDT * (1 - 0.005)).
 
 * In *Fall From Top* case, when `current_price` ≤ `top_price` * (1 + `cond_arg1`), it places a limit order for the price of `current_price` * (1 + `cond_arg2`). 
 
@@ -363,12 +363,12 @@ For example, let say you placed a trailing stop order with (sell=True, role='bot
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `true` for `"fall_from_top"` and `false` for `"rise_from_bottom"`.
+`sell` | boolean | Required | `true` for `"down_from_high"` and `false` for `"up_from_low"`.
 `role` | string | Required | `"both"`
 `quote` | string | Required | Quote coin symbol.
 `base` | string | Required | Base coin symbol.
 `amount` | decimal | Required | Order amount.
-`cond_type` | string | Required | `"fall_from_top"` or `"rise_from_bottom"`
+`cond_type` | string | Required | `"down_from_high"` or `"up_from_low"`
 `cond_arg1` | decimal | Required | In *Fall From Top* case, price discount rate compared with top price<br/>In *Rise From Bottom* case, price rise rate compared with bottom price.   
 `cond_arg2` | decimal | Required | When the condition as above is meet, it places a limit order for the price of `current_price` * (1 + `cond_arg2`).
 
