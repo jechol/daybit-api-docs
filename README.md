@@ -2,7 +2,7 @@
 이 저장소는 [Slate](https://github.com/lord/slate)를 포크한 비공개 저장소다.
 
 ### For Developers
-개발자는 [Middleman](https://github.com/middleman/middleman), static site generator using all the shortcuts and tools in modern web development 를 이해해야 한다. [Slate](https://github.com/lord/slate)는 [Middleman](https://github.com/middleman/middleman) 위에 작성된 boilerplate code 이다.
+개발자는 정적 사이트 제너레이터인 [Middleman](https://github.com/middleman/middleman)의 기본 컨셉을 이해해야 한다. [Slate](https://github.com/lord/slate)는 [Middleman](https://github.com/middleman/middleman) 위에 작성된 boilerplate code 이다.
 
 
 ### Prerequisites
