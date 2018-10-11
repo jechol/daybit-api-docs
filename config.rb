@@ -49,6 +49,21 @@ configure :build do
   # activate :gzip
 end
 
+activate :google_analytics do |ga|
+  # Google Analytics Account: DABIT
+  # Apps: DOC
+  ga.tracking_id = 'UA-127177858-2' 
+end
+
+configure :development do
+  activate :livereload
+  set :debug_assets, true
+end
+
+configure :build do
+  activate :minify_html
+end
+
 # Deploy Configuration
 # If you want Middleman to listen on a different port, you can set that below
 set :port, 4567
