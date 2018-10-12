@@ -28,7 +28,7 @@ $ bundler install
 $ bundler exec middleman server
 ```
 
-#### Build
+### Build
 ```shell
 $ bundler exec middleman build --clean
 ```
