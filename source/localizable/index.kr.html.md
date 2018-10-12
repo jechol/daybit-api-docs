@@ -115,8 +115,8 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 ### Channel of API Calls
 모든 API Call은 `/api` 채널을 사용합니다.
 
-### API Calls List
-`/api`채널에서 `event` 속성에 API 이름을 넣습니다. 사용가능한 목록은 다음과 같습니다.
+### API Call List
+`/api` 채널에서 `event` 속성에 API 이름을 넣습니다. 사용가능한 목록은 다음과 같습니다.
 
 * [`create_order`](#create_order)
 * [`cancel_order`](#cancel_order)
@@ -126,7 +126,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 * [`get_server_time`](#get_server_time)
 
 <aside class="notice">
-It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic, not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
+거래의 결과 등을 확인하기 위해서 <code>/api</code> 채널에서의 응답을 사용하는 것보다, <code>subscription:&ltsub_topic&gt</code> 채널에서 구독을 통하여 필요한 정보를 추적하는 것을 권장합니다.
 </aside>
 
 > Request `create_wdrl`

@@ -115,7 +115,7 @@ You may connect to [Daybit API endpoint](#host-address) through a websocket and 
 ### Channel of API Calls
 All API calls should use `/api` channel.
 
-### API Calls List
+### API Call List
 In `/api` channel, set `event` property with a API name . Available API call list are following.
 
 * [`create_order`](#create_order)
@@ -126,7 +126,7 @@ In `/api` channel, set `event` property with a API name . Available API call lis
 * [`get_server_time`](#get_server_time)
 
 <aside class="notice">
-It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic, not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
+It is recommended to retrieve data from <code>notification</code> of <code>subscription:&ltsub_topic&gt</code> channel, not response from <code>/api</code> channel.
 </aside>
 
 > Request `create_wdrl`
