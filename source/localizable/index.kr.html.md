@@ -60,8 +60,8 @@ Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트
 * [`/subscription:coins`](#coins)
 * [`/subscription:market_summaries;<market_summary_intvl>`](#market_summaries)
 
-### Event
-Event is `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. [API Calls](#api-calls) include types of request in event.
+### Events
+이벤트 _Event_ 는 채널에서 특별한 행동을 나타내기 위한 문자열입니다. 예를 들어 `"phx_join"`은 채널 참가를 의미하는 이벤트이고, `"phx_leave"`는 채널 나오기를 의미하는 이벤트입니다. [데이빗 API 호출](#api-calls) 은 `"/api"` 채널에서 이벤트를 사용해 요청을 보냅니다.
  
 ### Messages
 

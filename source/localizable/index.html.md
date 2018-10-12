@@ -60,10 +60,9 @@ Topics are string identifiers of [channels](#channels) that the various layers u
 * [`/subscription:coins`](#coins)
 * [`/subscription:market_summaries;<market_summary_intvl>`](#market_summaries)
 
-### Event
-Event is `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. [API Calls](#api-calls) include types of request in event.
+### Events
+Event is a `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. Daybit [API Calls](#api-calls) include types of request in event.
  
-
 ### Message
 
 > Example of `create_wdrl` 
