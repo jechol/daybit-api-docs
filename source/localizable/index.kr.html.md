@@ -1,5 +1,5 @@
 ---
-title: Daybit API Reference
+title: 데이빗 API 레퍼런스
 
 includes:
   - pydaybit
@@ -8,22 +8,22 @@ search: true
 
 toc_footers:
  - <a href='https://www.daybit.com'>Daybit</a>
- - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for DAYBIT API</a> 
+ - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for Daybit API</a> 
 ---
 
-# Introduction
+# Introdution
 
-Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcomes of using this API is your responsibility.
+이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었다. 또한 당신의 자산에 손해를 가져다 줄 수 있는 예제가 포함되어 있다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 한다. API 사용에 대한 모든 책임은 본인에게 있다. 자세한 내용은 [데이빗 API 이용약관](https://www.daybit.com/policy/terms-api)을 참고하라.
 
-You need to generate an API key pair from [Daybit's website](https://www.daybit.com) before using Daybit API. An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
+데이빗 API를 이용하기에 앞서 [데이빗](https://www.daybit.com)에서 API 키페어를 발급받아야 한다. API 키페어는 여러가지 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 이 있다. 자세한 내용은 [권한](#authorization) 항목을 참고하라.
 
-Basically there are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw.
+Daybit API에는 두가지 타입이 있다. 첫 번째는 [API 콜](#api-calls) - 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식이다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있다.
 
-Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. Based on type of the notification, it includes price change of coins, information of one's wallet, result of one's order and so on.
+두 번째는 [구독](#subscriptions)으로, 클라이언트가 API를 구독하면 서버에서 지속적으로 알림을 보내 준다. API 구독에는 코인 가격 변화, 지갑 정보 확인, 주문 결과 확인 등이 있다.
 
-Daybit APIs are implemented based on websocket connection and follow the format defined in Phoenix Framework. Daybit also provides [Pydaybit](#pydaybit) written in Python which allows developers to easily use Daybit API.
+데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [Phoenix](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받는다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공한다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼(Wrapper)이다. 
 
-If you are not familiar with programming, it would be better to take a look at examples of [Pydaybit](#pydaybit) first.
+만약 프로그래밍에 익숙하지 않다면 [Pydaybit](#pydaybit)의 예제를 먼저 읽어보는 빠른 이해에 도움이 된다.
  
 # Authorization
 
