@@ -45,7 +45,7 @@ You can generate maximum 5 API key pairs per account in [API Keys](https://www.d
 
 # Host address
 
-* Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
+* Daybit API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
 
 # APIs
 

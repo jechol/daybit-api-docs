@@ -45,7 +45,7 @@ API 사용은 API 키페어에 부여된 권한에 의해 제한됩니다. 만�
 
 # Host address
 
-* Exchange API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
+* 데이빗 API 엔드포인트 : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
 
 # APIs
 
