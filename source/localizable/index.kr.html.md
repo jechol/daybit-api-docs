@@ -13,17 +13,15 @@ toc_footers:
 
 # Introdution
 
-이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었다. 또한 당신의 자산에 손해를 가져다 줄 수 있는 예제가 포함되어 있다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 한다. API 사용에 대한 모든 책임은 본인에게 있다. 자세한 내용은 [데이빗 API 이용약관](https://www.daybit.com/policy/terms-api)을 참고하라.
+이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었습니다. 또한 당신의 자산에 손해를 가져다 줄 수 있는 예제가 포함되어 있습니다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 합니다. API 사용에 대한 모든 책임은 본인에게 있습니다. 자세한 내용은 [데이빗 API 이용약관](https://www.daybit.com/policy/terms-api)을 참고하십시오.
 
-데이빗 API를 이용하기에 앞서 [데이빗](https://www.daybit.com)에서 API 키페어를 발급받아야 한다. API 키페어는 여러가지 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 이 있다. 자세한 내용은 [권한](#authorization) 항목을 참고하라.
+데이빗 API를 이용하기에 앞서 [데이빗](https://www.daybit.com)에서 API 키페어를 발급받아야 합니다. API 키페어는 여러가지 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. 자세한 내용은 [권한](#authorization) 항목을 참고하십시오.
 
-Daybit API에는 두가지 타입이 있다. 첫 번째는 [API 콜](#api-calls) - 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식이다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있다.
+Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls)이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 데이빗 API 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions)입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
 
-두 번째는 [구독](#subscriptions)으로, 클라이언트가 API를 구독하면 서버에서 지속적으로 알림을 보내 준다. API 구독에는 코인 가격 변화, 지갑 정보 확인, 주문 결과 확인 등이 있다.
+데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [Phoenix](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받습니다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공합니다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼(Wrapper)입니다. 
 
-데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [Phoenix](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받는다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공한다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼(Wrapper)이다. 
-
-만약 프로그래밍에 익숙하지 않다면 [Pydaybit](#pydaybit)의 예제를 먼저 읽어보는 빠른 이해에 도움이 된다.
+만약 프로그래밍에 익숙하지 않다면 [Pydaybit](#pydaybit)의 예제를 먼저 읽어보는 것을 추천합니다.
  
 # Authorization
 
@@ -62,8 +60,7 @@ Topics are string identifiers of channels that the various layers use in order t
 ### Event
 Event is `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. [API Calls](#api-calls) include types of request in event.
  
-
-### Message
+### Messages
 
 > Example of `create_wdrl` 
 
@@ -95,13 +92,13 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 > {"join_ref": "1", "ref": "1", "topic": "/api", "event": "phx_join", "payload": {"timestamp": 1538739991045}, "timeout": 3000}
 < {"topic":"/api","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
 > {"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "ABTCADDRESS", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
-< {"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"A_BTC_ADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
+< {"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"ABTCADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
 > {"join_ref": "1", "ref": "3", "topic": "/api", "event": "phx_leave", "payload": {"timestamp": 1538739991124}, "timeout": 3000}
 < {"topic":"/api","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
 < {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
 ```
 
-Following information is delivered in the format of [JSON](https://en.wikipedia.org/wiki/JSON) object.
+다음 정보들은 [JSON](https://en.wikipedia.org/wiki/JSON) 객체 형식으로 전달됩니다.
 
 * `topic` - The string topic or topic:subtopic pair namespace, for example [`"/api"`](#api-calls) or [`"/subscription:coins"`](#coins)
 * `event` - The string event name, for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`, and so on

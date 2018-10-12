@@ -17,9 +17,7 @@ Target audience of this document is those who are capable of writing proper prog
 
 You need to generate an API key pair from [Daybit](https://www.daybit.com) before using Daybit API. An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
 
-There are two types of Daybit APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of APIs is used for asset trading, deposit or withdraw.
-
-Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. There are API subscriptions which includes price change of coins, information of one's wallet, result of one's order and so on.
+There are two types of Daybit APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of APIs is used for asset trading, deposit or withdraw. Second type is a [API Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from Daybit API server. There are API subscriptions which includes price change of coins, information of one's wallet, result of one's order and so on.
 
 Daybit APIs are implemented based on websocket connection and follow the format defined in [Phoenix](https://phoenixframework.org/). Daybit also provides [Pydaybit](#pydaybit) written in Python which allows users to easily use Daybit API.
 
