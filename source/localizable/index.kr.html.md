@@ -25,23 +25,23 @@ Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트
  
 # Authorization
 
-Before you are using Daybit APIs, you first need to generate API key pair with proper authorization. API has multiple types of authorization - receiving [candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or a [order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations.
+데이빗 API를 사용하기 전에, API 키페어를 적절한 권한으로 생성해야 합니다. 하나의 API 키페어는 여러 종류의 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. 
 
-| Type | Description |
+API 사용은 API 키페어에 부여된 권한에 의해 제한됩니다. 만약 접근 권한이 없는 API 키페어를 이용해 API를 사용한다면, `unauthenticated` 응답을 받습니다.
+
+| 종류 | 설명 |
 |------|-------------|
-| public_data | Authorized to access public data (ex, Market Summary, Order Book and so on). To get this authorization level from an API key, please include 'Market Inquiry' at the API key pair creation.
-| private_data | Authorized to access private data (ex, Asset and so on). To get this authorization level from an API key, please include 'Private Asset Inquiry' at the API key pair creation.
-| trade | Authorized to call trade related APIs (ex, Order, Trade and so on). To get this authorization level from an API key, please include 'Trading API' at the API key pair creation.
-| transaction | Authorized to call transaction related APIs (ex, Deposit, Withdrawal and so on). To get this authorization level from API key, please include 'Withdrawal API' at the API key pair creation.
+| public_data | 공개 정보(시장 요약 정보, 오더북 등)에 대한 접근 권한. API 키페어 생성 시에 `시장 조회`를 포함합니다.
+| private_data | 개인 자산에 대한 접근 권한. API 키페어 생성 시에 `개인 자산 조회`를 포함합니다.
+| trade | 거래 관련 API에 대한 접근 권한. API 키페어 생성 시에 `거래 관련 API`를 포함합니다.
+| transaction | 입금과 출금 관련 API에 대한 접근 권한. API 키페어 생성 시에 `출금 관련 API`를 포함합니다.
 
-You can generate maximum 5 API key pairs per account in [API Keys](https://www.daybit.com/mypage/api-managements) tab in My Page. Each API Key pair can have following authorizations:
+마이페이지의 [API Keys](https://www.daybit.com/mypage/api-managements) 탭에서 계정당 5개의 API 키패어를 생성 할 수 있습니다. 각 API 키페어는 다음 중 하나의 권한들을 갖습니다.
 
 * `public_data`
 * `public_data`, `private_data`, `trade`
 * `public_data`, `private_data`, `transaction`
 * `public_data`, `private_data`, `trade`, `transaction`
-
-The usage of APIs is restricted by given right to each API key pair. You would get `unauthenticated` response error_code if you called an API that is not accessible from your API key pair. Please look above for types of API key pair and details of it.
 
 # Host address
 

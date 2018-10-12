@@ -25,14 +25,16 @@ If you are not familiar with programming, it would be better to take a look at e
  
 # Authorization
 
-Before you are using Daybit APIs, you first need to generate API key pair with proper authorization. API has multiple types of authorization - receiving [candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or a [order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations.
+Before you are using Daybit APIs, you first need to generate API key pair with proper authorization. An API key pair has multiple types of authorization - receiving [candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or a [order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations.
+
+The usage of APIs is restricted by given right to each API key pair. You would get `unauthenticated` response error_code if you called an API that is not accessible from your API key pair. Please look above for types of API key pair and details of it.
 
 | Type | Description |
 |------|-------------|
-| public_data | Authorized to access public data (ex, Market Summary, Order Book and so on). To get this authorization level from an API key, please include 'Market Inquiry' at the API key pair creation.
-| private_data | Authorized to access private data (ex, Asset and so on). To get this authorization level from an API key, please include 'Private Asset Inquiry' at the API key pair creation.
-| trade | Authorized to call trade related APIs (ex, Order, Trade and so on). To get this authorization level from an API key, please include 'Trading API' at the API key pair creation.
-| transaction | Authorized to call transaction related APIs (ex, Deposit, Withdrawal and so on). To get this authorization level from API key, please include 'Withdrawal API' at the API key pair creation.
+| public_data | Authorized to access public data (ex, Market Summary, Order Book and so on). To get this authorization level from an API key, please include `Market Inquiry` at the API key pair creation.
+| private_data | Authorized to access private data (ex, Asset and so on). To get this authorization level from an API key, please include `Private Asset Inquiry` at the API key pair creation.
+| trade | Authorized to call trade related APIs (ex, Order, Trade and so on). To get this authorization level from an API key, please include `Trading API` at the API key pair creation.
+| transaction | Authorized to call transaction related APIs (ex, Deposit, Withdrawal and so on). To get this authorization level from API key, please include `Withdrawal API` at the API key pair creation.
 
 You can generate maximum 5 API key pairs per account in [API Keys](https://www.daybit.com/mypage/api-managements) tab in My Page. Each API Key pair can have following authorizations:
 
@@ -40,8 +42,6 @@ You can generate maximum 5 API key pairs per account in [API Keys](https://www.d
 * `public_data`, `private_data`, `trade`
 * `public_data`, `private_data`, `transaction`
 * `public_data`, `private_data`, `trade`, `transaction`
-
-The usage of APIs is restricted by given right to each API key pair. You would get `unauthenticated` response error_code if you called an API that is not accessible from your API key pair. Please look above for types of API key pair and details of it.
 
 # Host address
 
