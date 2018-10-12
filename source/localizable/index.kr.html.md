@@ -101,13 +101,13 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 < {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
 ```
 
-다음 정보들은 [JSON](https://en.wikipedia.org/wiki/JSON) 객체 형식으로 전달됩니다.
+다음 속성들은 [JSON](https://en.wikipedia.org/wiki/JSON) 객체 형식으로 전달됩니다. 예제는 `/api` 채널에서 `create_wdrl` API 호출할 때의 웹소켓 위에서 주고 받는 메시지를 보여 줍니다.
 
-* `topic` - The string topic or topic:subtopic pair namespace, for example [`"/api"`](#api-calls) or [`"/subscription:coins"`](#coins)
-* `event` - The string event name, for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`, and so on
-* `payload` - The message payload
-* `ref` - The unique string ref
-* `join_ref` - ref of joinning the channel
+* `topic` - 문자열 타입의 채널 식별자. 예를 들어, [`"/api"`](#api-calls)나 [`"/subscription:coins"`](#coins)가 있다.
+* `event` - 문자열 타입의 이벤트 이름, 예를 들어, [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`가 있다.
+* `payload` - 메시지 페이로드. JSON 객체 형식으로 API를 사용할 때 주요 정보가 전달된다.
+* `ref` - 문자열 타입의 메시지 고유 레퍼런스 번호.
+* `join_ref` - 문자열 타입의 채널 고유 레퍼런스 번호. 채널에 참가했을 때의 `ref`와 같다.
 
 ## API Calls
 [`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), and [`get_server_time`](#get_server_time) are API calls. You can use this APIs by sending required event and proper `payload` value in `/api` channel.

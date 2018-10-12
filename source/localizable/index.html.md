@@ -63,7 +63,7 @@ Topics are string identifiers of [channels](#channels) that the various layers u
 ### Events
 Event is a `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. Daybit [API Calls](#api-calls) include types of request in event.
  
-### Message
+### Messages
 
 > Example of `create_wdrl` 
 
@@ -95,16 +95,16 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 > {"join_ref": "1", "ref": "1", "topic": "/api", "event": "phx_join", "payload": {"timestamp": 1538739991045}, "timeout": 3000}
 < {"topic":"/api","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
 > {"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "ABTCADDRESS", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
-< {"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"A_BTC_ADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
+< {"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"ABTCADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
 > {"join_ref": "1", "ref": "3", "topic": "/api", "event": "phx_leave", "payload": {"timestamp": 1538739991124}, "timeout": 3000}
 < {"topic":"/api","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
 < {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
 ```
 
-Following information is delivered in the format of [JSON](https://en.wikipedia.org/wiki/JSON) object.
+Following properties is delivered in the format of [JSON](https://en.wikipedia.org/wiki/JSON) object. The example shows messages on the websocket between a client and Daybit API server when the client calls `create_wdrl`.
 
-* `topic` - The string topic or topic:subtopic pair namespace, for example [`"/api"`](#api-calls) or [`"/subscription:coins"`](#coins)
-* `event` - The string event name, for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`, and so on
+* `topic` - The string identifier of a channel. for example [`"/api"`](#api-calls) or [`"/subscription:coins"`](#coins)
+* `event` - The string event name. for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`, and so on
 * `payload` - The message payload
 * `ref` - The unique string ref
 * `join_ref` - ref of joinning the channel
