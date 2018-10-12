@@ -48,8 +48,7 @@ You can generate maximum 5 API key pairs per account in [API Keys](https://www.d
 * Daybit API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
 
 # APIs
-
-Basically there are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw. Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. Based on type of the notification, it includes price change of coins, information of one's wallet, result of one's order and so on.
+There are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw. Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. Based on type of the notification, it includes price change of coins, information of one's wallet, result of one's order and so on.
 
 ## Channels
 Channels are based on a simple idea of [Phoenix framework](https://phoenixframework.org/) that sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
