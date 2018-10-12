@@ -1,14 +1,3 @@
-## Prerequisites
-
-You're going to need:
-
- - **Linux or macOS** — Windows may work, but is unsupported.
- - **Ruby, version 2.3.1 or newer**
- - **Bundler** — If Ruby is already installed, but the `bundle` command doesn't work, just run `gem install bundler` in a terminal.
-
-### For Developers
-개발자는 정적 사이트 제너레이터인 [Middleman](https://github.com/middleman/middleman)의 기본 컨셉을 이해해야 한다. [Slate](https://github.com/lord/slate)는 [Middleman](https://github.com/middleman/middleman) 위에 작성된 boilerplate code 이다.
-
 ## Getting Set up
 
 ### Installation
