@@ -51,7 +51,7 @@ API 사용은 API 키페어에 부여된 권한에 의해 제한됩니다. 만�
 Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls)이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions)입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
 
 ## Channels
-Channels are based on a simple idea of [Phoenix framework](https://phoenixframework.org/) that sending and receiving messages. Senders broadcast messages about topics. Receivers subscribe to topics so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
+채널에서는 메시지를 보내고 받습니다. 발신자는 어떤 [주제](#topics)에 관해 메시지를 브로드캐스트(채널 참가자 모두에게 발신함) 할 수 있습니다. 수신자는 [주제](#topics)를 구독하면 그러한 메시지들을 수신할 수 있습니다. 언제든지 수신자가 발신자가 되거나, 발신자가 수신자가 될 수 있습니다.
 
 ### Topics
 Topics are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit APIs are using following types of topics: [`"/api"`](#api-calls), [`"/subscription:coins"`](#coins), [`"/subscription:market_summaries;<market_summary_intvl>"`](#market_summaries) and so on.
