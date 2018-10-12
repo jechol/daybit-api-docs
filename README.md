@@ -1,6 +1,3 @@
-
-이 저장소는 [Slate](https://github.com/lord/slate)를 포크한 비공개 저장소다.
-
 ## Prerequisites
 
 You're going to need:
