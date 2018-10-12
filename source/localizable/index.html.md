@@ -110,13 +110,20 @@ Following properties is delivered in the format of [JSON](https://en.wikipedia.o
 * `join_ref` - ref of joinning the channel
 
 ## API Calls
-[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), and [`get_server_time`](#get_server_time) are API calls. You can use this APIs by sending required event and proper `payload` value in `/api` channel.
+You may connect to [Daybit API endpoint](#host-address) through a websocket and join `/api` channel. Then you can  call a API by sending message with proper `event` among followings.
 
-* Topic: `/api`
+### Channel of API Calls
+All API calls should use `/api` channel.
 
-* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
+### API Calls List
+In `/api` channel, set `event` property with a API name . Available API call list are following.
 
-* Rate limit: Limit of calls for every second.
+* [`create_order`](#create_order)
+* [`cancel_order`](#cancel_order)
+* [`cancel_orders`](#cancel_orders)
+* [`cancel_all_my_orders`](#cancel_all_my_orders)
+* [`create_wdrl`](#create_wdrl)
+* [`get_server_time`](#get_server_time)
 
 <aside class="notice">
 It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic, not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.

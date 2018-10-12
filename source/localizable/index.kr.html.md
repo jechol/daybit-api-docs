@@ -110,13 +110,20 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 * `join_ref` - 문자열 타입의 채널 고유 레퍼런스 번호. 채널에 참가했을 때의 `ref`와 같다.
 
 ## API Calls
-[`create_order`](#create_order), [`cancel_order`](#cancel_order), [`cancel_orders`](#cancel_orders), [`cancel_all_my_orders`](#cancel_all_my_orders), [`create_wdrl`](#create_wdrl), and [`get_server_time`](#get_server_time) are API calls. You can use this APIs by sending required event and proper `payload` value in `/api` channel.
+웹소켓을 통해 [데이빗 API 엔드포인트](#host-address)와 연결하고 `/api` 채널에 참가합니다. 해당하는 API 이름을 `event`에 넣고, 필요한 인자 `payload`에 넣어 메시지를 보냅니다.
 
-* Topic: `/api`
+### Channel of API Calls
+모든 API Call은 `/api` 채널을 사용합니다.
 
-* Event: `get_server_time`, `create_order`, `cancel_order`, `cancel_orders`, `cancel_all_my_orders`, or `create_wdrl`
+### API Calls List
+`/api`채널에서 `event` 속성에 API 이름을 넣습니다. 사용가능한 목록은 다음과 같습니다.
 
-* Rate limit: Limit of calls for every second.
+* [`create_order`](#create_order)
+* [`cancel_order`](#cancel_order)
+* [`cancel_orders`](#cancel_orders)
+* [`cancel_all_my_orders`](#cancel_all_my_orders)
+* [`create_wdrl`](#create_wdrl)
+* [`get_server_time`](#get_server_time)
 
 <aside class="notice">
 It is recommended to retrieve data from `notification` of `/subscription:<sub_topic>` topic, not `response` from `/api` topic. It might cause confliction at `insert` action from `notification` because of two separate data roots.
