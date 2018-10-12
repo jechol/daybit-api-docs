@@ -54,7 +54,11 @@ Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트
 채널에서는 메시지를 보내고 받습니다. 발신자는 어떤 [주제](#topics)에 관해 메시지를 브로드캐스트(채널 참가자 모두에게 발신함) 할 수 있습니다. 수신자는 [주제](#topics)를 구독하면 그러한 메시지들을 수신할 수 있습니다. 언제든지 수신자가 발신자가 되거나, 발신자가 수신자가 될 수 있습니다.
 
 ### Topics
-Topics are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit APIs are using following types of topics: [`"/api"`](#api-calls), [`"/subscription:coins"`](#coins), [`"/subscription:market_summaries;<market_summary_intvl>"`](#market_summaries) and so on.
+주제 _Topic_ 는 다양한 층에서의 메시지가 올바른 곳으로 전달 될 수 있도록하는 [채널](#channels)의 문자열 식별자입니다. 데이빗 API는 다음과 같은 주제를 사용하고 있습니다.
+
+* [`/api`](#api-calls)
+* [`/subscription:coins`](#coins)
+* [`/subscription:market_summaries;<market_summary_intvl>`](#market_summaries)
 
 ### Event
 Event is `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. [API Calls](#api-calls) include types of request in event.

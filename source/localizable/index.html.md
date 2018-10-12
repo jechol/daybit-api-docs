@@ -54,7 +54,11 @@ There are two types of Daybit's APIs. First one is an [API Call](#api-calls) - c
 Channels are based on a simple idea of [Phoenix](https://phoenixframework.org/) that sending and receiving messages. Senders broadcast messages about [topics](#topics). Receivers subscribe to [topics](#topics) so that they can get those messages. Senders and receivers can switch roles on the same topic at any time.
 
 ### Topics
-Topics are string identifiers of channels that the various layers use in order to make sure messages end up in the right place. Daybit APIs are using following types of topics: [`"/api"`](#api-calls), [`"/subscription:coins"`](#coins), [`"/subscription:market_summaries;<market_summary_intvl>"`](#market_summaries) and so on.
+Topics are string identifiers of [channels](#channels) that the various layers use in order to make sure messages end up in the right place. Daybit APIs are using following types of topics.
+
+* [`/api`](#api-calls)
+* [`/subscription:coins`](#coins)
+* [`/subscription:market_summaries;<market_summary_intvl>`](#market_summaries)
 
 ### Event
 Event is `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. [API Calls](#api-calls) include types of request in event.
