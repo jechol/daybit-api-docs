@@ -251,9 +251,9 @@ Each API has limit of calls for every second. You will get `api_exceeded_rate_li
 All request takes `timestamp` and `timeout` to prevent unexpected calls because of network delay and so on.
 
 - `timestamp`: `unix_timestamp`
-- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000`.
+- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000` which means 3 seconds.
 
-Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
+A request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
 
 If there was a problem, below error_code will be returned in response.
 

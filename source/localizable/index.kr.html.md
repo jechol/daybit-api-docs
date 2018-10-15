@@ -212,17 +212,17 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 ## Timestamp
 
-All request takes `timestamp` and `timeout` to prevent unexpected calls because of network delay and so on.
+모든 요청은 네트워크 지연 등에 의한 예상치 못한 요청을 방지하기 위하여 `timestamp`와 `timeout`을 가집니다.
 
 - `timestamp`: `unix_timestamp`
-- `timeout`(**optional**): `ms` unit time in `integer`. Default value is `3000`.
+- `timeout`(**optional**): `integer` 타입의 `ms` 시간 단위 . 기본 값은 3초를 의미하는 `3000` 입니다.
 
-Request will be rejected in next condition: `server time` - `timestamp` > `timeout`.
+요청은 다음 조건을 만족하지 못하면 거부됩니다: `server time` - `timestamp` > `timeout`.
 
-If there was a problem, below error_code will be returned in response.
+만약 문제가 있다면, 아래의 에러코드가 응답으로 옵니다.
 
-- `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` are not existed or they are not `integer` (unix timestamp in millisecond).
-- `api_timeout`: Rejected because of request time out.
+- `api_invalid_timestamp_or_timeout`: `timestamp`이 존재하지 않거나 `timestamp`나 `timeout`가 `integer` 타입의 유닉스 밀리초 단위가 아닙니다.
+- `api_timeout`: 시간 초과로 인해 거부합니다.
 
 ## Response format
 
