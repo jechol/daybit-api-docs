@@ -220,16 +220,16 @@ await daybit.create_order(
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"both"`
-`quote` | string | Required | Quote coin symbol. ex) "BTC"
-`base` | string | Required | Base coin symbol. ex) "ETH"
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
+`quote` | string | Required | 호가 코인 기호. 예) "BTC"
+`base` | string | Required | 기준 코인 기호. 예) "ETH"
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Taker Order
