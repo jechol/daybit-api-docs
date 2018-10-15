@@ -170,13 +170,13 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-Create a order to sell or buy coin. There are five types of orders you can request to the server. For detail of orders, please refer followings - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
+Create a order to sell or buy coin. There are five types of orders you can request to Daybit API server - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
  
-The conditions of invalid order (void) are,
+The conditions of invalid order (void order) are,
 
-- rejected order (in case of placing error resulted order)
+- rejected order
 - order cancellation by user
-- order cancellation by cross trading
+- order cancellation by self order
 - auto cancellation of old order
 
 `sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
@@ -191,12 +191,12 @@ The conditions of invalid order (void) are,
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `true` for selling and `false` for buying.
+`sell` | boolean | Required | `True` for selling and `False` for buying.
 `quote` | string | Required | Quote coin symbol. ex) "BTC"
 `base` | string | Required | Base coin symbol. ex) "ETH"
 `amount` | decimal | Required | Order amount.
-`role` | string | Required | Role of order.
-`cond_type` | string | Required | Conditional types of the order.
+`role` | string | Required | Role of order. (`"both"`, `"maker_only"`, `"taker_only"`)
+`cond_type` | string | Required | Conditional types of the order. (`"none"`, `"le"`, `"ge"`, `"down_from_high"`, `"up_from_low"`)
 `price` | decimal | Optional | Asking price.
 `cond_arg1` | decimal | Optional | First conditional argument of the order.
 `cond_arg2` | decimal | Optional | Second conditional argument of the order.

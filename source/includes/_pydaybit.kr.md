@@ -169,16 +169,16 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-Create a order to sell or buy coin. There are five types of orders you can request to the server. For detail of orders, please refer followings - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
+코인은 사거나 파는 주문을 생성합니다. 데이빗 API 서버에 요청할 수 있는 다섯 가지의 주문 종류가 있습니다 - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), [Trailling Stop Order](#trailing-stop-order).
  
-The conditions of invalid order (void) are,
+잘못된 주문(주문 무효)의 경우는 다음과 같습니다
 
-- rejected order (in case of placing error resulted order)
-- order cancellation by user
-- order cancellation by cross trading
-- auto cancellation of old order
+- 거부된 주문
+- 유저의 요청으로 인한 취소
+- 자전 거래로 인한 취소
+- 오래된 주문의 자동 취소
 
-`sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
+`sell`, `quote`, `base`, `amount`, `role`, `cond_type` 파라미터 값은 모든 주문에서 필요합니다.
 
 * Topic: `/api`
 
@@ -190,15 +190,15 @@ The conditions of invalid order (void) are,
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `true` for selling and `false` for buying.
-`quote` | string | Required | Quote coin symbol. ex) "BTC"
-`base` | string | Required | Base coin symbol. ex) "ETH"
-`amount` | decimal | Required | Order amount.
-`role` | string | Required | Role of order.
-`cond_type` | string | Required | Conditional types of the order.
-`price` | decimal | Optional | Asking price.
-`cond_arg1` | decimal | Optional | First conditional argument of the order.
-`cond_arg2` | decimal | Optional | Second conditional argument of the order.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
+`quote` | string | Required | 호가 코인 기호. 예) "BTC"
+`base` | string | Required | 기준 코인 기호. 예) "ETH"
+`amount` | decimal | Required | 주문 수량.
+`role` | string | Required | 마켓에서의 주문의 역할 (`"both"`, `"maker_only"`, `"taker_only"`). 
+`cond_type` | string | Required | 주문의 조건 종류 (`"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"`).
+`price` | decimal | Optional | 주문 가격.
+`cond_arg1` | decimal | Optional | 조건 주문의 첫번째 인자.
+`cond_arg2` | decimal | Optional | 조건 주문의 두번째 인자.
 
 ### Limit Order
 
@@ -216,7 +216,7 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, it is regarded as a [taker order](#taker-order). and if remain amount of the order exists, it is regarded as a [maker order](#maker-order).
+이 주문이 접수되면 먼저 [테이커 주문](#taker-order) _taker order_ 로 여겨지고, 만약 주문의 잔량이 있다면 [메이커 주문](#maker-order) _maker order_ 가 됩니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
@@ -433,7 +433,7 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_order())
 }
 ```
 
-Cancel placed order. You must pass valid `id` to cancel the order.
+접수된 주문을 취소합니다. 주문 취소를 위해서는 유효한 주문 `id`를 넣어야 합니다.
 
 * Topic: `/api`
 
@@ -447,7 +447,7 @@ Cancel placed order. You must pass valid `id` to cancel the order.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`order_id` | integer | Required | id of order supposed to be canceled.
+`order_id` | integer | Required | 취소하려고 하는 주문의 `id`
 
 
 ## cancel_orders()
