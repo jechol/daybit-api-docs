@@ -208,7 +208,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 ## Rate limit
 
-Each API has limit of calls for every second. You will get `api_exceeded_rate_limit` error_code in response if you exceeded the limit.
+각 API는 매 초마다 호출에 제한이 있습니다. 만약 제한을 넘으면 `api_exceeded_rate_limit` 에러 코드를 받습니다.
 
 ## Timestamp
 
