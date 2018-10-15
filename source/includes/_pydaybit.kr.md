@@ -55,7 +55,7 @@ async def daybit_example():
 asyncio.get_event_loop().run_until_complete(daybit_example())
 ```
 
-For using the key pair without settings them in environment variable, please refer the example.
+API 키패어는 환경 변수 설정 없이도 사용할 수 있습니다. 예제를 참고하세요.
 
 ## get_server_time()
 
