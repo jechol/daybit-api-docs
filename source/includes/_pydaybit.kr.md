@@ -13,8 +13,8 @@ _이 소프트웨어의 사용에 대한 책임은 사용자 본인에게 있습
 $ git clone https://github.com/daybit-exchange/pydaybit
 $ pip install -e pydaybit
 ```
-  
-For the installation, please look right column.
+
+설치 방법은 오른쪽을 참고 하십시오.
 
 ## **API Key Pair**
 
