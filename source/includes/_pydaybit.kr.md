@@ -1,5 +1,5 @@
 # **Pydaybit**
-Pydaybit is an API wrapper for Daybit exchange written in Python. The code is available in [Pydaybit Repository](https://github.com/daybit-exchange/pydaybit). 
+Pydaybit은 파이썬으로 작성된 데이빗 거래소 API 레퍼 _warppaer_ 입니다. 코드는 [Pydaybit 저장소](https://github.com/daybit-exchange/pydaybit)에 있습니다. 
 
 
 ## **Disclaimer**
