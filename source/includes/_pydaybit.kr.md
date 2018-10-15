@@ -18,7 +18,7 @@ $ pip install -e pydaybit
 
 ## **API Key Pair**
 
-You need to generate a API key pair to use Pydaybit. Please refer [Authorization](#authorization).
+Pydaybit을 사용하기 위해서는 API 키페어 생성을 해야합니다. [권한](#authorization) 항목을 참조하십시오.
 
 ### Environment Variables
 
