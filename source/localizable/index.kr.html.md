@@ -521,7 +521,7 @@ identifier: `id`
 | filled_quote | decimal | 주문 체결량 (매도일 때 quote 기준) |
 | unfilled | decimal | 주문 미체결량 |
 | received_at | unix_timestamp | 주문 신청 시간 |
-| placed_at | unix_timestamp or null | 주문이 Order Book 에 등록된 시간 |
+| placed_at | unix_timestamp or null | 주문이 (Order Book 에) 등록된 시간 |
 | closed_at | unix_timestamp or null | 주문 체결 완료 시간 |
 | status | string | 주문 상태 (`"received"`, `"placed"`, `"closed"`) |
 | close_type | string | 체결 종류 (`"rejected"`, `"filled"`, `"canceled"`) |
