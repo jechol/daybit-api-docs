@@ -30,10 +30,10 @@ export DAYBIT_API_KEY="YOUR_OWN_API_KEY"
 export DAYBIT_API_SECRET="YOUR_WON_API_SECRET"
 ```
 
-You can set generated key pair as environment variable.
+환경 변수를 세팅하여 사용할 수 있습니다
 
-* `DAYBIT_API_KEY`: Generated API KEY
-* `DAYBIT_API_SECRET`: Generated API SECRET
+* `DAYBIT_API_KEY`: 생성한 API 키
+* `DAYBIT_API_SECRET`: 생성한 API 시크릿
 
 
 ### Without Environment Variables
