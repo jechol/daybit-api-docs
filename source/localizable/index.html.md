@@ -297,13 +297,13 @@ For other languages, please refer below libraries to implement the features of D
 
 ### General
 
-* `unauthenticated`: Unauthenticated user action
+* `unauthenticated`: Unauthenticated user or action
 * `invalid_arguments`: Invalid arguments in request
 * `resource_not_found`: Resource not found
 
 ### Api
 
-* `api_invalid_timestamp_or_timeou`t: `timestamp` and/or `timeout` of request is not valid
+* `api_invalid_timestamp_or_timeout`: `timestamp` and/or `timeout` of request is not valid
 * `api_timeout`: Timeout happens by requested `timestamp` and/or `timeout`
 * `api_exceeded_rate_limit`: Rate limit exceeded
 * `api_invalid_param_types`: Invalid request parameter type
@@ -319,7 +319,7 @@ For other languages, please refer below libraries to implement the features of D
 * `order_invalid_amount`: Invalid amount
 * `order_only_both_role_can_be_cond`: Conditional order is available only when `role` is `both`
 * `order_out_of_price_range`: Out of price range (Selling: 20% ~ 200%, Buying: 50% ~ 500%)
-* `order_exceeded_max_tstops`: Exceeded maximum Trailing*Stop order count (currently 2 per market)
+* `order_exceeded_max_tstops`: Exceeded maximum Trailing Stop order count (currently 2 per market)
 * `order_suspended_due_to_frequent_canceling`: Order suspended due to frequent canceling
 * `order_exceeds_my_asset_values`: Order exceeded my asset values
 * `order_already_closed`: Order already closed

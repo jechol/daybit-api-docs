@@ -261,47 +261,47 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 ### General
 
-* `unauthenticated`: Unauthenticated user action
-* `invalid_arguments`: Invalid arguments in request
-* `resource_not_found`: Resource not found
+* `unauthenticated`: 인증되지 않은 유저 혹은 이용
+* `invalid_arguments`: 잘못된 인자를 가진 요청 _request_
+* `resource_not_found`: 리소스가 없음
 
 ### Api
 
-* `api_invalid_timestamp_or_timeou`t: `timestamp` and/or `timeout` of request is not valid
-* `api_timeout`: Timeout happens by requested `timestamp` and/or `timeout`
-* `api_exceeded_rate_limit`: Rate limit exceeded
-* `api_invalid_param_types`: Invalid request parameter type
-* `api_required_params_not_provided`: Missing required parameter
+* `api_invalid_timestamp_or_timeout`: `timestamp`이 존재하지 않거나 `timestamp`나 `timeout`가 `integer` 타입의 유닉스 밀리초 단위가 아님.
+* `api_timeout`: 시간초과가 요청된 `timestamp`, `timeout` 에서 발생함
+* `api_exceeded_rate_limit`: 요청 제한 초과
+* `api_invalid_param_types`: 잘못된 인자 타입
+* `api_required_params_not_provided`: 필요한 인자가 누락됨
 
 ### Order
 
-* `order_invalid_market`: Invalid market(`quote`, `base`)
-* `order_not_tradable_coin`: Coin trade suspended
-* `order_not_sellable_market`: Selling is suspended in the market
-* `order_not_buyable_market`: Buying is suspended in the market
-* `order_invalid_price`: Invalid price
-* `order_invalid_amount`: Invalid amount
-* `order_only_both_role_can_be_cond`: Conditional order is available only when `role` is `both`
-* `order_out_of_price_range`: Out of price range (Selling: 20% ~ 200%, Buying: 50% ~ 500%)
-* `order_exceeded_max_tstops`: Exceeded maximum Trailing*Stop order count (currently 2 per market)
-* `order_suspended_due_to_frequent_canceling`: Order suspended due to frequent canceling
-* `order_exceeds_my_asset_values`: Order exceeded my asset values
-* `order_already_closed`: Order already closed
-* `order_exceeded_void_rate`: Order suspended for 10 minutes because invalid order rate exceeded specific value (currently 80%)
-* `order_exceeded_max_orders`: Order exceeded maximum number of outstanding orders (currently 100)
-* `order_violates_min_usd`: Order violates minimum of total USD exchanged amount (currently $10)
-* `order_unplaceable_maker_only`: Order didn't meet maker only conditions
-* `order_unplaceable_taker_only`: Order didn't meet taker only conditions
+* `order_invalid_market`: 잘못된 마켓. _마켓은 (`quote`, `base`) 쌍으로 표현된다_
+* `order_not_tradable_coin`: 해당 코인의 거래가 중단됨
+* `order_not_sellable_market`: 해당 마켓에서의 판매가 중단됨
+* `order_not_buyable_market`: 해당 마켓에서의 구매가 중단됨
+* `order_invalid_price`: 잘못된 가격
+* `order_invalid_amount`: 잘못된 수량
+* `order_only_both_role_can_be_cond`: 조건 주문의 `role`은 항상 `both`이어야 한다. [`create_order()`](#create_order) 참고.
+* `order_out_of_price_range`: 가격의 범위가 잘못됨. (판매: 현재가의 20% ~ 200%, 구매: 50% ~ 500%)
+* `order_exceeded_max_tstops`: 트레일링 스탑 주문의 갯수 제한을 넘음 (마켓당 2개)
+* `order_suspended_due_to_frequent_canceling`: 빈번한 주문 취소로 인한 주문 중지
+* `order_exceeds_my_asset_values`: 주문이 내 자산을 초과함
+* `order_already_closed`: 주문이 이미 체결됨
+* `order_exceeded_void_rate`: 잘못된 주문의 비율이 제한을 초과해 10분간 주문 중지 (80%)
+* `order_exceeded_max_orders`: 채결되지 않은 주문이 제한을 초과함 (100개)
+* `order_violates_min_usd`: USD 환산 금액이 최소 주문량 미만임 ($10)
+* `order_unplaceable_maker_only`: 주문이 `maker_only` 조건을 만족하지 않음
+* `order_unplaceable_taker_only`: 주문이 `taker_only` 조건을 만족하지 않음
 
 ### Wdrl
 
-* `wdrl_suspended_coin`: Coin was Suspended to withdraw
-* `wdrl_precision_error`: Decimal place accuracy error
-* `wdrl_under_min_amount`: One time withdrawal amount is less than minimum
-* `wdrl_over_daily_wdrl_limit`: Withdrawal amount exceeded daily limit
-* `wdrl_exceeds_my_asset_values`: Withdrawal amount exceeded my asset
-* `wdrl_needs_to_tag`: Missing `to_tag` parameter
-* `wdrl_invalid_addr`: Invalid address
+* `wdrl_suspended_coin`: 코인의 출금 중지
+* `wdrl_precision_error`: 소수점 자릿수의 정밀도가 잘못됨
+* `wdrl_under_min_amount`: 출금 금액이 최소 출금 한도 미만임
+* `wdrl_over_daily_wdrl_limit`: 출금이 하루 제한을 넘어섬
+* `wdrl_exceeds_my_asset_values`: 출금이 내 자산보다 큼
+* `wdrl_needs_to_tag`: `to_tag` 인자가 빠짐
+* `wdrl_invalid_addr`: 잘못된 주소
 
 # Action
 
