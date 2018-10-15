@@ -248,20 +248,20 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, before part or all of your orders are going on the order book, these are called as "taker". These trades are called as "taker" because it is "taking" the volume in the order book. This order is taking only volumes in the order book.
+이 주문은 오더북에 있는 거래량 _volume_ 을 가져가서 _tacking_ 오더북에 등록되기 전에 거래를 체결하기 때문에 `테이커` _tacker_ 라고 합니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"taker_only"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint:  <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건:  <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Maker Order

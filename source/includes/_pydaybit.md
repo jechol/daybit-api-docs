@@ -249,7 +249,7 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, before part or all of your orders are going on the order book, these are called as "taker". These trades are called as "taker" because it is "taking" the volume in the order book. This order is taking only volumes in the order book.
+If the order was placed, before your orders are going on the order book, these are called as "taker". These trades are called as "taker" because it is "taking" the volume in the order book. This order is taking only volumes in the order book.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
