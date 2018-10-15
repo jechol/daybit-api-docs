@@ -142,14 +142,6 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 ```
 
 ## Subscriptions
-For using API Subscriptions, first you need to join `/subscription:<subtopic>` channel and send `request` event. Once you are successfully subscribed by joinning a channel, the server sends `notfication` for any kind of updated data. [`coins`](#coins), [`coin_prices`](#coin_prices), [`quote_coins`](#quote_coins), [`markets`](#markets), [`market_summary_intvls`](#market_summary_intvls), [`market_summaries`](#market_summaries), [`order_books`](#order_books), [`price_history_intvls`](#price_history_intvls), [`price_histories`](#price_histories), [`trades`](#trades), [`my_users`](#my_users), [`my_assets`](#my_assets), [`my_orders`](#my_orders), [`my_trades`](#my_trades), [`my_tx_summaries`](#my_tx_summaries), [`my_airdrop_histories`](#my_airdrop_histories) are the topics you can use in API subscriptions.
-
-
-* Topic: `/subscription:<sub_topic>`
-
-* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to API, i.e., joining the channel related to the API with `request` event, you will get either `init` or `upsert` action response from the channel. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the channel with `notification` event. For more information of actions, please look following [Action](#action).
-
-* Rate limit: Limit of calls for every second. Only applicable for `request`.
 
 > Example of `coins`
 
@@ -186,6 +178,33 @@ asyncio.get_event_loop().run_until_complete(daybit_coins())
 < {"topic":"/subscription:coins","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
 < {"topic":"/subscription:coins","ref":"1","payload":{},"event":"phx_close"}
 ```
+
+API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참가하고, `request` 이벤트를 보냅니다. 채널에 참가해서 구독에 성공하면, 데이빗 API 서버는 데이터에 업데이트가 있을 때마다 `notification` 이벤트를 보내 줍니다.
+
+### API Subscription Channels
+다음과 같은 구독 채널이 있습니다. 채널의 토픽은 `/subscription:<subtopic>` 형식입니다. 예를 들어, `coins` API의 경우에는 채널 토픽이 `/subscription:coins` 입니다.
+
+* [`coins`](#coins)
+* [`coin_prices`](#coin_prices)
+* [`quote_coins`](#quote_coins)
+* [`markets`](#markets)
+* [`market_summary_intvls`](#market_summary_intvls)
+* [`market_summaries`](#market_summaries)
+* [`order_books`](#order_books)
+* [`price_history_intvls`](#price_history_intvls)
+* [`price_histories`](#price_histories)
+* [`trades`](#trades), [`my_users`](#my_users)
+* [`my_assets`](#my_assets)
+* [`my_orders`](#my_orders)
+* [`my_trades`](#my_trades)
+* [`my_tx_summaries`](#my_tx_summaries)
+* [`my_airdrop_histories`](#my_airdrop_histories) are the topics you can use in API subscriptions.
+
+### Event of API Subscriptions
+ `request`는 보내기 이벤트, `notification`는 받기 이벤트입니다. 클라이언트와 서버가 전송하는 [메세지](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html)는 각각 `request` 이벤트나 `notification` 이벤트를 가집니다. 한 API를 구독하면, 다시 말해, 해당하는 채널에 참가하여 `request` 이벤트를 보내면, 그 채널에서 `init`이나 `upsert` [액션](#action)을 응답으로 받습니다. 그 이후로는 `notification`이벤트와 함께 `insert`, `update`, `upsert`, `delete` 중 하나의 액션을 받습니다. 더 자세한 사항은 [액션](#action) 항목을 참고하십시오.
+
+### Rate Limit of API Subscriptions
+`request` 이벤트를 보내는 데에 초당 제한이 있습니다.
 
 ## Rate limit
 

@@ -142,14 +142,69 @@ It is recommended to retrieve data from <code>notification</code> of <code>subsc
 ```
 
 ## Subscriptions
-For using API Subscriptions, first you need to join `/subscription:<subtopic>` channel and send `request` event. Once you are successfully subscribed by joinning a channel, the server sends `notfication` for any kind of updated data. [`coins`](#coins), [`coin_prices`](#coin_prices), [`quote_coins`](#quote_coins), [`markets`](#markets), [`market_summary_intvls`](#market_summary_intvls), [`market_summaries`](#market_summaries), [`order_books`](#order_books), [`price_history_intvls`](#price_history_intvls), [`price_histories`](#price_histories), [`trades`](#trades), [`my_users`](#my_users), [`my_assets`](#my_assets), [`my_orders`](#my_orders), [`my_trades`](#my_trades), [`my_tx_summaries`](#my_tx_summaries), [`my_airdrop_histories`](#my_airdrop_histories) are the topics you can use in API subscriptions.
+
+> Example of `coins`
+
+```python
+import asyncio
+import logging
+
+from pydaybit import Daybit
+
+logger = logging.getLogger('pydaybit')
+logger.setLevel(logging.DEBUG)
+
+stream_handler = logging.StreamHandler()
+stream_handler.setFormatter(logging.Formatter('%(message)s'))
+logger.addHandler(stream_handler)
 
 
-* Topic: `/subscription:<sub_topic>`
+async def daybit_coins():
+    async with Daybit() as daybit:
+        await daybit.coins()
 
-* Event: `request` (push) or `notification` (pull). [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to API, i.e., joining the channel related to the API with `request` event, you will get either `init` or `upsert` action response from the channel. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the channel with `notification` event. For more information of actions, please look following [Action](#action).
 
-* Rate limit: Limit of calls for every second. Only applicable for `request`.
+asyncio.get_event_loop().run_until_complete(daybit_coins())
+```
+
+> Output
+
+```console
+> {"join_ref": "1", "ref": "1", "topic": "/subscription:coins", "event": "phx_join", "payload": {"timestamp": 1538740890363}, "timeout": 3000}
+< {"topic":"/subscription:coins","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+> {"join_ref": "1", "ref": "2", "topic": "/subscription:coins", "event": "request", "payload": {"timestamp": 1538740890374}, "timeout": 3000}
+< {"topic":"/subscription:coins","ref":"2","payload":{"status":"ok","response":{"data":[{"data":[{"wdrl_fee":"5.00000000","wdrl_enabled":true,"wdrl_confirm":2,"tradable":true,"tick_amount":"0.10000000","sym":"USDT","native_decimal_places":2,"name":"Tether","min_wdrl":"10.00000000","min_deposit":"10.00000000","has_tag":false,"has_org":false,"deposit_enabled":true,"deposit_confirm":2} ... ],"action":"init"}]}},"event":"phx_reply"}
+> {"join_ref": "1", "ref": "3", "topic": "/subscription:coins", "event": "phx_leave", "payload": {"timestamp": 1538740890386}, "timeout": 3000}
+< {"topic":"/subscription:coins","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+< {"topic":"/subscription:coins","ref":"1","payload":{},"event":"phx_close"}
+```
+
+For using API Subscriptions, first you need to join `/subscription:<subtopic>` channel and send `request` event. Once you are successfully subscribed by joinning a channel, Daybit API server sends `notification` for any kind of updated data. 
+
+### API Subscription Channels
+Subscription Channels are following. The topic of each channels has `/subscription:<subtopic>` format. For example, In case of the topic of `coins` channel is `/subscription:coins`.
+
+* [`coins`](#coins)
+* [`coin_prices`](#coin_prices)
+* [`quote_coins`](#quote_coins)
+* [`markets`](#markets)
+* [`market_summary_intvls`](#market_summary_intvls)
+* [`market_summaries`](#market_summaries)
+* [`order_books`](#order_books)
+* [`price_history_intvls`](#price_history_intvls)
+* [`price_histories`](#price_histories)
+* [`trades`](#trades), [`my_users`](#my_users)
+* [`my_assets`](#my_assets)
+* [`my_orders`](#my_orders)
+* [`my_trades`](#my_trades)
+* [`my_tx_summaries`](#my_tx_summaries)
+* [`my_airdrop_histories`](#my_airdrop_histories) are the topics you can use in API subscriptions.
+
+### Event of API Subscriptions
+`request` is a push event and `notification` is a pull event. [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to an API, i.e., joining the channel related to the API and sending a message with `request` event, you will get either `init` or `upsert` action response from the channel. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the channel with `notification` event. For more information of actions, please look following [Action](#action).
+
+### Rate Limit of API Subscriptions
+Limit of messages which have `request` event for every second.
 
 > Example of `coins`
 
