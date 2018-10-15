@@ -3,8 +3,7 @@ Pydaybit은 파이썬으로 작성된 데이빗 거래소 API 레퍼 _warppaer_ 
 
 
 ## **Disclaimer**
-USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
-
+_이 소프트웨어의 사용에 대한 책임은 사용자 본인에게 있습니다. 작성자와 모든 관계자들은 당신의 거래의 결과에 대해 책임을 지지 않습니다._
 
 ## **Installation**
   
