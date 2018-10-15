@@ -280,20 +280,20 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, after part or all of your orders filled the order book, these are called as "maker". This order is only valid when it fills the volume in the order book.
+주문이 오더북을 채워 마켓을 만들기 _making_ 하기 때문에 이러한 주문은 `메이커` _maker_ 라고 불립니다. 이 주문은 오더북을 채울 때만 유효합니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"maker_only"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건:  <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Stop Limit Order

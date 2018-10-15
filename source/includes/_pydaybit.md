@@ -281,7 +281,7 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, after part or all of your orders filled the order book, these are called as "maker". This order is only valid when it fills the volume in the order book.
+If the order was placed, after your orders filled the order book. these are called as "maker" because it is "making" the market. This order is only valid when it fills the volume in the order book.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
