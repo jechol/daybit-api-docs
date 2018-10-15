@@ -454,7 +454,7 @@ identifier: `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| seconds | integer | Market summary interval unit |
+| seconds | integer | Interval unit of [Market Summary](#market-summary) |
 
 ### Market summary
 
@@ -493,7 +493,7 @@ identifier: `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| seconds | integer | Price history interval unit |
+| seconds | integer | Interval unit of [Price history](#price-history) |
 
 ### Price history
 
@@ -548,8 +548,8 @@ identifier: `id`
 | price | decimal | Price |
 | role | string | Order role. `"both"`, `"maker_only"`, `"taker_only"` |
 | cond_type | string | Conditional order type. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
-| cond_arg1 | decimal or null | First conditional order price value |
-| cond_arg2 | decimal or null | Second conditional order price value |
+| cond_arg1 | decimal or null | First conditional order value |
+| cond_arg2 | decimal or null | Second conditional order value |
 | coin_fee | decimal | Fee |
 | amount | decimal | Order amount |
 | filled | decimal | Order filled (per base at selling) |

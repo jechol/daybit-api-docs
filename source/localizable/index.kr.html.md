@@ -358,7 +358,7 @@ API를 구독하면, 서버에서 오는 메시지는 데이터를 어떻게 처
 
 # Models
 
-Below are generic data models.
+아래는 응답으로 오는 데이터의 모델이다.
 
 ### Coin
 
@@ -366,22 +366,22 @@ identifier: `sym`
 
 | Name | Type | Description |
 |---|---|---|
-| sym | string | Coin symbol |
-| native_decimal_point | integer | Withdrawal amount decimal restriction |
-| amount_decimal_point | integer | Order amount decimal point restriction |
-| tick_amount | decimal | Order amount unit |
-| deposit_confirm | integer | Number of confirms required for deposit completion |
-| wdrl_confirm | integer | Number of confirms required for withdrawal completion |
-| public | boolean | Listed on the exchange (`true`) or not (`false`) |
-| name | string | Name of coin (locale applied) |
-| tradable | boolean | Tradable or not |
-| deposit_enabled | boolean | Deposit enabled or not |
-| wdrl_enabled | boolean | Withdrawal enabled or not |
-| wdrl_fee | decimal | Withdrawal fee |
-| min_deposit | decimal | Minimum deposit amount |
-| min_wdrl | decimal | Minimum withdrawal amount |
-| has_tag | boolean | to_tag required or not for deposit/withdrawal |
-| has_org | boolean | to_org required or not for deposit/withdrawal |
+| sym | string | 코인 기호 |
+| native_decimal_point | integer | 출금 수량 소수점 제한 |
+| amount_decimal_point | integer | 주문 수량 소수점 제한 |
+| tick_amount | decimal | 주문 수량 단위 |
+| deposit_confirm | integer | 입금 완료를 위한 confirm의 수 |
+| wdrl_confirm | integer | 출금 완료를 위한 confirm의 수 |
+| public | boolean | 코인이 거래소에서 표시되는지 여부 |
+| name | string | 코인명 |
+| tradable | boolean | 거래 가능 여부 |
+| deposit_enabled | boolean | 입금 가능 여부 |
+| wdrl_enabled | boolean | 출금 가능 여부 |
+| wdrl_fee | decimal | 출금 수수료 |
+| min_deposit | decimal | 최소 입금 수량 |
+| min_wdrl | decimal | 최소 출금 수량 |
+| has_tag | boolean | `to_tag`가 입출금에 필요한지 여부 |
+| has_org | boolean | `to_org `가 입출금에 필요한지 여부 |
 
 ### Coin price
 
@@ -389,8 +389,8 @@ identifier: `sym`
 
 | Name | Type | Description |
 |---|---|---|
-| sym | string | Coin symbol |
-| usd_price | decimal | USD exchanged price |
+| sym | string | 코인 기호 |
+| usd_price | decimal | USD 환산 가격 |
 
 ### Quote coin
 
@@ -398,7 +398,7 @@ identifier: `sym`
 
 | Name | Type | Description |
 |---|---|---|
-| sym | string | Coin symbol |
+| sym | string | 코인 심볼 |
 
 ### Market
 
@@ -406,12 +406,12 @@ identifier: `quote`, `base`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote coin |
-| base | string | Base coin |
-| tick_price | decimal | Order price unit |
-| sellable | boolean | Sellable or not |
-| buyable | boolean | Buyable or not |
-| tick_levels | integer | Number of levels for order book existence per `tick_price`. Order book is increased ten times for each level. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100 |
+| quote | string | 호가 코인 |
+| base | string | 기준 코인 |
+| tick_price | decimal | 주문 가격 단위 |
+| sellable | boolean | 매도 가능 여부 |
+| buyable | boolean | 매수 가능 여부 |
+| tick_levels | integer |  `tick_price` 기준으로 order book 이 존재하는 단계 수. 각 단계는 10배 차이남. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100 |
 
 ### Market summary interval
 
@@ -419,7 +419,7 @@ identifier: `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| seconds | integer | Market summary interval unit |
+| seconds | integer | [시장 요약](#market-summary) 단위 시간 |
 
 ### Market summary
 
@@ -427,16 +427,16 @@ identifier: `quote`, `base`, `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote coin |
-| base | string | Base coin |
-| seconds | integer | Time unit |
-| open | decimal | Opening price |
-| close | decimal | Closing price |
-| high | decimal or null | Highest price |
-| low | decimal or null | Lowest price |
-| volatility | decimal | Price volatility |
-| quote_vol | decimal or null | Trading volume per quote coin |
-| base_vol | decimal or null | Trading volume per base coin |
+| quote | string | 호가 코인 |
+| base | string | 기준 코인 |
+| seconds | integer | 단위 시간 |
+| open | decimal | 시가 |
+| close | decimal | 종가 |
+| high | decimal or null | 고가 |
+| low | decimal or null | 저가 |
+| volatility | decimal | 가격 변동률 |
+| quote_vol | decimal or null | 호가 코인 기준 거래량 |
+| base_vol | decimal or null | 기준 코인 기준 거래량 |
 
 ### Order book
 
@@ -444,13 +444,13 @@ identifier: `quote`, `base`, `intvl`, `min_price`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote coin |
-| base | string | Base coin |
-| intvl | decimal | Price interval unit |
-| min_price | decimal | Minimum price |
-| max_price | decimal | Maximum price |
-| sell_vol | decimal | Selling volume |
-| buy_vol | decimal | Buying volume |
+| quote | string | 호가 코인 |
+| base | string | 기준 코인 |
+| intvl | decimal | 단위 가격 |
+| min_price | decimal | 범위 시작 가격 |
+| max_price | decimal | 범위 종료 가격 |
+| sell_vol | decimal | 매도 수량 |
+| buy_vol | decimal | 매수 수량 |
 
 ### Price history interval
 
@@ -458,7 +458,7 @@ identifier: `seconds`
 
 | Name | Type | Description |
 |---|---|---|
-| seconds | integer | Price history interval unit |
+| seconds | integer | [가격 이력](#price-history) 단위 시간 |
 
 ### Price history
 
@@ -466,17 +466,17 @@ identifier: `quote`, `base`, `intvl`, `start_time`
 
 | Name | Type | Description |
 |---|---|---|
-| quote | string | Quote coin |
-| base | string | Base coin |
-| intvl | integer | Time interval |
-| start_time | unix_timestamp | Start time of price history |
-| end_time | unix_timestamp | End time of price history |
-| open | decimal | Opening price |
-| close | decimal | Closing price |
-| high | decimal | Highest price |
-| low | decimal | Lowest price |
-| base_vol | decimal | Trading volume per base coin |
-| quote_vol | decimal | Trading volume per quote coin |
+| quote | string | 호가 코인 |
+| base | string | 기준 코인 |
+| intvl | integer | 시간 간격 |
+| start_time | unix_timestamp | 범위 시작 시간 |
+| end_time | unix_timestamp | 범위 종료 시간 |
+| open | decimal | 시가 |
+| close | decimal | 종가 |
+| high | decimal | 고가 |
+| low | decimal | 저가 |
+| base_vol | decimal | 기준 코인 기준 거래량 |
+| quote_vol | decimal | 호가 코인 기준 거래량 |
 
 ### User
 
@@ -484,9 +484,9 @@ identifier: -
 
 | Name | Type | Description |
 |---|---|---|
-| maker_fee_rate | decimal | Maker fee rate |
-| taker_fee_rate | decimal | Taker fee rate |
-| one_day_wdrl_usd_limit | decimal | Withdrawal limit for 24 hours in USD |
+| maker_fee_rate | decimal | maker 수수료율 |
+| taker_fee_rate | decimal | taker 수수료율 |
+| one_day_wdrl_usd_limit | decimal | 24시간 동안의 USD 환산 출금 가능량 |
 
 ### Asset
 
@@ -494,11 +494,11 @@ identifier: `coin`
 
 | Name | Type | Description |
 |---|---|---|
-| coin | string | Coin symbol |
-| total | decimal | Total amount |
-| reserved | decimal | Reserved amount for order and so on |
-| available | decimal | Availalbe amount for order |
-| investment_usd | decimal | Total investment in USD |
+| coin | string | 코인 기호 |
+| total | decimal | 총 수량 |
+| reserved | decimal | 주문 등에 묶여있는 수량 |
+| available | decimal | 주문에 사용 가능한 수량 |
+| investment_usd | decimal | USD 환산 총 투자금 |
 
 ### Order
 
@@ -507,25 +507,25 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| sell | boolean | Selling (`true`) or buying (`false`) |
-| quote | string | Quote coin |
-| base | string | Base coin |
-| price | decimal | Price |
-| role | string | Order role. `"both"`, `"maker_only"`, `"taker_only"` |
-| cond_type | string | Conditional order type. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
-| cond_arg1 | decimal or null | First conditional order price value |
-| cond_arg2 | decimal or null | Second conditional order price value |
-| coin_fee | decimal | Fee |
-| amount | decimal | Order amount |
-| filled | decimal | Order filled (per base at selling) |
-| filled_quote | decimal | Order filled (per quote at buying) |
-| unfilled | decimal | Order unfilled |
-| received_at | unix_timestamp | Order received time |
-| placed_at | unix_timestamp or null | Order placed time (to order book) |
-| closed_at | unix_timestamp or null | Order closed time |
-| status | string | Order status (`"received"`, `"placed"`, `"closed"`) |
-| close_type | string | Closing type (`"rejected"`, `"filled"`, `"canceled"`) |
-| cancel_reason | string | Cancel reason (`"user"`, `"conflicting_self_order"`, `"expired"`, `"no_placed_amount"`, `"partially_filled_taker_only"`, `"maintenance"`, `"admin"`,) |
+| sell | boolean | 매도 여부 |
+| quote | string | 호가 코인 |
+| base | string | 기준 코인 |
+| price | decimal | 가격 |
+| role | string | 주문 형식. `"both"`, `"maker_only"`, `"taker_only"` |
+| cond_type | string | 조건부 주문 종류. `"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"` |
+| cond_arg1 | decimal or null | 조건부 주문의 첫번째 조건 값 |
+| cond_arg2 | decimal or null | 조건부 주문의 두번째 조건 값 |
+| coin_fee | decimal | 발생한 수수료 |
+| amount | decimal | 주문 수량 |
+| filled | decimal | 주문 체결량 (매수일 때 base 기준) |
+| filled_quote | decimal | 주문 체결량 (매도일 때 quote 기준) |
+| unfilled | decimal | 주문 미체결량 |
+| received_at | unix_timestamp | 주문 신청 시간 |
+| placed_at | unix_timestamp or null | 주문이 Order Book 에 등록된 시간 |
+| closed_at | unix_timestamp or null | 주문 체결 완료 시간 |
+| status | string | 주문 상태 (`"received"`, `"placed"`, `"closed"`) |
+| close_type | string | 체결 종류 (`"rejected"`, `"filled"`, `"canceled"`) |
+| cancel_reason | string | 취소 이유 (`"user"`, `"conflicting_self_order"`, `"expired"`, `"no_placed_amount"`, `"partially_filled_taker_only"`, `"maintenance"`, `"admin"`,) |
 
 ### Trade
 
@@ -534,18 +534,18 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| quote | string | Quote coin |
-| base | string | Base coin |
-| quote_amount | decimal | Quote coin trade amount |
-| base_amount | decimal | Base coin trade amount |
-| price | decimal | Trade closing price |
-| taker_sold | boolean | Taker is seller (`true`) or buyer (`false`) |
-| exec_at | unix_timestamp | Execution time |
-| Below are only available from [my_trades](#my_trades)  |
-| order_id | integer | Trade order id |
-| fee | decimal | Fee |
-| sell | boolean | Selling (`true`) or buying (`false`) |
-| counterpart | string | (`"user"`, `"daybit"`, `"project"`), The counterparty of the trade. `"daybit"` and `"project"` means Daybit exchange and another coin project team, respectively. |
+| quote | string | 호가 코인 |
+| base | string | 기준 코인 |
+| quote_amount | decimal | 호가 코인 거래량 |
+| base_amount | decimal | 기준 코인 거래량 |
+| price | decimal | 체결 가격 |
+| taker_sold | boolean | taker 가 매도자인지 여부 |
+| exec_at | unix_timestamp | 체결  시간 |
+| |Below are only available from [my_trades](#my_trades)  |
+| order_id | integer | 내 주문 id |
+| fee | decimal | 내 수수료 |
+| sell | boolean | 	매도 여부 |
+| counterpart | string | 거래 상대방의 종류. (`"user"`, `"daybit"`, `"project"`) 중 하나. `"daybit"`은 데이빗 거래소,  `"project"`는 코인 프로젝트 팀을 의미한다. |
 
 ### Transaction Summary
 
@@ -554,19 +554,19 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| coin | string | Transaction coin |
-| type | string | Type of the transaction (`"wdrl"`, `"deposit"`) |
-| amount | decimal | Transaction amount |
-| txid | string or null | Withdrawal transaction id |
-| confirm | integer | Confirm count |
+| coin | string | 거래 코인 |
+| type | string | 거래 종류. (`"wdrl"`, `"deposit"`) 중 하나. |
+| amount | decimal | 거래 수량 |
+| txid | string or null | 출금 거래 id |
+| confirm | integer | Confirm의 수 |
 | req_confirm | integer | |
-| deposit_status | string | Deposit status |
-| wdrl_status | string or null | Withdrawal status |
-| wdrl_to_addr | string or null | Withdrawal receiving address |
-| wdrl_to_tag | string or null | Withdrawal tag |
-| wdrl_to_org | string or null | Withdrawal organization |
-| created_at | unix_timestamp | Transaction created time |
-| completed_at | unix_timestamp or null | Transaction completed time |
+| deposit_status | string | 입금 상태 |
+| wdrl_status | string or null | 출금 상태 |
+| wdrl_to_addr | string or null | 출금을 받는 주소 |
+| wdrl_to_tag | string or null | 출금 태그 |
+| wdrl_to_org | string or null | 출금 기관 |
+| created_at | unix_timestamp | 거래 생성 시간 |
+| completed_at | unix_timestamp or null | 거래 완료 시간 |
 | tx_link_url | string ||
 
 
@@ -577,7 +577,7 @@ identifier: `id`
 | Name | Type | Description |
 |---|---|---|
 | id | integer | id |
-| coin | string | coin symbol |
-| amount | decimal | Airdrop amount |
-| description | string | Airdrop description |
-| airdropped_at | unix_timestamp | Airdrop time |
+| coin | string | 코인 기호 |
+| amount | decimal | 에어드랍 수량 |
+| description | string | 에어드랍 설명 |
+| airdropped_at | unix_timestamp | 에어드랍 시간 |
