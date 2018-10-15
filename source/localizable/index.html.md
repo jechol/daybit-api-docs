@@ -341,11 +341,11 @@ For other languages, please refer below libraries to implement the features of D
 
 # Action
 
-Response holds `action` which helps you to understand how to handle the response.
+When you subscribe an API, a message from the server holds `action` which helps you to understand how to handle the data.
 
-* `init` : Dump all previous data and initialize everything with most recent data.
-* `insert` : Add data to data set, as most recent data.
-* `update` : Search in data set and replace if it was found.
+* `init` : Dump all previous local data and initialize everything with data reponsed
+* `insert` : Add responsed data to local data set
+* `update` : Search in local data set and replace if it was found.
 * `upsert` : Search in data set and replace if it was found, or insert if there's no matching data.
 * `delete` : Search in data set and remove if it was found.
 

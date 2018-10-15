@@ -305,13 +305,13 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 # Action
 
-Response holds `action` which helps you to understand how to handle the response.
+API를 구독하면, 서버에서 오는 메시지는 데이터를 어떻게 처리하면 될지를 알려주는 `action`을 가지고 있습니다.
 
-* `init` : Dump all previous data and initialize everything with most recent data.
-* `insert` : Add data to data set, as most recent data.
-* `update` : Search in data set and replace if it was found.
-* `upsert` : Search in data set and replace if it was found, or insert if there's no matching data.
-* `delete` : Search in data set and remove if it was found.
+* `init` : 이전의 모든 로컬 데이터를 지우고, 현재 최신 데이터로 초기화합니다.
+* `insert` : 응답받은 데이터를 로컬 데이터셋에 추가합니다.
+* `update` : 로컬 데이터셋에서 일치하는 것이 존재하면 업데이트합니다.
+* `upsert` : 로컬 데이터셋에서 일치하는 것이 존재하면 업데이트합니다. 없다면 추가합니다.
+* `delete` : 로컬 데이터셋에서 일치하는 것이 존재하면 삭제합니다.
 
 # Types
 
