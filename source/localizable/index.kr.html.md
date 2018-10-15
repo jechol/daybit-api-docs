@@ -317,16 +317,16 @@ API를 구독하면, 서버에서 오는 메시지는 데이터를 어떻게 처
 
 ### Integer 
 
-`integer` data type.
+`integer` 타입.
  
 * `123`
 * `20181010`
 
 ### Decimal
-Decimal number. This is `string` data type to precisely express the exact amount of number which can't be expressed in ordinary decimal number types.
+정확한 정밀도로 표현하기 위해 `string`으로 표현된 10진수.
 
 * `"880.524"`
-* `"59.55000000000000000:`
+* `"59.55000000000000000"`
 
 ### String
 
@@ -346,13 +346,13 @@ Decimal number. This is `string` data type to precisely express the exact amount
 
 ### Unix Timestamp
 
-`millisecond` unit Unix timestamp.
+`millisecond` 단위의 Unix 타임스탬프.
  
 * `1528269989516`
 
 ### CSV
 
-string based comma separated values.
+각 값이 쉼표 _`,`_ 로 구분된 `string
  
 * `"1, 2, 3"`
 

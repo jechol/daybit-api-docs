@@ -353,7 +353,7 @@ When you subscribe an API, a message from the server holds `action` which helps 
 
 ### Integer 
 
-`integer` data type.
+`integer` type.
  
 * `123`
 * `20181010`
@@ -362,7 +362,7 @@ When you subscribe an API, a message from the server holds `action` which helps 
 Decimal number. This is `string` data type to precisely express the exact amount of number which can't be expressed in ordinary decimal number types.
 
 * `"880.524"`
-* `"59.55000000000000000:`
+* `"59.55000000000000000"`
 
 ### String
 
@@ -387,8 +387,7 @@ Decimal number. This is `string` data type to precisely express the exact amount
 * `1528269989516`
 
 ### CSV
-
-string based comma separated values.
+comma separated values expressed in `string`.
  
 * `"1, 2, 3"`
 
