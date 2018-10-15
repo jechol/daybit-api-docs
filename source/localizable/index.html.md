@@ -262,7 +262,7 @@ If there was a problem, below error_code will be returned in response.
 
 ## Response format
 
-Basically there are two types of response formats. Based on the result of API calls, you would get one of success or fail models. Please see success and fail response examples on right column. You can also find [Error List](#error-list) in below.
+There are two types of response formats. Based on the result of both API calls and subscriptions, you would get one of success or fail models. Please see success and fail response examples on right column. You can also find [Error List](#error-list) in below.
 
 > Success
 
