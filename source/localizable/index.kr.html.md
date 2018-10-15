@@ -247,11 +247,11 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 # Libraries
 
-Daybit is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Daybit API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides wrapper for Python language only.
+데이빗은 [엘릭서](https://elixir-lang.org/) 언어를 사용하고 [피닉스 프레임워크](https://phoenixframework.org/)를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 _wrapper_ 를 제공합니다. 
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
-For other languages, please refer below libraries to implement the features of Daybit API.
+다른 언어로 데이빗 API 를 사용하기 위해서는 다음 라이브러리를 참고하십시오.
 
 * Phoenix.js(Javascript): [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix/)
 * SwiftPhoenixClient(Swift): [https://github.com/davidstump/SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient/)

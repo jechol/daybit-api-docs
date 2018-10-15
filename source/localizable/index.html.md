@@ -283,7 +283,7 @@ There are two types of response formats. Based on the result of both API calls a
 
 # Libraries
 
-Daybit is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Daybit API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides wrapper for Python language only.
+Daybit is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Daybit API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides a wrapper for Python language.
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
