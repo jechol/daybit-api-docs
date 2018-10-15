@@ -82,7 +82,7 @@ asyncio.get_event_loop().run_until_complete(daybit_get_server_time())
 1537418605426 # unix_timestamp
 ```
 
-Get current time of Daybit in unix timestamp format.
+데이빗 API 서버의 현재 시간을 밀리초 단위의 유닉스 타임스탬프를 받아옵니다.
 
 * Topic: `/api`
 
