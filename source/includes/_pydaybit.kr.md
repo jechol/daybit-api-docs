@@ -313,25 +313,25 @@ await daybit.create_order(
 )
 ```
 
-When current price is equal or greater/less than `cond_arg1`, it places Limit Order.
+현재 가격이 `cond_arg`보다 같거나 클 때/ 같거나 작을 때, 리미트 _limit_ 주문을 접수합니다.
 
-* If you sent request with `cond_type` = `"le"`, it places Limit Order for the price of `price` when it becomes `current_price` ≤ `conditional_price`(= `cond_arg1`).
+* `cond_type` = `"le"`를 요청하면, `현재가` ≤ `조건가`(= `cond_arg1`)일 때에 `price` 가격에 리미트 주문을 접수합니다.
 
-* If you sent request with `cond_type` = `"ge"`, it places Limit Order for the price of `price` when it becomes `current_price` ≥ `conditional_price`(= `cond_arg1`).
+* `cond_type` = `"ge"`를 요청하면, `현재가` ≥ `조건가`(= `cond_arg1`)일 때에 `price` 가격에 리미트 주문을  접수합니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"both"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
-`cond_type` | string | Required | `"le"` or `"ge"`
-`cond_arg1` | decimal | Required | `conditional_price` of the order. This value is compared with `current_price`.
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
+`cond_type` | string | Required | `"le"` 혹은 `"ge"`.
+`cond_arg1` | decimal | Required | 주문의 `조건가`. 이 값을 `현재가`와 비교합니다.
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 
