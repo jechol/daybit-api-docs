@@ -343,46 +343,46 @@ Parameter | Type | Required | Description
 await daybit.create_order(
     sell=True,  # True for 'down_from_high', False for 'up_from_low'.
     role='both',
-    quote='BTC',
-    base='ETH',
-    amount=Decimal('1'),
+    quote='USDT',
+    base='BTC',
+    amount=Decimal('0.1'),
     cond_type='down_from_high',  # cond_type could be 'down_from_high' or 'up_from_low'.
-    cond_arg1=Decimal('-0.02'),
-    cond_arg2=Decimal('-0.01'),
+    cond_arg1=Decimal('-0.01'),
+    cond_arg2=Decimal('-0.005'),
 )
 ```
 
-You can place trailing stop order to sell the coin, with certain rate of discount compared with current price, when the price has dropped at specific rate compared with highest price. Likewise, you can also buy the coin, with certain rate of extra charge compared with current price, when the price has risen at specific rate compared with lowest price, by placing trailing stop order.
+ 트래일링 스탑 주문 _trailing stop order_ 을 사용하면, 가격이 고가에 크게 떨어질 때 현재 가격보다 조금 낮은 가격에 매도 리미트 주문을 접수할 수 있다. 마찬가지로, 현재 가격이 저가에 비해 크게 상승하면 현재가격보다 조금 높은 가격에 매수 리미트 주문을 접수할 수 있다.
 
-For example, let say you placed a trailing stop order with (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='down_from_high', cond_arg1='-0.01', cond_arg2='-0.005') parameters. After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be triggered at 9,000 USDT (= 1000 USDT * (1 - 0.1)) and create selling limit order at the price of 8955 USDT (= 9,000 USDT * (1 - 0.005)).
+예를들어, (`sell`=True, `role`='both', `quote`='BTC', `base`='USDT', `amount`='0.1', `cond_type`='down_from_high', `cond_arg1`='-0.01', `cond_arg2`='-0.005')로 주문을 냈다고 하자. 트래일링 스탑 주문이 접수되고, 가격이 10,000 USDT에 도달한뒤 떨어지기 시작한 상황에서는 이 주문은 9,000 USDT (= 1000 USDT * (1 + `cond_arg1`))에 트리거 되어 리미트 오더를 8,955 USDT (= 9,000 USDT * (1 + `cond_arg2`))에 접수한다.
 
-* In *Fall From Top* case, when `current_price` ≤ `top_price` * (1 + `cond_arg1`), it places a limit order for the price of `current_price` * (1 + `cond_arg2`). 
+* 고점에서 하락 *down from high* 의 경우, `현재가` ≤ `고가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매도 리미트 오더를 접수한다.
 
-* In *Rise From Bottom* case, when `current_price` ≥ `bottom_price` * (1 + `cond_arg1`), it places a limit order for the price of `current_price` * (1 + `cond_arg2`). 
+* 저점에서 상승 *up from low* 의 경우, `현재가` ≥ `저가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매수 리미트 오더를 접수한다. 
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `true` for `"down_from_high"` and `false` for `"up_from_low"`.
+`sell` | boolean | Required | `"down_from_high"`일 경우 `True`, `"up_from_low"`일 경우 `false`. 
 `role` | string | Required | `"both"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`amount` | decimal | Required | Order amount.
-`cond_type` | string | Required | `"down_from_high"` or `"up_from_low"`
-`cond_arg1` | decimal | Required | In *Fall From Top* case, price discount rate compared with top price<br/>In *Rise From Bottom* case, price rise rate compared with bottom price.   
-`cond_arg2` | decimal | Required | When the condition as above is meet, it places a limit order for the price of `current_price` * (1 + `cond_arg2`).
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`amount` | decimal | Required | 주문 수량.
+`cond_type` | string | Required | `"down_from_high"` 혹은 `"up_from_low"`.
+`cond_arg1` | decimal | Required | 고점에서 하락 *down from high* 의 경우, 고점 대비 가격 하락 비율.<br/>저점에서 상승 *up from low* 의 경우, 저점 대비 가격 상승 비율.   
+`cond_arg2` | decimal | Required | `cond_arg1` 관련 조건이 만족되면, `현재가` * (1 + `cond_arg2`) 가격에 리미트 주문을 접수한다.
 
 
 <aside class="notice">
- Constraint: <br />
+ 제한 조건: <br />
  <ul>
  <li>
- <code>amount</code> * <code>price in USD at a trailing stop order created</code> ≥ 10.0 <code>USD</code>.
+ <code>주문 수량</code> * <code>트래일링 스탑 주문을 접수할 때 USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
  </li>
  <li>
- In <em>Fall From Top</em> case:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
+ 고점에서 하락 <em>down from high</em> 의 경우:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
  </li>
  <li>
- In <em>Rise From Bottom</em> case:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1
+ 저점에서 상승 <em>up from low</em> 의 경우:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1
  </li>
  </ul>
 </aside>

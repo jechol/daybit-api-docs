@@ -344,22 +344,22 @@ Parameter | Type | Required | Description
 await daybit.create_order(
     sell=True,  # True for 'down_from_high', False for 'up_from_low'.
     role='both',
-    quote='BTC',
-    base='ETH',
-    amount=Decimal('1'),
+    quote='USDT',
+    base='BTC',
+    amount=Decimal('0.1'),
     cond_type='down_from_high',  # cond_type could be 'down_from_high' or 'up_from_low'.
-    cond_arg1=Decimal('-0.02'),
-    cond_arg2=Decimal('-0.01'),
+    cond_arg1=Decimal('-0.01'),
+    cond_arg2=Decimal('-0.005'),
 )
 ```
 
 You can place trailing stop order to sell the coin, with certain rate of discount compared with current price, when the price has dropped at specific rate compared with highest price. Likewise, you can also buy the coin, with certain rate of extra charge compared with current price, when the price has risen at specific rate compared with lowest price, by placing trailing stop order.
 
-For example, let say you placed a trailing stop order with (sell=True, role='both', quote='BTC', base='USDT', amount='0.1', cond_type='down_from_high', cond_arg1='-0.01', cond_arg2='-0.005') parameters. After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be triggered at 9,000 USDT (= 1000 USDT * (1 - 0.1)) and create selling limit order at the price of 8955 USDT (= 9,000 USDT * (1 - 0.005)).
+For example, let say you placed a trailing stop order with (`sell`=True, `role`='both', `quote`='BTC', `base`='USDT', `amount`='0.1', `cond_type`='down_from_high', `cond_arg1`='-0.01', `cond_arg2`='-0.005'). After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be triggered at 9,000 USDT (= 10,000 USDT * (1 + `cond_arg1`)) and place a limit order at the price of 8,955 USDT (= 9,000 USDT * (1 + `cond_arg2`)).
 
-* In *Fall From Top* case, when `current_price` ≤ `top_price` * (1 + `cond_arg1`), it places a limit order for the price of `current_price` * (1 + `cond_arg2`). 
+* In *Down From High* case, when `current_price` ≤ `top_price` * (1 + `cond_arg1`), it places a selling limit order for the price of `current_price` * (1 + `cond_arg2`). 
 
-* In *Rise From Bottom* case, when `current_price` ≥ `bottom_price` * (1 + `cond_arg1`), it places a limit order for the price of `current_price` * (1 + `cond_arg2`). 
+* In *Up From Low* case, when `current_price` ≥ `bottom_price` * (1 + `cond_arg1`), it places a buying limit order for the price of `current_price` * (1 + `cond_arg2`). 
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
@@ -368,8 +368,8 @@ Parameter | Type | Required | Description
 `quote` | string | Required | Quote coin symbol.
 `base` | string | Required | Base coin symbol.
 `amount` | decimal | Required | Order amount.
-`cond_type` | string | Required | `"down_from_high"` or `"up_from_low"`
-`cond_arg1` | decimal | Required | In *Fall From Top* case, price discount rate compared with top price<br/>In *Rise From Bottom* case, price rise rate compared with bottom price.   
+`cond_type` | string | Required | `"down_from_high"` or `"up_from_low"`.
+`cond_arg1` | decimal | Required | In *Down From High* case, price discount rate compared with top price<br/>In *Up From Low* case, price rise rate compared with bottom price.   
 `cond_arg2` | decimal | Required | When the condition as above is meet, it places a limit order for the price of `current_price` * (1 + `cond_arg2`).
 
 
@@ -380,10 +380,10 @@ Parameter | Type | Required | Description
  <code>amount</code> * <code>price in USD at a trailing stop order created</code> ≥ 10.0 <code>USD</code>.
  </li>
  <li>
- In <em>Fall From Top</em> case:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
+ In <em>Down From High</em> case:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
  </li>
  <li>
- In <em>Rise From Bottom</em> case:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1
+ In <em>Up From Low</em> case:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1
  </li>
  </ul>
 </aside>
