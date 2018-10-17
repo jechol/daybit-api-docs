@@ -866,7 +866,7 @@ asyncio.get_event_loop().run_until_complete(daybit_markets())
 }
 ```
 
-Subscribe to get basic market data. 
+시장 데이터를 구독합니다.
 
 * Topic: `/subscription:markets`
 
