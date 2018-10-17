@@ -502,7 +502,7 @@ Field | Description
 `num_canceled_orders` | Number of successfully canceled orders.
 
 <aside class="notice">
- Backend server is expecting the orders in CSV format (ex, "1,2,3"). However you should use array of integer if you are using Pydaybit.
+ Daybit API server is expecting orders in CSV format (ex, "1,2,3"). However, you should use a list of order <code>id</code>s if you are using Pydaybit.
  </aside>
 
 

@@ -480,7 +480,7 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_orders())
 }
 ```
 
-Cancel multiple orders. If one or more of `order_ids` are invalid, the API simply ignores it and cancels only valid ones. You can check number of canceled ids from `num_canceled_orders` in response.
+여러 개의 주문을 한번에 취소할 때 사용합니다. `order_ids`에서 일치하는 `id`를 가지는 유효한 주문을 취소합니다. 취소된 주문의 갯수는 응답의 `num_canceled_orders`를 참조하십시오.
 
 * Topic: `/api`
 
@@ -492,16 +492,16 @@ Cancel multiple orders. If one or more of `order_ids` are invalid, the API simpl
 
 Parameter | Type | Required | Description
 ----------|------|----------|-----------|
-`order_ids` | array | Required | ids of order supposed to be canceled.
+`order_ids` | array | Required | 쥐소하려고 하는 주문들의 id.
 
 ### Response
 
 Field | Description
 ---------|------------
-`num_canceled_orders` | Number of successfully canceled orders.
+`num_canceled_orders` | 취소한 주문의 갯수.
 
 <aside class="notice">
- Backend server is expecting the orders in CSV format (ex, "1,2,3"). However you should use array of integer if you are using Pydaybit.
+데이빗 API 서버는 주문들의 id를 CSV 형식(예를 들어, "1,2,3")으로 입력받습니다. 하지만 Pydaybit을 사용할 때에는 주문 <code>id</code>의 리스트를 사용하십시오.
  </aside>
 
 
