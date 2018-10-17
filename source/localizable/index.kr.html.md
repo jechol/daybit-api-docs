@@ -272,6 +272,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 * `api_exceeded_rate_limit`: 요청 제한 초과
 * `api_invalid_param_types`: 잘못된 인자 타입
 * `api_required_params_not_provided`: 필요한 인자가 누락됨
+* `api_invalid_event`: 잘못된 이벤트
 
 ### Order
 

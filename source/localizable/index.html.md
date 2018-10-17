@@ -308,6 +308,7 @@ For other languages, please refer below libraries to implement the features of D
 * `api_exceeded_rate_limit`: Rate limit exceeded
 * `api_invalid_param_types`: Invalid request parameter type
 * `api_required_params_not_provided`: Missing required parameter
+* `api_invalid_event`: Invalid request event
 
 ### Order
 
