@@ -1368,7 +1368,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_assets())
 ```
 
 
-Subscribe to get information of my assets.
+내 자신의 정보를 구독합니다.
 
 * Topic: `/subscription:my_assets`
 
