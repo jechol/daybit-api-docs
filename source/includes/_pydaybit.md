@@ -1105,7 +1105,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_history_intvls())
 }
 ```
 
-Time intervals of past market price data (unit: second). Return value can be used for input of [Price histories](#price_histories).
+ Subscribe to valid time intervals of market price data whose unit are in seconds. A time interval can be used for input of [Price histories](#price_histories).
 
 * Topic: `/subscription:price_history_intvls`
 

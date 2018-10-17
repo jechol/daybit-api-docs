@@ -1104,7 +1104,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_history_intvls())
 }
 ```
 
-Time intervals of past market price data (unit: second). Return value can be used for input of [Price histories](#price_histories).
+시장 가격 데이터의 유효한 시간 간격을 구독합니다. 시간 간격은 [Price histories](#price_histories)의 입력으로 사용됩니다.
 
 * Topic: `/subscription:price_history_intvls`
 
