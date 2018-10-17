@@ -742,7 +742,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 
 ### coin_prices()
 
-Coin to USD exchange rate for every coin. You will get `Noficiation` event whenever price of any coin gets changed. Please note that only updated coin price will be returned.
+Coin to USD exchange rate for every coin. You will get `notification` event whenever price of any coin gets changed. Please note that only updated coin price will be returned.
 
 * Topic: `/subscription:coin_prices`
 
@@ -758,7 +758,7 @@ Coin to USD exchange rate for every coin. You will get `Noficiation` event whene
 
 ### (coin_prices / `<sym>`)()
 
-Coin to USD exchange rate for specific coin. You will get `Noficiation` event whenever price of the specified coin gets changed.
+Coin to USD exchange rate for specific coin. You will get `notification` event whenever price of the specified coin gets changed.
 
 * Topic: `/subscription:coin_prices;<sym>`
 

@@ -741,7 +741,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 
 ### coin_prices()
 
-Coin to USD exchange rate for every coin. You will get `Noficiation` event whenever price of any coin gets changed. Please note that only updated coin price will be returned.
+모든 코인의 USD 환산 가격을 받아 옵니다. 어떤 코인이라도 가격에 변화가 있으면 `notification` 이벤트를 받을 것입니다. 가격 변화가 있는 코인만 업데이트 됩니다.
 
 * Topic: `/subscription:coin_prices`
 
@@ -757,7 +757,7 @@ Coin to USD exchange rate for every coin. You will get `Noficiation` event whene
 
 ### (coin_prices / `<sym>`)()
 
-Coin to USD exchange rate for specific coin. You will get `Noficiation` event whenever price of the specified coin gets changed.
+특정 코인의 USD 환산 가격을 받아 옵니다. 명시한 코인의 가격이 변화가 있을 때 마다 `notification` 이벤트를 받을 것입니다.
 
 * Topic: `/subscription:coin_prices;<sym>`
 
