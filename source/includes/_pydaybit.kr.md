@@ -589,7 +589,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 }
 ```
 
-Request withdraw to `to_addr` for `amount` of `coin`.
+`to_addr`로 `amount`만큼의 `coin`의 출금을 요청합니다.
 
 * Topic: `/api`
 
@@ -603,10 +603,10 @@ Request withdraw to `to_addr` for `amount` of `coin`.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`coin` | string | Required | Withdraw coin.
-`to_addr` | string | Required | Withdraw receiving address.
-`to_tag` | string | Optional | Withdraw tag. Used by `XRP` and so on.
-`amount` | decimal | Required | Amount to withdraw.
+`coin` | string | Required | 출금 코인.
+`to_addr` | string | Required | 출금을 받을 주소.
+`to_tag` | string | Optional | 출금 태그. `XRP` 등에서 사용.
+`amount` | decimal | Required | 출금 수량.
 
 
 ## coins()
