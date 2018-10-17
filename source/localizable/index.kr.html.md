@@ -15,11 +15,11 @@ toc_footers:
 
 이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었습니다. 또한 당신의 자산에 손해를 가져다 줄 수 있는 예제가 포함되어 있습니다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 합니다. API 사용에 대한 모든 책임은 본인에게 있습니다. 자세한 내용은 [데이빗 API 이용약관](https://www.daybit.com/policy/terms-api)을 참고하십시오.
 
-데이빗 API를 이용하기에 앞서 [데이빗](https://www.daybit.com)에서 API 키페어를 발급받아야 합니다. API 키페어는 여러가지 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. 자세한 내용은 [권한](#authorization) 항목을 참고하십시오.
+데이빗 API를 이용하기에 앞서 [데이빗](https://www.daybit.com)에서 API 키페어를 발급받아야 합니다. API 키페어는 여러가지 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. 자세한 내용은 [권한](#authorization) _Authorization_ 항목을 참고하십시오.
 
-Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls)이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 데이빗 API 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions)입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
+데이빗 API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls) _API Call_ 이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 데이빗 API 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions) _API Subscription_ 입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
 
-데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [Phoenix](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받습니다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공합니다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼(Wrapper)입니다. 
+데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [피닉스 프레임워크](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받습니다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공합니다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼(Wrapper)입니다. 
 
 만약 프로그래밍에 익숙하지 않다면 [Pydaybit](#pydaybit)의 예제를 먼저 읽어보는 것을 추천합니다.
  
@@ -48,20 +48,20 @@ API 사용은 API 키페어에 부여된 권한에 의해 제한됩니다. 만�
 * 데이빗 API 엔드포인트 : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
 
 # APIs
-Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls)이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions)입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
+Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls) _API Call_ 이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions) _API Subscription_ 입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
 
 ## Channels
-채널에서는 메시지를 보내고 받습니다. 발신자는 어떤 [주제](#topics)에 관해 메시지를 브로드캐스트(채널 참가자 모두에게 발신함) 할 수 있습니다. 수신자는 [주제](#topics)를 구독하면 그러한 메시지들을 수신할 수 있습니다. 언제든지 수신자가 발신자가 되거나, 발신자가 수신자가 될 수 있습니다. 자세한 정보는 [Phoenix 문서](https://hexdocs.pm/phoenix/channels.html)를 참고하십시오.
+채널에서는 메시지를 보내고 받습니다. 발신자는 어떤 [주제](#topics) _Topics_ 에 관해 메시지를 브로드캐스트(채널 참가자 모두에게 발신함) 할 수 있습니다. 수신자는 [주제](#topics)를 구독하면 그러한 메시지들을 수신할 수 있습니다. 언제든지 수신자가 발신자가 되거나, 발신자가 수신자가 될 수 있습니다. 자세한 정보는 [피닉스 문서](https://hexdocs.pm/phoenix/channels.html)를 참고하십시오.
 
 ### Topics
-주제 _Topic_ 는 다양한 층에서의 메시지가 올바른 곳으로 전달 될 수 있도록하는 [채널](#channels)의 문자열 식별자입니다. 데이빗 API는 다음과 같은 주제를 사용하고 있습니다.
+주제 _Topic_ 는 다양한 층에서의 메시지가 올바른 곳으로 전달 될 수 있도록하는 [채널](#channels) _Channels_ 의 문자열 식별자입니다. 데이빗 API는 다음과 같은 주제를 사용하고 있습니다.
 
 * [`/api`](#api-calls)
 * [`/subscription:coins`](#coins)
 * [`/subscription:market_summaries;<market_summary_intvl>`](#market_summaries)
 
 ### Events
-이벤트 _Event_ 는 채널에서 특별한 행동을 나타내기 위한 문자열입니다. 예를 들어 `"phx_join"`은 채널 참가를 의미하는 이벤트이고, `"phx_leave"`는 채널 나오기를 의미하는 이벤트입니다. [데이빗 API 호출](#api-calls) 은 `"/api"` 채널에서 이벤트를 사용해 요청을 보냅니다.
+이벤트 _Event_ 는 채널에서 특별한 행동을 나타내기 위한 문자열입니다. 예를 들어 `"phx_join"`은 채널 참가를 의미하는 이벤트이고, `"phx_leave"`는 채널 나오기를 의미하는 이벤트입니다. 데이빗 [API 호출](#api-calls) _API Calls_ 은 `"/api"` 채널에서 이벤트를 사용해 요청을 보냅니다.
  
 ### Messages
 
@@ -201,7 +201,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 * [`my_airdrop_histories`](#my_airdrop_histories) are the topics you can use in API subscriptions.
 
 ### Event of API Subscriptions
- `request`는 보내기 이벤트, `notification`는 받기 이벤트입니다. 클라이언트와 서버가 전송하는 [메세지](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html)는 각각 `request` 이벤트나 `notification` 이벤트를 가집니다. 한 API를 구독하면, 다시 말해, 해당하는 채널에 참가하여 `request` 이벤트를 보내면, 그 채널에서 `init`이나 `upsert` [액션](#action)을 응답으로 받습니다. 그 이후로는 `notification`이벤트와 함께 `insert`, `update`, `upsert`, `delete` 중 하나의 액션을 받습니다. 더 자세한 사항은 [액션](#action) 항목을 참고하십시오.
+ `request`는 보내기 이벤트, `notification`는 받기 이벤트입니다. 클라이언트와 서버가 전송하는 [메세지](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) _Message_ 는 각각 `request` 이벤트나 `notification` 이벤트를 가집니다. 한 API를 구독하면, 다시 말해, 해당하는 채널에 참가하여 `request` 이벤트를 보내면, 그 채널에서 `init`이나 `upsert` [액션](#action) _Action_ 을 응답으로 받습니다. 그 이후로는 `notification`이벤트와 함께 `insert`, `update`, `upsert`, `delete` 중 하나의 액션을 받습니다. 더 자세한 사항은 [액션](#action) 항목을 참고하십시오.
 
 ### Rate Limit of API Subscriptions
 `request` 이벤트를 보내는 데에 초당 제한이 있습니다.
@@ -226,7 +226,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 ## Response format
 
-여기에는 두가지 응답 형식이 있습니다. API 호출이나 구독의 결과에 따라 성공, 실패 모델 중에 하나를 받을 것 입니다. 오른쪽의 성공과 실패 예제를 참고 하십시오. 또한 아래에서 [오류 목록](#error-list)을 찾아 보십시오.
+여기에는 두가지 응답 형식이 있습니다. API 호출이나 구독의 결과에 따라 성공, 실패 모델 중에 하나를 받을 것 입니다. 오른쪽의 성공과 실패 예제를 참고 하십시오. 또한 아래에서 [오류 목록](#error-list) _Error List_ 을 찾아 보십시오.
 
 > Success
 
@@ -247,7 +247,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 # Libraries
 
-데이빗은 [엘릭서](https://elixir-lang.org/) 언어를 사용하고 [피닉스 프레임워크](https://phoenixframework.org/)를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 _wrapper_ 를 제공합니다. 
+데이빗은 [엘릭서](https://elixir-lang.org/) _Elixir_ 언어를 사용하고 [피닉스 프레임워크](https://phoenixframework.org/)를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 _wrapper_ 를 제공합니다. 
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 

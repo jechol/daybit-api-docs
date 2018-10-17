@@ -19,7 +19,7 @@ You need to generate an API key pair from [Daybit](https://www.daybit.com) befor
 
 There are two types of Daybit APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of APIs is used for asset trading, deposit or withdraw. Second type is a [API Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from Daybit API server. There are API subscriptions which includes price change of coins, information of one's wallet, result of one's order and so on.
 
-Daybit APIs are implemented based on websocket connection and follow the format defined in [Phoenix](https://phoenixframework.org/). Daybit also provides [Pydaybit](#pydaybit) written in Python which allows users to easily use Daybit API.
+Daybit APIs are implemented based on websocket connection and follow the format defined in [Phoenix framework](https://phoenixframework.org/). Daybit also provides [Pydaybit](#pydaybit) written in Python which allows users to easily use Daybit API.
 
 If you are not familiar with programming, it would be better to take a look at examples of [Pydaybit](#pydaybit) first.
  
