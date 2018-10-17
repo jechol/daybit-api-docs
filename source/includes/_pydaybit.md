@@ -1255,9 +1255,9 @@ asyncio.get_event_loop().run_until_complete(daybit_trades())
 }
 ```
 
-Subscribe to get trade data per market. API doesn't support for getting past trade data.
+Subscribe the trade data of a market.
 
-* Topic: `/subscription:trades/<quote>/<base>` 
+* Topic: `/subscription:trades;<quote>;<base>` 
 
 * Request: `init`
 

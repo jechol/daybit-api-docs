@@ -1254,9 +1254,9 @@ asyncio.get_event_loop().run_until_complete(daybit_trades())
 }
 ```
 
-Subscribe to get trade data per market. API doesn't support for getting past trade data.
+마켓의 거래를 구독합니다
 
-* Topic: `/subscription:trades/<quote>/<base>` 
+* Topic: `/subscription:trades;<quote>;<base>` 
 
 * Request: `init`
 
@@ -1272,7 +1272,7 @@ Subscribe to get trade data per market. API doesn't support for getting past tra
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`num_trades` | integer | Required | Trade count for retrieving.
+`num_trades` | integer | Required | 받아올 거래의 갯수.
 
 
 ## my_users()
