@@ -670,7 +670,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coins())
 }
 ```
 
-Subscribe to get coin data.
+코인 데이타를 구독합니다.
 
 * Topic: `/subscription:coins` 
 
