@@ -534,7 +534,7 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_all_my_orders())
 }
 ```
 
-Cancel all my orders (both sell and buy orders).
+Cancel all my orders.
 
 * Topic: `/api`
 

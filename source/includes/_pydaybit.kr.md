@@ -533,7 +533,7 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_all_my_orders())
 }
 ```
 
-Cancel all my orders (both sell and buy orders).
+내 모든 주문을 취소합니다.
 
 * Topic: `/api`
 
@@ -545,7 +545,7 @@ Cancel all my orders (both sell and buy orders).
 
 Field | Description
 ---------|------------
-`num_canceled_orders` | Number of successfully canceled orders.
+`num_canceled_orders` | 취소한 주문의 갯수.
 
 
 ## create_wdrl()
