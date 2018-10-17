@@ -1703,7 +1703,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_airdrop_histories())
       'id': 10}}
 ```
 
-Subscribe to get list of my airdrops.
+내 에어드랍 기록을 구독합니다.
 
 * Topic: `/subscription:my_airdrop_histories`
 

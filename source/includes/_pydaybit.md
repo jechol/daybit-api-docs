@@ -1704,7 +1704,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_airdrop_histories())
       'id': 10}}
 ```
 
-Subscribe to get list of my airdrops.
+Subscribe the history of my airdrops.
 
 * Topic: `/subscription:my_airdrop_histories`
 
