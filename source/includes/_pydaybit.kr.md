@@ -807,7 +807,7 @@ asyncio.get_event_loop().run_until_complete(daybit_quote_coins())
 }
 ```
 
-Subscribe to get quote coin list.
+호가 코인 리스트를 구독합니다.
 
 * Topic: `/subscription:quote_coins`
 
