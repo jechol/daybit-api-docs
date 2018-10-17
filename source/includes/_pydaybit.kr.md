@@ -1307,7 +1307,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_users())
 ]
 ```
 
-Subscribe to get information of my account.
+내 계정의 정보를 구독합니다. 
 
 * Topic: `/subscription:my_users`
 
