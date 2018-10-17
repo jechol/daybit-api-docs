@@ -916,7 +916,7 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summary_intvls())
 }
 ```
 
-Time intervals of market price (unit: second). Return value can be used for input of [Market summaries](#market_summaries).
+시장 가격의 시간 간격을 구독합니다. 시간 간격은 초 단위 입니다. 각 시간 간격은 [시장 요약](#market_summaries)을 구독할 때 사용됩니다.
 
 * Topic: `/subscription:market_summary_intvls`
 

@@ -917,7 +917,7 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summary_intvls())
 }
 ```
 
-Time intervals of market price (unit: second). Return value can be used for input of [Market summaries](#market_summaries).
+Subscribe to time intervals of a market price whose unit in second. Each time interval can be used for input of [Market summaries](#market_summaries).
 
 * Topic: `/subscription:market_summary_intvls`
 
