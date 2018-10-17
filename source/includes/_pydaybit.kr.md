@@ -1651,7 +1651,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_tx_summaries())
 }
 ```
 
-Subscribe to get my transaction summaries.
+나의 이체 내역 _transaction_ 을 구독합니다.
 
 * Topic: `/subscription:my_tx_summaries`
 
@@ -1669,9 +1669,9 @@ Subscribe to get my transaction summaries.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`type` | string | Required | One of `deposit` or `wdrl` per your purpose.
-`to_id` | integer | Optional | Get your transactions that are `id` is smaller than `to_id`.
-`size` | integer | Optional | The count of your transactions for retrieving. `size` ≤  30.
+`type` | string | Required | 입금의 경우 `deposit`. 출금의 경우 `wdrl`.
+`to_id` | integer | Optional | `to_id` 보다 작은 `id`를 가진 이체 내역 _transaction_ 을 가져옵니다.
+`size` | integer | Optional | 가져올 이체 내역을 갯수. `size` ≤  30.
 
 
 ## my_airdrop_histories()
