@@ -1456,7 +1456,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_orders())
 }
 ```
 
-Subscribe to get information of my orders.
+내 주문의 정보를 구독합니다.
 
 * Topic: `/subscription:my_orders`
 
@@ -1474,12 +1474,12 @@ Subscribe to get information of my orders.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`quote` | string | Optional | Quote coin symbol. ex) "BTC"
-`base` | string | Optional | Base coin symbol. ex) "ETH"
-`to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` ≤  30. 
-`sell` | boolean | Optional | `true` for selling order and `false` for buying order.
-`closed` | boolean | Optional | Conditions of `status` to retrieve. `false` will retrieve orders in `received` and `placed` status. `true` will retrieve orders in `closed` status.
+`quote` | string | Optional | 호가 코인 기호. ex) "BTC"
+`base` | string | Optional | 기준 코인 기호. ex) "ETH"
+`to_id` | integer | Optional | `to_id`보다 작은 `id`를 가진 주문을 가져옵니다.
+`size` | integer | Optional | 가져올 주문의 갯수. `size` ≤  30. 
+`sell` | boolean | Optional | 매수 주문은 `true`. 매도 주문은 `false`.
+`closed` | boolean | Optional | 가져올 주문의 `status`. `false`이면 `received`와 `placed`를 가져옵니다. `true`이면 `closed`를 가져옵니다.
 
 ## my_trades()
 
