@@ -1180,7 +1180,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_histories())
 }
 ```
 
-Past market price data. For the valid `intvl`, please refer [Price history intervals](#price_history_intvls).
+마켓의 가격 정보를 구독합니다. 유효한 `intvl`은 [가격 기록 간격](#price_history_intvls)을 참고하십시오.
 
 * Topic: `/subscription:price_histories;<quote>;<base>;<intvl>`
 
@@ -1198,8 +1198,8 @@ Past market price data. For the valid `intvl`, please refer [Price history inter
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`from_time` | unix_timestamp | Required | Start time of the price history range.
-`to_time` | unix_timestamp | Required | End time of the price history range.
+`from_time` | unix_timestamp | Required | 가격 기록 범위의 시작 시간.
+`to_time` | unix_timestamp | Required | 가격 기록 범위의 끝 시간.
 
 
 

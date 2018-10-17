@@ -1181,7 +1181,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_histories())
 }
 ```
 
-Past market price data. For the valid `intvl`, please refer [Price history intervals](#price_history_intvls).
+Subscribe to market price data. For the valid `intvl`, please refer [Price history intervals](#price_history_intvls).
 
 * Topic: `/subscription:price_histories;<quote>;<base>;<intvl>`
 
