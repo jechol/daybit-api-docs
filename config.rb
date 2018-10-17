@@ -34,6 +34,8 @@ activate :autoprefixer do |config|
   config.inline   = true
 end
 
+activate :i18n
+
 # Github pages require relative links
 activate :relative_assets
 set :relative_links, true

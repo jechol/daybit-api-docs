@@ -1,10 +1,9 @@
 # **Pydaybit**
-Pydaybit is an API wrapper for Daybit exchange written in Python. The code is available in [Pydaybit Repository](https://github.com/daybit-exchange/pydaybit). 
+Pydaybit은 파이썬으로 작성된 데이빗 거래소 API 레퍼 _warppaer_ 입니다. 코드는 [Pydaybit 저장소](https://github.com/daybit-exchange/pydaybit)에 있습니다. 
 
 
 ## **Disclaimer**
-USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESPONSIBILITY FOR YOUR TRADING RESULTS.
-
+_이 소프트웨어의 사용에 대한 책임은 사용자 본인에게 있습니다. 작성자와 모든 관계자들은 당신의 거래의 결과에 대해 책임을 지지 않습니다._
 
 ## **Installation**
   
@@ -14,12 +13,12 @@ USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESP
 $ git clone https://github.com/daybit-exchange/pydaybit
 $ pip install -e pydaybit
 ```
-  
-For the installation, please look right column.
+
+설치 방법은 오른쪽을 참고 하십시오.
 
 ## **API Key Pair**
 
-You need to generate a API key pair to use Pydaybit. Please refer [Authorization](#authorization).
+Pydaybit을 사용하기 위해서는 API 키페어 생성을 해야합니다. [권한](#authorization) 항목을 참조하십시오.
 
 ### Environment Variables
 
@@ -31,10 +30,10 @@ export DAYBIT_API_KEY="YOUR_OWN_API_KEY"
 export DAYBIT_API_SECRET="YOUR_WON_API_SECRET"
 ```
 
-You can set generated key pair as environment variable.
+환경 변수를 세팅하여 사용할 수 있습니다
 
-* `DAYBIT_API_KEY`: Generated API KEY
-* `DAYBIT_API_SECRET`: Generated API SECRET
+* `DAYBIT_API_KEY`: 생성한 API 키
+* `DAYBIT_API_SECRET`: 생성한 API 시크릿
 
 
 ### Without Environment Variables
@@ -56,7 +55,7 @@ async def daybit_example():
 asyncio.get_event_loop().run_until_complete(daybit_example())
 ```
 
-For using the key pair without settings them in environment variable, please refer the example.
+API 키패어는 환경 변수 설정 없이도 사용할 수 있습니다. 예제를 참고하십시오.
 
 ## get_server_time()
 
@@ -83,7 +82,7 @@ asyncio.get_event_loop().run_until_complete(daybit_get_server_time())
 1537418605426 # unix_timestamp
 ```
 
-Get current time of Daybit API server in Unix miliseconds timestamp format.
+데이빗 API 서버의 현재 시간을 밀리초 단위의 유닉스 타임스탬프를 받아옵니다.
 
 * Topic: `/api`
 
@@ -170,16 +169,16 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-Create a order to sell or buy coin. There are five types of orders you can request to Daybit API server - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
+코인은 사거나 파는 주문을 생성합니다. 데이빗 API 서버에 요청할 수 있는 다섯 가지의 주문 종류가 있습니다 - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), [Trailling Stop Order](#trailing-stop-order).
  
-The conditions of invalid order (void order) are,
+잘못된 주문(주문 무효)의 경우는 다음과 같습니다
 
-- rejected order
-- order cancellation by user
-- order cancellation by self order
-- auto cancellation of old order
+- 거부된 주문
+- 유저의 요청으로 인한 취소
+- 자전 거래로 인한 취소
+- 오래된 주문의 자동 취소
 
-`sell`, `quote`, `base`, `amount`, `role`, `cond_type` are always required.
+`sell`, `quote`, `base`, `amount`, `role`, `cond_type` 파라미터 값은 모든 주문에서 필요합니다.
 
 * Topic: `/api`
 
@@ -191,15 +190,15 @@ The conditions of invalid order (void order) are,
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
-`quote` | string | Required | Quote coin symbol. ex) "BTC"
-`base` | string | Required | Base coin symbol. ex) "ETH"
-`amount` | decimal | Required | Order amount.
-`role` | string | Required | Role of order. (`"both"`, `"maker_only"`, `"taker_only"`)
-`cond_type` | string | Required | Conditional types of the order. (`"none"`, `"le"`, `"ge"`, `"down_from_high"`, `"up_from_low"`)
-`price` | decimal | Optional | Asking price.
-`cond_arg1` | decimal | Optional | First conditional argument of the order.
-`cond_arg2` | decimal | Optional | Second conditional argument of the order.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
+`quote` | string | Required | 호가 코인 기호. 예) "BTC"
+`base` | string | Required | 기준 코인 기호. 예) "ETH"
+`amount` | decimal | Required | 주문 수량.
+`role` | string | Required | 마켓에서의 주문의 역할 (`"both"`, `"maker_only"`, `"taker_only"`). 
+`cond_type` | string | Required | 주문의 조건 종류 (`"none"`, `"le"`, `"ge"`, `"fall_from_top"`, `"rise_from_bottom"`).
+`price` | decimal | Optional | 주문 가격.
+`cond_arg1` | decimal | Optional | 조건 주문의 첫번째 인자.
+`cond_arg2` | decimal | Optional | 조건 주문의 두번째 인자.
 
 ### Limit Order
 
@@ -217,20 +216,20 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, it is regarded as a [taker order](#taker-order). and if remain amount of the order exists, it is regarded as a [maker order](#maker-order).
+이 주문이 접수되면 먼저 [테이커 주문](#taker-order) _taker order_ 로 여겨지고, 만약 주문의 잔량이 있다면 [메이커 주문](#maker-order) _maker order_ 가 됩니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"both"`
-`quote` | string | Required | Quote coin symbol. ex) "BTC"
-`base` | string | Required | Base coin symbol. ex) "ETH"
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
+`quote` | string | Required | 호가 코인 기호. 예) "BTC"
+`base` | string | Required | 기준 코인 기호. 예) "ETH"
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Taker Order
@@ -249,20 +248,20 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, before your orders are going on the order book, these are called as "taker". These trades are called as "taker" because it is "taking" the volume in the order book. This order is taking only volumes in the order book.
+이 주문은 오더북에 있는 거래량 _volume_ 을 가져가서 _tacking_ 오더북에 등록되기 전에 거래를 체결하기 때문에 `테이커` _tacker_ 라고 합니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"taker_only"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint:  <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건:  <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Maker Order
@@ -281,20 +280,20 @@ await daybit.create_order(
 )
 ```
 
-If the order was placed, after your orders filled the order book. these are called as "maker" because it is "making" the market. This order is only valid when it fills the volume in the order book.
+주문이 오더북을 채워 마켓을 만들기 _making_ 하기 때문에 이러한 주문은 `메이커` _maker_ 라고 불립니다. 이 주문은 오더북을 채울 때만 유효합니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"maker_only"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
 `cond_type` | string | Required | `"none"`
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건:  <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 ### Stop Limit Order
@@ -314,25 +313,25 @@ await daybit.create_order(
 )
 ```
 
-When current price is equal or greater/less than `cond_arg1`, it places Limit Order.
+현재 가격이 `cond_arg`보다 같거나 클 때/ 같거나 작을 때, 리미트 _limit_ 주문을 접수합니다.
 
-* If you sent request with `cond_type` = `"le"`, it places Limit Order for the price of `price` when it becomes `current_price` ≤ `conditional_price`(= `cond_arg1`).
+* `cond_type` = `"le"`를 요청하면, `현재가` ≤ `조건가`(= `cond_arg1`)일 때에 `price` 가격에 리미트 주문을 접수합니다.
 
-* If you sent request with `cond_type` = `"ge"`, it places Limit Order for the price of `price` when it becomes `current_price` ≥ `conditional_price`(= `cond_arg1`).
+* `cond_type` = `"ge"`를 요청하면, `현재가` ≥ `조건가`(= `cond_arg1`)일 때에 `price` 가격에 리미트 주문을  접수합니다.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `True` for selling and `False` for buying.
+`sell` | boolean | Required | 판매일 경우 `True`, 구매일 경우 `False`.
 `role` | string | Required | `"both"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`price` | decimal | Required | Asking price in terms of `price` = `base` / `quote`.
-`amount` | decimal | Required | Required amount of `quote`.
-`cond_type` | string | Required | `"le"` or `"ge"`
-`cond_arg1` | decimal | Required | `conditional_price` of the order. This value is compared with `current_price`.
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`price` | decimal | Required | 주문 가격. `price` = `base` / `quote`.
+`amount` | decimal | Required | `quote` 기준 주문 수량.
+`cond_type` | string | Required | `"le"` 혹은 `"ge"`.
+`cond_arg1` | decimal | Required | 주문의 `조건가`. 이 값을 `현재가`와 비교합니다.
 
 <aside class="notice">
-  Constraint: <code>amount</code> * <code>price in USD</code> ≥ 10.0 <code>USD</code>.
+  제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
 </aside>
 
 
@@ -353,37 +352,37 @@ await daybit.create_order(
 )
 ```
 
-You can place trailing stop order to sell the coin, with certain rate of discount compared with current price, when the price has dropped at specific rate compared with highest price. Likewise, you can also buy the coin, with certain rate of extra charge compared with current price, when the price has risen at specific rate compared with lowest price, by placing trailing stop order.
+ 트래일링 스탑 주문 _trailing stop order_ 을 사용하면, 가격이 고가에 크게 떨어질 때 현재 가격보다 조금 낮은 가격에 매도 리미트 주문을 접수할 수 있다. 마찬가지로, 현재 가격이 저가에 비해 크게 상승하면 현재가격보다 조금 높은 가격에 매수 리미트 주문을 접수할 수 있다.
 
-For example, let say you placed a trailing stop order with (`sell`=True, `role`='both', `quote`='BTC', `base`='USDT', `amount`='0.1', `cond_type`='down_from_high', `cond_arg1`='-0.01', `cond_arg2`='-0.005'). After the trailing stop order has placed, if the price has dropped since it reached highest price at 10,000 USDT, it will be triggered at 9,000 USDT (= 10,000 USDT * (1 + `cond_arg1`)) and place a limit order at the price of 8,955 USDT (= 9,000 USDT * (1 + `cond_arg2`)).
+예를들어, (`sell`=True, `role`='both', `quote`='BTC', `base`='USDT', `amount`='0.1', `cond_type`='down_from_high', `cond_arg1`='-0.01', `cond_arg2`='-0.005')로 주문을 냈다고 하자. 트래일링 스탑 주문이 접수되고, 가격이 10,000 USDT에 도달한뒤 떨어지기 시작한 상황에서는 이 주문은 9,000 USDT (= 1000 USDT * (1 + `cond_arg1`))에 트리거 되어 리미트 오더를 8,955 USDT (= 9,000 USDT * (1 + `cond_arg2`))에 접수한다.
 
-* In *Down From High* case, when `current_price` ≤ `top_price` * (1 + `cond_arg1`), it places a selling limit order for the price of `current_price` * (1 + `cond_arg2`). 
+* 고점에서 하락 *down from high* 의 경우, `현재가` ≤ `고가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매도 리미트 오더를 접수한다.
 
-* In *Up From Low* case, when `current_price` ≥ `bottom_price` * (1 + `cond_arg1`), it places a buying limit order for the price of `current_price` * (1 + `cond_arg2`). 
+* 저점에서 상승 *up from low* 의 경우, `현재가` ≥ `저가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매수 리미트 오더를 접수한다. 
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`sell` | boolean | Required | `true` for `"down_from_high"` and `false` for `"up_from_low"`.
+`sell` | boolean | Required | `"down_from_high"`일 경우 `True`, `"up_from_low"`일 경우 `false`. 
 `role` | string | Required | `"both"`
-`quote` | string | Required | Quote coin symbol.
-`base` | string | Required | Base coin symbol.
-`amount` | decimal | Required | Order amount.
-`cond_type` | string | Required | `"down_from_high"` or `"up_from_low"`.
-`cond_arg1` | decimal | Required | In *Down From High* case, price discount rate compared with top price<br/>In *Up From Low* case, price rise rate compared with bottom price.   
-`cond_arg2` | decimal | Required | When the condition as above is meet, it places a limit order for the price of `current_price` * (1 + `cond_arg2`).
+`quote` | string | Required | 호가 코인 기호.
+`base` | string | Required | 기준 코인 기호.
+`amount` | decimal | Required | 주문 수량.
+`cond_type` | string | Required | `"down_from_high"` 혹은 `"up_from_low"`.
+`cond_arg1` | decimal | Required | 고점에서 하락 *down from high* 의 경우, 고점 대비 가격 하락 비율.<br/>저점에서 상승 *up from low* 의 경우, 저점 대비 가격 상승 비율.   
+`cond_arg2` | decimal | Required | `cond_arg1` 관련 조건이 만족되면, `현재가` * (1 + `cond_arg2`) 가격에 리미트 주문을 접수한다.
 
 
 <aside class="notice">
- Constraint: <br />
+ 제한 조건: <br />
  <ul>
  <li>
- <code>amount</code> * <code>price in USD at a trailing stop order created</code> ≥ 10.0 <code>USD</code>.
+ <code>주문 수량</code> * <code>트래일링 스탑 주문을 접수할 때 USD 환산 가격</code> ≥ 10.0 <code>USD</code>.
  </li>
  <li>
- In <em>Down From High</em> case:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
+ 고점에서 하락 <em>down from high</em> 의 경우:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01
  </li>
  <li>
- In <em>Up From Low</em> case:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1
+ 저점에서 상승 <em>up from low</em> 의 경우:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1
  </li>
  </ul>
 </aside>
@@ -434,7 +433,7 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_order())
 }
 ```
 
-Cancel placed order. You must pass valid `id` to cancel the order.
+접수된 주문을 취소합니다. 주문 취소를 위해서는 유효한 주문 `id`를 넣어야 합니다.
 
 * Topic: `/api`
 
@@ -448,7 +447,7 @@ Cancel placed order. You must pass valid `id` to cancel the order.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
-`order_id` | integer | Required | id of order supposed to be canceled.
+`order_id` | integer | Required | 취소하려고 하는 주문의 `id`
 
 
 ## cancel_orders()
@@ -481,7 +480,7 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_orders())
 }
 ```
 
-Cancel multiple orders. If one or more of `order_ids` are invalid, the API simply ignores it and cancels only valid ones. You can check number of canceled ids from `num_canceled_orders` in response.
+여러 개의 주문을 한번에 취소할 때 사용합니다. `order_ids`에서 일치하는 `id`를 가지는 유효한 주문을 취소합니다. 취소된 주문의 갯수는 응답의 `num_canceled_orders`를 참조하십시오.
 
 * Topic: `/api`
 
@@ -493,16 +492,16 @@ Cancel multiple orders. If one or more of `order_ids` are invalid, the API simpl
 
 Parameter | Type | Required | Description
 ----------|------|----------|-----------|
-`order_ids` | array | Required | ids of order supposed to be canceled.
+`order_ids` | array | Required | 쥐소하려고 하는 주문들의 id.
 
 ### Response
 
 Field | Description
 ---------|------------
-`num_canceled_orders` | Number of successfully canceled orders.
+`num_canceled_orders` | 취소한 주문의 갯수.
 
 <aside class="notice">
- Daybit API server is expecting orders in CSV format (ex, "1,2,3"). However, you should use a list of order <code>id</code>s if you are using Pydaybit.
+데이빗 API 서버는 주문들의 id를 CSV 형식(예를 들어, "1,2,3")으로 입력받습니다. 하지만 Pydaybit을 사용할 때에는 주문 <code>id</code>의 리스트를 사용하십시오.
  </aside>
 
 
@@ -534,7 +533,7 @@ asyncio.get_event_loop().run_until_complete(daybit_cancel_all_my_orders())
 }
 ```
 
-Cancel all my orders.
+내 모든 주문을 취소합니다.
 
 * Topic: `/api`
 
@@ -546,7 +545,7 @@ Cancel all my orders.
 
 Field | Description
 ---------|------------
-`num_canceled_orders` | Number of successfully canceled orders.
+`num_canceled_orders` | 취소한 주문의 갯수.
 
 
 ## create_wdrl()
@@ -590,7 +589,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 }
 ```
 
-Request withdraw to `to_addr` for `amount` of `coin`.
+`to_addr`로 `amount`만큼의 `coin`의 출금을 요청합니다.
 
 * Topic: `/api`
 
@@ -604,10 +603,10 @@ Request withdraw to `to_addr` for `amount` of `coin`.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`coin` | string | Required | Withdraw coin.
-`to_addr` | string | Required | Withdraw receiving address.
-`to_tag` | string | Optional | Withdraw tag. Used by `XRP` and so on.
-`amount` | decimal | Required | Amount to withdraw.
+`coin` | string | Required | 출금 코인.
+`to_addr` | string | Required | 출금을 받을 주소.
+`to_tag` | string | Optional | 출금 태그. `XRP` 등에서 사용.
+`amount` | decimal | Required | 출금 수량.
 
 
 ## coins()
@@ -671,7 +670,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coins())
 }
 ```
 
-Subscribe to get coin data.
+코인 데이타를 구독합니다.
 
 * Topic: `/subscription:coins` 
 
@@ -742,7 +741,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coin_prices())
 
 ### coin_prices()
 
-Coin to USD exchange rate for every coin. You will get `notification` event whenever price of any coin gets changed. Please note that only updated coin price will be returned.
+모든 코인의 USD 환산 가격을 받아 옵니다. 어떤 코인이라도 가격에 변화가 있으면 `notification` 이벤트를 받을 것입니다. 가격 변화가 있는 코인만 업데이트 됩니다.
 
 * Topic: `/subscription:coin_prices`
 
@@ -758,7 +757,7 @@ Coin to USD exchange rate for every coin. You will get `notification` event when
 
 ### (coin_prices / `<sym>`)()
 
-Coin to USD exchange rate for specific coin. You will get `notification` event whenever price of the specified coin gets changed.
+특정 코인의 USD 환산 가격을 받아 옵니다. 명시한 코인의 가격이 변화가 있을 때 마다 `notification` 이벤트를 받을 것입니다.
 
 * Topic: `/subscription:coin_prices;<sym>`
 
@@ -808,7 +807,7 @@ asyncio.get_event_loop().run_until_complete(daybit_quote_coins())
 }
 ```
 
-Subscribe to get quote coin list.
+호가 코인 리스트를 구독합니다.
 
 * Topic: `/subscription:quote_coins`
 
@@ -867,7 +866,7 @@ asyncio.get_event_loop().run_until_complete(daybit_markets())
 }
 ```
 
-Subscribe to get basic market data. 
+시장 데이터를 구독합니다.
 
 * Topic: `/subscription:markets`
 
@@ -917,7 +916,7 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summary_intvls())
 }
 ```
 
-Subscribe to time intervals of a market price whose unit in second. Each time interval can be used for input of [Market summaries](#market_summaries).
+시장 가격의 시간 간격을 구독합니다. 시간 간격은 초 단위 입니다. 각 시간 간격은 [시장 요약](#market_summaries)을 구독할 때 사용됩니다.
 
 * Topic: `/subscription:market_summary_intvls`
 
@@ -985,7 +984,7 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summaries())
 }
 ```
 
-Subscribe to market summaries. For the valid `seconds`, please refer [Market summary intervals](#market_summary_intvls).
+시장 요약을 구독합니다. 유효한 `seconds`는 [시장 요약 간격](#market_summary_intvls)을 참고 하십시오.
 
 * Topic: `/subscription:market_summaries;<market_summary_intvl>`
 
@@ -1053,9 +1052,9 @@ asyncio.get_event_loop().run_until_complete(daybit_order_books())
 }
 ```
 
-Subscribe to order book by unit price. In the data of order book, there's no `id` so you need to compare it with `min_price` or `max_price` to identify the order book. `sell_vol` is aggregated volumes of the range (`min_price`, `max_price`] and `buy_vol` is aggregated volumes of the range [`min_price`, `max_price`). There is not more than one range that both `sell_vol` and `buy_vol` are larger than zero.
+가격 단위로 나뉜 오더북을 구독합니다. 오더북 데이터에는 `id`가 없기 때문에 `min_price`와 `max_price`로 구별해야 합니다. `sell_vol`의 경우 (`min_price`, `max_price`]의 구간의 물량을 합한 값이고, `buy_vol`의 경우 [`min_price`, `max_price`)의 구간의 물량을 합한 값입니다. `sell_vol`과 `buy_vol`이 모두 양수인 경우는 많아도 한 구간입니다.
 
-Valid `price_intvl`s are [1, 10, 100, 1000] × `tick_price` of a [market](#markets). 
+`price_intvl`은 _[시장](#markets)의 `tick_price`_ × [1, 10, 100, 1000] 중에 하나를 사용할 수 있습니다.
 
 * Topic: `/subscription:order_books;<quote>;<base>;<price_intvl>`
 
@@ -1105,7 +1104,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_history_intvls())
 }
 ```
 
- Subscribe to valid time intervals of market price data whose unit are in seconds. A time interval can be used for input of [Price histories](#price_histories).
+시장 가격 데이터의 유효한 시간 간격을 구독합니다. 시간 간격은 [Price histories](#price_histories)의 입력으로 사용됩니다.
 
 * Topic: `/subscription:price_history_intvls`
 
@@ -1181,7 +1180,7 @@ asyncio.get_event_loop().run_until_complete(daybit_price_histories())
 }
 ```
 
-Subscribe to market price data. For the valid `intvl`, please refer [Price history intervals](#price_history_intvls).
+마켓의 가격 정보를 구독합니다. 유효한 `intvl`은 [가격 기록 간격](#price_history_intvls)을 참고하십시오.
 
 * Topic: `/subscription:price_histories;<quote>;<base>;<intvl>`
 
@@ -1199,8 +1198,8 @@ Subscribe to market price data. For the valid `intvl`, please refer [Price histo
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`from_time` | unix_timestamp | Required | Start time of the price history range.
-`to_time` | unix_timestamp | Required | End time of the price history range.
+`from_time` | unix_timestamp | Required | 가격 기록 범위의 시작 시간.
+`to_time` | unix_timestamp | Required | 가격 기록 범위의 끝 시간.
 
 
 
@@ -1255,7 +1254,7 @@ asyncio.get_event_loop().run_until_complete(daybit_trades())
 }
 ```
 
-Subscribe the trade data of a market.
+마켓의 거래를 구독합니다
 
 * Topic: `/subscription:trades;<quote>;<base>` 
 
@@ -1273,7 +1272,7 @@ Subscribe the trade data of a market.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`num_trades` | integer | Required | Trade count for retrieving.
+`num_trades` | integer | Required | 받아올 거래의 갯수.
 
 
 ## my_users()
@@ -1308,7 +1307,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_users())
 ]
 ```
 
-Subscribe to get information of my account.
+내 계정의 정보를 구독합니다. 
 
 * Topic: `/subscription:my_users`
 
@@ -1369,7 +1368,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_assets())
 ```
 
 
-Subscribe to get information of my assets.
+내 자신의 정보를 구독합니다.
 
 * Topic: `/subscription:my_assets`
 
@@ -1457,7 +1456,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_orders())
 }
 ```
 
-Subscribe to get information of my orders.
+내 주문의 정보를 구독합니다.
 
 * Topic: `/subscription:my_orders`
 
@@ -1475,12 +1474,12 @@ Subscribe to get information of my orders.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`quote` | string | Optional | Quote coin symbol. ex) "BTC"
-`base` | string | Optional | Base coin symbol. ex) "ETH"
-`to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` ≤  30. 
-`sell` | boolean | Optional | `true` for selling order and `false` for buying order.
-`closed` | boolean | Optional | Conditions of `status` to retrieve. `false` will retrieve orders in `received` and `placed` status. `true` will retrieve orders in `closed` status.
+`quote` | string | Optional | 호가 코인 기호. ex) "BTC"
+`base` | string | Optional | 기준 코인 기호. ex) "ETH"
+`to_id` | integer | Optional | `to_id`보다 작은 `id`를 가진 주문을 가져옵니다.
+`size` | integer | Optional | 가져올 주문의 갯수. `size` ≤  30. 
+`sell` | boolean | Optional | 매수 주문은 `true`. 매도 주문은 `false`.
+`closed` | boolean | Optional | 가져올 주문의 `status`. `false`이면 `received`와 `placed`를 가져옵니다. `true`이면 `closed`를 가져옵니다.
 
 ## my_trades()
 
@@ -1541,7 +1540,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_trades())
 }
 ```
 
-Subscribe to get information of my trade data.
+내 거래 데이터를 구독합니다.
 
 * Topic: `/subscription:my_trades`
 
@@ -1559,11 +1558,11 @@ Subscribe to get information of my trade data.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`quote` | string | Optional | Quote coin symbol. ex) "BTC"
-`base` | string | Optional | Base coin symbol. ex) "ETH"
-`to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` ≤  30.
-`sell` | boolean | Optional | `true` for selling order and `false` for buying order.
+`quote` | string | Optional | 호가 코인 기호. ex) "BTC"
+`base` | string | Optional | 기준 코인 기호. ex) "ETH"
+`to_id` | integer | Optional | `to_id` 보다 작은 `id`를 가진 내 거래를 가져옵니다.
+`size` | integer | Optional | 가져올 거래의 갯수. `size` ≤  30.
+`sell` | boolean | Optional | 매도의 경우 `true`. 매수의 경우 `false`.
 
 
 ## my_tx_summaries()
@@ -1652,7 +1651,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_tx_summaries())
 }
 ```
 
-Subscribe to get my transaction summaries.
+나의 이체 내역 _transaction_ 을 구독합니다.
 
 * Topic: `/subscription:my_tx_summaries`
 
@@ -1670,9 +1669,9 @@ Subscribe to get my transaction summaries.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`type` | string | Required | One of `deposit` or `wdrl` per your purpose.
-`to_id` | integer | Optional | Get your transactions that are `id` is smaller than `to_id`.
-`size` | integer | Optional | The count of your transactions for retrieving. `size` ≤  30.
+`type` | string | Required | 입금의 경우 `deposit`. 출금의 경우 `wdrl`.
+`to_id` | integer | Optional | `to_id` 보다 작은 `id`를 가진 이체 내역 _transaction_ 을 가져옵니다.
+`size` | integer | Optional | 가져올 이체 내역을 갯수. `size` ≤  30.
 
 
 ## my_airdrop_histories()
@@ -1704,7 +1703,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_airdrop_histories())
       'id': 10}}
 ```
 
-Subscribe the history of my airdrops.
+내 에어드랍 기록을 구독합니다.
 
 * Topic: `/subscription:my_airdrop_histories`
 
