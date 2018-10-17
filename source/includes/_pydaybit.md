@@ -1016,7 +1016,9 @@ async def daybit_order_books():
     async with Daybit() as daybit:
         quote = 'USDT'
         base = 'BTC'
-        price_intvl = Decimal((await daybit.markets())['{}-{}'.format(quote, base)]['tick_price']) * 10
+        multiple = 10
+        assert multiple in [1, 10, 100, 1000]
+        price_intvl = Decimal((await daybit.markets())['{}-{}'.format(quote, base)]['tick_price']) * multiple
         pprint(await (daybit.order_books / quote / base / price_intvl)())
 
 
@@ -1051,9 +1053,9 @@ asyncio.get_event_loop().run_until_complete(daybit_order_books())
 }
 ```
 
+Subscribe to order book by unit price. In the data of order book, there's no `id` so you need to compare it with `min_price` or `max_price` to identify the order book. `sell_vol` is aggregated volumes of the range (`min_price`, `max_price`] and `buy_vol` is aggregated volumes of the range [`min_price`, `max_price`). There is not more than one range that both `sell_vol` and `buy_vol` are larger than zero.
 
-
-Order book by unit price. In the response, there's no `id` so you need to compare it with `min_price` or `max_price` to identify the order book. (min_price, max_price] is the range for selling and [min_price, max_price) is the range for buying. In case of `sell_vol` and `buy_vol` exist at the same time, please make sure that they are located in difference range by above range conditions.
+Valid `price_intvl`s are [1, 10, 100, 1000] × `tick_price` of a [market](#markets). 
 
 * Topic: `/subscription:order_books;<quote>;<base>;<price_intvl>`
 
