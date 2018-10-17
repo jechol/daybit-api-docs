@@ -1540,7 +1540,7 @@ asyncio.get_event_loop().run_until_complete(daybit_my_trades())
 }
 ```
 
-Subscribe to get information of my trade data.
+내 거래 데이터를 구독합니다.
 
 * Topic: `/subscription:my_trades`
 
@@ -1558,11 +1558,11 @@ Subscribe to get information of my trade data.
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`quote` | string | Optional | Quote coin symbol. ex) "BTC"
-`base` | string | Optional | Base coin symbol. ex) "ETH"
-`to_id` | integer | Optional | Get my orders that are `id` is smaller than `to_id`.
-`size` | integer | Optional | Order count for retrieving. `size` ≤  30.
-`sell` | boolean | Optional | `true` for selling order and `false` for buying order.
+`quote` | string | Optional | 호가 코인 기호. ex) "BTC"
+`base` | string | Optional | 기준 코인 기호. ex) "ETH"
+`to_id` | integer | Optional | `to_id` 보다 작은 `id`를 가진 내 거래를 가져옵니다.
+`size` | integer | Optional | 가져올 거래의 갯수. `size` ≤  30.
+`sell` | boolean | Optional | 매도의 경우 `true`. 매수의 경우 `false`.
 
 
 ## my_tx_summaries()
