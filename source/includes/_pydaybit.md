@@ -984,9 +984,8 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summaries())
   }
 }
 ```
-`market_summaries/<seconds>`
 
-Subscribe to get market summaries. For the valid `seconds`, please refer [Market summary intervals](#market_summary_intvls).
+Subscribe to market summaries. For the valid `seconds`, please refer [Market summary intervals](#market_summary_intvls).
 
 * Topic: `/subscription:market_summaries;<market_summary_intvl>`
 

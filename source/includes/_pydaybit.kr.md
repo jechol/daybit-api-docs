@@ -983,9 +983,8 @@ asyncio.get_event_loop().run_until_complete(daybit_market_summaries())
   }
 }
 ```
-`market_summaries/<seconds>`
 
-Subscribe to get market summaries. For the valid `seconds`, please refer [Market summary intervals](#market_summary_intvls).
+시장 요약을 구독합니다. 유효한 `seconds`는 [시장 요약 간격](#market_summary_intvls)을 참고 하십시오.
 
 * Topic: `/subscription:market_summaries;<market_summary_intvl>`
 
