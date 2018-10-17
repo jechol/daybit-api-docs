@@ -103,11 +103,11 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 
 다음 속성들은 [JSON](https://en.wikipedia.org/wiki/JSON) 객체 형식으로 전달됩니다. 예제는 `/api` 채널에서 `create_wdrl` API 호출할 때의 웹소켓 위에서 주고 받는 메시지를 보여 줍니다.
 
-* `topic` - 문자열 타입의 채널 식별자. 예를 들어, [`"/api"`](#api-calls)나 [`"/subscription:coins"`](#coins)가 있다.
-* `event` - 문자열 타입의 이벤트 이름, 예를 들어, [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`가 있다.
-* `payload` - 메시지 페이로드. JSON 객체 형식으로 API를 사용할 때 주요 정보가 전달된다.
+* `topic` - 문자열 타입의 채널 식별자. 예를 들어, [`"/api"`](#api-calls)나 [`"/subscription:coins"`](#coins)가 있습니다.
+* `event` - 문자열 타입의 이벤트 이름, 예를 들어, [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`가 있습니다.
+* `payload` - 메시지 페이로드. JSON 객체 형식으로 API를 사용할 때 주요 정보가 전달됩니다.
 * `ref` - 문자열 타입의 메시지 고유 레퍼런스 번호.
-* `join_ref` - 문자열 타입의 채널 고유 레퍼런스 번호. 채널에 참가했을 때의 `ref`와 같다.
+* `join_ref` - 문자열 타입의 채널 고유 레퍼런스 번호. 채널에 참가했을 때의 `ref`와 같습니다.
 
 ## API Calls
 웹소켓을 통해 [데이빗 API 엔드포인트](#host-address)와 연결하고 `/api` 채널에 참가합니다. 해당하는 API 이름을 `event`에 넣고, 필요한 인자 `payload`에 넣어 메시지를 보냅니다.
