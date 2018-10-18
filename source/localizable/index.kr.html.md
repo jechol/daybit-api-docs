@@ -13,7 +13,7 @@ toc_footers:
  - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for Daybit API</a> 
 ---
 
-# Introdution
+# Introduction
 
 이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었습니다. 또한 당신의 자산에 손해를 가져다 줄 수 있는 예제가 포함되어 있습니다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 합니다. API 사용에 대한 모든 책임은 본인에게 있습니다. 자세한 내용은 [데이빗 API 이용약관](https://www.daybit.com/policy/terms-api)을 참고하십시오.
 
