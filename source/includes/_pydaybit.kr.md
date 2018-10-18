@@ -1719,5 +1719,5 @@ asyncio.get_event_loop().run_until_complete(daybit_my_airdrop_histories())
 
 Parameter | Type | Required | Description
 ----------|------|----------|------------
-`to_id` | integer | Optional | Get your airdrop histories that are `id` is smaller than `to_id`.
-`size` | integer | Optional | The count of your airdrop histories for retrieving. `size` ≤  30.
+`to_id` | integer | Optional | `id`가 `to_id`보다 작은 당신의 에어드랍을 가져옵니다.
+`size` | integer | Optional | 가져올 에어드랍 기록의 갯수. `size` ≤  30.
