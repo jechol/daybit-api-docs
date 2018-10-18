@@ -7,7 +7,7 @@ includes:
 search: true
 
 toc_footers:
- - <a href='/kr/index.html'>Daybit API Document - Korean</a>
+ - <a href='/kr'>Daybit API Document - Korean</a>
  - <br/>
  - <a href='https://www.daybit.com'>Daybit</a>
  - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for Daybit API</a> 
