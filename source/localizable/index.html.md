@@ -200,7 +200,7 @@ Subscription Channels are following. The topic of each channels has `/subscripti
 * [`my_orders`](#my_orders)
 * [`my_trades`](#my_trades)
 * [`my_tx_summaries`](#my_tx_summaries)
-* [`my_airdrop_histories`](#my_airdrop_histories) are the topics you can use in API subscriptions.
+* [`my_airdrop_histories`](#my_airdrop_histories)
 
 ### Event of API Subscriptions
 `request` is a push event and `notification` is a pull event. [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to an API, i.e., joining the channel related to the API and sending a message with `request` event, you will get either `init` or `upsert` action response from the channel. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the channel with `notification` event. For more information of actions, please look following [Action](#action).
