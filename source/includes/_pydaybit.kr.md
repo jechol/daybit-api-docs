@@ -352,13 +352,13 @@ await daybit.create_order(
 )
 ```
 
- 트래일링 스탑 주문 _trailing stop order_ 을 사용하면, 가격이 고가에 크게 떨어질 때 현재 가격보다 조금 낮은 가격에 매도 리미트 주문을 접수할 수 있다. 마찬가지로, 현재 가격이 저가에 비해 크게 상승하면 현재가격보다 조금 높은 가격에 매수 리미트 주문을 접수할 수 있다.
+ 트래일링 스탑 주문 _trailing stop order_ 을 사용하면, 가격이 고가에 크게 떨어질 때 현재 가격보다 조금 낮은 가격에 매도 리미트 주문을 접수할 수 있다. 마찬가지로, 현재 가격이 저가에 비해 크게 상승하면 현재가격보다 조금 높은 가격에 매수 리미트 주문을 접수할 수 있습니다.
 
-예를들어, (`sell`=True, `role`='both', `quote`='BTC', `base`='USDT', `amount`='0.1', `cond_type`='down_from_high', `cond_arg1`='-0.01', `cond_arg2`='-0.005')로 주문을 냈다고 하자. 트래일링 스탑 주문이 접수되고, 가격이 10,000 USDT에 도달한뒤 떨어지기 시작한 상황에서는 이 주문은 9,000 USDT (= 1000 USDT * (1 + `cond_arg1`))에 트리거 되어 리미트 오더를 8,955 USDT (= 9,000 USDT * (1 + `cond_arg2`))에 접수한다.
+예를들어, (`sell`=True, `role`='both', `quote`='BTC', `base`='USDT', `amount`='0.1', `cond_type`='down_from_high', `cond_arg1`='-0.01', `cond_arg2`='-0.005')로 주문을 냈다고 가정합니다. 트래일링 스탑 주문이 접수되고, 가격이 10,000 USDT에 도달한뒤 떨어지기 시작한 상황에서는 이 주문은 9,000 USDT (= 1000 USDT * (1 + `cond_arg1`))에 트리거 되어 리미트 오더를 8,955 USDT (= 9,000 USDT * (1 + `cond_arg2`))에 접수합니다.
 
-* 고점에서 하락 *down from high* 의 경우, `현재가` ≤ `고가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매도 리미트 오더를 접수한다.
+* 고점에서 하락 *down from high* 의 경우, `현재가` ≤ `고가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매도 리미트 오더를 접수합니다.
 
-* 저점에서 상승 *up from low* 의 경우, `현재가` ≥ `저가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매수 리미트 오더를 접수한다. 
+* 저점에서 상승 *up from low* 의 경우, `현재가` ≥ `저가` * (1 + `cond_arg1`)일 때, 가격이 `현재가` * (1 + `cond_arg2`)인 매수 리미트 오더를 접수합니다. 
 
 Parameter | Type | Required | Description
 ----------|------|----------|------|----------|------------
@@ -369,7 +369,7 @@ Parameter | Type | Required | Description
 `amount` | decimal | Required | 주문 수량.
 `cond_type` | string | Required | `"down_from_high"` 혹은 `"up_from_low"`.
 `cond_arg1` | decimal | Required | 고점에서 하락 *down from high* 의 경우, 고점 대비 가격 하락 비율.<br/>저점에서 상승 *up from low* 의 경우, 저점 대비 가격 상승 비율.   
-`cond_arg2` | decimal | Required | `cond_arg1` 관련 조건이 만족되면, `현재가` * (1 + `cond_arg2`) 가격에 리미트 주문을 접수한다.
+`cond_arg2` | decimal | Required | `cond_arg1` 관련 조건이 만족되면, `현재가` * (1 + `cond_arg2`) 가격에 리미트 주문을 접수합니다.
 
 
 <aside class="notice">
