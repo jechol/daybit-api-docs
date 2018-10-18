@@ -15,7 +15,7 @@ toc_footers:
 
 # Introduction
 
-Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcomes of using this API is your responsibility. Please refer [Terms of Service for Daybit API]https://www.daybit.com/policy/terms-api) for details.
+Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcomes of using this API is your responsibility. Please refer [Terms of Service for Daybit API](https://www.daybit.com/policy/terms-api) for details.
 
 You need to generate an API key pair from [Daybit](https://www.daybit.com) before using Daybit API. An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
 
