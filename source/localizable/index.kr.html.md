@@ -7,10 +7,11 @@ includes:
 search: true
 
 toc_footers:
- - <a href='/'>DAYBIT API Document - English</a>
- - <br/>
  - <a href='https://www.daybit.com'>DAYBIT</a>
+ - <a href='/'>DAYBIT API Document - English</a>
  - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for DAYBIT API</a> 
+ - <br/>
+ - <a href="https://github.com/daybit-exchange/daybit-api-docs"><img src="https://img.shields.io/badge/Github-daybit--api--docs-181717.svg?logo=github" /></a>
 ---
 
 # Introduction
