@@ -34,6 +34,8 @@ activate :autoprefixer do |config|
   config.inline   = true
 end
 
+activate :i18n
+
 # Github pages require relative links
 activate :relative_assets
 set :relative_links, true
@@ -47,6 +49,21 @@ configure :build do
   # activate :relative_assets
   # activate :asset_hash
   # activate :gzip
+end
+
+configure :development do
+  activate :livereload
+  set :debug_assets, true
+end
+
+configure :build do
+  activate :google_analytics do |ga|
+    # Google Analytics Account: DAYBIT
+    # Apps: DOC
+    ga.tracking_id = 'UA-127177858-2'
+  end
+
+  activate :minify_html
 end
 
 # Deploy Configuration
