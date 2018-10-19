@@ -1,5 +1,5 @@
 ---
-title: Daybit API Reference
+title: DAYBIT API Reference
 
 includes:
   - pydaybit
@@ -7,27 +7,27 @@ includes:
 search: true
 
 toc_footers:
- - <a href='/kr'>Daybit API Document - Korean</a>
+ - <a href='/kr'>DAYBIT API Document - Korean</a>
  - <br/>
- - <a href='https://www.daybit.com'>Daybit</a>
- - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for Daybit API</a> 
+ - <a href='https://www.daybit.com'>DAYBIT</a>
+ - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for DAYBIT API</a> 
 ---
 
 # Introduction
 
-Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcomes of using this API is your responsibility. Please refer [Terms of Service for Daybit API](https://www.daybit.com/policy/terms-api) for details.
+Target audience of this document is those who are capable of writing proper program source code. This document contains examples that might put your assets in danger, even losing your assets. You need to fully understand descriptions and functionalities of the source code before run them. Use this API at your own risk and all kinds of outcomes of using this API is your responsibility. Please refer [Terms of Service for DAYBIT API](https://www.daybit.com/policy/terms-api) for details.
 
-You need to generate an API key pair from [Daybit](https://www.daybit.com) before using Daybit API. An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
+You need to generate an API key pair from [DAYBIT](https://www.daybit.com) before using DAYBIT API. An API key pair has multiple types of authorization - receiving [Candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or [Order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations. Please refer [Authorization](#authorization) for details of authorization.
 
-There are two types of Daybit APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of APIs is used for asset trading, deposit or withdraw. Second type is a [API Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from Daybit API server. There are API subscriptions which includes price change of coins, information of one's wallet, result of one's order and so on.
+There are two types of DAYBIT APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of APIs is used for asset trading, deposit or withdraw. Second type is a [API Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from DAYBIT API server. There are API subscriptions which includes price change of coins, information of one's wallet, result of one's order and so on.
 
-Daybit APIs are implemented based on websocket connection and follow the format defined in [Phoenix framework](https://phoenixframework.org/). Daybit also provides [Pydaybit](#pydaybit) written in Python which allows users to easily use Daybit API.
+DAYBIT APIs are implemented based on websocket connection and follow the format defined in [Phoenix framework](https://phoenixframework.org/). DAYBIT also provides [Pydaybit](#pydaybit) written in Python which allows users to easily use DAYBIT API.
 
 If you are not familiar with programming, it would be better to take a look at examples of [Pydaybit](#pydaybit) first.
  
 # Authorization
 
-Before you are using Daybit APIs, you first need to generate API key pair with proper authorization. An API key pair has multiple types of authorization - receiving [candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or a [order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations.
+Before you are using DAYBIT APIs, you first need to generate API key pair with proper authorization. An API key pair has multiple types of authorization - receiving [candle data](https://en.wikipedia.org/wiki/Candlestick_chart) or a [order book](https://en.wikipedia.org/wiki/Order_book_(trading)), checking personal assets, trading personal assets, and withdrawal authorizations.
 
 The usage of APIs is restricted by given right to each API key pair. You would get `unauthenticated` response error_code if you called an API that is not accessible from your API key pair. Please look above for types of API key pair and details of it.
 
@@ -47,23 +47,23 @@ You can generate maximum 5 API key pairs per account in [API Keys](https://www.d
 
 # Host address
 
-* Daybit API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
+* DAYBIT API endpoint : [wss://api.daybit.com/v1/user_api_socket/websocket/](wss://api.daybit.com/v1/user_api_socket/websocket/)
 
 # APIs
-There are two types of Daybit's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw. Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. Based on type of the notification, it includes price change of coins, information of one's wallet, result of one's order and so on.
+There are two types of DAYBIT's APIs. First one is an [API Call](#api-calls) - client sends a request and server responds accordingly. Usually this type of a call is used for asset trading, deposit or withdraw. Second type is a [Subscription](#subscriptions) which allows you to subscribe to an API and keep getting a notification from the server. Based on type of the notification, it includes price change of coins, information of one's wallet, result of one's order and so on.
 
 ## Channels
 Channels are based on a simple idea of [Phoenix](https://phoenixframework.org/) that sending and receiving messages. Senders broadcast messages about [topics](#topics). Receivers subscribe to a channel which has a specific [topics](#topics) so that they can get those messages. Senders and receivers can switch roles on the same topic at any time. For details, refer to [Phoenix Documents](https://hexdocs.pm/phoenix/channels.html).
 
 ### Topics
-Topics are string identifiers of [channels](#channels) that the various layers use in order to make sure messages end up in the right place. Daybit APIs are using following types of topics.
+Topics are string identifiers of [channels](#channels) that the various layers use in order to make sure messages end up in the right place. DAYBIT APIs are using following types of topics.
 
 * [`/api`](#api-calls)
 * [`/subscription:coins`](#coins)
 * [`/subscription:market_summaries;<market_summary_intvl>`](#market_summaries)
 
 ### Events
-Event is a `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. Daybit [API Calls](#api-calls) include types of request in event.
+Event is a `string` representing specific actions of the channel. `"phx_join"` is for joinning the channel and `"phx_leave"` is for leaving the channel. DAYBIT [API Calls](#api-calls) include types of request in event.
  
 ### Messages
 
@@ -103,7 +103,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_wdrl())
 < {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
 ```
 
-Following properties is delivered in the format of [JSON](https://en.wikipedia.org/wiki/JSON) object. The example shows messages on the websocket between a client and Daybit API server when the client calls `create_wdrl`.
+Following properties is delivered in the format of [JSON](https://en.wikipedia.org/wiki/JSON) object. The example shows messages on the websocket between a client and DAYBIT API server when the client calls `create_wdrl`.
 
 * `topic` - The string identifier of a channel. for example [`"/api"`](#api-calls) or [`"/subscription:coins"`](#coins)
 * `event` - The string event name. for example [`"create_order"`](#create_order), [`"cancel_order"`](#cancel_order), `"phx_join"`, `"phx_leave"`, and so on
@@ -112,7 +112,7 @@ Following properties is delivered in the format of [JSON](https://en.wikipedia.o
 * `join_ref` - ref of joinning the channel
 
 ## API Calls
-You may connect to [Daybit API endpoint](#host-address) through a websocket and join `/api` channel. Then you can  call a API by sending message with proper `event` among followings.
+You may connect to [DAYBIT API endpoint](#host-address) through a websocket and join `/api` channel. Then you can  call a API by sending message with proper `event` among followings.
 
 ### Channel of API Calls
 All API calls should use `/api` channel.
@@ -181,7 +181,7 @@ asyncio.get_event_loop().run_until_complete(daybit_coins())
 < {"topic":"/subscription:coins","ref":"1","payload":{},"event":"phx_close"}
 ```
 
-For using API Subscriptions, first you need to join `/subscription:<subtopic>` channel and send `request` event. Once you are successfully subscribed by joinning a channel, Daybit API server sends `notification` for any kind of updated data. 
+For using API Subscriptions, first you need to join `/subscription:<subtopic>` channel and send `request` event. Once you are successfully subscribed by joinning a channel, DAYBIT API server sends `notification` for any kind of updated data. 
 
 ### API Subscription Channels
 Subscription Channels are following. The topic of each channels has `/subscription:<subtopic>` format. For example, In case of the topic of `coins` channel is `/subscription:coins`.
@@ -285,11 +285,11 @@ There are two types of response formats. Based on the result of both API calls a
 
 # Libraries
 
-Daybit is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). Daybit API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, Daybit officially provides a wrapper for Python language.
+DAYBIT is using [Elixir](https://elixir-lang.org/) language and built on [Phoenix framework](https://phoenixframework.org/). DAYBIT API can be accessed from Phoenix client, which makes it easy to connect to Phoenix sockets. For now, DAYBIT officially provides a wrapper for Python language.
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
-For other languages, please refer below libraries to implement the features of Daybit API.
+For other languages, please refer below libraries to implement the features of DAYBIT API.
 
 * Phoenix.js(Javascript): [https://github.com/phoenixframework/phoenix](https://github.com/phoenixframework/phoenix/)
 * SwiftPhoenixClient(Swift): [https://github.com/davidstump/SwiftPhoenixClient](https://github.com/davidstump/SwiftPhoenixClient/)
@@ -373,7 +373,7 @@ Decimal number. This is `string` data type to precisely express the exact amount
  
 * `"string"`
 * `"bitcoin"`
-* `"Daybit"`
+* `"DAYBIT"`
 
  
 ### Boolean
@@ -583,7 +583,7 @@ identifier: `id`
 | order_id | integer | Trade order id |
 | fee | decimal | Fee |
 | sell | boolean | Selling (`true`) or buying (`false`) |
-| counterpart | string | (`"user"`, `"daybit"`, `"project"`), The counterparty of the trade. `"daybit"` and `"project"` means Daybit exchange and another coin project team, respectively. |
+| counterpart | string | (`"user"`, `"daybit"`, `"project"`), The counterparty of the trade. `"daybit"` and `"project"` means DAYBIT exchange and another coin project team, respectively. |
 
 ### Transaction Summary
 

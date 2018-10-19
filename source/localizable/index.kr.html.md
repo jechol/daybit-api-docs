@@ -7,10 +7,10 @@ includes:
 search: true
 
 toc_footers:
- - <a href='/'>Daybit API Document - English</a>
+ - <a href='/'>DAYBIT API Document - English</a>
  - <br/>
- - <a href='https://www.daybit.com'>Daybit</a>
- - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for Daybit API</a> 
+ - <a href='https://www.daybit.com'>DAYBIT</a>
+ - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for DAYBIT API</a> 
 ---
 
 # Introduction
@@ -203,7 +203,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 * [`my_airdrop_histories`](#my_airdrop_histories)
 
 ### Event of API Subscriptions
- `request`는 보내기 이벤트, `notification`는 받기 이벤트입니다. 클라이언트와 서버가 전송하는 [메세지](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) _Message_ 는 각각 `request` 이벤트나 `notification` 이벤트를 가집니다. 한 API를 구독하면, 다시 말해, 해당하는 채널에 참가하여 `request` 이벤트를 보내면, 그 채널에서 `init`이나 `upsert` [액션](#action) _Action_ 을 응답으로 받습니다. 그 이후로는 `notification`이벤트와 함께 `insert`, `update`, `upsert`, `delete` 중 하나의 액션을 받습니다. 더 자세한 사항은 [액션](#action) 항목을 참고하십시오.
+ `request`는 보내기 이벤트, `notification`는 받기 이벤트입니다. 클라이언트와 서버가 전송하는 [메세지](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html)는 각각 `request` 이벤트나 `notification` 이벤트를 가집니다. 한 API를 구독하면, 다시 말해, 해당하는 채널에 참가하여 `request` 이벤트를 보내면, 그 채널에서 `init`이나 `upsert` [액션](#action)을 응답으로 받습니다. 그 이후로는 `notification`이벤트와 함께 `insert`, `update`, `upsert`, `delete` 중 하나의 액션을 받습니다. 더 자세한 사항은 [액션](#action) 항목을 참고하십시오.
 
 ### Rate Limit of API Subscriptions
 `request` 이벤트를 보내는 데에 초당 제한이 있습니다.
@@ -228,7 +228,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 ## Response format
 
-여기에는 두가지 응답 형식이 있습니다. API 호출이나 구독의 결과에 따라 성공, 실패 모델 중에 하나를 받을 것 입니다. 오른쪽의 성공과 실패 예제를 참고 하십시오. 또한 아래에서 [오류 목록](#error-list) _Error List_ 을 찾아 보십시오.
+여기에는 두가지 응답 형식이 있습니다. API 호출이나 구독의 결과에 따라 성공, 실패 모델 중에 하나를 받을 것 입니다. 오른쪽의 성공과 실패 예제를 참고 하십시오. 또한 아래에서 [오류 목록](#error-list)을 찾아 보십시오.
 
 > Success
 
@@ -249,7 +249,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 # Libraries
 
-데이빗은 [엘릭서](https://elixir-lang.org/) _Elixir_ 언어를 사용하고 [피닉스 프레임워크](https://phoenixframework.org/)를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 _wrapper_ 를 제공합니다. 
+데이빗은 [엘릭서](https://elixir-lang.org/) 언어를 사용하고 [피닉스 프레임워크](https://phoenixframework.org/)를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 _wrapper_ 를 제공합니다. 
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
@@ -337,7 +337,7 @@ API를 구독하면, 서버에서 오는 메시지는 데이터를 어떻게 처
  
 * `"string"`
 * `"bitcoin"`
-* `"Daybit"`
+* `"DAYBIT"`
 
  
 ### Boolean
