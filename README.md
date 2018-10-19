@@ -19,3 +19,12 @@ $ bundler exec middleman server
 $ bundler exec middleman build --clean
 ```
 
+## Document List
+
+### DAYBIT API DOC 
+> [ENGLISH](source/localizable/index.html.md)   
+> [KOREAN](source/localizable/index.kr.html.md)
+
+### PYDAYBIT DOC:
+> [ENGLISH](source/includes/_pydaybit.md)   
+> [KOREAN](source/includes/_pydaybit.kr.md)
