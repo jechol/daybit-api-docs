@@ -1055,7 +1055,7 @@ asyncio.get_event_loop().run_until_complete(daybit_order_books())
 
 Subscribe to order book by unit price. In the data of order book, there's no `id` so you need to compare it with `min_price` or `max_price` to identify the order book. `sell_vol` is aggregated volumes of the range (`min_price`, `max_price`] and `buy_vol` is aggregated volumes of the range [`min_price`, `max_price`). There is not more than one range that both `sell_vol` and `buy_vol` are larger than zero.
 
-Valid `price_intvl`s are [1, 10, 100, 1000] × `tick_price` of a [market](#markets). 
+Valid `price_intvl`s is one of `[1, 10, 100, 1000] × tick_price` of a [market](#markets). 
 
 * Topic: `/subscription:order_books;<quote>;<base>;<price_intvl>`
 

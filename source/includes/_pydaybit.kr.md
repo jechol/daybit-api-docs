@@ -1054,7 +1054,7 @@ asyncio.get_event_loop().run_until_complete(daybit_order_books())
 
 가격 단위로 나뉜 오더북을 구독합니다. 오더북 데이터에는 `id`가 없기 때문에 `min_price`와 `max_price`로 구별해야 합니다. `sell_vol`의 경우 (`min_price`, `max_price`]의 구간의 물량을 합한 값이고, `buy_vol`의 경우 [`min_price`, `max_price`)의 구간의 물량을 합한 값입니다. `sell_vol`과 `buy_vol`이 모두 양수인 경우는 많아도 한 구간입니다.
 
-`price_intvl`은 _[시장](#markets)의 `tick_price`_ × [1, 10, 100, 1000] 중에 하나를 사용할 수 있습니다.
+`price_intvl`은 [시장](#markets)의 `tick_price × [1, 10, 100, 1000]` 중에 하나를 사용할 수 있습니다.
 
 * Topic: `/subscription:order_books;<quote>;<base>;<price_intvl>`
 
