@@ -17,9 +17,9 @@ toc_footers:
 
 이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었습니다. 또한 당신의 자산에 손해를 가져다 줄 수 있는 예제가 포함되어 있습니다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 합니다. API 사용에 대한 모든 책임은 본인에게 있습니다. 자세한 내용은 [데이빗 API 이용약관](https://www.daybit.com/policy/terms-api)을 참고하십시오.
 
-데이빗 API를 이용하기에 앞서 [데이빗](https://www.daybit.com)에서 API 키페어를 발급받아야 합니다. API 키페어는 여러가지 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. 자세한 내용은 [권한](#authorization) _Authorization_ 항목을 참고하십시오.
+데이빗 API를 이용하기에 앞서 [데이빗](https://www.daybit.com)에서 API 키페어를 발급받아야 합니다. API 키페어는 여러가지 권한 - [캔들 차트](https://en.wikipedia.org/wiki/Candlestick_chart)나 [오더북](https://en.wikipedia.org/wiki/Order_book_(trading)) 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. 자세한 내용은 [권한](#authorization) 항목을 참고하십시오.
 
-데이빗 API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls) _API Call_ 이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 데이빗 API 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions) _API Subscription_ 입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
+데이빗 API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls) 이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 데이빗 API 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions) 입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
 
 데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [피닉스 프레임워크](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받습니다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공합니다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼 _Wrapper_ 입니다. 
 
