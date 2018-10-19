@@ -249,7 +249,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 
 # Libraries
 
-데이빗은 [엘릭서](https://elixir-lang.org/) _Elixir_ 언어를 사용하고 [피닉스 프레임워크](https://phoenixframework.org/)를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 _wrapper_ 를 제공합니다. 
+데이빗은 [엘릭서](https://elixir-lang.org/) 언어를 사용하고 [피닉스 프레임워크](https://phoenixframework.org/)를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 _wrapper_ 를 제공합니다. 
 
 * PyDaybit(Python): [https://github.com/daybit-exchange/pydaybit](https://github.com/daybit-exchange/pydaybit/)
 
