@@ -169,7 +169,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-코인은 사거나 파는 주문을 생성합니다. 데이빗 API 서버에 요청할 수 있는 다섯 가지의 주문 종류가 있습니다 - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), [Trailling Stop Order](#trailing-stop-order).
+코인은 사거나 파는 주문을 생성합니다. 데이빗 API 서버에 요청할 수 있는 다섯 가지의 주문 종류가 있습니다 - [리미트 주문](#limit-order), [테이커 주문](#taker-order), [메이커 주문](#maker-order), [스탑 리미트 주문](#stop-limit-order), [트레일링 스탑 주문](#trailing-stop-order).
  
 잘못된 주문(주문 무효)의 경우는 다음과 같습니다
 
