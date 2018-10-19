@@ -1,3 +1,6 @@
+# DAYBIT-API-DOCS
+This is [Documents for DAYBIT APIs](https://docs.daybit.com/) and [Pydaybit](https://github.com/daybit-exchange/pydaybit).
+
 ## Getting Set up
 
 ### Installation
