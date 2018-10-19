@@ -7,10 +7,10 @@ includes:
 search: true
 
 toc_footers:
- - <a href='/'>Daybit API Document - English</a>
+ - <a href='/'>DAYBIT API Document - English</a>
  - <br/>
- - <a href='https://www.daybit.com'>Daybit</a>
- - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for Daybit API</a> 
+ - <a href='https://www.daybit.com'>DAYBIT</a>
+ - <a href='https://www.daybit.com/policy/terms-api'>Terms of Service for DAYBIT API</a> 
 ---
 
 # Introduction
@@ -337,7 +337,7 @@ API를 구독하면, 서버에서 오는 메시지는 데이터를 어떻게 처
  
 * `"string"`
 * `"bitcoin"`
-* `"Daybit"`
+* `"DAYBIT"`
 
  
 ### Boolean

@@ -1,5 +1,5 @@
 # **Pydaybit**
-Pydaybit is an API wrapper for Daybit exchange written in Python. The code is available in [Pydaybit Repository](https://github.com/daybit-exchange/pydaybit). 
+Pydaybit is an API wrapper for DAYBIT exchange written in Python. The code is available in [Pydaybit Repository](https://github.com/daybit-exchange/pydaybit). 
 
 
 ## **Disclaimer**
@@ -83,7 +83,7 @@ asyncio.get_event_loop().run_until_complete(daybit_get_server_time())
 1537418605426 # unix_timestamp
 ```
 
-Get current time of Daybit API server in Unix miliseconds timestamp format.
+Get current time of DAYBIT API server in Unix miliseconds timestamp format.
 
 * Topic: `/api`
 
@@ -170,7 +170,7 @@ asyncio.get_event_loop().run_until_complete(daybit_create_order_sell())
 }
 ```
 
-Create a order to sell or buy coin. There are five types of orders you can request to Daybit API server - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
+Create a order to sell or buy coin. There are five types of orders you can request to DAYBIT API server - [Limit order](#limit-order), [Taker Order](#taker-order), [Maker Order](#maker-order), [Stop Limit Order](#stop-limit-order), and [Trailling Stop Order](#trailing-stop-order).
  
 The conditions of invalid order (void order) are,
 
@@ -502,7 +502,7 @@ Field | Description
 `num_canceled_orders` | Number of successfully canceled orders.
 
 <aside class="notice">
- Daybit API server is expecting orders in CSV format (ex, "1,2,3"). However, you should use a list of order <code>id</code>s if you are using Pydaybit.
+ DAYBIT API server is expecting orders in CSV format (ex, "1,2,3"). However, you should use a list of order <code>id</code>s if you are using Pydaybit.
  </aside>
 
 
