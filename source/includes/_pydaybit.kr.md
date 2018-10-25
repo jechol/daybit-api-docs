@@ -1,5 +1,5 @@
 # **Pydaybit**
-Pydaybit은 파이썬으로 작성된 데이빗 거래소 API 레퍼 _warppaer_ 입니다. 코드는 [Pydaybit 저장소](https://github.com/daybit-exchange/pydaybit)에 있습니다. 
+Pydaybit은 파이썬으로 작성된 데이빗 거래소 API 레퍼 _wrapper_ 입니다. 코드는 [Pydaybit 저장소](https://github.com/daybit-exchange/pydaybit)에 있습니다. 
 
 
 ## **Disclaimer**
@@ -55,7 +55,7 @@ async def daybit_example():
 asyncio.get_event_loop().run_until_complete(daybit_example())
 ```
 
-API 키패어는 환경 변수 설정 없이도 사용할 수 있습니다. 예제를 참고하십시오.
+API 키페어는 환경 변수 설정 없이도 사용할 수 있습니다. 예제를 참고하십시오.
 
 ## get_server_time()
 
