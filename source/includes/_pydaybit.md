@@ -11,8 +11,7 @@ USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESP
 > Pydaybit installation
 
 ```shell
-$ git clone https://github.com/daybit-exchange/pydaybit
-$ pip install -e pydaybit
+$ pip install --upgrade pydaybit
 ```
   
 For the installation, please look right column.

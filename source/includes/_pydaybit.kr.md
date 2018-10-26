@@ -10,8 +10,7 @@ _이 소프트웨어의 사용에 대한 책임은 사용자 본인에게 있습
 > Pydaybit installation
 
 ```shell
-$ git clone https://github.com/daybit-exchange/pydaybit
-$ pip install -e pydaybit
+$ pip install --upgrade pydaybit
 ```
 
 설치 방법은 오른쪽을 참고 하십시오.
