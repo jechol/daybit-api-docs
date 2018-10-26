@@ -22,7 +22,7 @@ toc_footers:
 
 데이빗 API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 [API 호출](#api-calls) 이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 데이빗 API 서버에서 지속적으로 알림을 보내 주는 [API 구독](#subscriptions) 입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.
 
-데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [피닉스 프레임워크](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받습니다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공합니다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼 _Wrapper_ 입니다. 
+데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, [피닉스 프레임워크](https://phoenixframework.org)에서 정의한 방식으로 메시지를 주고 받습니다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 [Pydaybit](#pydaybit)를 제공합니다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼 _wrapper_ 입니다. 
 
 만약 프로그래밍에 익숙하지 않다면 [Pydaybit](#pydaybit)의 예제를 먼저 읽어보는 것을 추천합니다.
  
@@ -39,7 +39,7 @@ API 사용은 API 키페어에 부여된 권한에 의해 제한됩니다. 만�
 | trade | 거래 관련 API에 대한 접근 권한. API 키페어 생성 시에 `거래 관련 API`를 포함합니다.
 | transaction | 입금과 출금 관련 API에 대한 접근 권한. API 키페어 생성 시에 `출금 관련 API`를 포함합니다.
 
-마이페이지의 [API Keys](https://www.daybit.com/mypage/api-managements) 탭에서 계정당 5개의 API 키패어를 생성 할 수 있습니다. 각 API 키페어는 다음 중 하나의 권한들을 갖습니다.
+마이페이지의 [API Keys](https://www.daybit.com/mypage/api-managements) 탭에서 계정당 5개의 API 키페어를 생성 할 수 있습니다. 각 API 키페어는 다음 중 하나의 권한들을 갖습니다.
 
 * `public_data`
 * `public_data`, `private_data`, `trade`
