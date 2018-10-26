@@ -11,7 +11,7 @@ USE THE SOFTWARE AT YOUR OWN RISK. THE AUTHORS AND ALL AFFILIATES ASSUME NO RESP
 > Pydaybit installation
 
 ```shell
-$ pip install --upgrade pydaybit
+$ pip3 install --upgrade pydaybit
 ```
   
 For the installation, please look right column.
