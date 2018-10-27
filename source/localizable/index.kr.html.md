@@ -289,7 +289,7 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 * `order_out_of_price_range`: 가격의 범위가 잘못됨. (판매: 현재가의 20% ~ 200%, 구매: 50% ~ 500%)
 * `order_exceeded_max_tstops`: 트레일링 스탑 주문의 갯수 제한을 넘음 (마켓당 2개)
 * `order_suspended_due_to_frequent_canceling`: 빈번한 주문 취소로 인한 주문 중지
-* `order_exceeds_my_asset_values`: 주문이 내 자산을 초과함
+* `order_exceeded_asset_values`: 주문이 내 자산을 초과함
 * `order_already_closed`: 주문이 이미 체결됨
 * `order_exceeded_void_rate`: 잘못된 주문의 비율이 제한을 초과해 10분간 주문 중지 (80%)
 * `order_exceeded_max_orders`: 채결되지 않은 주문이 제한을 초과함 (100개)
