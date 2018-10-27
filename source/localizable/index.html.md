@@ -325,7 +325,7 @@ For other languages, please refer below libraries to implement the features of D
 * `order_out_of_price_range`: Out of price range (Selling: 20% ~ 200%, Buying: 50% ~ 500%)
 * `order_exceeded_max_tstops`: Exceeded maximum Trailing Stop order count (currently 2 per market)
 * `order_suspended_due_to_frequent_canceling`: Order suspended due to frequent canceling
-* `order_exceeds_my_asset_values`: Order exceeded my asset values
+* `order_exceeded_asset_values`: Order exceeded my asset values
 * `order_already_closed`: Order already closed
 * `order_exceeded_void_rate`: Order suspended for 10 minutes because invalid order rate exceeded specific value (currently 80%)
 * `order_exceeded_max_orders`: Order exceeded maximum number of outstanding orders (currently 100)
