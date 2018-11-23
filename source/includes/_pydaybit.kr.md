@@ -1779,3 +1779,78 @@ Parameter | Type | Required | Description
 ----------|------|----------|------------
 `size` | integer | Optional | 가져올 거래량의 갯수. `size` ≤  30.
 
+
+## day_avgs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_day_avgs():
+    async with Daybit() as daybit:
+        pprint(await daybit.day_avgs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_day_avgs())
+```
+
+> Example Response
+
+```python
+{1542844800000: {'avg': '63115476.62825952',
+                 'end_time': 1542931200000,
+                 'start_time': 1542844800000}}
+```
+
+> Example of Day Contriubtion 
+
+```python 
+import asyncio
+from datetime import datetime
+from decimal import Decimal
+
+from pydaybit import Daybit
+
+
+async def daybit_day_contribution():
+    async with Daybit() as daybit:
+        day_avgs = (await daybit.day_avgs())[0]
+        my_day_avgs = (await daybit.my_day_avgs())[0]
+
+        start_time = my_day_avgs['start_time']
+        end_time = my_day_avgs['end_time']
+
+        day_avg = Decimal(day_avgs['avg'])
+        my_day_avg = Decimal(my_day_avgs['avg'])
+
+        print('[{} - {}] Estimated My Contribution : {}'.format(datetime.fromtimestamp(start_time / 1000),
+                                                                datetime.fromtimestamp(end_time / 1000),
+                                                                (my_day_avg / day_avg).quantize(
+                                                                    Decimal('0.0001'))))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_day_contribution())
+```
+
+```Shell
+# Output
+[2018-11-23 09:00:00 - 2018-11-24 09:00:00] Estimated My Contribution : 0.0001
+```
+
+단위 시간 동안, 리워드로 분배된 DAY 총량의 평균을 구독합니다.
+DAY 기여율을 구하기 위해 사용할 수 있습니다. `Example of Day Contriubtion` 예제를 참고하십시오.
+
+* Topic: `/subscription:day_avgs`
+
+* Request: `upsert`
+
+* Notification: `upsert`
+
+* Sort: -
+
+* Response: [DayAverage](#day-average)

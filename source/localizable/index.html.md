@@ -631,3 +631,15 @@ identifier: `start_time`
 | start_time | unix_timestamp | Start Time |
 | end_time | unix_timestamp | End Time |
 | usd_amount | decimal | Aggregated volume between `start_time` and `end_time` |
+
+
+### Day Average
+
+identifier: `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | Start Time |
+| end_time | unix_timestamp | End Time |
+| avg | decimal | Average of total volume of distributed DAY as rewards between `start_time` and  `end_time` |
+
