@@ -1855,4 +1855,58 @@ You would use to calculate your own DAY contribution. See `Example of Day Contri
 * Sort: -
 
 * Response: [DayAverage](#day-average)
-  
+ 
+
+## div_plans()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_div_plans():
+    async with Daybit() as daybit:
+        pprint(await daybit.div_plans())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_div_plans()) 
+```
+
+> Example Response
+
+```python
+{1540339200000: {'div_btc': '21.31789479',
+                 'div_count': 1128,
+                 'end_time': 1540425600000,
+                 'start_time': 1540339200000},
+
+ ...
+
+ 1542844800000: {'div_btc': '3.83510361',
+                 'div_count': 417,
+                 'end_time': 1542931200000,
+                 'start_time': 1542844800000}}
+```
+
+Subscribe BTC rewards.
+
+* Topic: `/subscription:div_plans`
+
+* Request: `upsert`
+
+* Notification: `insert`, `upsert`
+
+* Sort: by `end_time` in `desc`
+
+* Response: [DivPlan](#div-plan)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | The number of `DivPlan` for retrieving. `size` ≤  30.
+`to_end_time` | unix_timestamp | Optional | a limit respond to `end_time`.

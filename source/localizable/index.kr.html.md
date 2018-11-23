@@ -607,3 +607,15 @@ identifier: `start_time`
 | start_time | unix_timestamp | 시작 시간 |
 | end_time | unix_timestamp | 종료 시간 |
 | avg | decimal | 리워드로 분배된 DAY 총량의 `start_time`과 `end_time` 사이의 평균|
+
+
+### Div Plan
+
+identifier: `end_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | 시작 시간 |
+| end_time | unix_timestamp | 종료 시간 |
+| div_count | integer | BTC 리워드를 받을 사람 수 |
+| div_btc | decimal | 총 BTC 리워드 |

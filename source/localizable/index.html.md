@@ -643,3 +643,14 @@ identifier: `start_time`
 | end_time | unix_timestamp | End Time |
 | avg | decimal | Average of total volume of distributed DAY as rewards between `start_time` and  `end_time` |
 
+
+### Div Plan
+
+identifier: `end_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | Start Time |
+| end_time | unix_timestamp | End Time |
+| div_count | integer | The number of BTC reward receivers |
+| div_btc | decimal | Total BTC rewards |

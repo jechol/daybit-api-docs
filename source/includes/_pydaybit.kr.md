@@ -1854,3 +1854,58 @@ DAY 기여율을 구하기 위해 사용할 수 있습니다. `Example of Day Co
 * Sort: -
 
 * Response: [DayAverage](#day-average)
+
+
+## div_plans()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_div_plans():
+    async with Daybit() as daybit:
+        pprint(await daybit.div_plans())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_div_plans()) 
+```
+
+> Example Response
+
+```python
+{1540339200000: {'div_btc': '21.31789479',
+                 'div_count': 1128,
+                 'end_time': 1540425600000,
+                 'start_time': 1540339200000},
+
+ ...
+
+ 1542844800000: {'div_btc': '3.83510361',
+                 'div_count': 417,
+                 'end_time': 1542931200000,
+                 'start_time': 1542844800000}}
+```
+
+BTC 리워드를 구독합니다.
+
+* Topic: `/subscription:div_plans`
+
+* Request: `upsert`
+
+* Notification: `insert`, `upsert`
+
+* Sort: by `end_time` in `desc`
+
+* Response: [DivPlan](#div-plan)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | 가져올 `DivPlan`의 갯수. `size` ≤  30.
+`to_end_time` | unix_timestamp | Optional | `end_time` 기준 제한
