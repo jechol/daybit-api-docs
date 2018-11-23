@@ -1989,3 +1989,48 @@ You would use to calculate your own DAY contribution. See `Example of Day Contri
 * Sort: -
 
 * Response: [DayAverage](#day-average)
+
+
+## my_divs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_divs():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_divs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_divs())
+```
+
+> Example Response
+
+```python
+{}
+```
+
+Subscribe my BTC rewards.
+
+* Topic: `/subscription:my_divs`
+
+* Request: `upsert`
+
+* Notification: `insert`, `upsert`
+
+* Sort: by `end_time` in `desc`
+
+* Response: [DivPlan](#div-plan)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | The number of `DivPlan` for retrieving. `size` ≤  30.
+`to_end_time` | unix_timestamp | Optional | a limit respond to `end_time`.

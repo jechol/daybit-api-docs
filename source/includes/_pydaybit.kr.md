@@ -1988,3 +1988,48 @@ DAY 기여율을 구하기 위해 사용할 수 있습니다. `Example of Day Co
 * Sort: -
 
 * Response: [DayAverage](#day-average)
+
+
+## my_divs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_divs():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_divs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_divs())
+```
+
+> Example Response
+
+```python
+{}
+```
+
+나의 BTC 리워드를 구독합니다.
+
+* Topic: `/subscription:my_divs`
+
+* Request: `upsert`
+
+* Notification: `insert`, `upsert`
+
+* Sort: by `end_time` in `desc`
+
+* Response: [DivPlan](#div-plan)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | 가져올 `DivPlan`의 갯수. `size` ≤  30.
+`to_end_time` | unix_timestamp | Optional | `end_time` 기준 제한
