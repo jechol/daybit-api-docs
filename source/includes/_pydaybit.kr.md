@@ -1948,3 +1948,43 @@ asyncio.get_event_loop().run_until_complete(daybit_my_trade_vols())
 
 * Response: [TradeVolume](#trade-volume)
 
+
+## my_day_avgs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_day_avgs():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_day_avgs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_day_avgs())
+```
+
+> Example Response
+
+```python
+[{'avg': '200.00000000',
+  'end_time': 1543017600000,
+  'start_time': 1542931200000}]
+```
+
+단위 시간 동안 나의 DAY 평균 보유량을 구독합니다.
+DAY 기여율을 구하기 위해 사용할 수 있습니다. `Example of Day Contriubtion` 예제를 참고하십시오.
+
+* Topic: `/subscription:my_day_avgs`
+
+* Request: `init`
+
+* Notification: `init`
+
+* Sort: -
+
+* Response: [DayAverage](#day-average)

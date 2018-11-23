@@ -1949,3 +1949,43 @@ Subscribe my trade volume in USD.
 
 * Response: [TradeVolume](#trade-volume)
 
+
+## my_day_avgs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_day_avgs():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_day_avgs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_day_avgs())
+```
+
+> Example Response
+
+```python
+[{'avg': '200.00000000',
+  'end_time': 1543017600000,
+  'start_time': 1542931200000}]
+```
+
+Subscribe the average of my DAY volume response to a unit period.
+You would use to calculate your own DAY contribution. See `Example of Day Contriubtion` example.
+
+* Topic: `/subscription:my_day_avgs`
+
+* Request: `init`
+
+* Notification: `init`
+
+* Sort: -
+
+* Response: [DayAverage](#day-average)
