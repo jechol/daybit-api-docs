@@ -620,3 +620,14 @@ identifier: `id`
 | amount | decimal | Airdrop amount |
 | description | string | Airdrop description |
 | airdropped_at | unix_timestamp | Airdrop time |
+
+
+### Trade Volume
+
+identifier: `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | Start Time |
+| end_time | unix_timestamp | End Time |
+| usd_amount | decimal | Aggregated volume between `start_time` and `end_time` |

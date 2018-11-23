@@ -585,3 +585,14 @@ identifier: `id`
 | amount | decimal | 에어드랍 수량 |
 | description | string | 에어드랍 설명 |
 | airdropped_at | unix_timestamp | 에어드랍 시간 |
+
+
+### Trade Volume
+
+identifier: `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | 시작 시간 |
+| end_time | unix_timestamp | 종료 시간 |
+| usd_amount | decimal | `start_time`과 `end_time` 사이의 거래량 |

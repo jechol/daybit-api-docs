@@ -1720,3 +1720,62 @@ Parameter | Type | Required | Description
 ----------|------|----------|------------
 `to_id` | integer | Optional | `id`가 `to_id`보다 작은 당신의 에어드랍을 가져옵니다.
 `size` | integer | Optional | 가져올 에어드랍 기록의 갯수. `size` ≤  30.
+
+
+## trade_vols()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_trade_vols():
+    async with Daybit() as daybit:
+        pprint(await daybit.trade_vols(size=5))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_trade_vols())
+```
+
+> Example Response
+
+```python
+{1542412800000: {'end_time': 1542499200000,
+                 'start_time': 1542412800000,
+                 'usd_amount': '0'},
+ 1542499200000: {'end_time': 1542585600000,
+                 'start_time': 1542499200000,
+                 'usd_amount': '0'},
+ 1542585600000: {'end_time': 1542672000000,
+                 'start_time': 1542585600000,
+                 'usd_amount': '0'},
+ 1542672000000: {'end_time': 1542758400000,
+                 'start_time': 1542672000000,
+                 'usd_amount': '23340096.41952102'},
+ 1542758400000: {'end_time': 1542844800000,
+                 'start_time': 1542758400000,
+                 'usd_amount': '2970733.71822306'}}
+```
+
+데이빗 거래량의 USD 환산 금액을 구독합니다.
+
+* Topic: `/subscription:trade_vols`
+
+* Request: `upsert`
+
+* Notification: `upsert`
+
+* Sort: by `start_time` in `desc`
+
+* Response: [TradeVolume](#trade-volume)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | 가져올 거래량의 갯수. `size` ≤  30.
+
