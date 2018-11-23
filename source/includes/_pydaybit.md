@@ -1910,3 +1910,42 @@ Parameter | Type | Required | Description
 ----------|------|----------|------------
 `size` | integer | Optional | The number of `DivPlan` for retrieving. `size` ≤  30.
 `to_end_time` | unix_timestamp | Optional | a limit respond to `end_time`.
+
+
+## my_trade_vols()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_trade_vols():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_trade_vols())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_trade_vols())
+```
+
+> Example Response
+
+```python
+[{'end_time': 1543017600000, 'start_time': 1542931200000, 'usd_amount': '0'}]
+```
+
+Subscribe my trade volume in USD.
+
+* Topic: `/subscription:my_trade_vols`
+
+* Request: `init`
+
+* Notification: `init`
+
+* Sort: -
+
+* Response: [TradeVolume](#trade-volume)
+

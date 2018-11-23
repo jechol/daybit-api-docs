@@ -1909,3 +1909,42 @@ Parameter | Type | Required | Description
 ----------|------|----------|------------
 `size` | integer | Optional | 가져올 `DivPlan`의 갯수. `size` ≤  30.
 `to_end_time` | unix_timestamp | Optional | `end_time` 기준 제한
+
+
+## my_trade_vols()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_trade_vols():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_trade_vols())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_trade_vols())
+```
+
+> Example Response
+
+```python
+[{'end_time': 1543017600000, 'start_time': 1542931200000, 'usd_amount': '0'}]
+```
+
+나의 거래량의 USD 환산 금액을 구독합니다.
+
+* Topic: `/subscription:my_trade_vols`
+
+* Request: `init`
+
+* Notification: `init`
+
+* Sort: -
+
+* Response: [TradeVolume](#trade-volume)
+
