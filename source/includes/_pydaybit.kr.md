@@ -1720,3 +1720,316 @@ Parameter | Type | Required | Description
 ----------|------|----------|------------
 `to_id` | integer | Optional | `id`가 `to_id`보다 작은 당신의 에어드랍을 가져옵니다.
 `size` | integer | Optional | 가져올 에어드랍 기록의 갯수. `size` ≤  30.
+
+
+## trade_vols()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_trade_vols():
+    async with Daybit() as daybit:
+        pprint(await daybit.trade_vols(size=5))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_trade_vols())
+```
+
+> Example Response
+
+```python
+{1542412800000: {'end_time': 1542499200000,
+                 'start_time': 1542412800000,
+                 'usd_amount': '0'},
+ 1542499200000: {'end_time': 1542585600000,
+                 'start_time': 1542499200000,
+                 'usd_amount': '0'},
+ 1542585600000: {'end_time': 1542672000000,
+                 'start_time': 1542585600000,
+                 'usd_amount': '0'},
+ 1542672000000: {'end_time': 1542758400000,
+                 'start_time': 1542672000000,
+                 'usd_amount': '23340096.41952102'},
+ 1542758400000: {'end_time': 1542844800000,
+                 'start_time': 1542758400000,
+                 'usd_amount': '2970733.71822306'}}
+```
+
+데이빗 거래량의 USD 환산 금액을 구독합니다.
+
+* Topic: `/subscription:trade_vols`
+
+* Request: `upsert`
+
+* Notification: `upsert`
+
+* Sort: by `start_time` in `desc`
+
+* Response: [TradeVolume](#trade-volume)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | 가져올 거래량의 갯수. `size` ≤  30.
+
+
+## day_avgs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_day_avgs():
+    async with Daybit() as daybit:
+        pprint(await daybit.day_avgs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_day_avgs())
+```
+
+> Example Response
+
+```python
+{1542844800000: {'avg': '63115476.62825952',
+                 'end_time': 1542931200000,
+                 'start_time': 1542844800000}}
+```
+
+> Example of Day Contriubtion 
+
+```python 
+import asyncio
+from datetime import datetime
+from decimal import Decimal
+
+from pydaybit import Daybit
+
+
+async def daybit_day_contribution():
+    async with Daybit() as daybit:
+        day_avgs = (await daybit.day_avgs())[0]
+        my_day_avgs = (await daybit.my_day_avgs())[0]
+
+        start_time = my_day_avgs['start_time']
+        end_time = my_day_avgs['end_time']
+
+        day_avg = Decimal(day_avgs['avg'])
+        my_day_avg = Decimal(my_day_avgs['avg'])
+
+        print('[{} - {}] Estimated My Contribution : {}'.format(datetime.fromtimestamp(start_time / 1000),
+                                                                datetime.fromtimestamp(end_time / 1000),
+                                                                (my_day_avg / day_avg).quantize(
+                                                                    Decimal('0.0001'))))
+
+
+asyncio.get_event_loop().run_until_complete(daybit_day_contribution())
+```
+
+```Shell
+# Output
+[2018-11-23 09:00:00 - 2018-11-24 09:00:00] Estimated My Contribution : 0.0001
+```
+
+단위 시간 동안, 리워드로 분배된 DAY 총량의 평균을 구독합니다.
+DAY 기여율을 구하기 위해 사용할 수 있습니다. `Example of Day Contriubtion` 예제를 참고하십시오.
+
+* Topic: `/subscription:day_avgs`
+
+* Request: `upsert`
+
+* Notification: `upsert`
+
+* Sort: -
+
+* Response: [DayAverage](#day-average)
+
+
+## div_plans()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_div_plans():
+    async with Daybit() as daybit:
+        pprint(await daybit.div_plans())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_div_plans()) 
+```
+
+> Example Response
+
+```python
+{1540339200000: {'div_btc': '21.31789479',
+                 'div_count': 1128,
+                 'end_time': 1540425600000,
+                 'start_time': 1540339200000},
+
+ ...
+
+ 1542844800000: {'div_btc': '3.83510361',
+                 'div_count': 417,
+                 'end_time': 1542931200000,
+                 'start_time': 1542844800000}}
+```
+
+BTC 리워드를 구독합니다.
+
+* Topic: `/subscription:div_plans`
+
+* Request: `upsert`
+
+* Notification: `insert`, `upsert`
+
+* Sort: by `end_time` in `desc`
+
+* Response: [DivPlan](#div-plan)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | 가져올 `DivPlan`의 갯수. `size` ≤  30.
+`to_end_time` | unix_timestamp | Optional | `end_time` 기준 제한
+
+
+## my_trade_vols()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_trade_vols():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_trade_vols())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_trade_vols())
+```
+
+> Example Response
+
+```python
+[{'end_time': 1543017600000, 'start_time': 1542931200000, 'usd_amount': '0'}]
+```
+
+나의 거래량의 USD 환산 금액을 구독합니다.
+
+* Topic: `/subscription:my_trade_vols`
+
+* Request: `init`
+
+* Notification: `init`
+
+* Sort: -
+
+* Response: [TradeVolume](#trade-volume)
+
+
+## my_day_avgs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_day_avgs():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_day_avgs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_day_avgs())
+```
+
+> Example Response
+
+```python
+[{'avg': '200.00000000',
+  'end_time': 1543017600000,
+  'start_time': 1542931200000}]
+```
+
+단위 시간 동안 나의 DAY 평균 보유량을 구독합니다.
+DAY 기여율을 구하기 위해 사용할 수 있습니다. `Example of Day Contriubtion` 예제를 참고하십시오.
+
+* Topic: `/subscription:my_day_avgs`
+
+* Request: `init`
+
+* Notification: `init`
+
+* Sort: -
+
+* Response: [DayAverage](#day-average)
+
+
+## my_divs()
+
+> Example Request
+
+```python
+import asyncio
+from pprint import pprint
+
+from pydaybit import Daybit
+
+
+async def daybit_my_divs():
+    async with Daybit() as daybit:
+        pprint(await daybit.my_divs())
+
+
+asyncio.get_event_loop().run_until_complete(daybit_my_divs())
+```
+
+> Example Response
+
+```python
+{}
+```
+
+나의 BTC 리워드를 구독합니다.
+
+* Topic: `/subscription:my_divs`
+
+* Request: `upsert`
+
+* Notification: `insert`, `upsert`
+
+* Sort: by `end_time` in `desc`
+
+* Response: [DivPlan](#div-plan)
+
+### arguments
+
+Parameter | Type | Required | Description
+----------|------|----------|------------
+`size` | integer | Optional | 가져올 `DivPlan`의 갯수. `size` ≤  30.
+`to_end_time` | unix_timestamp | Optional | `end_time` 기준 제한

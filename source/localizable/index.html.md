@@ -202,6 +202,12 @@ Subscription Channels are following. The topic of each channels has `/subscripti
 * [`my_trades`](#my_trades)
 * [`my_tx_summaries`](#my_tx_summaries)
 * [`my_airdrop_histories`](#my_airdrop_histories)
+* [`trade_vols`](#trade_vols)
+* [`day_avgs`](#day_avgs)
+* [`div_plan`](#div_plan)
+* [`my_trade_vols`](#my_trade_vols)
+* [`my_day_avgs`](#my_day_avgs)
+* [`my_divs`](#my_divs)
 
 ### Event of API Subscriptions
 `request` is a push event and `notification` is a pull event. [Message](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html) transported from client and server have `request` and `notification` events, respectively. When you subscribe to an API, i.e., joining the channel related to the API and sending a message with `request` event, you will get either `init` or `upsert` action response from the channel. After that, you would get one of `insert`, `update`, `upsert`, or `delete` from the channel with `notification` event. For more information of actions, please look following [Action](#action).
@@ -620,3 +626,37 @@ identifier: `id`
 | amount | decimal | Airdrop amount |
 | description | string | Airdrop description |
 | airdropped_at | unix_timestamp | Airdrop time |
+
+
+### Trade Volume
+
+identifier: `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | Start Time |
+| end_time | unix_timestamp | End Time |
+| usd_amount | decimal | Aggregated volume between `start_time` and `end_time` |
+
+
+### Day Average
+
+identifier: `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | Start Time |
+| end_time | unix_timestamp | End Time |
+| avg | decimal | Average of total volume of distributed DAY as rewards between `start_time` and  `end_time` |
+
+
+### Div Plan
+
+identifier: `end_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | Start Time |
+| end_time | unix_timestamp | End Time |
+| div_count | integer | The number of BTC reward receivers |
+| div_btc | decimal | Total BTC rewards |

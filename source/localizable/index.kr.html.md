@@ -202,6 +202,12 @@ API 구독을 하기 위해서, 먼저 `/subscription:<subtopic>` 채널에 참�
 * [`my_trades`](#my_trades)
 * [`my_tx_summaries`](#my_tx_summaries)
 * [`my_airdrop_histories`](#my_airdrop_histories)
+* [`trade_vols`](#trade_vols)
+* [`day_avgs`](#day_avgs)
+* [`div_plan`](#div_plan)
+* [`my_trade_vols`](#my_trade_vols)
+* [`my_day_avgs`](#my_day_avgs)
+* [`my_divs`](#my_divs)
 
 ### Event of API Subscriptions
  `request`는 보내기 이벤트, `notification`는 받기 이벤트입니다. 클라이언트와 서버가 전송하는 [메세지](https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html)는 각각 `request` 이벤트나 `notification` 이벤트를 가집니다. 한 API를 구독하면, 다시 말해, 해당하는 채널에 참가하여 `request` 이벤트를 보내면, 그 채널에서 `init`이나 `upsert` [액션](#action)을 응답으로 받습니다. 그 이후로는 `notification`이벤트와 함께 `insert`, `update`, `upsert`, `delete` 중 하나의 액션을 받습니다. 더 자세한 사항은 [액션](#action) 항목을 참고하십시오.
@@ -585,3 +591,37 @@ identifier: `id`
 | amount | decimal | 에어드랍 수량 |
 | description | string | 에어드랍 설명 |
 | airdropped_at | unix_timestamp | 에어드랍 시간 |
+
+
+### Trade Volume
+
+identifier: `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | 시작 시간 |
+| end_time | unix_timestamp | 종료 시간 |
+| usd_amount | decimal | `start_time`과 `end_time` 사이의 거래량 |
+
+
+### Day Average
+
+identifier: `start_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | 시작 시간 |
+| end_time | unix_timestamp | 종료 시간 |
+| avg | decimal | 리워드로 분배된 DAY 총량의 `start_time`과 `end_time` 사이의 평균|
+
+
+### Div Plan
+
+identifier: `end_time`
+
+| Name | Type | Description |
+|---|---|---|
+| start_time | unix_timestamp | 시작 시간 |
+| end_time | unix_timestamp | 종료 시간 |
+| div_count | integer | BTC 리워드를 받을 사람 수 |
+| div_btc | decimal | 총 BTC 리워드 |
