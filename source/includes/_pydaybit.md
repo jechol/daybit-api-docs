@@ -27,7 +27,7 @@ You need to generate a API key pair to use Pydaybit. Please refer [Authorization
 ```shell
 # ~/.bash_profile
 export DAYBIT_API_KEY="YOUR_OWN_API_KEY"
-export DAYBIT_API_SECRET="YOUR_WON_API_SECRET"
+export DAYBIT_API_SECRET="YOUR_OWN_API_SECRET"
 ```
 
 You can set generated key pair as environment variable.
@@ -48,7 +48,7 @@ from pydaybit import Daybit, PARAM_API_KEY, PARAM_API_SECRET
 
 async def daybit_example():
     async with Daybit(params={PARAM_API_KEY: "YOUR_OWN_API_KEY",
-                              PARAM_API_SECRET: "YOUR_OWR_API_SECRET"}) as daybit:
+                              PARAM_API_SECRET: "YOUR_OWN_API_SECRET"}) as daybit:
         pass
 
 
