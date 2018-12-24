@@ -26,7 +26,7 @@ Pydaybit을 사용하기 위해서는 API 키페어 생성을 해야합니다. [
 ```shell
 # ~/.bash_profile
 export DAYBIT_API_KEY="YOUR_OWN_API_KEY"
-export DAYBIT_API_SECRET="YOUR_WON_API_SECRET"
+export DAYBIT_API_SECRET="YOUR_OWN_API_SECRET"
 ```
 
 환경 변수를 세팅하여 사용할 수 있습니다
@@ -47,7 +47,7 @@ from pydaybit import Daybit, PARAM_API_KEY, PARAM_API_SECRET
 
 async def daybit_example():
     async with Daybit(params={PARAM_API_KEY: "YOUR_OWN_API_KEY",
-                              PARAM_API_SECRET: "YOUR_OWR_API_SECRET"}) as daybit:
+                              PARAM_API_SECRET: "YOUR_OWN_API_SECRET"}) as daybit:
         pass
 
 
