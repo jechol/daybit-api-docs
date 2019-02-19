@@ -1,3 +1,5 @@
 files:
   - source: /source/localizable/index.html.md
     translation: /source/localizable/index.%two_letters_code%.html.md
+  - source: /source/includes/_pydaybit.md
+    translation: /source/includes/_pydaybit.%two_letters_code%.md
