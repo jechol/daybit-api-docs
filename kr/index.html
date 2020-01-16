@@ -1,0 +1,1112 @@
+<!doctype html> <html> <head> <meta charset=utf-8> <meta content="IE=edge,chrome=1" http-equiv=X-UA-Compatible> <meta name=viewport content="width=device-width, initial-scale=1, maximum-scale=1"> <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+  ga('create', 'UA-127177858-2', 'auto');
+  ga('send', 'pageview');
+</script> <title>데이빗 API 레퍼런스</title> <link href="../images/favicon.ico" rel=icon type="image/ico"/> <style>
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .cd {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style> <link href="../stylesheets/screen.css" rel=stylesheet media=screen /> <link href="../stylesheets/print.css" rel=stylesheet media=print /> <script src="../javascripts/all.js"></script> </head> <body class="kr kr_index" data-languages="[]"> <a href="#" id=nav-button> <span> NAV <img src="../images/navbar.png" alt=Navbar /> </span> </a> <div class=toc-wrapper> <img src="../images/logo.png" class=logo alt=Logo /> <div class=search> <input class=search id=input-search placeholder=Search> </div> <ul class=search-results></ul> <ul id=toc class=toc-list-h1> <li> <a href="#introdution" class="toc-h1 toc-link" data-title=Introdution>Introdution</a> </li> <li> <a href="#authorization" class="toc-h1 toc-link" data-title=Authorization>Authorization</a> </li> <li> <a href="#host-address" class="toc-h1 toc-link" data-title="Host address">Host address</a> </li> <li> <a href="#apis" class="toc-h1 toc-link" data-title=APIs>APIs</a> <ul class=toc-list-h2> <li> <a href="#channels" class="toc-h2 toc-link" data-title=Channels>Channels</a> </li> <li> <a href="#api-calls" class="toc-h2 toc-link" data-title="API Calls">API Calls</a> </li> <li> <a href="#subscriptions" class="toc-h2 toc-link" data-title=Subscriptions>Subscriptions</a> </li> <li> <a href="#rate-limit" class="toc-h2 toc-link" data-title="Rate limit">Rate limit</a> </li> <li> <a href="#timestamp" class="toc-h2 toc-link" data-title=Timestamp>Timestamp</a> </li> <li> <a href="#response-format" class="toc-h2 toc-link" data-title="Response format">Response format</a> </li> </ul> </li> <li> <a href="#libraries" class="toc-h1 toc-link" data-title=Libraries>Libraries</a> </li> <li> <a href="#error-list" class="toc-h1 toc-link" data-title="Error list">Error list</a> <ul class=toc-list-h2> <li> <a href="#general" class="toc-h2 toc-link" data-title=General>General</a> </li> <li> <a href="#api" class="toc-h2 toc-link" data-title=Api>Api</a> </li> <li> <a href="#order" class="toc-h2 toc-link" data-title=Order>Order</a> </li> <li> <a href="#wdrl" class="toc-h2 toc-link" data-title=Wdrl>Wdrl</a> </li> </ul> </li> <li> <a href="#action" class="toc-h1 toc-link" data-title=Action>Action</a> </li> <li> <a href="#types" class="toc-h1 toc-link" data-title=Types>Types</a> <ul class=toc-list-h2> <li> <a href="#integer" class="toc-h2 toc-link" data-title=Integer>Integer</a> </li> <li> <a href="#decimal" class="toc-h2 toc-link" data-title=Decimal>Decimal</a> </li> <li> <a href="#string" class="toc-h2 toc-link" data-title=String>String</a> </li> <li> <a href="#boolean" class="toc-h2 toc-link" data-title=Boolean>Boolean</a> </li> <li> <a href="#unix-timestamp" class="toc-h2 toc-link" data-title="Unix Timestamp">Unix Timestamp</a> </li> <li> <a href="#csv" class="toc-h2 toc-link" data-title=CSV>CSV</a> </li> </ul> </li> <li> <a href="#models" class="toc-h1 toc-link" data-title=Models>Models</a> <ul class=toc-list-h2> <li> <a href="#coin" class="toc-h2 toc-link" data-title=Coin>Coin</a> </li> <li> <a href="#coin-price" class="toc-h2 toc-link" data-title="Coin price">Coin price</a> </li> <li> <a href="#quote-coin" class="toc-h2 toc-link" data-title="Quote coin">Quote coin</a> </li> <li> <a href="#market" class="toc-h2 toc-link" data-title=Market>Market</a> </li> <li> <a href="#market-summary-interval" class="toc-h2 toc-link" data-title="Market summary interval">Market summary interval</a> </li> <li> <a href="#market-summary" class="toc-h2 toc-link" data-title="Market summary">Market summary</a> </li> <li> <a href="#order-book" class="toc-h2 toc-link" data-title="Order book">Order book</a> </li> <li> <a href="#price-history-interval" class="toc-h2 toc-link" data-title="Price history interval">Price history interval</a> </li> <li> <a href="#price-history" class="toc-h2 toc-link" data-title="Price history">Price history</a> </li> <li> <a href="#user" class="toc-h2 toc-link" data-title=User>User</a> </li> <li> <a href="#asset" class="toc-h2 toc-link" data-title=Asset>Asset</a> </li> <li> <a href="#order-2" class="toc-h2 toc-link" data-title=Order>Order</a> </li> <li> <a href="#trade" class="toc-h2 toc-link" data-title=Trade>Trade</a> </li> <li> <a href="#transaction-summary" class="toc-h2 toc-link" data-title="Transaction Summary">Transaction Summary</a> </li> <li> <a href="#airdrop" class="toc-h2 toc-link" data-title=Airdrop>Airdrop</a> </li> </ul> </li> <li> <a href="#pydaybit" class="toc-h1 toc-link" data-title=Pydaybit><strong>Pydaybit</strong></a> <ul class=toc-list-h2> <li> <a href="#disclaimer" class="toc-h2 toc-link" data-title=Disclaimer><strong>Disclaimer</strong></a> </li> <li> <a href="#installation" class="toc-h2 toc-link" data-title=Installation><strong>Installation</strong></a> </li> <li> <a href="#api-key-pair" class="toc-h2 toc-link" data-title="API Key Pair"><strong>API Key Pair</strong></a> </li> <li> <a href="#get_server_time" class="toc-h2 toc-link" data-title="get_server_time()">get_server_time()</a> </li> <li> <a href="#create_order" class="toc-h2 toc-link" data-title="create_order()">create_order()</a> </li> <li> <a href="#cancel_order" class="toc-h2 toc-link" data-title="cancel_order()">cancel_order()</a> </li> <li> <a href="#cancel_orders" class="toc-h2 toc-link" data-title="cancel_orders()">cancel_orders()</a> </li> <li> <a href="#cancel_all_my_orders" class="toc-h2 toc-link" data-title="cancel_all_my_orders()">cancel_all_my_orders()</a> </li> <li> <a href="#create_wdrl" class="toc-h2 toc-link" data-title="create_wdrl()">create_wdrl()</a> </li> <li> <a href="#coins" class="toc-h2 toc-link" data-title="coins()">coins()</a> </li> <li> <a href="#coin_prices" class="toc-h2 toc-link" data-title="coin_prices()">coin_prices()</a> </li> <li> <a href="#quote_coins" class="toc-h2 toc-link" data-title="quote_coins()">quote_coins()</a> </li> <li> <a href="#markets" class="toc-h2 toc-link" data-title="markets()">markets()</a> </li> <li> <a href="#market_summary_intvls" class="toc-h2 toc-link" data-title="market_summary_intvls()">market_summary_intvls()</a> </li> <li> <a href="#market_summaries" class="toc-h2 toc-link" data-title="market_summaries()">market_summaries()</a> </li> <li> <a href="#order_books" class="toc-h2 toc-link" data-title="order_books()">order_books()</a> </li> <li> <a href="#price_history_intvls" class="toc-h2 toc-link" data-title="price_history_intvls()">price_history_intvls()</a> </li> <li> <a href="#price_histories" class="toc-h2 toc-link" data-title="price_histories()">price_histories()</a> </li> <li> <a href="#trades" class="toc-h2 toc-link" data-title="trades()">trades()</a> </li> <li> <a href="#my_users" class="toc-h2 toc-link" data-title="my_users()">my_users()</a> </li> <li> <a href="#my_assets" class="toc-h2 toc-link" data-title="my_assets()">my_assets()</a> </li> <li> <a href="#my_orders" class="toc-h2 toc-link" data-title="my_orders()">my_orders()</a> </li> <li> <a href="#my_trades" class="toc-h2 toc-link" data-title="my_trades()">my_trades()</a> </li> <li> <a href="#my_tx_summaries" class="toc-h2 toc-link" data-title="my_tx_summaries()">my_tx_summaries()</a> </li> <li> <a href="#my_airdrop_histories" class="toc-h2 toc-link" data-title="my_airdrop_histories()">my_airdrop_histories()</a> </li> </ul> </li> </ul> <ul class=toc-footer> <li><a href='/'>Daybit API Document - English</a></li> <li><br/></li> <li><a href='https://www.daybit.com'>Daybit</a></li> <li><a href='https://www.daybit.com/policy/terms-api'>Terms of Service for Daybit API</a></li> </ul> </div> <div class=page-wrapper> <div class=dark-box></div> <div class=content> <h1 id=introdution>Introdution</h1> <p>이 문서는 기본적인 프로그래밍 능력을 갖춘 독자를 대상으로 작성되었습니다. 또한 당신의 자산에 손해를 가져다 줄 수 있는 예제가 포함되어 있습니다. 각각의 기능에 대한 설명과 코드를 충분히 이해하고 실행하도록 합니다. API 사용에 대한 모든 책임은 본인에게 있습니다. 자세한 내용은 <a href="https://www.daybit.com/policy/terms-api">데이빗 API 이용약관</a>을 참고하십시오.</p> <p>데이빗 API를 이용하기에 앞서 <a href="https://www.daybit.com">데이빗</a>에서 API 키페어를 발급받아야 합니다. API 키페어는 여러가지 권한 - <a href="https://en.wikipedia.org/wiki/Candlestick_chart">캔들 차트</a>나 <a href="https://en.wikipedia.org/wiki/Order_book_(trading)">오더북</a> 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. 자세한 내용은 <a href="#authorization">권한</a> <em>Authorization</em> 항목을 참고하십시오.</p> <p>데이빗 API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 <a href="#api-calls">API 호출</a> <em>API Call</em> 이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 데이빗 API 서버에서 지속적으로 알림을 보내 주는 <a href="#subscriptions">API 구독</a> <em>API Subscription</em> 입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.</p> <p>데이빗 API는 웹소켓을 기반으로 구현되어 있어 있고, <a href="https://phoenixframework.org">피닉스 프레임워크</a>에서 정의한 방식으로 메시지를 주고 받습니다. 또한 데이빗은 사용자가 API를 쉽게 사용할 수 있도록 <a href="#pydaybit">Pydaybit</a>를 제공합니다. Pydaybit은 파이썬으로 작성된 데이빗 API 레퍼 <em>Wrapper</em> 입니다. </p> <p>만약 프로그래밍에 익숙하지 않다면 <a href="#pydaybit">Pydaybit</a>의 예제를 먼저 읽어보는 것을 추천합니다.</p> <h1 id=authorization>Authorization</h1> <p>데이빗 API를 사용하기 전에, API 키페어를 적절한 권한으로 생성해야 합니다. 하나의 API 키페어는 여러 종류의 권한 - <a href="https://en.wikipedia.org/wiki/Candlestick_chart">캔들 차트</a>나 <a href="https://en.wikipedia.org/wiki/Order_book_(trading)">오더북</a> 가져오기, 자산을 확인하기, 자산을 거래하기, 자산 출금하기 권한 - 을 가집니다. </p> <p>API 사용은 API 키페어에 부여된 권한에 의해 제한됩니다. 만약 접근 권한이 없는 API 키페어를 이용해 API를 사용한다면, <code>unauthenticated</code> 응답을 받습니다.</p> <table><thead> <tr> <th>종류</th> <th>설명</th> </tr> </thead><tbody> <tr> <td>public_data</td> <td>공개 정보(시장 요약 정보, 오더북 등)에 대한 접근 권한. API 키페어 생성 시에 <code>시장 조회</code>를 포함합니다.</td> </tr> <tr> <td>private_data</td> <td>개인 자산에 대한 접근 권한. API 키페어 생성 시에 <code>개인 자산 조회</code>를 포함합니다.</td> </tr> <tr> <td>trade</td> <td>거래 관련 API에 대한 접근 권한. API 키페어 생성 시에 <code>거래 관련 API</code>를 포함합니다.</td> </tr> <tr> <td>transaction</td> <td>입금과 출금 관련 API에 대한 접근 권한. API 키페어 생성 시에 <code>출금 관련 API</code>를 포함합니다.</td> </tr> </tbody></table> <p>마이페이지의 <a href="https://www.daybit.com/mypage/api-managements">API Keys</a> 탭에서 계정당 5개의 API 키패어를 생성 할 수 있습니다. 각 API 키페어는 다음 중 하나의 권한들을 갖습니다.</p> <ul> <li><code>public_data</code></li> <li><code>public_data</code>, <code>private_data</code>, <code>trade</code></li> <li><code>public_data</code>, <code>private_data</code>, <code>transaction</code></li> <li><code>public_data</code>, <code>private_data</code>, <code>trade</code>, <code>transaction</code></li> </ul> <h1 id=host-address>Host address</h1> <ul> <li>데이빗 API 엔드포인트 : <a href="wss://api.daybit.com/v1/user_api_socket/websocket/">wss://api.daybit.com/v1/user_api_socket/websocket/</a></li> </ul> <h1 id=apis>APIs</h1> <p>Daybit API에는 두가지 타입이 있습니다. 첫 번째는 클라이언트가 요청을 보내고 서버가 알맞은 응답을 보내는 방식으로 <a href="#api-calls">API 호출</a> <em>API Call</em> 이라 합니다. 이러한 API는 보통 자산의 거래, 입출금에 관련되어 있습니다. 두 번째는 클라이언트가 API를 구독하면 서버에서 지속적으로 알림을 보내 주는 <a href="#subscriptions">API 구독</a> <em>API Subscription</em> 입니다. API 구독에는 코인 가격 변화, 지갑 정보 구독, 주문 결과 구독 등이 있습니다.</p> <h2 id=channels>Channels</h2> <p>채널에서는 메시지를 보내고 받습니다. 발신자는 어떤 <a href="#topics">주제</a> <em>Topics</em> 에 관해 메시지를 브로드캐스트(채널 참가자 모두에게 발신함) 할 수 있습니다. 수신자는 <a href="#topics">주제</a>를 구독하면 그러한 메시지들을 수신할 수 있습니다. 언제든지 수신자가 발신자가 되거나, 발신자가 수신자가 될 수 있습니다. 자세한 정보는 <a href="https://hexdocs.pm/phoenix/channels.html">피닉스 문서</a>를 참고하십시오.</p> <h3 id=topics>Topics</h3> <p>주제 <em>Topic</em> 는 다양한 층에서의 메시지가 올바른 곳으로 전달 될 수 있도록하는 <a href="#channels">채널</a> <em>Channels</em> 의 문자열 식별자입니다. 데이빗 API는 다음과 같은 주제를 사용하고 있습니다.</p> <ul> <li><a href="#api-calls"><code>/api</code></a></li> <li><a href="#coins"><code>/subscription:coins</code></a></li> <li><a href="#market_summaries"><code>/subscription:market_summaries;&lt;market_summary_intvl&gt;</code></a></li> </ul> <h3 id=events>Events</h3> <p>이벤트 <em>Event</em> 는 채널에서 특별한 행동을 나타내기 위한 문자열입니다. 예를 들어 <code>&quot;phx_join&quot;</code>은 채널 참가를 의미하는 이벤트이고, <code>&quot;phx_leave&quot;</code>는 채널 나오기를 의미하는 이벤트입니다. 데이빗 <a href="#api-calls">API 호출</a> <em>API Calls</em> 은 <code>&quot;/api&quot;</code> 채널에서 이벤트를 사용해 요청을 보냅니다.</p> <h3 id=messages>Messages</h3> <blockquote> <p>Example of <code>create_wdrl</code> </p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'pydaybit'</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="n">stream_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">stream_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">'</span><span class="si">%(message)</span><span class="s">s'</span><span class="p">))</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">stream_handler</span><span class="p">)</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_create_wdrl</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_wdrl</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="s">'BTC'</span><span class="p">,</span> <span class="n">to_addr</span><span class="o">=</span><span class="s">'ABTCADDRESS'</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="s">'0.05'</span><span class="p">)</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_create_wdrl</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Output of the example</p> </blockquote> <pre class="highlight shell_session"><code>&gt; {"join_ref": "1", "ref": "1", "topic": "/api", "event": "phx_join", "payload": {"timestamp": 1538739991045}, "timeout": 3000}
+&lt; {"topic":"/api","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+&gt; {"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "ABTCADDRESS", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
+&lt; {"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"ABTCADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
+&gt; {"join_ref": "1", "ref": "3", "topic": "/api", "event": "phx_leave", "payload": {"timestamp": 1538739991124}, "timeout": 3000}
+&lt; {"topic":"/api","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+&lt; {"topic":"/api","ref":"1","payload":{},"event":"phx_close"}
+</code></pre> <p>다음 속성들은 <a href="https://en.wikipedia.org/wiki/JSON">JSON</a> 객체 형식으로 전달됩니다. 예제는 <code>/api</code> 채널에서 <code>create_wdrl</code> API 호출할 때의 웹소켓 위에서 주고 받는 메시지를 보여 줍니다.</p> <ul> <li><code>topic</code> - 문자열 타입의 채널 식별자. 예를 들어, <a href="#api-calls"><code>&quot;/api&quot;</code></a>나 <a href="#coins"><code>&quot;/subscription:coins&quot;</code></a>가 있습니다.</li> <li><code>event</code> - 문자열 타입의 이벤트 이름, 예를 들어, <a href="#create_order"><code>&quot;create_order&quot;</code></a>, <a href="#cancel_order"><code>&quot;cancel_order&quot;</code></a>, <code>&quot;phx_join&quot;</code>, <code>&quot;phx_leave&quot;</code>가 있습니다.</li> <li><code>payload</code> - 메시지 페이로드. JSON 객체 형식으로 API를 사용할 때 주요 정보가 전달됩니다.</li> <li><code>ref</code> - 문자열 타입의 메시지 고유 레퍼런스 번호.</li> <li><code>join_ref</code> - 문자열 타입의 채널 고유 레퍼런스 번호. 채널에 참가했을 때의 <code>ref</code>와 같습니다.</li> </ul> <h2 id=api-calls>API Calls</h2> <p>웹소켓을 통해 <a href="#host-address">데이빗 API 엔드포인트</a>와 연결하고 <code>/api</code> 채널에 참가합니다. 해당하는 API 이름을 <code>event</code>에 넣고, 필요한 인자 <code>payload</code>에 넣어 메시지를 보냅니다.</p> <h3 id=channel-of-api-calls>Channel of API Calls</h3> <p>모든 API Call은 <code>/api</code> 채널을 사용합니다.</p> <h3 id=api-call-list>API Call List</h3> <p><code>/api</code> 채널에서 <code>event</code> 속성에 API 이름을 넣습니다. 사용가능한 목록은 다음과 같습니다.</p> <ul> <li><a href="#create_order"><code>create_order</code></a></li> <li><a href="#cancel_order"><code>cancel_order</code></a></li> <li><a href="#cancel_orders"><code>cancel_orders</code></a></li> <li><a href="#cancel_all_my_orders"><code>cancel_all_my_orders</code></a></li> <li><a href="#create_wdrl"><code>create_wdrl</code></a></li> <li><a href="#get_server_time"><code>get_server_time</code></a></li> </ul> <aside class=notice> 거래의 결과 등을 확인하기 위해서 <code>/api</code> 채널에서의 응답을 사용하는 것보다, <code>subscription:&ltsub_topic&gt</code> 채널에서 구독을 통하여 필요한 정보를 추적하는 것을 권장합니다. </aside> <blockquote> <p>Request <code>create_wdrl</code></p> </blockquote> <pre class="highlight shell_session"><code>{"join_ref": "1", "ref": "2", "topic": "/api", "event": "create_wdrl", "payload": {"to_addr": "ABTCADDRESS", "timestamp": 1538739991059, "coin": "BTC", "amount": "0.05"}, "timeout": 3000}
+</code></pre> <blockquote> <p>Response</p> </blockquote> <pre class="highlight shell_session"><code>{"topic":"/api","ref":"2","payload":{"status":"ok","response":{"data":{"wdrl_to_tag":null,"wdrl_to_org":null,"wdrl_to_addr":"ABTCADDRESS","wdrl_status":"queued","type":"wdrl","txid":null,"tx_link_url":"https://live.blockcypher.com/btc/tx/","req_confirm":2,"id":5882,"deposit_status":null,"created_at":1538739991072,"confirm":0,"completed_at":null,"coin":"BTC","amount":"0.050000000000000000"}}},"event":"phx_reply"}
+</code></pre><h2 id=subscriptions>Subscriptions</h2> <blockquote> <p>Example of <code>coins</code></p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s">'pydaybit'</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">DEBUG</span><span class="p">)</span>
+
+<span class="n">stream_handler</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">StreamHandler</span><span class="p">()</span>
+<span class="n">stream_handler</span><span class="o">.</span><span class="n">setFormatter</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">Formatter</span><span class="p">(</span><span class="s">'</span><span class="si">%(message)</span><span class="s">s'</span><span class="p">))</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">stream_handler</span><span class="p">)</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_coins</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">coins</span><span class="p">()</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_coins</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Output</p> </blockquote> <pre class="highlight shell_session"><code>&gt; {"join_ref": "1", "ref": "1", "topic": "/subscription:coins", "event": "phx_join", "payload": {"timestamp": 1538740890363}, "timeout": 3000}
+&lt; {"topic":"/subscription:coins","ref":"1","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+&gt; {"join_ref": "1", "ref": "2", "topic": "/subscription:coins", "event": "request", "payload": {"timestamp": 1538740890374}, "timeout": 3000}
+&lt; {"topic":"/subscription:coins","ref":"2","payload":{"status":"ok","response":{"data":[{"data":[{"wdrl_fee":"5.00000000","wdrl_enabled":true,"wdrl_confirm":2,"tradable":true,"tick_amount":"0.10000000","sym":"USDT","native_decimal_places":2,"name":"Tether","min_wdrl":"10.00000000","min_deposit":"10.00000000","has_tag":false,"has_org":false,"deposit_enabled":true,"deposit_confirm":2} ... ],"action":"init"}]}},"event":"phx_reply"}
+&gt; {"join_ref": "1", "ref": "3", "topic": "/subscription:coins", "event": "phx_leave", "payload": {"timestamp": 1538740890386}, "timeout": 3000}
+&lt; {"topic":"/subscription:coins","ref":"3","payload":{"status":"ok","response":{}},"event":"phx_reply"}
+&lt; {"topic":"/subscription:coins","ref":"1","payload":{},"event":"phx_close"}
+</code></pre> <p>API 구독을 하기 위해서, 먼저 <code>/subscription:&lt;subtopic&gt;</code> 채널에 참가하고, <code>request</code> 이벤트를 보냅니다. 채널에 참가해서 구독에 성공하면, 데이빗 API 서버는 데이터에 업데이트가 있을 때마다 <code>notification</code> 이벤트를 보내 줍니다.</p> <h3 id=api-subscription-channels>API Subscription Channels</h3> <p>다음과 같은 구독 채널이 있습니다. 채널의 토픽은 <code>/subscription:&lt;subtopic&gt;</code> 형식입니다. 예를 들어, <code>coins</code> API의 경우에는 채널 토픽이 <code>/subscription:coins</code> 입니다.</p> <ul> <li><a href="#coins"><code>coins</code></a></li> <li><a href="#coin_prices"><code>coin_prices</code></a></li> <li><a href="#quote_coins"><code>quote_coins</code></a></li> <li><a href="#markets"><code>markets</code></a></li> <li><a href="#market_summary_intvls"><code>market_summary_intvls</code></a></li> <li><a href="#market_summaries"><code>market_summaries</code></a></li> <li><a href="#order_books"><code>order_books</code></a></li> <li><a href="#price_history_intvls"><code>price_history_intvls</code></a></li> <li><a href="#price_histories"><code>price_histories</code></a></li> <li><a href="#trades"><code>trades</code></a>, <a href="#my_users"><code>my_users</code></a></li> <li><a href="#my_assets"><code>my_assets</code></a></li> <li><a href="#my_orders"><code>my_orders</code></a></li> <li><a href="#my_trades"><code>my_trades</code></a></li> <li><a href="#my_tx_summaries"><code>my_tx_summaries</code></a></li> <li><a href="#my_airdrop_histories"><code>my_airdrop_histories</code></a> are the topics you can use in API subscriptions.</li> </ul> <h3 id=event-of-api-subscriptions>Event of API Subscriptions</h3> <p><code>request</code>는 보내기 이벤트, <code>notification</code>는 받기 이벤트입니다. 클라이언트와 서버가 전송하는 <a href="https://hexdocs.pm/phoenix/Phoenix.Socket.Message.html">메세지</a> <em>Message</em> 는 각각 <code>request</code> 이벤트나 <code>notification</code> 이벤트를 가집니다. 한 API를 구독하면, 다시 말해, 해당하는 채널에 참가하여 <code>request</code> 이벤트를 보내면, 그 채널에서 <code>init</code>이나 <code>upsert</code> <a href="#action">액션</a> <em>Action</em> 을 응답으로 받습니다. 그 이후로는 <code>notification</code>이벤트와 함께 <code>insert</code>, <code>update</code>, <code>upsert</code>, <code>delete</code> 중 하나의 액션을 받습니다. 더 자세한 사항은 <a href="#action">액션</a> 항목을 참고하십시오.</p> <h3 id=rate-limit-of-api-subscriptions>Rate Limit of API Subscriptions</h3> <p><code>request</code> 이벤트를 보내는 데에 초당 제한이 있습니다.</p> <h2 id=rate-limit>Rate limit</h2> <p>각 API는 매 초마다 호출에 제한이 있습니다. 만약 제한을 넘으면 <code>api_exceeded_rate_limit</code> 에러 코드를 받습니다.</p> <h2 id=timestamp>Timestamp</h2> <p>모든 요청은 네트워크 지연 등에 의한 예상치 못한 요청을 방지하기 위하여 <code>timestamp</code>와 <code>timeout</code>을 가집니다.</p> <ul> <li><code>timestamp</code>: <code>unix_timestamp</code></li> <li><code>timeout</code>(<strong>optional</strong>): <code>integer</code> 타입의 <code>ms</code> 시간 단위 . 기본 값은 3초를 의미하는 <code>3000</code> 입니다.</li> </ul> <p>요청은 다음 조건을 만족하지 못하면 거부됩니다: <code>server time</code> - <code>timestamp</code> &gt; <code>timeout</code>.</p> <p>만약 문제가 있다면, 아래의 에러코드가 응답으로 옵니다.</p> <ul> <li><code>api_invalid_timestamp_or_timeout</code>: <code>timestamp</code>이 존재하지 않거나 <code>timestamp</code>나 <code>timeout</code>가 <code>integer</code> 타입의 유닉스 밀리초 단위가 아닙니다.</li> <li><code>api_timeout</code>: 시간 초과로 인해 거부합니다.</li> </ul> <h2 id=response-format>Response format</h2> <p>여기에는 두가지 응답 형식이 있습니다. API 호출이나 구독의 결과에 따라 성공, 실패 모델 중에 하나를 받을 것 입니다. 오른쪽의 성공과 실패 예제를 참고 하십시오. 또한 아래에서 <a href="#error-list">오류 목록</a> <em>Error List</em> 을 찾아 보십시오.</p> <blockquote> <p>Success</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="c"># plain json object with proper data</span>
+<span class="p">}</span>
+</code></pre> <blockquote> <p>Fail</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">"error_code"</span><span class="p">:</span> <span class="s">'string'</span><span class="p">,</span>
+  <span class="s">"message"</span><span class="p">:</span> <span class="s">'string'</span>
+<span class="p">}</span>
+</code></pre><h1 id=libraries>Libraries</h1> <p>데이빗은 <a href="https://elixir-lang.org/">엘릭서</a> <em>Elixir</em> 언어를 사용하고 <a href="https://phoenixframework.org/">피닉스 프레임워크</a>를 기반하여 만들어 졌습니다. 데이빗 API는 피닉스 서버와 소켓 통신을 하는 피닉스 클라이언트를 통해 접근할 수 있습니다. 데이빗은 공식적으로 파이썬 언어로된 레퍼 <em>wrapper</em> 를 제공합니다. </p> <ul> <li>PyDaybit(Python): <a href="https://github.com/daybit-exchange/pydaybit/">https://github.com/daybit-exchange/pydaybit</a></li> </ul> <p>다른 언어로 데이빗 API 를 사용하기 위해서는 다음 라이브러리를 참고하십시오.</p> <ul> <li>Phoenix.js(Javascript): <a href="https://github.com/phoenixframework/phoenix/">https://github.com/phoenixframework/phoenix</a></li> <li>SwiftPhoenixClient(Swift): <a href="https://github.com/davidstump/SwiftPhoenixClient/">https://github.com/davidstump/SwiftPhoenixClient</a></li> <li>PhoenixSharp(C#): <a href="https://github.com/Mazyod/PhoenixSharp/">https://github.com/Mazyod/PhoenixSharp</a></li> </ul> <h1 id=error-list>Error list</h1><h3 id=general>General</h3> <ul> <li><code>unauthenticated</code>: 인증되지 않은 유저 혹은 이용</li> <li><code>invalid_arguments</code>: 잘못된 인자를 가진 요청 <em>request</em></li> <li><code>resource_not_found</code>: 리소스가 없음</li> </ul> <h3 id=api>Api</h3> <ul> <li><code>api_invalid_timestamp_or_timeout</code>: <code>timestamp</code>이 존재하지 않거나 <code>timestamp</code>나 <code>timeout</code>가 <code>integer</code> 타입의 유닉스 밀리초 단위가 아님.</li> <li><code>api_timeout</code>: 시간초과가 요청된 <code>timestamp</code>, <code>timeout</code> 에서 발생함</li> <li><code>api_exceeded_rate_limit</code>: 요청 제한 초과</li> <li><code>api_invalid_param_types</code>: 잘못된 인자 타입</li> <li><code>api_required_params_not_provided</code>: 필요한 인자가 누락됨</li> <li><code>api_invalid_event</code>: 잘못된 이벤트</li> </ul> <h3 id=order>Order</h3> <ul> <li><code>order_invalid_market</code>: 잘못된 마켓. <em>마켓은 (<code>quote</code>, <code>base</code>) 쌍으로 표현된다</em></li> <li><code>order_not_tradable_coin</code>: 해당 코인의 거래가 중단됨</li> <li><code>order_not_sellable_market</code>: 해당 마켓에서의 판매가 중단됨</li> <li><code>order_not_buyable_market</code>: 해당 마켓에서의 구매가 중단됨</li> <li><code>order_invalid_price</code>: 잘못된 가격</li> <li><code>order_invalid_amount</code>: 잘못된 수량</li> <li><code>order_only_both_role_can_be_cond</code>: 조건 주문의 <code>role</code>은 항상 <code>both</code>이어야 한다. <a href="#create_order"><code>create_order()</code></a> 참고.</li> <li><code>order_out_of_price_range</code>: 가격의 범위가 잘못됨. (판매: 현재가의 20% ~ 200%, 구매: 50% ~ 500%)</li> <li><code>order_exceeded_max_tstops</code>: 트레일링 스탑 주문의 갯수 제한을 넘음 (마켓당 2개)</li> <li><code>order_suspended_due_to_frequent_canceling</code>: 빈번한 주문 취소로 인한 주문 중지</li> <li><code>order_exceeds_my_asset_values</code>: 주문이 내 자산을 초과함</li> <li><code>order_already_closed</code>: 주문이 이미 체결됨</li> <li><code>order_exceeded_void_rate</code>: 잘못된 주문의 비율이 제한을 초과해 10분간 주문 중지 (80%)</li> <li><code>order_exceeded_max_orders</code>: 채결되지 않은 주문이 제한을 초과함 (100개)</li> <li><code>order_violates_min_usd</code>: USD 환산 금액이 최소 주문량 미만임 ($10)</li> <li><code>order_unplaceable_maker_only</code>: 주문이 <code>maker_only</code> 조건을 만족하지 않음</li> <li><code>order_unplaceable_taker_only</code>: 주문이 <code>taker_only</code> 조건을 만족하지 않음</li> </ul> <h3 id=wdrl>Wdrl</h3> <ul> <li><code>wdrl_suspended_coin</code>: 코인의 출금 중지</li> <li><code>wdrl_precision_error</code>: 소수점 자릿수의 정밀도가 잘못됨</li> <li><code>wdrl_under_min_amount</code>: 출금 금액이 최소 출금 한도 미만임</li> <li><code>wdrl_over_daily_wdrl_limit</code>: 출금이 하루 제한을 넘어섬</li> <li><code>wdrl_exceeds_my_asset_values</code>: 출금이 내 자산보다 큼</li> <li><code>wdrl_needs_to_tag</code>: <code>to_tag</code> 인자가 빠짐</li> <li><code>wdrl_invalid_addr</code>: 잘못된 주소</li> </ul> <h1 id=action>Action</h1> <p>API를 구독하면, 서버에서 오는 메시지는 데이터를 어떻게 처리하면 될지를 알려주는 <code>action</code>을 가지고 있습니다.</p> <ul> <li><code>init</code> : 이전의 모든 로컬 데이터를 지우고, 현재 최신 데이터로 초기화합니다.</li> <li><code>insert</code> : 응답받은 데이터를 로컬 데이터셋에 추가합니다.</li> <li><code>update</code> : 로컬 데이터셋에서 일치하는 것이 존재하면 업데이트합니다.</li> <li><code>upsert</code> : 로컬 데이터셋에서 일치하는 것이 존재하면 업데이트합니다. 없다면 추가합니다.</li> <li><code>delete</code> : 로컬 데이터셋에서 일치하는 것이 존재하면 삭제합니다.</li> </ul> <h1 id=types>Types</h1><h3 id=integer>Integer</h3> <p><code>integer</code> 타입.</p> <ul> <li><code>123</code></li> <li><code>20181010</code></li> </ul> <h3 id=decimal>Decimal</h3> <p>정확한 정밀도로 표현하기 위해 <code>string</code>으로 표현된 10진수.</p> <ul> <li><code>&quot;880.524&quot;</code></li> <li><code>&quot;59.55000000000000000&quot;</code></li> </ul> <h3 id=string>String</h3> <p><code>string</code>.</p> <ul> <li><code>&quot;string&quot;</code></li> <li><code>&quot;bitcoin&quot;</code></li> <li><code>&quot;Daybit&quot;</code></li> </ul> <h3 id=boolean>Boolean</h3> <p><code>boolean</code>.</p> <ul> <li><code>true</code></li> <li><code>false</code></li> </ul> <h3 id=unix-timestamp>Unix Timestamp</h3> <p><code>millisecond</code> 단위의 Unix 타임스탬프.</p> <ul> <li><code>1528269989516</code></li> </ul> <h3 id=csv>CSV</h3> <p>각 값이 쉼표 <em><code>,</code></em> 로 구분된 `string</p> <ul> <li><code>&quot;1, 2, 3&quot;</code></li> </ul> <h1 id=models>Models</h1> <p>아래는 응답으로 오는 데이터의 모델이다.</p> <h3 id=coin>Coin</h3> <p>identifier: <code>sym</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>sym</td> <td>string</td> <td>코인 기호</td> </tr> <tr> <td>native_decimal_point</td> <td>integer</td> <td>출금 수량 소수점 제한</td> </tr> <tr> <td>amount_decimal_point</td> <td>integer</td> <td>주문 수량 소수점 제한</td> </tr> <tr> <td>tick_amount</td> <td>decimal</td> <td>주문 수량 단위</td> </tr> <tr> <td>deposit_confirm</td> <td>integer</td> <td>입금 완료를 위한 confirm의 수</td> </tr> <tr> <td>wdrl_confirm</td> <td>integer</td> <td>출금 완료를 위한 confirm의 수</td> </tr> <tr> <td>public</td> <td>boolean</td> <td>코인이 거래소에서 표시되는지 여부</td> </tr> <tr> <td>name</td> <td>string</td> <td>코인명</td> </tr> <tr> <td>tradable</td> <td>boolean</td> <td>거래 가능 여부</td> </tr> <tr> <td>deposit_enabled</td> <td>boolean</td> <td>입금 가능 여부</td> </tr> <tr> <td>wdrl_enabled</td> <td>boolean</td> <td>출금 가능 여부</td> </tr> <tr> <td>wdrl_fee</td> <td>decimal</td> <td>출금 수수료</td> </tr> <tr> <td>min_deposit</td> <td>decimal</td> <td>최소 입금 수량</td> </tr> <tr> <td>min_wdrl</td> <td>decimal</td> <td>최소 출금 수량</td> </tr> <tr> <td>has_tag</td> <td>boolean</td> <td><code>to_tag</code>가 입출금에 필요한지 여부</td> </tr> <tr> <td>has_org</td> <td>boolean</td> <td><code>to_org</code>가 입출금에 필요한지 여부</td> </tr> </tbody></table> <h3 id=coin-price>Coin price</h3> <p>identifier: <code>sym</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>sym</td> <td>string</td> <td>코인 기호</td> </tr> <tr> <td>usd_price</td> <td>decimal</td> <td>USD 환산 가격</td> </tr> </tbody></table> <h3 id=quote-coin>Quote coin</h3> <p>identifier: <code>sym</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>sym</td> <td>string</td> <td>코인 심볼</td> </tr> </tbody></table> <h3 id=market>Market</h3> <p>identifier: <code>quote</code>, <code>base</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>quote</td> <td>string</td> <td>호가 코인</td> </tr> <tr> <td>base</td> <td>string</td> <td>기준 코인</td> </tr> <tr> <td>tick_price</td> <td>decimal</td> <td>주문 가격 단위</td> </tr> <tr> <td>sellable</td> <td>boolean</td> <td>매도 가능 여부</td> </tr> <tr> <td>buyable</td> <td>boolean</td> <td>매수 가능 여부</td> </tr> <tr> <td>tick_levels</td> <td>integer</td> <td><code>tick_price</code> 기준으로 order book 이 존재하는 단계 수. 각 단계는 10배 차이남. ex) tick_price = 0.01, order book intvl = 0.01, 0.1, 1, 10, 100</td> </tr> </tbody></table> <h3 id=market-summary-interval>Market summary interval</h3> <p>identifier: <code>seconds</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>seconds</td> <td>integer</td> <td><a href="#market-summary">시장 요약</a> 단위 시간</td> </tr> </tbody></table> <h3 id=market-summary>Market summary</h3> <p>identifier: <code>quote</code>, <code>base</code>, <code>seconds</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>quote</td> <td>string</td> <td>호가 코인</td> </tr> <tr> <td>base</td> <td>string</td> <td>기준 코인</td> </tr> <tr> <td>seconds</td> <td>integer</td> <td>단위 시간</td> </tr> <tr> <td>open</td> <td>decimal</td> <td>시가</td> </tr> <tr> <td>close</td> <td>decimal</td> <td>종가</td> </tr> <tr> <td>high</td> <td>decimal or null</td> <td>고가</td> </tr> <tr> <td>low</td> <td>decimal or null</td> <td>저가</td> </tr> <tr> <td>volatility</td> <td>decimal</td> <td>가격 변동률</td> </tr> <tr> <td>quote_vol</td> <td>decimal or null</td> <td>호가 코인 기준 거래량</td> </tr> <tr> <td>base_vol</td> <td>decimal or null</td> <td>기준 코인 기준 거래량</td> </tr> </tbody></table> <h3 id=order-book>Order book</h3> <p>identifier: <code>quote</code>, <code>base</code>, <code>intvl</code>, <code>min_price</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>quote</td> <td>string</td> <td>호가 코인</td> </tr> <tr> <td>base</td> <td>string</td> <td>기준 코인</td> </tr> <tr> <td>intvl</td> <td>decimal</td> <td>단위 가격</td> </tr> <tr> <td>min_price</td> <td>decimal</td> <td>범위 시작 가격</td> </tr> <tr> <td>max_price</td> <td>decimal</td> <td>범위 종료 가격</td> </tr> <tr> <td>sell_vol</td> <td>decimal</td> <td>매도 수량</td> </tr> <tr> <td>buy_vol</td> <td>decimal</td> <td>매수 수량</td> </tr> </tbody></table> <h3 id=price-history-interval>Price history interval</h3> <p>identifier: <code>seconds</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>seconds</td> <td>integer</td> <td><a href="#price-history">가격 이력</a> 단위 시간</td> </tr> </tbody></table> <h3 id=price-history>Price history</h3> <p>identifier: <code>quote</code>, <code>base</code>, <code>intvl</code>, <code>start_time</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>quote</td> <td>string</td> <td>호가 코인</td> </tr> <tr> <td>base</td> <td>string</td> <td>기준 코인</td> </tr> <tr> <td>intvl</td> <td>integer</td> <td>시간 간격</td> </tr> <tr> <td>start_time</td> <td>unix_timestamp</td> <td>범위 시작 시간</td> </tr> <tr> <td>end_time</td> <td>unix_timestamp</td> <td>범위 종료 시간</td> </tr> <tr> <td>open</td> <td>decimal</td> <td>시가</td> </tr> <tr> <td>close</td> <td>decimal</td> <td>종가</td> </tr> <tr> <td>high</td> <td>decimal</td> <td>고가</td> </tr> <tr> <td>low</td> <td>decimal</td> <td>저가</td> </tr> <tr> <td>base_vol</td> <td>decimal</td> <td>기준 코인 기준 거래량</td> </tr> <tr> <td>quote_vol</td> <td>decimal</td> <td>호가 코인 기준 거래량</td> </tr> </tbody></table> <h3 id=user>User</h3> <p>identifier: -</p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>maker_fee_rate</td> <td>decimal</td> <td>maker 수수료율</td> </tr> <tr> <td>taker_fee_rate</td> <td>decimal</td> <td>taker 수수료율</td> </tr> <tr> <td>one_day_wdrl_usd_limit</td> <td>decimal</td> <td>24시간 동안의 USD 환산 출금 가능량</td> </tr> </tbody></table> <h3 id=asset>Asset</h3> <p>identifier: <code>coin</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>coin</td> <td>string</td> <td>코인 기호</td> </tr> <tr> <td>total</td> <td>decimal</td> <td>총 수량</td> </tr> <tr> <td>reserved</td> <td>decimal</td> <td>주문 등에 묶여있는 수량</td> </tr> <tr> <td>available</td> <td>decimal</td> <td>주문에 사용 가능한 수량</td> </tr> <tr> <td>investment_usd</td> <td>decimal</td> <td>USD 환산 총 투자금</td> </tr> </tbody></table> <h3 id=order-2>Order</h3> <p>identifier: <code>id</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>id</td> <td>integer</td> <td>id</td> </tr> <tr> <td>sell</td> <td>boolean</td> <td>매도 여부</td> </tr> <tr> <td>quote</td> <td>string</td> <td>호가 코인</td> </tr> <tr> <td>base</td> <td>string</td> <td>기준 코인</td> </tr> <tr> <td>price</td> <td>decimal</td> <td>가격</td> </tr> <tr> <td>role</td> <td>string</td> <td>주문 형식. <code>&quot;both&quot;</code>, <code>&quot;maker_only&quot;</code>, <code>&quot;taker_only&quot;</code></td> </tr> <tr> <td>cond_type</td> <td>string</td> <td>조건부 주문 종류. <code>&quot;none&quot;</code>, <code>&quot;le&quot;</code>, <code>&quot;ge&quot;</code>, <code>&quot;fall_from_top&quot;</code>, <code>&quot;rise_from_bottom&quot;</code></td> </tr> <tr> <td>cond_arg1</td> <td>decimal or null</td> <td>조건부 주문의 첫번째 조건 값</td> </tr> <tr> <td>cond_arg2</td> <td>decimal or null</td> <td>조건부 주문의 두번째 조건 값</td> </tr> <tr> <td>coin_fee</td> <td>decimal</td> <td>발생한 수수료</td> </tr> <tr> <td>amount</td> <td>decimal</td> <td>주문 수량</td> </tr> <tr> <td>filled</td> <td>decimal</td> <td>주문 체결량 (매수일 때 base 기준)</td> </tr> <tr> <td>filled_quote</td> <td>decimal</td> <td>주문 체결량 (매도일 때 quote 기준)</td> </tr> <tr> <td>unfilled</td> <td>decimal</td> <td>주문 미체결량</td> </tr> <tr> <td>received_at</td> <td>unix_timestamp</td> <td>주문 신청 시간</td> </tr> <tr> <td>placed_at</td> <td>unix_timestamp or null</td> <td>주문이 (Order Book 에) 등록된 시간</td> </tr> <tr> <td>closed_at</td> <td>unix_timestamp or null</td> <td>주문 체결 완료 시간</td> </tr> <tr> <td>status</td> <td>string</td> <td>주문 상태 (<code>&quot;received&quot;</code>, <code>&quot;placed&quot;</code>, <code>&quot;closed&quot;</code>)</td> </tr> <tr> <td>close_type</td> <td>string</td> <td>체결 종류 (<code>&quot;rejected&quot;</code>, <code>&quot;filled&quot;</code>, <code>&quot;canceled&quot;</code>)</td> </tr> <tr> <td>cancel_reason</td> <td>string</td> <td>취소 이유 (<code>&quot;user&quot;</code>, <code>&quot;conflicting_self_order&quot;</code>, <code>&quot;expired&quot;</code>, <code>&quot;no_placed_amount&quot;</code>, <code>&quot;partially_filled_taker_only&quot;</code>, <code>&quot;maintenance&quot;</code>, <code>&quot;admin&quot;</code>,)</td> </tr> </tbody></table> <h3 id=trade>Trade</h3> <p>identifier: <code>id</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>id</td> <td>integer</td> <td>id</td> </tr> <tr> <td>quote</td> <td>string</td> <td>호가 코인</td> </tr> <tr> <td>base</td> <td>string</td> <td>기준 코인</td> </tr> <tr> <td>quote_amount</td> <td>decimal</td> <td>호가 코인 거래량</td> </tr> <tr> <td>base_amount</td> <td>decimal</td> <td>기준 코인 거래량</td> </tr> <tr> <td>price</td> <td>decimal</td> <td>체결 가격</td> </tr> <tr> <td>taker_sold</td> <td>boolean</td> <td>taker 가 매도자인지 여부</td> </tr> <tr> <td>exec_at</td> <td>unix_timestamp</td> <td>체결 시간</td> </tr> <tr> <td></td> <td>Below are only available from <a href="#my_trades">my_trades</a></td> <td></td> </tr> <tr> <td>order_id</td> <td>integer</td> <td>내 주문 id</td> </tr> <tr> <td>fee</td> <td>decimal</td> <td>내 수수료</td> </tr> <tr> <td>sell</td> <td>boolean</td> <td>매도 여부</td> </tr> <tr> <td>counterpart</td> <td>string</td> <td>거래 상대방의 종류. (<code>&quot;user&quot;</code>, <code>&quot;daybit&quot;</code>, <code>&quot;project&quot;</code>) 중 하나. <code>&quot;daybit&quot;</code>은 데이빗 거래소, <code>&quot;project&quot;</code>는 코인 프로젝트 팀을 의미한다.</td> </tr> </tbody></table> <h3 id=transaction-summary>Transaction Summary</h3> <p>identifier: <code>id</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>id</td> <td>integer</td> <td>id</td> </tr> <tr> <td>coin</td> <td>string</td> <td>거래 코인</td> </tr> <tr> <td>type</td> <td>string</td> <td>거래 종류. (<code>&quot;wdrl&quot;</code>, <code>&quot;deposit&quot;</code>) 중 하나.</td> </tr> <tr> <td>amount</td> <td>decimal</td> <td>거래 수량</td> </tr> <tr> <td>txid</td> <td>string or null</td> <td>출금 거래 id</td> </tr> <tr> <td>confirm</td> <td>integer</td> <td>Confirm의 수</td> </tr> <tr> <td>req_confirm</td> <td>integer</td> <td></td> </tr> <tr> <td>deposit_status</td> <td>string</td> <td>입금 상태</td> </tr> <tr> <td>wdrl_status</td> <td>string or null</td> <td>출금 상태</td> </tr> <tr> <td>wdrl_to_addr</td> <td>string or null</td> <td>출금을 받는 주소</td> </tr> <tr> <td>wdrl_to_tag</td> <td>string or null</td> <td>출금 태그</td> </tr> <tr> <td>wdrl_to_org</td> <td>string or null</td> <td>출금 기관</td> </tr> <tr> <td>created_at</td> <td>unix_timestamp</td> <td>거래 생성 시간</td> </tr> <tr> <td>completed_at</td> <td>unix_timestamp or null</td> <td>거래 완료 시간</td> </tr> <tr> <td>tx_link_url</td> <td>string</td> <td></td> </tr> </tbody></table> <h3 id=airdrop>Airdrop</h3> <p>identifier: <code>id</code></p> <table><thead> <tr> <th>Name</th> <th>Type</th> <th>Description</th> </tr> </thead><tbody> <tr> <td>id</td> <td>integer</td> <td>id</td> </tr> <tr> <td>coin</td> <td>string</td> <td>코인 기호</td> </tr> <tr> <td>amount</td> <td>decimal</td> <td>에어드랍 수량</td> </tr> <tr> <td>description</td> <td>string</td> <td>에어드랍 설명</td> </tr> <tr> <td>airdropped_at</td> <td>unix_timestamp</td> <td>에어드랍 시간</td> </tr> </tbody></table> <h1 id=pydaybit><strong>Pydaybit</strong></h1> <p>Pydaybit은 파이썬으로 작성된 데이빗 거래소 API 레퍼 <em>warppaer</em> 입니다. 코드는 <a href="https://github.com/daybit-exchange/pydaybit">Pydaybit 저장소</a>에 있습니다. </p> <h2 id=disclaimer><strong>Disclaimer</strong></h2> <p><em>이 소프트웨어의 사용에 대한 책임은 사용자 본인에게 있습니다. 작성자와 모든 관계자들은 당신의 거래의 결과에 대해 책임을 지지 않습니다.</em></p> <h2 id=installation><strong>Installation</strong></h2> <blockquote> <p>Pydaybit installation</p> </blockquote> <pre class="highlight shell tab-shell"><code><span class="gp">$ </span>git clone https://github.com/daybit-exchange/pydaybit
+<span class="gp">$ </span>pip install -e pydaybit
+</code></pre> <p>설치 방법은 오른쪽을 참고 하십시오.</p> <h2 id=api-key-pair><strong>API Key Pair</strong></h2> <p>Pydaybit을 사용하기 위해서는 API 키페어 생성을 해야합니다. <a href="#authorization">권한</a> 항목을 참조하십시오.</p> <h3 id=environment-variables>Environment Variables</h3> <blockquote> <p>bash example</p> </blockquote> <pre class="highlight shell tab-shell"><code><span class="c"># ~/.bash_profile</span>
+<span class="nb">export </span><span class="nv">DAYBIT_API_KEY</span><span class="o">=</span><span class="s2">"YOUR_OWN_API_KEY"</span>
+<span class="nb">export </span><span class="nv">DAYBIT_API_SECRET</span><span class="o">=</span><span class="s2">"YOUR_WON_API_SECRET"</span>
+</code></pre> <p>환경 변수를 세팅하여 사용할 수 있습니다</p> <ul> <li><code>DAYBIT_API_KEY</code>: 생성한 API 키</li> <li><code>DAYBIT_API_SECRET</code>: 생성한 API 시크릿</li> </ul> <h3 id=without-environment-variables>Without Environment Variables</h3> <blockquote> <p>without environment settings</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span><span class="p">,</span> <span class="n">PARAM_API_KEY</span><span class="p">,</span> <span class="n">PARAM_API_SECRET</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_example</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">(</span><span class="n">params</span><span class="o">=</span><span class="p">{</span><span class="n">PARAM_API_KEY</span><span class="p">:</span> <span class="s">"YOUR_OWN_API_KEY"</span><span class="p">,</span>
+                              <span class="n">PARAM_API_SECRET</span><span class="p">:</span> <span class="s">"YOUR_OWR_API_SECRET"</span><span class="p">})</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_example</span><span class="p">())</span>
+</code></pre> <p>API 키패어는 환경 변수 설정 없이도 사용할 수 있습니다. 예제를 참고하십시오.</p> <h2 id=get_server_time>get_server_time()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_get_server_time</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">get_server_time</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_get_server_time</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="mi">1537418605426</span> <span class="c"># unix_timestamp</span>
+</code></pre> <p>데이빗 API 서버의 현재 시간을 밀리초 단위의 유닉스 타임스탬프를 받아옵니다.</p> <ul> <li><p>Topic: <code>/api</code></p></li> <li><p>Event: <code>get_server_time</code></p></li> <li><p>Rate limit: 10</p></li> </ul> <h2 id=create_order>create_order()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">contextlib</span> <span class="kn">import</span> <span class="n">suppress</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+<span class="kn">from</span> <span class="nn">pydaybit.exceptions</span> <span class="kn">import</span> <span class="n">OrderAlreadyClosed</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">current_price</span><span class="p">(</span><span class="n">daybit</span><span class="p">,</span> <span class="n">quote</span><span class="p">,</span> <span class="n">base</span><span class="p">):</span>
+    <span class="n">summary_intvl</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">market_summary_intvls</span><span class="p">())</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">price</span> <span class="o">=</span> <span class="p">(</span><span class="n">await</span> <span class="p">(</span><span class="n">daybit</span><span class="o">.</span><span class="n">market_summaries</span> <span class="o">/</span> <span class="n">summary_intvl</span><span class="p">)())[</span><span class="s">'{}-{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quote</span><span class="p">,</span> <span class="n">base</span><span class="p">)][</span><span class="s">'close'</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">Decimal</span><span class="p">(</span><span class="n">price</span><span class="p">)</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_create_order_sell</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">quote</span> <span class="o">=</span> <span class="s">'USDT'</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="s">'BTC'</span>
+
+        <span class="n">tick_price</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">((</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">markets</span><span class="p">())[</span><span class="s">'{}-{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quote</span><span class="p">,</span> <span class="n">base</span><span class="p">)][</span><span class="s">'tick_price'</span><span class="p">])</span>
+        <span class="n">tick_amount</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">((</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">coins</span><span class="p">())[</span><span class="n">base</span><span class="p">][</span><span class="s">'tick_amount'</span><span class="p">])</span>
+
+        <span class="c"># amount * price should be greater than 10 USDT.</span>
+        <span class="n">price</span> <span class="o">=</span> <span class="p">((</span><span class="n">await</span> <span class="n">current_price</span><span class="p">(</span><span class="n">daybit</span><span class="p">,</span> <span class="n">quote</span><span class="p">,</span> <span class="n">base</span><span class="p">))</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="mf">1.2</span><span class="p">))</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">tick_price</span><span class="p">)</span>
+        <span class="n">amount</span> <span class="o">=</span> <span class="p">(</span><span class="n">Decimal</span><span class="p">(</span><span class="mf">10.5</span><span class="p">)</span> <span class="o">/</span> <span class="n">price</span><span class="p">)</span><span class="o">.</span><span class="n">quantize</span><span class="p">(</span><span class="n">tick_amount</span><span class="p">)</span>
+
+        <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+            <span class="n">sell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>
+            <span class="n">role</span><span class="o">=</span><span class="s">'both'</span><span class="p">,</span>
+            <span class="n">quote</span><span class="o">=</span><span class="n">quote</span><span class="p">,</span>
+            <span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
+            <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span>
+            <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+            <span class="n">cond_type</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+        <span class="k">with</span> <span class="n">suppress</span><span class="p">(</span><span class="n">OrderAlreadyClosed</span><span class="p">):</span>
+            <span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">cancel_order</span><span class="p">(</span><span class="n">response</span><span class="p">[</span><span class="s">'id'</span><span class="p">])</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_create_order_sell</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'amount'</span><span class="p">:</span> <span class="s">'0.00200000'</span><span class="p">,</span>
+  <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+  <span class="s">'cancel_reason'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'close_type'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'closed_at'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'cond_arg1'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'cond_arg2'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'cond_type'</span><span class="p">:</span> <span class="s">'none'</span><span class="p">,</span>
+  <span class="s">'filled'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+  <span class="s">'filled_quote'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+  <span class="s">'id'</span><span class="p">:</span> <span class="mi">53026865</span><span class="p">,</span>
+  <span class="s">'placed_amount'</span><span class="p">:</span> <span class="s">'0.00200000'</span><span class="p">,</span>
+  <span class="s">'placed_at'</span><span class="p">:</span> <span class="mi">1537419310682</span><span class="p">,</span>
+  <span class="s">'price'</span><span class="p">:</span> <span class="s">'6961.00000000'</span><span class="p">,</span>
+  <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+  <span class="s">'received_at'</span><span class="p">:</span> <span class="mi">1537419310639</span><span class="p">,</span>
+  <span class="s">'role'</span><span class="p">:</span> <span class="s">'both'</span><span class="p">,</span>
+  <span class="s">'sell'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+  <span class="s">'status'</span><span class="p">:</span> <span class="s">'placed'</span><span class="p">,</span>
+  <span class="s">'unfilled'</span><span class="p">:</span> <span class="s">'0.00200000'</span>
+<span class="p">}</span>
+</code></pre> <p>코인은 사거나 파는 주문을 생성합니다. 데이빗 API 서버에 요청할 수 있는 다섯 가지의 주문 종류가 있습니다 - <a href="#limit-order">Limit order</a>, <a href="#taker-order">Taker Order</a>, <a href="#maker-order">Maker Order</a>, <a href="#stop-limit-order">Stop Limit Order</a>, <a href="#trailing-stop-order">Trailling Stop Order</a>.</p> <p>잘못된 주문(주문 무효)의 경우는 다음과 같습니다</p> <ul> <li>거부된 주문</li> <li>유저의 요청으로 인한 취소</li> <li>자전 거래로 인한 취소</li> <li>오래된 주문의 자동 취소</li> </ul> <p><code>sell</code>, <code>quote</code>, <code>base</code>, <code>amount</code>, <code>role</code>, <code>cond_type</code> 파라미터 값은 모든 주문에서 필요합니다.</p> <ul> <li><p>Topic: <code>/api</code></p></li> <li><p>Event: <code>create_order</code></p></li> <li><p>Rate limit: -</p></li> <li><p>Response: <a href="#order-2">Order</a></p></li> </ul> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Required</td> <td>판매일 경우 <code>True</code>, 구매일 경우 <code>False</code>.</td> </tr> <tr> <td><code>quote</code></td> <td>string</td> <td>Required</td> <td>호가 코인 기호. 예) &quot;BTC&quot;</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Required</td> <td>기준 코인 기호. 예) &quot;ETH&quot;</td> </tr> <tr> <td><code>amount</code></td> <td>decimal</td> <td>Required</td> <td>주문 수량.</td> </tr> <tr> <td><code>role</code></td> <td>string</td> <td>Required</td> <td>마켓에서의 주문의 역할 (<code>&quot;both&quot;</code>, <code>&quot;maker_only&quot;</code>, <code>&quot;taker_only&quot;</code>).</td> </tr> <tr> <td><code>cond_type</code></td> <td>string</td> <td>Required</td> <td>주문의 조건 종류 (<code>&quot;none&quot;</code>, <code>&quot;le&quot;</code>, <code>&quot;ge&quot;</code>, <code>&quot;fall_from_top&quot;</code>, <code>&quot;rise_from_bottom&quot;</code>).</td> </tr> <tr> <td><code>price</code></td> <td>decimal</td> <td>Optional</td> <td>주문 가격.</td> </tr> <tr> <td><code>cond_arg1</code></td> <td>decimal</td> <td>Optional</td> <td>조건 주문의 첫번째 인자.</td> </tr> <tr> <td><code>cond_arg2</code></td> <td>decimal</td> <td>Optional</td> <td>조건 주문의 두번째 인자.</td> </tr> </tbody></table> <h3 id=limit-order>Limit Order</h3> <blockquote> <p>Example Limit Order</p> </blockquote> <pre class="highlight python tab-python"><code><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+    <span class="n">sell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="c"># True for selling, False for buying.</span>
+    <span class="n">role</span><span class="o">=</span><span class="s">'both'</span><span class="p">,</span>
+    <span class="n">quote</span><span class="o">=</span><span class="n">quote</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
+    <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+    <span class="n">cond_type</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre> <p>이 주문이 접수되면 먼저 <a href="#taker-order">테이커 주문</a> <em>taker order</em> 로 여겨지고, 만약 주문의 잔량이 있다면 <a href="#maker-order">메이커 주문</a> <em>maker order</em> 가 됩니다.</p> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Required</td> <td>판매일 경우 <code>True</code>, 구매일 경우 <code>False</code>.</td> </tr> <tr> <td><code>role</code></td> <td>string</td> <td>Required</td> <td><code>&quot;both&quot;</code></td> </tr> <tr> <td><code>quote</code></td> <td>string</td> <td>Required</td> <td>호가 코인 기호. 예) &quot;BTC&quot;</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Required</td> <td>기준 코인 기호. 예) &quot;ETH&quot;</td> </tr> <tr> <td><code>price</code></td> <td>decimal</td> <td>Required</td> <td>주문 가격. <code>price</code> = <code>base</code> / <code>quote</code>.</td> </tr> <tr> <td><code>amount</code></td> <td>decimal</td> <td>Required</td> <td><code>quote</code> 기준 주문 수량.</td> </tr> <tr> <td><code>cond_type</code></td> <td>string</td> <td>Required</td> <td><code>&quot;none&quot;</code></td> </tr> </tbody></table> <aside class=notice> 제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>. </aside> <h3 id=taker-order>Taker Order</h3> <blockquote> <p>Example Taker Order</p> </blockquote> <pre class="highlight python tab-python"><code><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+    <span class="n">sell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="c"># True for selling, False for buying.</span>
+    <span class="n">role</span><span class="o">=</span><span class="s">'taker_only'</span><span class="p">,</span>
+    <span class="n">quote</span><span class="o">=</span><span class="n">quote</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
+    <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+    <span class="n">cond_type</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre> <p>이 주문은 오더북에 있는 거래량 <em>volume</em> 을 가져가서 <em>tacking</em> 오더북에 등록되기 전에 거래를 체결하기 때문에 <code>테이커</code> <em>tacker</em> 라고 합니다.</p> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Required</td> <td>판매일 경우 <code>True</code>, 구매일 경우 <code>False</code>.</td> </tr> <tr> <td><code>role</code></td> <td>string</td> <td>Required</td> <td><code>&quot;taker_only&quot;</code></td> </tr> <tr> <td><code>quote</code></td> <td>string</td> <td>Required</td> <td>호가 코인 기호.</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Required</td> <td>기준 코인 기호.</td> </tr> <tr> <td><code>price</code></td> <td>decimal</td> <td>Required</td> <td>주문 가격. <code>price</code> = <code>base</code> / <code>quote</code>.</td> </tr> <tr> <td><code>amount</code></td> <td>decimal</td> <td>Required</td> <td><code>quote</code> 기준 주문 수량.</td> </tr> <tr> <td><code>cond_type</code></td> <td>string</td> <td>Required</td> <td><code>&quot;none&quot;</code></td> </tr> </tbody></table> <aside class=notice> 제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>. </aside> <h3 id=maker-order>Maker Order</h3> <blockquote> <p>Example Maker Order</p> </blockquote> <pre class="highlight python tab-python"><code><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+    <span class="n">sell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="c"># True for selling, False for buying.</span>
+    <span class="n">role</span><span class="o">=</span><span class="s">'maker_only'</span><span class="p">,</span>
+    <span class="n">quote</span><span class="o">=</span><span class="n">quote</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
+    <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+    <span class="n">cond_type</span><span class="o">=</span><span class="s">'none'</span><span class="p">,</span>
+<span class="p">)</span>
+</code></pre> <p>주문이 오더북을 채워 마켓을 만들기 <em>making</em> 하기 때문에 이러한 주문은 <code>메이커</code> <em>maker</em> 라고 불립니다. 이 주문은 오더북을 채울 때만 유효합니다.</p> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Required</td> <td>판매일 경우 <code>True</code>, 구매일 경우 <code>False</code>.</td> </tr> <tr> <td><code>role</code></td> <td>string</td> <td>Required</td> <td><code>&quot;maker_only&quot;</code></td> </tr> <tr> <td><code>quote</code></td> <td>string</td> <td>Required</td> <td>호가 코인 기호.</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Required</td> <td>기준 코인 기호.</td> </tr> <tr> <td><code>price</code></td> <td>decimal</td> <td>Required</td> <td>주문 가격. <code>price</code> = <code>base</code> / <code>quote</code>.</td> </tr> <tr> <td><code>amount</code></td> <td>decimal</td> <td>Required</td> <td><code>quote</code> 기준 주문 수량.</td> </tr> <tr> <td><code>cond_type</code></td> <td>string</td> <td>Required</td> <td><code>&quot;none&quot;</code></td> </tr> </tbody></table> <aside class=notice> 제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>. </aside> <h3 id=stop-limit-order>Stop Limit Order</h3> <blockquote> <p>Example Stop Limit Order</p> </blockquote> <pre class="highlight python tab-python"><code><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+    <span class="n">sell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="c"># True for selling, False for buying.</span>
+    <span class="n">role</span><span class="o">=</span><span class="s">'both'</span><span class="p">,</span>
+    <span class="n">quote</span><span class="o">=</span><span class="n">quote</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">=</span><span class="n">base</span><span class="p">,</span>
+    <span class="n">price</span><span class="o">=</span><span class="n">price</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="n">amount</span><span class="p">,</span>
+    <span class="n">cond_type</span><span class="o">=</span><span class="s">'ge'</span><span class="p">,</span> <span class="c"># cond_type could be 'ge' or 'le'.</span>
+    <span class="n">cond_arg1</span><span class="o">=</span><span class="n">price</span> <span class="o">*</span> <span class="n">Decimal</span><span class="p">(</span><span class="mf">1.5</span><span class="p">)</span>
+<span class="p">)</span>
+</code></pre> <p>현재 가격이 <code>cond_arg</code>보다 같거나 클 때/ 같거나 작을 때, 리미트 <em>limit</em> 주문을 접수합니다.</p> <ul> <li><p><code>cond_type</code> = <code>&quot;le&quot;</code>를 요청하면, <code>현재가</code> ≤ <code>조건가</code>(= <code>cond_arg1</code>)일 때에 <code>price</code> 가격에 리미트 주문을 접수합니다.</p></li> <li><p><code>cond_type</code> = <code>&quot;ge&quot;</code>를 요청하면, <code>현재가</code> ≥ <code>조건가</code>(= <code>cond_arg1</code>)일 때에 <code>price</code> 가격에 리미트 주문을 접수합니다.</p></li> </ul> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Required</td> <td>판매일 경우 <code>True</code>, 구매일 경우 <code>False</code>.</td> </tr> <tr> <td><code>role</code></td> <td>string</td> <td>Required</td> <td><code>&quot;both&quot;</code></td> </tr> <tr> <td><code>quote</code></td> <td>string</td> <td>Required</td> <td>호가 코인 기호.</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Required</td> <td>기준 코인 기호.</td> </tr> <tr> <td><code>price</code></td> <td>decimal</td> <td>Required</td> <td>주문 가격. <code>price</code> = <code>base</code> / <code>quote</code>.</td> </tr> <tr> <td><code>amount</code></td> <td>decimal</td> <td>Required</td> <td><code>quote</code> 기준 주문 수량.</td> </tr> <tr> <td><code>cond_type</code></td> <td>string</td> <td>Required</td> <td><code>&quot;le&quot;</code> 혹은 <code>&quot;ge&quot;</code>.</td> </tr> <tr> <td><code>cond_arg1</code></td> <td>decimal</td> <td>Required</td> <td>주문의 <code>조건가</code>. 이 값을 <code>현재가</code>와 비교합니다.</td> </tr> </tbody></table> <aside class=notice> 제한 조건: <code>주문 수량</code> * <code>USD 환산 가격</code> ≥ 10.0 <code>USD</code>. </aside> <h3 id=trailing-stop-order>Trailing Stop Order</h3> <blockquote> <p>Example Trailing Stop Order</p> </blockquote> <pre class="highlight python tab-python"><code><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_order</span><span class="p">(</span>
+    <span class="n">sell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span>  <span class="c"># True for 'down_from_high', False for 'up_from_low'.</span>
+    <span class="n">role</span><span class="o">=</span><span class="s">'both'</span><span class="p">,</span>
+    <span class="n">quote</span><span class="o">=</span><span class="s">'USDT'</span><span class="p">,</span>
+    <span class="n">base</span><span class="o">=</span><span class="s">'BTC'</span><span class="p">,</span>
+    <span class="n">amount</span><span class="o">=</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'0.1'</span><span class="p">),</span>
+    <span class="n">cond_type</span><span class="o">=</span><span class="s">'down_from_high'</span><span class="p">,</span>  <span class="c"># cond_type could be 'down_from_high' or 'up_from_low'.</span>
+    <span class="n">cond_arg1</span><span class="o">=</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'-0.01'</span><span class="p">),</span>
+    <span class="n">cond_arg2</span><span class="o">=</span><span class="n">Decimal</span><span class="p">(</span><span class="s">'-0.005'</span><span class="p">),</span>
+<span class="p">)</span>
+</code></pre> <p>트래일링 스탑 주문 <em>trailing stop order</em> 을 사용하면, 가격이 고가에 크게 떨어질 때 현재 가격보다 조금 낮은 가격에 매도 리미트 주문을 접수할 수 있다. 마찬가지로, 현재 가격이 저가에 비해 크게 상승하면 현재가격보다 조금 높은 가격에 매수 리미트 주문을 접수할 수 있다.</p> <p>예를들어, (<code>sell</code>=True, <code>role</code>=&#39;both&#39;, <code>quote</code>=&#39;BTC&#39;, <code>base</code>=&#39;USDT&#39;, <code>amount</code>=&#39;0.1&#39;, <code>cond_type</code>=&#39;down_from_high&#39;, <code>cond_arg1</code>=&#39;-0.01&#39;, <code>cond_arg2</code>=&#39;-0.005&#39;)로 주문을 냈다고 하자. 트래일링 스탑 주문이 접수되고, 가격이 10,000 USDT에 도달한뒤 떨어지기 시작한 상황에서는 이 주문은 9,000 USDT (= 1000 USDT * (1 + <code>cond_arg1</code>))에 트리거 되어 리미트 오더를 8,955 USDT (= 9,000 USDT * (1 + <code>cond_arg2</code>))에 접수한다.</p> <ul> <li><p>고점에서 하락 <em>down from high</em> 의 경우, <code>현재가</code> ≤ <code>고가</code> * (1 + <code>cond_arg1</code>)일 때, 가격이 <code>현재가</code> * (1 + <code>cond_arg2</code>)인 매도 리미트 오더를 접수한다.</p></li> <li><p>저점에서 상승 <em>up from low</em> 의 경우, <code>현재가</code> ≥ <code>저가</code> * (1 + <code>cond_arg1</code>)일 때, 가격이 <code>현재가</code> * (1 + <code>cond_arg2</code>)인 매수 리미트 오더를 접수한다. </p></li> </ul> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Required</td> <td><code>&quot;down_from_high&quot;</code>일 경우 <code>True</code>, <code>&quot;up_from_low&quot;</code>일 경우 <code>false</code>.</td> </tr> <tr> <td><code>role</code></td> <td>string</td> <td>Required</td> <td><code>&quot;both&quot;</code></td> </tr> <tr> <td><code>quote</code></td> <td>string</td> <td>Required</td> <td>호가 코인 기호.</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Required</td> <td>기준 코인 기호.</td> </tr> <tr> <td><code>amount</code></td> <td>decimal</td> <td>Required</td> <td>주문 수량.</td> </tr> <tr> <td><code>cond_type</code></td> <td>string</td> <td>Required</td> <td><code>&quot;down_from_high&quot;</code> 혹은 <code>&quot;up_from_low&quot;</code>.</td> </tr> <tr> <td><code>cond_arg1</code></td> <td>decimal</td> <td>Required</td> <td>고점에서 하락 <em>down from high</em> 의 경우, 고점 대비 가격 하락 비율.<br/>저점에서 상승 <em>up from low</em> 의 경우, 저점 대비 가격 상승 비율.</td> </tr> <tr> <td><code>cond_arg2</code></td> <td>decimal</td> <td>Required</td> <td><code>cond_arg1</code> 관련 조건이 만족되면, <code>현재가</code> * (1 + <code>cond_arg2</code>) 가격에 리미트 주문을 접수한다.</td> </tr> </tbody></table> <aside class=notice> 제한 조건: <br/> <ul> <li> <code>주문 수량</code> * <code>트래일링 스탑 주문을 접수할 때 USD 환산 가격</code> ≥ 10.0 <code>USD</code>. </li> <li> 고점에서 하락 <em>down from high</em> 의 경우:<br/> -0.1≤<code>cond_arg1</code>≤-0.02<br/> -0.1≤<code>cond_arg2</code>≤-0.01 </li> <li> 저점에서 상승 <em>up from low</em> 의 경우:<br/> 0.02≤<code>cond_arg1</code>≤0.1<br/> 0.01≤<code>cond_arg2</code>≤0.1 </li> </ul> </aside> <h2 id=cancel_order>cancel_order()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_cancel_order</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">cancel_order</span><span class="p">(</span><span class="mi">53216861</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_cancel_order</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'amount'</span><span class="p">:</span> <span class="s">'0.00200000'</span><span class="p">,</span>
+  <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+  <span class="s">'cancel_reason'</span><span class="p">:</span> <span class="s">'user'</span><span class="p">,</span>
+  <span class="s">'close_type'</span><span class="p">:</span> <span class="s">'canceled'</span><span class="p">,</span>
+  <span class="s">'closed_at'</span><span class="p">:</span> <span class="mi">1537421465336</span><span class="p">,</span>
+  <span class="s">'cond_arg1'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'cond_arg2'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'cond_type'</span><span class="p">:</span> <span class="s">'none'</span><span class="p">,</span>
+  <span class="s">'filled'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+  <span class="s">'filled_quote'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+  <span class="s">'id'</span><span class="p">:</span> <span class="mi">53216861</span><span class="p">,</span>
+  <span class="s">'placed_amount'</span><span class="p">:</span> <span class="s">'0.00200000'</span><span class="p">,</span>
+  <span class="s">'placed_at'</span><span class="p">:</span> <span class="mi">1537421443079</span><span class="p">,</span>
+  <span class="s">'price'</span><span class="p">:</span> <span class="s">'6595.00000000'</span><span class="p">,</span>
+  <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+  <span class="s">'received_at'</span><span class="p">:</span> <span class="mi">1537421443074</span><span class="p">,</span>
+  <span class="s">'role'</span><span class="p">:</span> <span class="s">'both'</span><span class="p">,</span>
+  <span class="s">'sell'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+  <span class="s">'status'</span><span class="p">:</span> <span class="s">'closed'</span><span class="p">,</span>
+  <span class="s">'unfilled'</span><span class="p">:</span> <span class="s">'0.00200000'</span>
+<span class="p">}</span>
+</code></pre> <p>접수된 주문을 취소합니다. 주문 취소를 위해서는 유효한 주문 <code>id</code>를 넣어야 합니다.</p> <ul> <li><p>Topic: <code>/api</code></p></li> <li><p>Event: <code>cancel_order</code></p></li> <li><p>Rate limit: -</p></li> <li><p>Response: <a href="#order-2">Order</a></p></li> </ul> <h3 id=arguments>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>order_id</code></td> <td>integer</td> <td>Required</td> <td>취소하려고 하는 주문의 <code>id</code></td> </tr> </tbody></table> <h2 id=cancel_orders>cancel_orders()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_cancel_orders</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">my_orders</span> <span class="o">=</span> <span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_orders</span><span class="p">()</span>
+        <span class="n">open_orders</span> <span class="o">=</span> <span class="p">([</span><span class="n">my_orders</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">'id'</span><span class="p">]</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">my_orders</span> <span class="k">if</span> <span class="n">my_orders</span><span class="p">[</span><span class="n">key</span><span class="p">][</span><span class="s">'status'</span><span class="p">]</span> <span class="o">==</span> <span class="s">'placed'</span><span class="p">])</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">open_orders</span><span class="p">)</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">cancel_orders</span><span class="p">(</span><span class="n">open_orders</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_cancel_orders</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'num_canceled_orders'</span><span class="p">:</span> <span class="mi">5</span>
+<span class="p">}</span>
+</code></pre> <p>여러 개의 주문을 한번에 취소할 때 사용합니다. <code>order_ids</code>에서 일치하는 <code>id</code>를 가지는 유효한 주문을 취소합니다. 취소된 주문의 갯수는 응답의 <code>num_canceled_orders</code>를 참조하십시오.</p> <ul> <li><p>Topic: <code>/api</code></p></li> <li><p>Event: <code>cancel_orders</code></p></li> <li><p>Rate limit: 1</p></li> </ul> <h3 id=arguments-2>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>order_ids</code></td> <td>array</td> <td>Required</td> <td>쥐소하려고 하는 주문들의 id.</td> </tr> </tbody></table> <h3 id=response>Response</h3> <table><thead> <tr> <th>Field</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>num_canceled_orders</code></td> <td>취소한 주문의 갯수.</td> </tr> </tbody></table> <aside class=notice> 데이빗 API 서버는 주문들의 id를 CSV 형식(예를 들어, "1,2,3")으로 입력받습니다. 하지만 Pydaybit을 사용할 때에는 주문 <code>id</code>의 리스트를 사용하십시오. </aside> <h2 id=cancel_all_my_orders>cancel_all_my_orders()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_cancel_all_my_orders</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">response</span> <span class="o">=</span> <span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">cancel_all_my_orders</span><span class="p">()</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_cancel_all_my_orders</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'num_canceled_orders'</span><span class="p">:</span> <span class="mi">2</span>
+<span class="p">}</span>
+</code></pre> <p>내 모든 주문을 취소합니다.</p> <ul> <li><p>Topic: <code>/api</code></p></li> <li><p>Event: <code>cancel_all_my_orders</code></p></li> <li><p>Rate limit: 1</p></li> </ul> <h3 id=response-2>Response</h3> <table><thead> <tr> <th>Field</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>num_canceled_orders</code></td> <td>취소한 주문의 갯수.</td> </tr> </tbody></table> <h2 id=create_wdrl>create_wdrl()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_create_wdrl</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">create_wdrl</span><span class="p">(</span><span class="n">coin</span><span class="o">=</span><span class="s">'BTC'</span><span class="p">,</span> <span class="n">to_addr</span><span class="o">=</span><span class="s">'&lt;YOUR BTC ADDRESS&gt;'</span><span class="p">,</span> <span class="n">amount</span><span class="o">=</span><span class="s">'0.01'</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_create_wdrl</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'amount'</span><span class="p">:</span> <span class="s">'0.01000000'</span><span class="p">,</span>
+  <span class="s">'coin'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+  <span class="s">'completed_at'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'confirm'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+  <span class="s">'created_at'</span><span class="p">:</span> <span class="mi">1538639363972</span><span class="p">,</span>
+  <span class="s">'deposit_status'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'id'</span><span class="p">:</span> <span class="mi">5294</span><span class="p">,</span>
+  <span class="s">'req_confirm'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+  <span class="s">'tx_link_url'</span><span class="p">:</span> <span class="s">'https://live.blockcypher.com/btc/tx/'</span><span class="p">,</span>
+  <span class="s">'txid'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'type'</span><span class="p">:</span> <span class="s">'wdrl'</span><span class="p">,</span>
+  <span class="s">'wdrl_status'</span><span class="p">:</span> <span class="s">'queued'</span><span class="p">,</span>
+  <span class="s">'wdrl_to_addr'</span><span class="p">:</span> <span class="s">'&lt;YOUR BTC ADDRESS&gt;'</span><span class="p">,</span>
+  <span class="s">'wdrl_to_org'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+  <span class="s">'wdrl_to_tag'</span><span class="p">:</span> <span class="bp">None</span>
+<span class="p">}</span>
+</code></pre> <p><code>to_addr</code>로 <code>amount</code>만큼의 <code>coin</code>의 출금을 요청합니다.</p> <ul> <li><p>Topic: <code>/api</code></p></li> <li><p>Event: <code>create_wdrl</code></p></li> <li><p>Rate limit: 50</p></li> <li><p>Response: <a href="#transaction-summary">Transaction summary</a></p></li> </ul> <h3 id=arguments-3>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>coin</code></td> <td>string</td> <td>Required</td> <td>출금 코인.</td> </tr> <tr> <td><code>to_addr</code></td> <td>string</td> <td>Required</td> <td>출금을 받을 주소.</td> </tr> <tr> <td><code>to_tag</code></td> <td>string</td> <td>Optional</td> <td>출금 태그. <code>XRP</code> 등에서 사용.</td> </tr> <tr> <td><code>amount</code></td> <td>decimal</td> <td>Required</td> <td>출금 수량.</td> </tr> </tbody></table> <h2 id=coins>coins()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_coins</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">coins</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_coins</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'ADA'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'deposit_confirm'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s">'deposit_enabled'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'has_org'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">'has_tag'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">'min_deposit'</span><span class="p">:</span> <span class="s">'100.00000000'</span><span class="p">,</span>
+    <span class="s">'min_wdrl'</span><span class="p">:</span> <span class="s">'100.00000000'</span><span class="p">,</span>
+    <span class="s">'name'</span><span class="p">:</span> <span class="s">'Ada'</span><span class="p">,</span>
+    <span class="s">'native_decimal_places'</span><span class="p">:</span> <span class="mi">8</span><span class="p">,</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'ADA'</span><span class="p">,</span>
+    <span class="s">'tick_amount'</span><span class="p">:</span> <span class="s">'2.00000000'</span><span class="p">,</span>
+    <span class="s">'tradable'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">'wdrl_confirm'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s">'wdrl_enabled'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'wdrl_fee'</span><span class="p">:</span> <span class="s">'50.00000000'</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...       </span>
+
+  <span class="s">'ZRX'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'deposit_confirm'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s">'deposit_enabled'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'has_org'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">'has_tag'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">'min_deposit'</span><span class="p">:</span> <span class="s">'13.00000000'</span><span class="p">,</span>
+    <span class="s">'min_wdrl'</span><span class="p">:</span> <span class="s">'13.00000000'</span><span class="p">,</span>
+    <span class="s">'name'</span><span class="p">:</span> <span class="s">'0x Protocol'</span><span class="p">,</span>
+    <span class="s">'native_decimal_places'</span><span class="p">:</span> <span class="mi">4</span><span class="p">,</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'ZRX'</span><span class="p">,</span>
+    <span class="s">'tick_amount'</span><span class="p">:</span> <span class="s">'0.20000000'</span><span class="p">,</span>
+    <span class="s">'tradable'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'wdrl_confirm'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s">'wdrl_enabled'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'wdrl_fee'</span><span class="p">:</span> <span class="s">'6.30000000'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>코인 데이타를 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:coins</code> </p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#coin">Coin</a></p></li> <li><p>Sort: -</p></li> </ul> <h2 id=coin_prices>coin_prices()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="c"># For every coin</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_coin_prices</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">coin_prices</span><span class="p">())</span>
+
+
+<span class="c"># For specific coin</span>
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_coin_prices_with_sym</span><span class="p">(</span><span class="n">sym</span><span class="o">=</span><span class="s">'ETH'</span><span class="p">):</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="p">(</span><span class="n">daybit</span><span class="o">.</span><span class="n">coin_prices</span> <span class="o">/</span> <span class="n">sym</span><span class="p">)())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_coin_prices</span><span class="p">())</span>
+<span class="c"># asyncio.get_event_loop().run_until_complete(daybit_coin_prices_with_sym())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="c"># If you didn't specify the coin</span>
+<span class="p">{</span>
+  <span class="s">'ADA'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'ADA'</span><span class="p">,</span>
+    <span class="s">'usd_price'</span><span class="p">:</span> <span class="s">'0.09000000'</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="s">'ZRX'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'ZRX'</span><span class="p">,</span>
+    <span class="s">'usd_price'</span><span class="p">:</span> <span class="s">'0.67047870'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c"># If you specified the coin</span>
+<span class="p">{</span>
+  <span class="s">'ETH'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'ETH'</span><span class="p">,</span>
+    <span class="s">'usd_price'</span><span class="p">:</span> <span class="s">'291.88000000'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre><h3 id=coin_prices-2>coin_prices()</h3> <p>모든 코인의 USD 환산 가격을 받아 옵니다. 어떤 코인이라도 가격에 변화가 있으면 <code>notification</code> 이벤트를 받을 것입니다. 가격 변화가 있는 코인만 업데이트 됩니다.</p> <ul> <li><p>Topic: <code>/subscription:coin_prices</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>update</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#coin-price">Coin price</a></p></li> <li><p>Sort: -</p></li> </ul> <h3 id=coin_prices-lt-sym-gt>(coin_prices / <code>&lt;sym&gt;</code>)()</h3> <p>특정 코인의 USD 환산 가격을 받아 옵니다. 명시한 코인의 가격이 변화가 있을 때 마다 <code>notification</code> 이벤트를 받을 것입니다.</p> <ul> <li><p>Topic: <code>/subscription:coin_prices;&lt;sym&gt;</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>update</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#coin-price">Coin price</a></p></li> <li><p>Sort: -</p></li> </ul> <h2 id=quote_coins>quote_coins()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_quote_coins</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">quote_coins</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_quote_coins</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'BTC'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'BTC'</span>
+  <span class="p">},</span>
+  <span class="s">'ETH'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'ETH'</span>
+  <span class="p">},</span>
+  <span class="s">'USDT'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'sym'</span><span class="p">:</span> <span class="s">'USDT'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>호가 코인 리스트를 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:quote_coins</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code>, <code>delete</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#quote-coin">Quote coin</a></p></li> <li><p>Sort: -</p></li> </ul> <h2 id=markets>markets()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_markets</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">markets</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_markets</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'BTC-ADA'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'ADA'</span><span class="p">,</span>
+    <span class="s">'buyable'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'sellable'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'tick_levels'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s">'tick_price'</span><span class="p">:</span> <span class="s">'0.00000001'</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="s">'USDT-ETH'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'ETH'</span><span class="p">,</span>
+    <span class="s">'buyable'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'sellable'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'tick_levels'</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span>
+    <span class="s">'tick_price'</span><span class="p">:</span> <span class="s">'0.02000000'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>시장 데이터를 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:markets</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code>, <code>delete</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#market">Market</a></p></li> <li><p>Sort: -</p></li> </ul> <h2 id=market_summary_intvls>market_summary_intvls()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_market_summary_intvls</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">market_summary_intvls</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_market_summary_intvls</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="mi">30</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'seconds'</span><span class="p">:</span> <span class="mi">30</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="mi">1440</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'seconds'</span><span class="p">:</span> <span class="mi">1440</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>시장 가격의 시간 간격을 구독합니다. 시간 간격은 초 단위 입니다. 각 시간 간격은 <a href="#market_summaries">시장 요약</a>을 구독할 때 사용됩니다.</p> <ul> <li><p>Topic: <code>/subscription:market_summary_intvls</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code>, <code>delete</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#market-summary-interval">Market summary interval</a></p></li> <li><p>Sort: by <code>seconds</code> in <code>desc</code></p></li> </ul> <h2 id=market_summaries>market_summaries()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_market_summaries</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">intvls</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">market_summary_intvls</span><span class="p">())</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="p">(</span><span class="n">daybit</span><span class="o">.</span><span class="n">market_summaries</span> <span class="o">/</span> <span class="n">intvls</span><span class="p">[</span><span class="mi">0</span><span class="p">])())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_market_summaries</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'BTC-AMO'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'AMO'</span><span class="p">,</span>
+    <span class="s">'base_vol'</span><span class="p">:</span> <span class="s">'141900.000'</span><span class="p">,</span>
+    <span class="s">'close'</span><span class="p">:</span> <span class="s">'0.00000046'</span><span class="p">,</span>
+    <span class="s">'high'</span><span class="p">:</span> <span class="s">'0.00000046'</span><span class="p">,</span>
+    <span class="s">'low'</span><span class="p">:</span> <span class="s">'0.00000046'</span><span class="p">,</span>
+    <span class="s">'open'</span><span class="p">:</span> <span class="s">'0.00000046'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'quote_vol'</span><span class="p">:</span> <span class="s">'0.065'</span><span class="p">,</span>
+    <span class="s">'seconds'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s">'volatility'</span><span class="p">:</span> <span class="s">'0.0000'</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="s">'USDT-ETH'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'ETH'</span><span class="p">,</span>
+    <span class="s">'base_vol'</span><span class="p">:</span> <span class="s">'0.275'</span><span class="p">,</span>
+    <span class="s">'close'</span><span class="p">:</span> <span class="s">'291.82'</span><span class="p">,</span>
+    <span class="s">'high'</span><span class="p">:</span> <span class="s">'291.82'</span><span class="p">,</span>
+    <span class="s">'low'</span><span class="p">:</span> <span class="s">'291.82'</span><span class="p">,</span>
+    <span class="s">'open'</span><span class="p">:</span> <span class="s">'291.82'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'quote_vol'</span><span class="p">:</span> <span class="s">'80.251'</span><span class="p">,</span>
+    <span class="s">'seconds'</span><span class="p">:</span> <span class="mi">30</span><span class="p">,</span>
+    <span class="s">'volatility'</span><span class="p">:</span> <span class="s">'0.0000'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>시장 요약을 구독합니다. 유효한 <code>seconds</code>는 <a href="#market_summary_intvls">시장 요약 간격</a>을 참고 하십시오.</p> <ul> <li><p>Topic: <code>/subscription:market_summaries;&lt;market_summary_intvl&gt;</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>init</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#market-summary">Market summary</a></p></li> <li><p>Sort: -</p></li> </ul> <h2 id=order_books>order_books()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">decimal</span> <span class="kn">import</span> <span class="n">Decimal</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_order_books</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">quote</span> <span class="o">=</span> <span class="s">'USDT'</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="s">'BTC'</span>
+        <span class="n">multiple</span> <span class="o">=</span> <span class="mi">10</span>
+        <span class="k">assert</span> <span class="n">multiple</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">100</span><span class="p">,</span> <span class="mi">1000</span><span class="p">]</span>
+        <span class="n">price_intvl</span> <span class="o">=</span> <span class="n">Decimal</span><span class="p">((</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">markets</span><span class="p">())[</span><span class="s">'{}-{}'</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">quote</span><span class="p">,</span> <span class="n">base</span><span class="p">)][</span><span class="s">'tick_price'</span><span class="p">])</span> <span class="o">*</span> <span class="n">multiple</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="p">(</span><span class="n">daybit</span><span class="o">.</span><span class="n">order_books</span> <span class="o">/</span> <span class="n">quote</span> <span class="o">/</span> <span class="n">base</span> <span class="o">/</span> <span class="n">price_intvl</span><span class="p">)())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_order_books</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'6475.00000000-6480.00000000'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'buy_vol'</span><span class="p">:</span> <span class="s">'0.02086000'</span><span class="p">,</span>
+    <span class="s">'intvl'</span><span class="p">:</span> <span class="s">'5.00000000'</span><span class="p">,</span>
+    <span class="s">'max_price'</span><span class="p">:</span> <span class="s">'6480.00000000'</span><span class="p">,</span>
+    <span class="s">'min_price'</span><span class="p">:</span> <span class="s">'6475.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'sell_vol'</span><span class="p">:</span> <span class="s">'0.00000000'</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+ <span class="s">'7640.00000000-7645.00000000'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'buy_vol'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+    <span class="s">'intvl'</span><span class="p">:</span> <span class="s">'5.00000000'</span><span class="p">,</span>
+    <span class="s">'max_price'</span><span class="p">:</span> <span class="s">'7645.00000000'</span><span class="p">,</span>
+    <span class="s">'min_price'</span><span class="p">:</span> <span class="s">'7640.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'sell_vol'</span><span class="p">:</span> <span class="s">'0.01060000'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>가격 단위로 나뉜 오더북을 구독합니다. 오더북 데이터에는 <code>id</code>가 없기 때문에 <code>min_price</code>와 <code>max_price</code>로 구별해야 합니다. <code>sell_vol</code>의 경우 (<code>min_price</code>, <code>max_price</code>]의 구간의 물량을 합한 값이고, <code>buy_vol</code>의 경우 [<code>min_price</code>, <code>max_price</code>)의 구간의 물량을 합한 값입니다. <code>sell_vol</code>과 <code>buy_vol</code>이 모두 양수인 경우는 많아도 한 구간입니다.</p> <p><code>price_intvl</code>은 <em><a href="#markets">시장</a>의 <code>tick_price</code></em> × [1, 10, 100, 1000] 중에 하나를 사용할 수 있습니다.</p> <ul> <li><p>Topic: <code>/subscription:order_books;&lt;quote&gt;;&lt;base&gt;;&lt;price_intvl&gt;</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>init</code>, <code>upsert</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#order-book">Order book</a></p></li> <li><p>Sort: by <code>min_price</code> in <code>desc</code></p></li> </ul> <h2 id=price_history_intvls>price_history_intvls()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_price_history_intvls</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">price_history_intvls</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_price_history_intvls</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="mi">60</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'seconds'</span><span class="p">:</span> <span class="mi">60</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="mi">86400</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'seconds'</span><span class="p">:</span> <span class="mi">86400</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>시장 가격 데이터의 유효한 시간 간격을 구독합니다. 시간 간격은 <a href="#price_histories">Price histories</a>의 입력으로 사용됩니다.</p> <ul> <li><p>Topic: <code>/subscription:price_history_intvls</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: - (nothing to be reported)</p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#price-history-interval">Price history interval</a></p></li> <li><p>Sort: <code>seconds</code> in <code>asc</code></p></li> </ul> <h2 id=price_histories>price_histories()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">import</span> <span class="nn">time</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_price_histories</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">quote</span> <span class="o">=</span> <span class="s">'USDT'</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="s">'BTC'</span>
+        <span class="n">intvl</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">((</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">price_history_intvls</span><span class="p">())</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">pprint</span><span class="p">(</span>
+            <span class="n">await</span> <span class="p">(</span><span class="n">daybit</span><span class="o">.</span><span class="n">price_histories</span> <span class="o">/</span> <span class="n">quote</span> <span class="o">/</span> <span class="n">base</span> <span class="o">/</span> <span class="n">intvl</span><span class="p">)(</span><span class="n">from_time</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span> <span class="o">-</span> <span class="n">intvl</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">),</span>
+                                                                  <span class="n">to_time</span><span class="o">=</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">)))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_price_histories</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'USDT-BTC-60-1537351080000'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'base_vol'</span><span class="p">:</span> <span class="s">'0'</span><span class="p">,</span>
+    <span class="s">'close'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'end_time'</span><span class="p">:</span> <span class="mi">1537351140000</span><span class="p">,</span>
+    <span class="s">'high'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'intvl'</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s">'low'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'open'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'quote_vol'</span><span class="p">:</span> <span class="s">'0'</span><span class="p">,</span>
+    <span class="s">'start_time'</span><span class="p">:</span> <span class="mi">1537351080000</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="s">'USDT-BTC-60-1537351680000'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'base_vol'</span><span class="p">:</span> <span class="s">'0'</span><span class="p">,</span>
+    <span class="s">'close'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'end_time'</span><span class="p">:</span> <span class="mi">1537351740000</span><span class="p">,</span>
+    <span class="s">'high'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'intvl'</span><span class="p">:</span> <span class="mi">60</span><span class="p">,</span>
+    <span class="s">'low'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'open'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'quote_vol'</span><span class="p">:</span> <span class="s">'0'</span><span class="p">,</span>
+    <span class="s">'start_time'</span><span class="p">:</span> <span class="mi">1537351680000</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>마켓의 가격 정보를 구독합니다. 유효한 <code>intvl</code>은 <a href="#price_history_intvls">가격 기록 간격</a>을 참고하십시오.</p> <ul> <li><p>Topic: <code>/subscription:price_histories;&lt;quote&gt;;&lt;base&gt;;&lt;intvl&gt;</code></p></li> <li><p>Request: <code>upsert</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code></p></li> <li><p>Rate limit: 8</p></li> <li><p>Response: <a href="#price-history">Price history</a></p></li> <li><p>Sort: -</p></li> </ul> <h3 id=arguments-4>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>from_time</code></td> <td>unix_timestamp</td> <td>Required</td> <td>가격 기록 범위의 시작 시간.</td> </tr> <tr> <td><code>to_time</code></td> <td>unix_timestamp</td> <td>Required</td> <td>가격 기록 범위의 끝 시간.</td> </tr> </tbody></table> <h2 id=trades>trades()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_trades</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">quote</span> <span class="o">=</span> <span class="s">'USDT'</span>
+        <span class="n">base</span> <span class="o">=</span> <span class="s">'BTC'</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="p">(</span><span class="n">daybit</span><span class="o">.</span><span class="n">trades</span> <span class="o">/</span> <span class="n">quote</span> <span class="o">/</span> <span class="n">base</span><span class="p">)(</span><span class="n">size</span><span class="o">=</span><span class="mi">10</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_trades</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="mi">40810689</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'base_amount'</span><span class="p">:</span> <span class="s">'0.00266000'</span><span class="p">,</span>
+    <span class="s">'exec_at'</span><span class="p">:</span> <span class="mi">1537350775639</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">40810689</span><span class="p">,</span>
+    <span class="s">'price'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'quote_amount'</span><span class="p">:</span> <span class="s">'18.17578000'</span><span class="p">,</span>
+    <span class="s">'taker_sold'</span><span class="p">:</span> <span class="bp">True</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="mi">40811438</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'base_amount'</span><span class="p">:</span> <span class="s">'0.00458000'</span><span class="p">,</span>
+    <span class="s">'exec_at'</span><span class="p">:</span> <span class="mi">1537352156105</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">40811438</span><span class="p">,</span>
+    <span class="s">'price'</span><span class="p">:</span> <span class="s">'6833.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'quote_amount'</span><span class="p">:</span> <span class="s">'31.29514000'</span><span class="p">,</span>
+    <span class="s">'taker_sold'</span><span class="p">:</span> <span class="bp">True</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>마켓의 거래를 구독합니다</p> <ul> <li><p>Topic: <code>/subscription:trades;&lt;quote&gt;;&lt;base&gt;</code> </p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>insert</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#trade">Trade</a></p></li> <li><p>Sort: by <code>id</code> in <code>desc</code></p></li> </ul> <h3 id=arguments-5>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>num_trades</code></td> <td>integer</td> <td>Required</td> <td>받아올 거래의 갯수.</td> </tr> </tbody></table> <h2 id=my_users>my_users()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_my_users</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_users</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_my_users</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">[</span>
+  <span class="p">{</span>
+    <span class="s">'maker_fee_rate'</span><span class="p">:</span> <span class="s">'0.001000'</span><span class="p">,</span>
+    <span class="s">'one_day_wdrl_usd_limit'</span><span class="p">:</span> <span class="s">'5000.00000000'</span><span class="p">,</span>
+    <span class="s">'pay_fee_with_day'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'taker_fee_rate'</span><span class="p">:</span> <span class="s">'0.001000'</span>
+  <span class="p">}</span>
+<span class="p">]</span>
+</code></pre> <p>내 계정의 정보를 구독합니다. </p> <ul> <li><p>Topic: <code>/subscription:my_users</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>init</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#user">User</a></p></li> <li><p>Sort: -</p></li> </ul> <h2 id=my_assets>my_assets()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_my_assets</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_assets</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_my_assets</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="s">'ADA'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'available'</span><span class="p">:</span> <span class="s">'700000.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'coin'</span><span class="p">:</span> <span class="s">'ADA'</span><span class="p">,</span>
+    <span class="s">'investment_usd'</span><span class="p">:</span> <span class="s">'0.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'reserved'</span><span class="p">:</span> <span class="s">'0.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'total'</span><span class="p">:</span> <span class="s">'700000.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'visible'</span><span class="p">:</span> <span class="bp">True</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="s">'ZRX'</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'available'</span><span class="p">:</span> <span class="s">'90000.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'coin'</span><span class="p">:</span> <span class="s">'ZRX'</span><span class="p">,</span>
+    <span class="s">'investment_usd'</span><span class="p">:</span> <span class="s">'0.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'reserved'</span><span class="p">:</span> <span class="s">'0.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'total'</span><span class="p">:</span> <span class="s">'90000.000000000000000000'</span><span class="p">,</span>
+    <span class="s">'visible'</span><span class="p">:</span> <span class="bp">True</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>내 자신의 정보를 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:my_assets</code></p></li> <li><p>Request: <code>init</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#asset">Asset</a></p></li> <li><p>Sort: -</p></li> </ul> <h2 id=my_orders>my_orders()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_my_orders</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_orders</span><span class="p">(</span><span class="n">closed</span><span class="o">=</span><span class="bp">False</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_my_orders</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="mi">81133319</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'amount'</span><span class="p">:</span> <span class="s">'0.00020000'</span><span class="p">,</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'cancel_reason'</span><span class="p">:</span> <span class="s">'user'</span><span class="p">,</span>
+    <span class="s">'close_type'</span><span class="p">:</span> <span class="s">'canceled'</span><span class="p">,</span>
+    <span class="s">'closed_at'</span><span class="p">:</span> <span class="mi">1537339108567</span><span class="p">,</span>
+    <span class="s">'cond_arg1'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'cond_arg2'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'cond_type'</span><span class="p">:</span> <span class="s">'none'</span><span class="p">,</span>
+    <span class="s">'filled'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+    <span class="s">'filled_quote'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">81133319</span><span class="p">,</span>
+    <span class="s">'placed_amount'</span><span class="p">:</span> <span class="s">'0.00020000'</span><span class="p">,</span>
+    <span class="s">'placed_at'</span><span class="p">:</span> <span class="mi">1537339108540</span><span class="p">,</span>
+    <span class="s">'price'</span><span class="p">:</span> <span class="s">'6040.50000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'received_at'</span><span class="p">:</span> <span class="mi">1537339108516</span><span class="p">,</span>
+    <span class="s">'role'</span><span class="p">:</span> <span class="s">'both'</span><span class="p">,</span>
+    <span class="s">'sell'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'status'</span><span class="p">:</span> <span class="s">'closed'</span><span class="p">,</span>
+    <span class="s">'unfilled'</span><span class="p">:</span> <span class="s">'0.00020000'</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="mi">82722801</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'amount'</span><span class="p">:</span> <span class="s">'0.00020000'</span><span class="p">,</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'cancel_reason'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'close_type'</span><span class="p">:</span> <span class="s">'filled'</span><span class="p">,</span>
+    <span class="s">'closed_at'</span><span class="p">:</span> <span class="mi">1537347509954</span><span class="p">,</span>
+    <span class="s">'cond_arg1'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'cond_arg2'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'cond_type'</span><span class="p">:</span> <span class="s">'none'</span><span class="p">,</span>
+    <span class="s">'filled'</span><span class="p">:</span> <span class="s">'0.00020000'</span><span class="p">,</span>
+    <span class="s">'filled_quote'</span><span class="p">:</span> <span class="s">'1.41820000'</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">82722801</span><span class="p">,</span>
+    <span class="s">'placed_amount'</span><span class="p">:</span> <span class="s">'0.00020000'</span><span class="p">,</span>
+    <span class="s">'placed_at'</span><span class="p">:</span> <span class="mi">1537347483279</span><span class="p">,</span>
+    <span class="s">'price'</span><span class="p">:</span> <span class="s">'7091.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'received_at'</span><span class="p">:</span> <span class="mi">1537347483275</span><span class="p">,</span>
+    <span class="s">'role'</span><span class="p">:</span> <span class="s">'both'</span><span class="p">,</span>
+    <span class="s">'sell'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">'status'</span><span class="p">:</span> <span class="s">'closed'</span><span class="p">,</span>
+    <span class="s">'unfilled'</span><span class="p">:</span> <span class="s">'0.00000000'</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>내 주문의 정보를 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:my_orders</code></p></li> <li><p>Request: <code>upsert</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#order-2">Order</a></p></li> <li><p>Sort: by <code>id</code> in <code>desc</code></p></li> </ul> <h3 id=arguments-6>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>quote</code></td> <td>string</td> <td>Optional</td> <td>호가 코인 기호. ex) &quot;BTC&quot;</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Optional</td> <td>기준 코인 기호. ex) &quot;ETH&quot;</td> </tr> <tr> <td><code>to_id</code></td> <td>integer</td> <td>Optional</td> <td><code>to_id</code>보다 작은 <code>id</code>를 가진 주문을 가져옵니다.</td> </tr> <tr> <td><code>size</code></td> <td>integer</td> <td>Optional</td> <td>가져올 주문의 갯수. <code>size</code> ≤ 30.</td> </tr> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Optional</td> <td>매수 주문은 <code>true</code>. 매도 주문은 <code>false</code>.</td> </tr> <tr> <td><code>closed</code></td> <td>boolean</td> <td>Optional</td> <td>가져올 주문의 <code>status</code>. <code>false</code>이면 <code>received</code>와 <code>placed</code>를 가져옵니다. <code>true</code>이면 <code>closed</code>를 가져옵니다.</td> </tr> </tbody></table> <h2 id=my_trades>my_trades()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_my_trades</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_trades</span><span class="p">(</span><span class="n">sell</span><span class="o">=</span><span class="bp">True</span><span class="p">,</span> <span class="n">quote</span><span class="o">=</span><span class="s">'USDT'</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_my_trades</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span>
+  <span class="mi">40807547</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'base_amount'</span><span class="p">:</span> <span class="s">'0.00020000'</span><span class="p">,</span>
+    <span class="s">'coin_fee'</span><span class="p">:</span> <span class="s">'0.00141820'</span><span class="p">,</span>
+    <span class="s">'counterpart'</span><span class="p">:</span> <span class="s">'user'</span><span class="p">,</span>
+    <span class="s">'day_fee'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+    <span class="s">'exec_at'</span><span class="p">:</span> <span class="mi">1537347408941</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">40807547</span><span class="p">,</span>
+    <span class="s">'order_id'</span><span class="p">:</span> <span class="mi">82707048</span><span class="p">,</span>
+    <span class="s">'price'</span><span class="p">:</span> <span class="s">'7091.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'quote_amount'</span><span class="p">:</span> <span class="s">'1.41820000'</span><span class="p">,</span>
+    <span class="s">'sell'</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span>
+    <span class="s">'taker_sold'</span><span class="p">:</span> <span class="bp">True</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="mi">40807691</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'base'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'base_amount'</span><span class="p">:</span> <span class="s">'0.00020000'</span><span class="p">,</span>
+    <span class="s">'coin_fee'</span><span class="p">:</span> <span class="s">'0.00000000'</span><span class="p">,</span>
+    <span class="s">'counterpart'</span><span class="p">:</span> <span class="s">'user'</span><span class="p">,</span>
+    <span class="s">'day_fee'</span><span class="p">:</span> <span class="s">'0.04415411'</span><span class="p">,</span>
+    <span class="s">'exec_at'</span><span class="p">:</span> <span class="mi">1537347509915</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">40807691</span><span class="p">,</span>
+    <span class="s">'order_id'</span><span class="p">:</span> <span class="mi">82722801</span><span class="p">,</span>
+    <span class="s">'price'</span><span class="p">:</span> <span class="s">'7091.00000000'</span><span class="p">,</span>
+    <span class="s">'quote'</span><span class="p">:</span> <span class="s">'USDT'</span><span class="p">,</span>
+    <span class="s">'quote_amount'</span><span class="p">:</span> <span class="s">'1.41820000'</span><span class="p">,</span>
+    <span class="s">'sell'</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
+    <span class="s">'taker_sold'</span><span class="p">:</span> <span class="bp">True</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>내 거래 데이터를 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:my_trades</code></p></li> <li><p>Request: <code>upsert</code></p></li> <li><p>Notification: <code>insert</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#trade">Trade</a></p></li> <li><p>Sort: by <code>id</code> in <code>desc</code></p></li> </ul> <h3 id=arguments-7>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>quote</code></td> <td>string</td> <td>Optional</td> <td>호가 코인 기호. ex) &quot;BTC&quot;</td> </tr> <tr> <td><code>base</code></td> <td>string</td> <td>Optional</td> <td>기준 코인 기호. ex) &quot;ETH&quot;</td> </tr> <tr> <td><code>to_id</code></td> <td>integer</td> <td>Optional</td> <td><code>to_id</code> 보다 작은 <code>id</code>를 가진 내 거래를 가져옵니다.</td> </tr> <tr> <td><code>size</code></td> <td>integer</td> <td>Optional</td> <td>가져올 거래의 갯수. <code>size</code> ≤ 30.</td> </tr> <tr> <td><code>sell</code></td> <td>boolean</td> <td>Optional</td> <td>매도의 경우 <code>true</code>. 매수의 경우 <code>false</code>.</td> </tr> </tbody></table> <h2 id=my_tx_summaries>my_tx_summaries()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_my_tx_summaries</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_tx_summaries</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">'deposit'</span><span class="p">))</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_tx_summaries</span><span class="p">(</span><span class="nb">type</span><span class="o">=</span><span class="s">'wdrl'</span><span class="p">))</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_my_tx_summaries</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="c"># response of daybit.my_tx_summaries(type='deposit')</span>
+<span class="p">{</span>
+  <span class="mi">47283</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'amount'</span><span class="p">:</span> <span class="s">'1.2977'</span><span class="p">,</span>
+    <span class="s">'coin'</span><span class="p">:</span> <span class="s">'LTC'</span><span class="p">,</span>
+    <span class="s">'completed_at'</span><span class="p">:</span> <span class="mi">1537417829032</span><span class="p">,</span>
+    <span class="s">'confirm'</span><span class="p">:</span> <span class="mi">3847</span><span class="p">,</span>
+    <span class="s">'created_at'</span><span class="p">:</span> <span class="mi">1537417829029</span><span class="p">,</span>
+    <span class="s">'deposit_status'</span><span class="p">:</span> <span class="s">'completed'</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">47283</span><span class="p">,</span>
+    <span class="s">'req_confirm'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s">'tx_link_url'</span><span class="p">:</span> <span class="s">'https://live.blockcypher.com/ltc/tx/a809a19d194d48967f1c8b6aa1dae33d412ece2570fe8d9b751d63a703e15183'</span><span class="p">,</span>
+    <span class="s">'txid'</span><span class="p">:</span> <span class="s">'a809a19d194d48967f1c8b6aa1dae33d412ece2570fe8d9b751d63a703e15183'</span><span class="p">,</span>
+    <span class="s">'type'</span><span class="p">:</span> <span class="s">'deposit'</span><span class="p">,</span>
+    <span class="s">'wdrl_status'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'wdrl_to_addr'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'wdrl_to_org'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'wdrl_to_tag'</span><span class="p">:</span> <span class="bp">None</span>
+  <span class="p">},</span>
+
+  <span class="c"># ...</span>
+
+  <span class="mi">47287</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'amount'</span><span class="p">:</span> <span class="s">'0.01448502'</span><span class="p">,</span>
+    <span class="s">'coin'</span><span class="p">:</span> <span class="s">'BTC'</span><span class="p">,</span>
+    <span class="s">'completed_at'</span><span class="p">:</span> <span class="mi">1537417829091</span><span class="p">,</span>
+    <span class="s">'confirm'</span><span class="p">:</span> <span class="mi">955</span><span class="p">,</span>
+    <span class="s">'created_at'</span><span class="p">:</span> <span class="mi">1537417829087</span><span class="p">,</span>
+    <span class="s">'deposit_status'</span><span class="p">:</span> <span class="s">'completed'</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">47287</span><span class="p">,</span>
+    <span class="s">'req_confirm'</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span>
+    <span class="s">'tx_link_url'</span><span class="p">:</span> <span class="s">'https://live.blockcypher.com/btc/tx/af9648f4c1622b3872649019d4391248d9c93bdd9630e16128431d475d2263a4'</span><span class="p">,</span>
+    <span class="s">'txid'</span><span class="p">:</span> <span class="s">'af9648f4c1622b3872649019d4391248d9c93bdd9630e16128431d475d2263a4'</span><span class="p">,</span>
+    <span class="s">'type'</span><span class="p">:</span> <span class="s">'deposit'</span><span class="p">,</span>
+    <span class="s">'wdrl_status'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'wdrl_to_addr'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'wdrl_to_org'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'wdrl_to_tag'</span><span class="p">:</span> <span class="bp">None</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c"># example of daybit.my_tx_summaries(type='wdrl')</span>
+<span class="p">{</span>
+  <span class="mi">47291</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s">'amount'</span><span class="p">:</span> <span class="s">'100.00000000'</span><span class="p">,</span>
+    <span class="s">'coin'</span><span class="p">:</span> <span class="s">'ADA'</span><span class="p">,</span>
+    <span class="s">'completed_at'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'confirm'</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="s">'created_at'</span><span class="p">:</span> <span class="mi">1537419011126</span><span class="p">,</span>
+    <span class="s">'deposit_status'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'id'</span><span class="p">:</span> <span class="mi">47291</span><span class="p">,</span>
+    <span class="s">'req_confirm'</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span>
+    <span class="s">'tx_link_url'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'txid'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'type'</span><span class="p">:</span> <span class="s">'wdrl'</span><span class="p">,</span>
+    <span class="s">'wdrl_status'</span><span class="p">:</span> <span class="s">'queued'</span><span class="p">,</span>
+    <span class="s">'wdrl_to_addr'</span><span class="p">:</span> <span class="s">'0x2b7cd7f27d21da93395a4c19aea80f8467f93596'</span><span class="p">,</span>
+    <span class="s">'wdrl_to_org'</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span>
+    <span class="s">'wdrl_to_tag'</span><span class="p">:</span> <span class="bp">None</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+</code></pre> <p>나의 이체 내역 <em>transaction</em> 을 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:my_tx_summaries</code></p></li> <li><p>Request: <code>upsert</code></p></li> <li><p>Notification: <code>insert</code>, <code>update</code></p></li> <li><p>Rate limit: 3</p></li> <li><p>Response: <a href="#transaction-summary">Transaction Summary</a></p></li> <li><p>Sort: by <code>id</code> in <code>desc</code></p></li> </ul> <h3 id=arguments-8>Arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>type</code></td> <td>string</td> <td>Required</td> <td>입금의 경우 <code>deposit</code>. 출금의 경우 <code>wdrl</code>.</td> </tr> <tr> <td><code>to_id</code></td> <td>integer</td> <td>Optional</td> <td><code>to_id</code> 보다 작은 <code>id</code>를 가진 이체 내역 <em>transaction</em> 을 가져옵니다.</td> </tr> <tr> <td><code>size</code></td> <td>integer</td> <td>Optional</td> <td>가져올 이체 내역을 갯수. <code>size</code> ≤ 30.</td> </tr> </tbody></table> <h2 id=my_airdrop_histories>my_airdrop_histories()</h2> <blockquote> <p>Example Request</p> </blockquote> <pre class="highlight python tab-python"><code><span class="kn">import</span> <span class="nn">asyncio</span>
+<span class="kn">from</span> <span class="nn">pprint</span> <span class="kn">import</span> <span class="n">pprint</span>
+
+<span class="kn">from</span> <span class="nn">pydaybit</span> <span class="kn">import</span> <span class="n">Daybit</span>
+
+
+<span class="n">async</span> <span class="k">def</span> <span class="nf">daybit_my_airdrop_histories</span><span class="p">():</span>
+    <span class="n">async</span> <span class="k">with</span> <span class="n">Daybit</span><span class="p">()</span> <span class="k">as</span> <span class="n">daybit</span><span class="p">:</span>
+        <span class="n">pprint</span><span class="p">(</span><span class="n">await</span> <span class="n">daybit</span><span class="o">.</span><span class="n">my_airdrop_histories</span><span class="p">())</span>
+
+
+<span class="n">asyncio</span><span class="o">.</span><span class="n">get_event_loop</span><span class="p">()</span><span class="o">.</span><span class="n">run_until_complete</span><span class="p">(</span><span class="n">daybit_my_airdrop_histories</span><span class="p">())</span>
+</code></pre> <blockquote> <p>Example Response</p> </blockquote> <pre class="highlight python tab-python"><code><span class="p">{</span><span class="mi">10</span><span class="p">:</span> <span class="p">{</span><span class="s">'amount'</span><span class="p">:</span> <span class="s">'200.00000000'</span><span class="p">,</span>
+      <span class="s">'category'</span><span class="p">:</span> <span class="s">'project'</span><span class="p">,</span>
+      <span class="s">'coin'</span><span class="p">:</span> <span class="s">'DAY'</span><span class="p">,</span>
+      <span class="s">'exec_at'</span><span class="p">:</span> <span class="mi">1539148862461</span><span class="p">,</span>
+      <span class="s">'id'</span><span class="p">:</span> <span class="mi">10</span><span class="p">}}</span>
+</code></pre> <p>내 에어드랍 기록을 구독합니다.</p> <ul> <li><p>Topic: <code>/subscription:my_airdrop_histories</code></p></li> <li><p>Request: <code>upsert</code></p></li> <li><p>Notification: <code>insert</code></p></li> <li><p>Sort: by <code>id</code> in <code>desc</code></p></li> <li><p>Response: <a href="#airdrop">Airdrop</a></p></li> </ul> <h3 id=arguments-9>arguments</h3> <table><thead> <tr> <th>Parameter</th> <th>Type</th> <th>Required</th> <th>Description</th> </tr> </thead><tbody> <tr> <td><code>to_id</code></td> <td>integer</td> <td>Optional</td> <td><code>id</code>가 <code>to_id</code>보다 작은 당신의 에어드랍을 가져옵니다.</td> </tr> <tr> <td><code>size</code></td> <td>integer</td> <td>Optional</td> <td>가져올 에어드랍 기록의 갯수. <code>size</code> ≤ 30.</td> </tr> </tbody></table> </div> <div class=dark-box> </div> </div> </body> </html>
